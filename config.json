@@ -1,0 +1,8 @@
+{
+    "connectionString": "mongodb://192.168.223.65:27017/SaasDatabase",
+    "apiUrl":  "http://localhost:5000/api",
+    "secret": "Saas Team Secret",
+    "user": "saasteamaws@gmail.com",
+    "pass": "12angDum^^y",
+    "from": "\"SaaS Team 👻\" <saasteamaws@gmail.com>" 
+}
