@@ -24,6 +24,12 @@
                 parent: 'main',
                 templateUrl: 'home/home.html',
                 //controller: 'HomeController'
+            })
+            .state('clientList', {
+                url: '/clients/list',
+                parent: 'main',
+                templateUrl: 'clients/list.html',
+                controller: 'ClientListController'
             });
 
         $httpProvider.interceptors.push(function($q, $window, $location){
@@ -54,7 +60,6 @@
 
         // add JWT token as default auth header
         $http.get('/app/token').then(function(res){
-            console.log('TOKEN', res.data);
             $http.defaults.headers.common['Authorization'] = 'Bearer ' + res.data;
         });
 
