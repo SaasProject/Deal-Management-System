@@ -7,6 +7,10 @@
 
     
     function Controller($scope, $rootScope, $state) {
-        
+        $scope.dealForm = {};
+
+        $scope.submit = function () {
+            console.log($scope.dealForm);
+        }
     }
 })();
