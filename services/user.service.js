@@ -58,7 +58,7 @@ function authenticate(email, password) {
         if (user && bcrypt.compareSync(password, user.hash)) {
             // authentication successful
             delete user.hash;
-            deferred.resolve({token: jwt.sign({ sub: user._id }, config.secret ,{expiresIn:'9h'}), user: user});
+            deferred.resolve({token: jwt.sign({ sub: user._id }, config.secret), user: user});
         } else {
             // authentication failed
             deferred.resolve();

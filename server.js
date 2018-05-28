@@ -24,7 +24,7 @@ app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/profile_pictures'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(session({ secret: config.secret, resave: false, saveUninitialized: true, cookie: {maxAge: 1000 * 60 * 60 * 9}})); //equvalent of 9h (same as jwt)
+app.use(session({ secret: config.secret, resave: false, saveUninitialized: true})); //equvalent of 9h (same as jwt)
  
 // use JWT auth to secure the api   // edited by dyan0: added '/api/users/emailOn'
 //app.use('/api', expressJwt({ secret: config.secret }).unless({ path: [] }));
