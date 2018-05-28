@@ -42,6 +42,12 @@
                 parent: 'main',
                 templateUrl: 'deals/new.html',
                 controller: 'NewDealController'
+            })
+            .state('newClient', {
+                url: '/clients/new',
+                parent: 'main',
+                templateUrl: 'clients/new.html',
+                controller: 'NewClientController'
             });
 
         $httpProvider.interceptors.push(function($q, $window, $location){
