@@ -52,5 +52,5 @@ app.get('/', function (req, res) {
  
 // start server --edited by dyan0 from app.listen to http.listen
 var server = http.listen(5000, function () {
-
+console.log(5000);
 });
