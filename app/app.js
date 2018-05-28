@@ -32,6 +32,7 @@
                     var defer = $q.defer();
 
                     if(rejection.status == 401){
+                        console.log('401 detected');
                         location.reload();
                     }
 
@@ -43,13 +44,19 @@
         });
     }
  
-    function run($rootScope, $state, UserService) {
+    function run($rootScope, $state, UserService, $http) {
         $rootScope.user = {};
 
         $rootScope.fromState = {
             name: 'home',
             url: '/'
         };
+
+        // add JWT token as default auth header
+        $http.get('/app/token').then(function(res){
+            console.log('TOKEN', res.data);
+            $http.defaults.headers.common['Authorization'] = 'Bearer ' + res.data;
+        });
 
         //when the app is refreshed, get the current logged in user
         UserService.getCurrent().then(function(user) {
@@ -59,7 +66,6 @@
         });
 
         $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-            console.log('@stateChange: ', $rootScope.user);
             //not logged in
             if ($rootScope.user.email === undefined && toState.name !== 'login') {
                 $state.transitionTo('login');
@@ -67,11 +73,15 @@
             } else if ($rootScope.user.email !== undefined && toState.name === 'login') {
                 //return to previous page
                 $state.transitionTo($rootScope.fromState.name);
+            //access is allowed
             } else {
-                //save fromState to rootScope variable
-                $rootScope.fromState = {
+                //save fromState (except login) to rootScope variable
+                $rootScope.fromState = (fromState.name !== 'login') ? {
                     name: fromState.name,
                     url: fromState.url
+                } : {
+                    name: 'home',
+                    url: '/'
                 };
             }
         });
