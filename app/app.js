@@ -43,8 +43,21 @@
         });
     }
  
-    function run($rootScope, $state) {
+    function run($rootScope, $state, UserService) {
         $rootScope.user = {};
+
+        $rootScope.fromState = {
+            name: 'home',
+            url: '/'
+        };
+
+        //when the app is refreshed, get the current logged in user
+        UserService.getCurrent().then(function(user) {
+            $rootScope.user = user;
+        }).catch(function(err) {
+            console.log(err);
+        });
+
         $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
             console.log('@stateChange: ', $rootScope.user);
             //not logged in
@@ -53,7 +66,13 @@
             //already logged in
             } else if ($rootScope.user.email !== undefined && toState.name === 'login') {
                 //return to previous page
-                $state.transitionTo(fromState.name);
+                $state.transitionTo($rootScope.fromState.name);
+            } else {
+                //save fromState to rootScope variable
+                $rootScope.fromState = {
+                    name: fromState.name,
+                    url: fromState.url
+                };
             }
         });
     }

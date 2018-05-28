@@ -1,5 +1,15 @@
-<h1>MAIN LAYOUT PAGE</h1>
+<h1>Hi, {{user.username}}</h1>
+<div class="row">
+    <div class="col-md-2 sidebar">
+        <ul>
+            <li>Deals</li>
+            <li>Clients</li>
+        </ul>
+    </div>
+    <div class="col-md-10">
+        <div ui-view></div>
+    </div>
+</div>
 
-<div ui-view></div>
 
-<button ng-click="logout()">Logout</button>
+<button class="btn btn-default" ng-click="logout()">Logout</button>

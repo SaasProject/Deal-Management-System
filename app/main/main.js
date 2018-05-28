@@ -6,15 +6,16 @@
         .controller('MainController', Controller);
 
     
-    function Controller($scope, $rootScope, $state) {
+    function Controller($scope, $rootScope, $state, UserService) {
         
         console.log($rootScope.user);
 
         $scope.logout = function () {
 
-            $rootScope.user = {};
-            $state.transitionTo('login');
-            
+            UserService.logout().then(function() {
+                $rootScope.user = {};
+                $state.transitionTo('login');
+            });            
         }
     }
 })();

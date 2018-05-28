@@ -31,6 +31,7 @@ app.use(session({ secret: config.secret, resave: false, saveUninitialized: true,
  
 // routes
 app.use('/app', require('./controllers/app.controller'));
+app.use('/user', require('./controllers/user.controller'));
 
 
 //added by dyan0

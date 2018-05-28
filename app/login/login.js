@@ -6,18 +6,19 @@
         .controller('LoginController', Controller);
 
     
-    function Controller($scope, $rootScope, $state) {
-        var sampleAccount = {
-            email: 'aa@bb.com',
-            password: 'hii'
+    function Controller($scope, $rootScope, $state, UserService) {
+        $scope.loginForm = {
+            email: '',
+            password: ''
         };
 
         $scope.login = function () {
-            
-            //sample. no authentication.
-            $rootScope.user = sampleAccount;
-            $state.transitionTo('home');
-            
+            UserService.login($scope.loginForm).then(function(user) {
+                $rootScope.user = user;
+                $state.transitionTo('home');
+            }).catch(function(err) {
+                console.log(err);
+            });
         }
     }
 })();

@@ -1,1 +1,15 @@
-<button ng-click="login()">Login</button>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form ng-submit="login()">
+            <label>Email:</label>
+            <input type="text" class="form-control" ng-model="loginForm.email" required>
+            <label>Password:</label>
+            <input type="password" class="form-control" ng-model="loginForm.password" required>
+            <br/>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
