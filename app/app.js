@@ -30,6 +30,18 @@
                 parent: 'main',
                 templateUrl: 'clients/list.html',
                 controller: 'ClientListController'
+            })
+            .state('dealList', {
+                url: '/deals/list',
+                parent: 'main',
+                templateUrl: 'deals/list.html',
+                controller: 'DealListController'
+            })
+            .state('newDeal', {
+                url: '/deals/new',
+                parent: 'main',
+                templateUrl: 'deals/new.html',
+                controller: 'NewDealController'
             });
 
         $httpProvider.interceptors.push(function($q, $window, $location){

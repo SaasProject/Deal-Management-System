@@ -1,0 +1,49 @@
+<form>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-inline">
+                <label>Deal Name: &nbsp;</label>
+                <input type="text" class="form-control" ng-model="dealForm.name">
+            </div>
+            <br>
+            <div class="form-inline">
+                <label>Due Date: &nbsp;</label>
+                <input type="date" class="form-control" ng-model="dealForm.dueDate">
+            </div>
+        </div>
+        <div class="col-md-2 pull-right">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button class="btn btn-default">Cancel</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div>
+            <big>PROFILE:</big>
+            <div class="row">
+                <div class="col-md-1">
+                    COUNTRY:
+                    
+                </div>
+                <div class="col-md-1">
+                    <select class="form-control" ng-model="dealForm.profile.country">
+                        <option>PH</option>
+                        <option>JP</option>
+                        <option>CN</option>
+                        <option>US</option>
+                        <option>GR</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div>
+            <big>PROCESS:</big>
+        </div>
+        <div>
+            <big>DISTRIBUTION:</big>
+        </div>
+        <div>
+            <big>STATUS:</big>
+        </div>
+    </div>
+</form>
