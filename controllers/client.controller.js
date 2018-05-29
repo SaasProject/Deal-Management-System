@@ -6,7 +6,6 @@ var clientService = require('services/client.service');
 router.post('/addClient', addClient);
 router.get('/getAllClients', getAllClients);
 router.put('/updateClient/:_id', updateClient);
-router.delete('/deleteClient/:_id', deleteClient);
 
 /*router.post('/addClient', function(req, res, next) {
     
@@ -57,15 +56,4 @@ function updateClient(req, res) {
         .catch(function (err) {
             res.status(400).send(err);
         });
-}
-
-function deleteClient(req, res) {
-	var clientId = req.params._id;
-	clientService.deleteClient(clientId)
-	    .then(function() {
-            res.sendStatus(200);
-	    })
-	    .catch(function(err) {
-	        res.status(400);
-	    });
 }

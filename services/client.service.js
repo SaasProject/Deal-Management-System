@@ -16,7 +16,6 @@ var service = {};
 service.addClient = addClient;    // macku
 service.getAllClients = getAllClients; //glenn
 service.updateClient = updateClient; //glenn
-service.deleteClient = deleteClient; //glenn
  
 module.exports = service;
 
@@ -61,32 +60,6 @@ function updateClient(_id, clientParam) {
            deferred.reject(err);
         }
         deferred.resolve();
-    });
-
-    return deferred.promise;
-}
-
-//glenn
-function deleteClient(_id){
-	var deferred = Q.defer();
-
-	db.clients.findById(_id, function (err, client) {
-        if (err) deferred.reject(err);
-
-		if(client) {
-
-			db.clients.remove(
-			{ _id: mongo.helper.toObjectID(_id) },
-			function (err) {
-				if (err){};
- 
-				deferred.resolve();
-			});
-		}
-		else {
-			deferred.reject();
-		}
-
     });
 
     return deferred.promise;

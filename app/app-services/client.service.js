@@ -11,7 +11,6 @@
         service.addClient = addClient;
         service.getAllClients = getAllClients;
         service.updateClient = updateClient;
-        service.deleteClient = deleteClient;
  
         return service;  
         
@@ -26,10 +25,6 @@
 
         function updateClient(client) {
             return $http.put('/client/updateClient/' + client._id, client).then(handleSuccess, handleError);
-        }
-
-        function deleteClient(clientId) {
-            return $http.delete('/client/deleteClient/'+clientId).then(handleSuccess, handleError);
         }
  
         // private functions
