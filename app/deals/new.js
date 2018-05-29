@@ -101,13 +101,23 @@
                     }
                 },
                 distribution: {
-                    fiscalYear: {},
+                    fiscalYear: new Date().getFullYear(),
                     total: {
                         resource: 0,
                         revenue: 0,
+                        cm: 0,
+                        percentage: 0
                     },
                     average: 0,
-                    cm: 0
+                    cm: {},
+                    res: {
+                        jp: {},
+                        gd: {}
+                    },
+                    rev: {
+                        jp: {},
+                        gd: {}
+                    }
                 },
                 status: {
                     dependency: '',
@@ -118,7 +128,7 @@
                 content: ''
             };
         }
-
+        
         //rough code
         function getMonthsOfFiscalYear() {
             var fiscalYear = {};

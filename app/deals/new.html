@@ -276,11 +276,12 @@
                     <tr>
                         <th>MONTH</th>
                         <th></th>
-                        <th>05/2018</th>
-                        <th>06/01/2018</th>
-                        <th>06/02/2018</th>
-                        <th>06/03/2018</th>
-                        <th>06/04/2018</th>
+                        <th>05/{{dealForm.distribution.fiscalYear}}</th>
+                        <th>06/{{dealForm.distribution.fiscalYear}}</th>
+                        <th>07/{{dealForm.distribution.fiscalYear}}</th>
+                        <th>08/{{dealForm.distribution.fiscalYear}}</th>
+                        <th>09/{{dealForm.distribution.fiscalYear}}</th>
+                        <th>10/{{dealForm.distribution.fiscalYear}}</th>
                     </tr>
 
                     <!--row-->
@@ -290,13 +291,32 @@
                         </td>
                         <td>
                             JP
-                            <br> GD
+                            <br/><br/> GD
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.may">
+                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.may">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.jun">
+                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.jun">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.jul">
+                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.jul">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.aug">
+                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.aug">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.sep">
+                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.sep">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.oct">
+                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.oct">
+                        </td>
                     </tr>
 
                     <!--row-->
@@ -306,12 +326,32 @@
                         </td>
                         <td>
                             JP
+                            <br/><br/> GD
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.may">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.may">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.jun">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.jun">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jul">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.jul">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.aug">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.aug">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.sep">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.sep">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.oct">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.oct">
+                        </td>
                     </tr>
 
                     <!--row-->
@@ -320,14 +360,26 @@
                             CM(JPY)
                         </td>
                         <td>
-                            GD
-                            <br> ALL
+                            ALL
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.may">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.jun">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.jul">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.aug">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.sep">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.oct">
+                        </td>
                     </tr>
                 </table>
                 <!--another same table-->
@@ -336,11 +388,12 @@
                     <tr>
                         <th>MONTH</th>
                         <th></th>
-                        <th>05/30/2018</th>
-                        <th>06/01/2018</th>
-                        <th>06/02/2018</th>
-                        <th>06/03/2018</th>
-                        <th>06/04/2018</th>
+                        <th>11/{{dealForm.distribution.fiscalYear}}</th>
+                        <th>12/{{dealForm.distribution.fiscalYear}}</th>
+                        <th>01/{{dealForm.distribution.fiscalYear + 1}}</th>
+                        <th>02/{{dealForm.distribution.fiscalYear + 1}}</th>
+                        <th>03/{{dealForm.distribution.fiscalYear + 1}}</th>
+                        <th>04/{{dealForm.distribution.fiscalYear + 1}}</th>
                     </tr>
 
                     <!--row-->
@@ -350,13 +403,32 @@
                         </td>
                         <td>
                             JP
-                            <br> GD
+                            <br/><br/> GD
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.nov">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.nov">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.dec">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.dec">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.jan">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.jan">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.feb">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.feb">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.mar">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.mar">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.apr">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.apr">
+                        </td>
                     </tr>
 
                     <!--row-->
@@ -366,12 +438,32 @@
                         </td>
                         <td>
                             JP
+                            <br/><br/> GD
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.nov">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.nov">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.dec">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.dec">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.jan">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.jan">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.feb">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.feb">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.mar">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.mar">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.apr">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.apr">
+                        </td>
                     </tr>
 
                     <!--row-->
@@ -380,14 +472,26 @@
                             CM(JPY)
                         </td>
                         <td>
-                            GD
-                            <br> ALL
+                            ALL
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.may">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.jun">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.jul">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.aug">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.sep">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.oct">
+                        </td>
                     </tr>
                 </table>
                 <div class="row">
@@ -397,13 +501,13 @@
                         <table class="table table-striped table-condensed table-hover">
                             <tr>
                                 <th>Total</th>
-                                <td>(MM)</td>
-                                <td>(JPY)</td>
+                                <td>{{totalRES}} (MM)</td>
+                                <td>{{totalREV}} (JPY)</td>
                             </tr>
                             <tr>
                                 <th>Average</th>
                                 <td></td>
-                                <td>(JPY/MM)</td>
+                                <td>{{totalREV / totalRES}} (JPY/MM)</td>
                             </tr>
                             <tr>
                                 <th>CM</th>
