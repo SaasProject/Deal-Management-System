@@ -89,10 +89,6 @@
         }
         getAllClients();
 
-        $scope.editClient = function(client){
-            ClientService.passSelected(client);
-        }
-
         $scope.deleteClient = function(clientId){
             ClientService.deleteClient(clientId).then(function (res) {
                 console.log(res);

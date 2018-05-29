@@ -48,12 +48,6 @@
                 parent: 'main',
                 templateUrl: 'clients/new.html',
                 controller: 'NewClientController'
-            })
-            .state('editClient', {
-                url: '/clients/edit',
-                parent: 'main',
-                templateUrl: 'clients/edit.html',
-                controller: 'EditClientController'
             });
 
         $httpProvider.interceptors.push(function($q, $window, $location){

@@ -12,20 +12,8 @@
         service.getAllClients = getAllClients;
         service.updateClient = updateClient;
         service.deleteClient = deleteClient;
-        service.passSelected = passSelected;
-        service.getSelected = getSelected;
  
         return service;  
-
-        var editClient = [];
-
-        function passSelected(client){
-            editClient = client;
-        }
-
-        function getSelected(){
-            return editClient;
-        }
         
         function addClient(clientForm) {
             //console.log(clientForm)
