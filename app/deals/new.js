@@ -9,6 +9,34 @@
     function Controller($scope, $rootScope, $state, $filter) {
         $scope.dealForm = getInitialDealForm();
         var tempDealForm = getInitialDealForm();
+        //determine current year for distribution
+        var currentYear = new Date().getFullYear();
+
+        //hard code level and steps. steps depend on the selected level
+        $scope.levels = [
+            {
+                level: 9,
+                steps: [
+                    9.1
+                ]
+            },
+            {
+                level: 5,
+                steps: [
+                    5.2,
+                    5.1
+                ]
+            },
+            {
+                level: 4,
+                steps: [
+                    4.2,
+                    4.1
+                ]
+            }
+        ];
+
+        $scope.totalRES;
 
         var DATE_FORMAT = 'dd/MM/yyyy';
 
@@ -101,7 +129,7 @@
                     }
                 },
                 distribution: {
-                    fiscalYear: new Date().getFullYear(),
+                    fiscalYear: [currentYear, currentYear + 1],
                     total: {
                         resource: 0,
                         revenue: 0,
@@ -127,26 +155,6 @@
                 },
                 content: ''
             };
-        }
-        
-        //rough code
-        function getMonthsOfFiscalYear() {
-            var fiscalYear = {};
-            var currentYear = new Date().getFullYear();
-            var currentYearMonths = ['May', 'June', 'July']
-            fiscalYear[currentYear] = [];
-            
-            var perMonth = {
-                resource: { 
-                    jp: 0,
-                    gd: 0
-                },
-                revenue: {
-                    jp: 0,
-                    gd: 0
-                },
-                cm: 0
-            }
         }
     }
 })();

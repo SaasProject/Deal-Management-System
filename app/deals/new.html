@@ -78,17 +78,11 @@
                             <small style="color:red;">(step options must depend on the level choice)</small>
                             <div class="pull-right">
                                 <select class="form-control" ng-model="dealForm.profile.level">
-                                    <option>9</option>
-                                    <option>5</option>
-                                    <option>4</option>
+                                    <option ng-repeat="level in levels">{{level.level}}</option>
                                 </select>
                                 /
                                 <select class="form-control" ng-model="dealForm.profile.step">
-                                    <option>9.1</option>
-                                    <option>5.2</option>
-                                    <option>5.1</option>
-                                    <option>4.2</option>
-                                    <option>4.1</option>
+                                    <option ng-repeat="step in levels[dealForm.profile.level].steps">{{step}}</option>
                                 </select>
                             </div>
                         </div>
@@ -99,8 +93,8 @@
                         <div class="form-inline">
                             Type
                             <select class="form-control pull-right" ng-model="dealForm.profile.type">
-                                <option>A</option>
-                                <option>B</option>
+                                <option>New</option>
+                                <option>Renew</option>
                             </select>
                         </div>
                     </td>
@@ -276,12 +270,12 @@
                     <tr>
                         <th>MONTH</th>
                         <th></th>
-                        <th>05/{{dealForm.distribution.fiscalYear}}</th>
-                        <th>06/{{dealForm.distribution.fiscalYear}}</th>
-                        <th>07/{{dealForm.distribution.fiscalYear}}</th>
-                        <th>08/{{dealForm.distribution.fiscalYear}}</th>
-                        <th>09/{{dealForm.distribution.fiscalYear}}</th>
-                        <th>10/{{dealForm.distribution.fiscalYear}}</th>
+                        <th>05/{{dealForm.distribution.fiscalYear[0]}}</th>
+                        <th>06/{{dealForm.distribution.fiscalYear[0]}}</th>
+                        <th>07/{{dealForm.distribution.fiscalYear[0]}}</th>
+                        <th>08/{{dealForm.distribution.fiscalYear[0]}}</th>
+                        <th>09/{{dealForm.distribution.fiscalYear[0]}}</th>
+                        <th>10/{{dealForm.distribution.fiscalYear[0]}}</th>
                     </tr>
 
                     <!--row-->
@@ -294,28 +288,28 @@
                             <br/><br/> GD
                         </td>
                         <td>
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.may">
-                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.may">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].may">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].may">
                         </td>
                         <td>
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.jun">
-                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.jun">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].jun">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].jun">
                         </td>
                         <td>
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.jul">
-                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.jul">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].jul">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].jul">
                         </td>
                         <td>
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.aug">
-                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.aug">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].aug">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].aug">
                         </td>
                         <td>
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.sep">
-                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.sep">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].sep">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].sep">
                         </td>
                         <td>
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.oct">
-                            <br/> <input type="text" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.oct">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].oct">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].oct">
                         </td>
                     </tr>
 
@@ -329,28 +323,28 @@
                             <br/><br/> GD
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.may">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.may">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].may">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].may">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.jun">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.jun">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].jun">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].jun">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jul">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.jul">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].jul">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].jul">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.aug">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.aug">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].aug">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].aug">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.sep">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.sep">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].sep">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].sep">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.oct">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.oct">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].oct">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].oct">
                         </td>
                     </tr>
 
@@ -363,22 +357,22 @@
                             ALL
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.may">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].may">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.jun">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].jun">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.jul">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].jul">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.aug">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].aug">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.sep">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].sep">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.oct">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].oct">
                         </td>
                     </tr>
                 </table>
@@ -388,12 +382,12 @@
                     <tr>
                         <th>MONTH</th>
                         <th></th>
-                        <th>11/{{dealForm.distribution.fiscalYear}}</th>
-                        <th>12/{{dealForm.distribution.fiscalYear}}</th>
-                        <th>01/{{dealForm.distribution.fiscalYear + 1}}</th>
-                        <th>02/{{dealForm.distribution.fiscalYear + 1}}</th>
-                        <th>03/{{dealForm.distribution.fiscalYear + 1}}</th>
-                        <th>04/{{dealForm.distribution.fiscalYear + 1}}</th>
+                        <th>11/{{dealForm.distribution.fiscalYear[0]}}</th>
+                        <th>12/{{dealForm.distribution.fiscalYear[0]}}</th>
+                        <th>01/{{dealForm.distribution.fiscalYear[1]}}</th>
+                        <th>02/{{dealForm.distribution.fiscalYear[1]}}</th>
+                        <th>03/{{dealForm.distribution.fiscalYear[1]}}</th>
+                        <th>04/{{dealForm.distribution.fiscalYear[1]}}</th>
                     </tr>
 
                     <!--row-->
@@ -406,28 +400,28 @@
                             <br/><br/> GD
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.nov">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.nov">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].nov">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].nov">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.dec">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.dec">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].dec">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].dec">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.jan">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.jan">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].jan">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].jan">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.feb">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.feb">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].feb">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].feb">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.mar">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.mar">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].mar">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].mar">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp.apr">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd.apr">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].apr">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].apr">
                         </td>
                     </tr>
 
@@ -441,28 +435,28 @@
                             <br/><br/> GD
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.nov">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.nov">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].nov">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].nov">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.dec">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.dec">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].dec">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].dec">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.jan">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.jan">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].jan">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].jan">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.feb">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.feb">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].feb">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].feb">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.mar">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.mar">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].mar">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].mar">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp.apr">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd.apr">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].apr">
+                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].apr">
                         </td>
                     </tr>
 
@@ -475,22 +469,22 @@
                             ALL
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.may">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].nov">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.jun">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].dec">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.jul">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].jan">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.aug">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].feb">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.sep">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].mar">
                         </td>
                         <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm.oct">
+                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].apr">
                         </td>
                     </tr>
                 </table>
@@ -529,7 +523,7 @@
                 <tr>
                     <td>
                         <div class="form-inline">
-                            Status
+                            Dependency
                             <input type="text" class="form-control pull-right" ng-model="dealForm.status.dependency">
                         </div>
                     </td>
