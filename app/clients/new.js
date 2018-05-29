@@ -26,5 +26,18 @@
                     });
         }
 
+        $scope.editClient=function(client){
+            console.log(client);
+
+
+             /*ClientService.addClient($scope.clientForm)
+                    .then(function () {
+                        console.log("client added") 
+                    })
+                    .catch(function (error) {
+                        console.log("client not added") 
+                    });*/
+        }
+
     }
 })();
