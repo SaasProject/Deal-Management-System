@@ -48,6 +48,12 @@
                 parent: 'main',
                 templateUrl: 'clients/new.html',
                 controller: 'NewClientController'
+            })
+            .state('fields', {
+                url: '/fields',
+                parent: 'main',
+                templateUrl: 'fields/fields.html',
+                controller: 'FieldsController'
             });
 
         $httpProvider.interceptors.push(function($q, $window, $location){

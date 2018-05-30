@@ -3,6 +3,7 @@
         <div class="col-md-2 sidenav">
             <a ui-sref="dealList">Deals</a>
             <a ui-sref="clientList">Clients</a>
+            <a ui-sref="fields" ng-if="user.role === 'Admin'">Fields</a>
             <a href="#" ng-click="logout()">Logout</a>
         </div>
 
