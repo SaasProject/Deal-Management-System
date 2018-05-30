@@ -6,7 +6,7 @@
         .controller('NewDealController', Controller);
 
     
-    function Controller($scope, $rootScope, $state, $filter) {
+    function Controller($scope, $rootScope, $state, $filter, ModulesService) {
         $scope.dealForm = getInitialDealForm();
         var tempDealForm = getInitialDealForm();
         //determine current year for distribution
@@ -39,6 +39,54 @@
         $scope.totalRES;
 
         var DATE_FORMAT = 'dd/MM/yyyy';
+
+        function getAllFields(){
+			
+		  ModulesService.getModuleByName('dealprofile').then(function(response){
+				$scope.profileFields = response.fields;
+                $scope.profileFieldsId = response._id;
+				$scope.profileFieldsLength = Object.size(response.fields);
+								
+			}).catch(function(err){
+				alert(err.msg_error);
+            });
+          ModulesService.getModuleByName('dealprocess').then(function(response){
+				$scope.processFields = response.fields;
+                $scope.processFieldsId = response._id;
+				$scope.processFieldsLength = Object.size(response.fields);
+								
+			}).catch(function(err){
+				alert(err.msg_error);
+            });
+          ModulesService.getModuleByName('dealdistribution').then(function(response){
+				$scope.distributionFields = response.fields;
+                $scope.distributionFieldsId = response._id;
+				$scope.distributionFieldsLength = Object.size(response.fields);
+								
+			}).catch(function(err){
+				alert(err.msg_error);
+            });
+          ModulesService.getModuleByName('dealstatus').then(function(response){
+				$scope.statusFields = response.fields;
+                $scope.statusFieldsId = response._id;
+				$scope.statusFieldsLength = Object.size(response.fields);
+								
+			}).catch(function(err){
+				alert(err.msg_error);
+            });
+          ModulesService.getModuleByName('dealcontent').then(function(response){
+				$scope.contentFields = response.fields;
+                $scope.contentFieldsId = response._id;
+				$scope.contentFieldsLength = Object.size(response.fields);
+								
+			}).catch(function(err){
+				alert(err.msg_error);
+            });
+        };
+        
+
+        //call this function to get all fields when page is loaded
+        getAllFields();
 
         //use this to convert date inputs to a datestring with the prescribed format
         $scope.formatDateInput = function (date) {
