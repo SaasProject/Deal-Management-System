@@ -186,6 +186,110 @@
                     </td>
                 </tr>
             </table>
+            <div>
+                <div class="col-md-6 form-inline">
+                    <table class="table">
+                        <tbody>
+                            <tr ng-repeat="field in profileFields">
+                                <td ng-if="$even">
+                                        <label for = "{{field.name}}"> {{field.name}} </label>
+                                        <span style = "color:red" ng-if="field.required">*</span>
+                                        
+                                        <!--show textbox-->
+                                        <input data="{{field.type}}" type="text" ng-show="field.type=='text'" ng-model="dealForm.dealprofile[field.name]"  class="form-control pull-right" ng-required=field.required />
+                        
+                                        <!-- show email -->
+                                        <input name="{{field.type}}" data="{{field.type}}" type="email" ng-show="field.type=='email'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
+                        
+                                        <!-- show number -->
+                                        <input name="{{field.type}}" data="{{field.type}}" type="text" ng-show="field.type=='number'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
+                        
+                                        <!-- show password -->
+                                        <input name="{{field.type}}" data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-show="field.type=='password'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
+                        
+                                        <!-- show confirm password -->
+                                        <label ng-show="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                        <input name="{{'confirm '+field.type}}" data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-show="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                        
+                                        <!-- show text area -->
+                                        <textarea data="{{field.type}}" ng-show="field.type=='textarea'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                        
+                                        <!-- show checkbox -->
+                                        <div class="{{'checkBoxAdd '+field.name}}" name="checkBoxInput" ng-repeat="option in field.options" data="{{field.type}}" ng-show="field.type=='checkbox'">
+                                            <input class="{{option}}" type="checkbox" name="{{option}}" ng-model="optionSelected" ng-checked="isChoosed(field.name, option)" data="{{option}}" ng-click="pushToAEntry(field.name, option)">{{option}}<br>
+                                        </div>
+                        
+                                        <!-- show radio -->
+                                        <div ng-repeat="option in field.options" data="{{field.type}}" ng-show="field.type=='radio'">
+                                            <input class="{{option}}" type="radio" name="{{field.name}} {{option}}" ng-model="radioSelected" ng-click="putToModel(option, field.name)" ng-hide = "" value="{{option}}" ng-checked="isChoosed(field.name, option)">{{option}}<br>
+                                        </div>
+                        
+                                        <!-- show date -->
+                                        <input data="{{field.type}}" type="{{field.type}}" ng-show="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAAssets(field.name, this.tempDate)" class="form-control addTicketDateInput" ng-required=field.required>
+                        
+                                        <!-- show dropdown -->
+                                        <select class="form-control pull-right" data="{{field.type}}" ng-show="field.type=='dropdown'" ng-model="dealForm.dealprofile[field.name]" ng-required="field.required">
+                                            <option value="" ng-if="!field.required"></option>
+                                            <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                            <option ng-repeat="option in field.options">{{option}}</option>
+                                        </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6 form-inline">
+                    <table class="table">
+                        <tbody>
+                            <tr ng-repeat="field in profileFields">
+                                <td ng-if="$odd">
+                                        <label for = "{{field.name}}"> {{field.name}} </label>
+                                        <span style = "color:red" ng-if="field.required">*</span>
+                                        
+                                        <!--show textbox-->
+                                        <input data="{{field.type}}" type="text" ng-show="field.type=='text'" ng-model="dealForm.dealprofile[field.name]"  class="form-control pull-right" ng-required=field.required />
+                        
+                                        <!-- show email -->
+                                        <input name="{{field.type}}" data="{{field.type}}" type="email" ng-show="field.type=='email'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
+                        
+                                        <!-- show number -->
+                                        <input name="{{field.type}}" data="{{field.type}}" type="text" ng-show="field.type=='number'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
+                        
+                                        <!-- show password -->
+                                        <input name="{{field.type}}" data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-show="field.type=='password'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
+                        
+                                        <!-- show confirm password -->
+                                        <label ng-show="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                        <input name="{{'confirm '+field.type}}" data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-show="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                        
+                                        <!-- show text area -->
+                                        <textarea data="{{field.type}}" ng-show="field.type=='textarea'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                        
+                                        <!-- show checkbox -->
+                                        <div class="{{'checkBoxAdd '+field.name}}" name="checkBoxInput" ng-repeat="option in field.options" data="{{field.type}}" ng-show="field.type=='checkbox'">
+                                            <input class="{{option}}" type="checkbox" name="{{option}}" ng-model="optionSelected" ng-checked="isChoosed(field.name, option)" data="{{option}}" ng-click="pushToAEntry(field.name, option)">{{option}}<br>
+                                        </div>
+                        
+                                        <!-- show radio -->
+                                        <div ng-repeat="option in field.options" data="{{field.type}}" ng-show="field.type=='radio'">
+                                            <input class="{{option}}" type="radio" name="{{field.name}} {{option}}" ng-model="radioSelected" ng-click="putToModel(option, field.name)" ng-hide = "" value="{{option}}" ng-checked="isChoosed(field.name, option)">{{option}}<br>
+                                        </div>
+                        
+                                        <!-- show date -->
+                                        <input data="{{field.type}}" type="{{field.type}}" ng-show="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAAssets(field.name, this.tempDate)" class="form-control addTicketDateInput" ng-required=field.required>
+                        
+                                        <!-- show dropdown -->
+                                        <select class="form-control pull-right" data="{{field.type}}" ng-show="field.type=='dropdown'" ng-model="dealForm.dealprofile[field.name]" ng-required="field.required">
+                                            <option value="" ng-if="!field.required"></option>
+                                            <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                            <option ng-repeat="option in field.options">{{option}}</option>
+                                        </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="col-md-1"></div>
     </div>
