@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-md-3">
+        <select class="form-control" ng-model="module.name" ng-change="getModuleByName()">
+            <option value="deals">Deals</option>
+        </select>
+        <hr/>
+        <form ng-submit="submitField()" class="form-group">
+            <label>Category</label>
+            <select class="form-control" ng-model="fieldForm.category">
+                <option>Profile</option>
+                <option>Process</option>
+                <option>Distribution</option>
+                <option>Status</option>
+            </select>
+            <label>Name</label>
+            <input type="text" class="form-control" ng-model="fieldForm.name" required />
+            <br/>
+            <input type="checkbox" ng-model="fieldForm.unique" />
+            <b>Unique</b>
+            <br/>
+            <input type="checkbox" ng-model="fieldForm.required" />
+            <b>Required</b>
+            <br/>
+            <input type="checkbox" ng-model="fieldForm.showInList" />
+            <b>Show in List</b>
+            <br/>
+            <br/>
+            <label>Type</label>
+            <select class="form-control" ng-model="fieldForm.type" required>
+                <option>text</option>
+                <option>number</option>
+                <option>email</option>
+                <option>password</option>
+            </select>
+            <br/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-default" ng-click="resetFieldForm()">Cancel</button>
+            <br/>
+            <i ng-bind="message"></i>
+        </form>
+    </div>
+    <div class="col-md-9">
+        <table class="table">
+            <thead>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Unique</th>
+                <th>Required</th>
+                <th>Type</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="field in module.fields">
+                    <th>{{field.category}}</th>
+                    <td>{{field.name}}</td>
+                    <td>{{field.unique}}</td>
+                    <td>{{field.required}}</td>
+                    <td>{{field.type}}</td>
+                    <td>
+                        <div class="pull-right">
+                            <div ng-if="!field.default">
+                                <a style="cursor:pointer">
+                                    <i class="fa fa-list-alt" aria-hidden="true" ng-click="editField(field)" data-toggle="tooltip"
+                                        title="Edit"></i>
+                                    <a>
+                                        |
+                                        <a style="cursor:pointer">
+                                            <i class="fa fa-trash" aria-hidden="true" ng-click="deleteField(field)" data-toggle="tooltip"
+                                                title="Delete"></i>
+                                        </a>
+                            </div>
+                            <text ng-if="field.default">DEFAULT</text>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
