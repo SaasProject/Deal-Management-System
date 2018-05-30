@@ -13,26 +13,22 @@
             fields: []
         };
         $scope.fieldForm = {            
-            category: 'essential',
             name: '',
             type: 'text',
             unique: false,
             required: false,
-            showInList: true
+            showInList: false
         };
  
         $scope.resetFieldForm = function () {
             //initialize the fieldForm
             $scope.fieldForm = {            
-                category: 'essential',
                 name: '',
                 type: 'text',
                 unique: false,
                 required: false,
-                showInList: true
+                showInList: false
             };
-            //remove category property if the module is not 'deals'
-            if($scope.module.name !== 'deals') delete $scope.fieldForm.category;
             //separate field options from fieldForm object because this needs processing
             $scope.fieldOptions = '';
         }
