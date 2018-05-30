@@ -2,16 +2,20 @@
     <div class="col-md-3">
         <select class="form-control" ng-model="module.name" ng-change="getModuleByName()">
             <option value="deals">Deals</option>
+            <option value="clients">Clients</option>
         </select>
         <hr/>
         <form ng-submit="submitField()" class="form-group">
-            <label>Category</label>
-            <select class="form-control" ng-model="fieldForm.category">
-                <option>Profile</option>
-                <option>Process</option>
-                <option>Distribution</option>
-                <option>Status</option>
-            </select>
+            <div ng-if="module.name === 'deals'">
+                <label>Category</label>
+                <select class="form-control" ng-model="fieldForm.category" required>
+                    <option value="essential">Essential</option>
+                    <option value="profile">Profile</option>
+                    <option value="process">Process</option>
+                    <option value="distribution">Distribution</option>
+                    <option value="status">Status</option>
+                </select>
+            </div>
             <label>Name</label>
             <input type="text" class="form-control" ng-model="fieldForm.name" required />
             <br/>
@@ -30,11 +34,24 @@
                 <option>text</option>
                 <option>number</option>
                 <option>email</option>
+                <option>date</option>
                 <option>password</option>
+                <option>textarea</option>
+                <option>dropdown</option>
+                <option>radio</option>
+                <option>checkbox</option>
             </select>
+            <br/>
+            <div ng-show="hasFieldOptions()">
+                <label>Options</label>
+                <br/>
+                <small>input options separated by comma (,)</small>
+                <textarea class="form-control" rows="5" ng-model="fieldOptions"></textarea>
+            </div>
             <br/>
             <button type="submit" class="btn btn-primary">Submit</button>
             <button type="button" class="btn btn-default" ng-click="resetFieldForm()">Cancel</button>
+            <br/>
             <br/>
             <i ng-bind="message"></i>
         </form>
@@ -44,30 +61,26 @@
             <thead>
                 <th>Category</th>
                 <th>Name</th>
-                <th>Unique</th>
                 <th>Required</th>
-                <th>Type</th>
+                <th>Show in List</th>
                 <th></th>
             </thead>
             <tbody>
                 <tr ng-repeat="field in module.fields">
-                    <th>{{field.category}}</th>
+                    <td>{{field.category}}</td>
                     <td>{{field.name}}</td>
-                    <td>{{field.unique}}</td>
                     <td>{{field.required}}</td>
-                    <td>{{field.type}}</td>
+                    <td>{{field.showInList}}</td>
                     <td>
                         <div class="pull-right">
                             <div ng-if="!field.default">
                                 <a style="cursor:pointer">
-                                    <i class="fa fa-list-alt" aria-hidden="true" ng-click="editField(field)" data-toggle="tooltip"
-                                        title="Edit"></i>
-                                    <a>
-                                        |
-                                        <a style="cursor:pointer">
-                                            <i class="fa fa-trash" aria-hidden="true" ng-click="deleteField(field)" data-toggle="tooltip"
-                                                title="Delete"></i>
-                                        </a>
+                                    <i class="fa fa-list-alt" aria-hidden="true" ng-click="editField(field)" data-toggle="tooltip" title="Edit"></i>
+                                </a>
+                                |
+                                <a style="cursor:pointer">
+                                    <i class="fa fa-trash" aria-hidden="true" ng-click="deleteField(field)" data-toggle="tooltip" title="Delete"></i>
+                                </a>
                             </div>
                             <text ng-if="field.default">DEFAULT</text>
                         </div>

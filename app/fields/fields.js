@@ -12,37 +12,70 @@
             name: 'deals',
             fields: []
         };
-        $scope.fieldForm = {
-            category: '',
+        $scope.fieldForm = {            
+            category: 'essential',
             name: '',
             type: 'text',
             unique: false,
-            required: false
+            required: false,
+            showInList: true
         };
-
+ 
         $scope.resetFieldForm = function () {
-            $scope.fieldForm = {
+            //initialize the fieldForm
+            $scope.fieldForm = {            
+                category: 'essential',
                 name: '',
                 type: 'text',
                 unique: false,
-                required: false
+                required: false,
+                showInList: true
             };
+            //remove category property if the module is not 'deals'
+            if($scope.module.name !== 'deals') delete $scope.fieldForm.category;
+            //separate field options from fieldForm object because this needs processing
+            $scope.fieldOptions = '';
         }
+        $scope.resetFieldForm();
 
         $scope.getModuleByName = function () {
             ModulesService.getModuleByName($scope.module.name).then(function (aModule) {
                 $scope.module = aModule;
+                $scope.resetFieldForm();
             }).catch(function (err) {
                 $scope.message = 'Not found';
+                $scope.resetFieldForm();
+                console.log($scope.fieldForm);
+                //reset the module.fields to remove the fields of a previously selected module
+                $scope.module.fields = [];
             });
         }
+        $scope.getModuleByName();
 
         $scope.submitField = function () {
+            //include options to fieldForm object
+            if ($scope.hasFieldOptions()) {
+                $scope.fieldForm.options = $scope.fieldOptions.split(',');
+
+                //remove duplicates from the array
+                $scope.fieldForm.options = $scope.fieldForm.options.filter(function (value, index, self) {
+                    return (self.indexOf(value) == index && value != null && value != '');
+                });
+
+                //check if the array is empty
+                if ($scope.fieldForm.options.length === 0) {
+                    $scope.message = 'No options inputted';
+                    //exit the function instead of proceeding
+                    return;
+                }
+            }
+
+            //required object parameter for ModulesService.addModuleField and .updateModuleField
             var forSave = {
                 moduleName: $scope.module.name,
                 field: $scope.fieldForm
             }
-            console.log($scope.fieldForm);
+            //add since there is no id property
             if ($scope.fieldForm.id === undefined) {
                 ModulesService.addModuleField(forSave).then(function () {
                     $scope.message = 'Field added';
@@ -52,6 +85,7 @@
                     console.log(err);
                     $scope.message = 'Cannot add the field';
                 });
+            //update
             } else {
                 ModulesService.updateModuleField(forSave).then(function () {
                     $scope.message = 'Field updated';
@@ -66,6 +100,10 @@
 
         $scope.editField = function (aField) {
             angular.copy(aField, $scope.fieldForm);
+            //convert fieldForm.options to a string and save it to fieldOptions
+            if ($scope.hasFieldOptions()) {
+                $scope.fieldOptions = $scope.fieldForm.options.toString();
+            }
         }
 
         $scope.deleteField = function (aField) {
@@ -78,6 +116,9 @@
             });
         }
 
-        $scope.getModuleByName();
+        $scope.hasFieldOptions = function () {
+            return ($scope.fieldForm.type === 'dropdown' || $scope.fieldForm.type === 'radio' 
+            || $scope.fieldForm.type === 'checkbox' ) ? true : false;
+        }
     }
 })();
