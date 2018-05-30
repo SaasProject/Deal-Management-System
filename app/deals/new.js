@@ -1,16 +1,18 @@
-(function(){
+(function () {
     'use strict';
 
     angular
         .module('app')
         .controller('NewDealController', Controller);
 
-    
+
     function Controller($scope, $rootScope, $state, $filter, ModulesService) {
         $scope.dealForm = getInitialDealForm();
         var tempDealForm = getInitialDealForm();
-        //determine current year for distribution
-        var currentYear = new Date().getFullYear();
+        $scope.profileFields = [];
+        $scope.processFields = [];
+        $scope.distributionFields = [];
+        $scope.statusFields = [];
 
         //hard code level and steps. steps depend on the selected level
         $scope.levels = [
@@ -40,53 +42,55 @@
 
         var DATE_FORMAT = 'dd/MM/yyyy';
 
-        function getAllFields(){
-			
-		  ModulesService.getModuleByName('dealprofile').then(function(response){
-				$scope.profileFields = response.fields;
+        function getAllFields() {
+
+            ModulesService.getModuleByName('dealprofile').then(function (response) {
+                $scope.profileFields = response.fields;
                 $scope.profileFieldsId = response._id;
-				$scope.profileFieldsLength = Object.size(response.fields);
-								
-			}).catch(function(err){
-				alert(err.msg_error);
+                for (var i = 0; i < $scope.profileFields.length; i++) {
+                    $scope.dealForm.profile[$scope.profileFields[i].name] = ($scope.profileFields[i].type !== 'number') ? '' : 0;
+                }
+            }).catch(function (err) {
+                alert(err.msg_error);
             });
-          ModulesService.getModuleByName('dealprocess').then(function(response){
-				$scope.processFields = response.fields;
+            ModulesService.getModuleByName('dealprocess').then(function (response) {
+                $scope.processFields = response.fields;
                 $scope.processFieldsId = response._id;
-				$scope.processFieldsLength = Object.size(response.fields);
-								
-			}).catch(function(err){
-				alert(err.msg_error);
+                for (var i = 0; i < $scope.processFields.length; i++) {
+                    $scope.dealForm.process[$scope.processFields[i].name] = ($scope.processFields[i].type !== 'number') ? '' : 0;
+                }
+            }).catch(function (err) {
+                alert(err.msg_error);
             });
-          ModulesService.getModuleByName('dealdistribution').then(function(response){
-				$scope.distributionFields = response.fields;
+            ModulesService.getModuleByName('dealdistribution').then(function (response) {
+                $scope.distributionFields = response.fields;
                 $scope.distributionFieldsId = response._id;
-				$scope.distributionFieldsLength = Object.size(response.fields);
-								
-			}).catch(function(err){
-				alert(err.msg_error);
+                for (var i = 0; i < $scope.distributionFields.length; i++) {
+                    $scope.dealForm.distribution[$scope.distributionFields[i].name] = ($scope.distributionFields[i].type !== 'number') ? '' : 0;
+                }
+            }).catch(function (err) {
+                alert(err.msg_error);
             });
-          ModulesService.getModuleByName('dealstatus').then(function(response){
-				$scope.statusFields = response.fields;
+            ModulesService.getModuleByName('dealstatus').then(function (response) {
+                $scope.statusFields = response.fields;
                 $scope.statusFieldsId = response._id;
-				$scope.statusFieldsLength = Object.size(response.fields);
-								
-			}).catch(function(err){
-				alert(err.msg_error);
+                for (var i = 0; i < $scope.statusFields.length; i++) {
+                    $scope.dealForm.status[$scope.statusFields[i].name] = ($scope.statusFields[i].type !== 'number') ? '' : 0;
+                }
+            }).catch(function (err) {
+                alert(err.msg_error);
             });
-          ModulesService.getModuleByName('dealcontent').then(function(response){
-				$scope.contentFields = response.fields;
+            ModulesService.getModuleByName('dealcontent').then(function (response) {
+                $scope.contentFields = response.fields;
                 $scope.contentFieldsId = response._id;
-				$scope.contentFieldsLength = Object.size(response.fields);
-								
-			}).catch(function(err){
-				alert(err.msg_error);
+
+            }).catch(function (err) {
+                alert(err.msg_error);
             });
         };
-        
 
-        //call this function to get all fields when page is loaded
         getAllFields();
+        
 
         //use this to convert date inputs to a datestring with the prescribed format
         $scope.formatDateInput = function (date) {
@@ -104,7 +108,7 @@
              * do not use = because this is a reference; meaning any changes on one affects the other 
              * tempDealForm = $scope.dealForm; ---> X
              */
-            
+
 
             //use Object.assign(target, source) instead
             Object.assign(tempDealForm, $scope.dealForm);
@@ -131,53 +135,13 @@
                 //dueDate: new Date(),
                 dueDate: '',
                 profile: {
-                    country: '',
-                    division: '',
-                    client: {
-                        clientID: '',
-                        clientResp: ''
-                    },
-                    service: '',
-                    level: '',
-                    step: '',
-                    type: '',
-                    confidence: '',
-                    resourceSize: {
-                        mm: 0,
-                        fte: 0
-                    },
-                    revenue: 0,
-                    cm: 0,
-                    duration: {
-                        //start: new Date(),
-                        //end: new Date()
-                        start: '',
-                        end: ''
-                    },
-                    awsResp: {
-                        sales: '',
-                        dev: ''
-                    },
-                    keyAssignment: '',
-                    remark: ''
+
                 },
                 process: {
-                    sow: {
-                        scheme: '',
-                        number: '',
-                        //date: new Date(),
-                        date: '',
-                        status: ''
-                    },
-                    srb: {
-                        number: '',
-                        //date: new Date(),
-                        date: '',
-                        status: ''
-                    }
+
                 },
                 distribution: {
-                    fiscalYear: [currentYear, currentYear + 1],
+                    fiscalYear: [new Date().getFullYear(), new Date().getFullYear() + 1],
                     total: {
                         resource: 0,
                         revenue: 0,
@@ -196,10 +160,7 @@
                     }
                 },
                 status: {
-                    dependency: '',
-                    action: '',
-                    status: '',
-                    stepToClose: ''
+
                 },
                 content: ''
             };
