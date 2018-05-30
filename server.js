@@ -33,6 +33,7 @@ app.use(session({ secret: config.secret, resave: false, saveUninitialized: true}
 app.use('/app', require('./controllers/app.controller'));
 app.use('/user', require('./controllers/user.controller'));
 app.use('/client', require('./controllers/client.controller'));
+app.use('/api/modules', require('./controllers/api/modules.controller'));
 
 
 //added by dyan0
