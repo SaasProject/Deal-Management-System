@@ -13,7 +13,8 @@ var fs = require('fs');
  
 var service = {};
 
-service.addDeal = addDeal;    // macku
+service.addDeal = addDeal; 
+service.editDeal = editDeal;    // macku
 
  
 module.exports = service;
@@ -58,4 +59,18 @@ function addDeal(deal){
 
 
     return deferred.promise;
+}
+
+function editDeal(deal){
+	var deferred = Q.defer();
+
+
+	db.deals.update({ID : deal.ID}, {$set: deal}, function(err){
+            if(err) {
+               deferred.reject(err);
+            }
+            deferred.resolve();
+        });
+
+	return deferred.promise;
 }

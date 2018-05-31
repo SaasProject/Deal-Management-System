@@ -131,25 +131,33 @@
              */       
                         
             console.log(tempDealForm);
-            
-            DealsService.addDeal(tempDealForm)
-            .then(function(){
-                console.log('eyy');
-                $state.transitionTo('dealList');
-            })
-            .catch(function(err){
 
-            });
-            
+            if (tempDealForm._id === undefined) {
+                DealsService.addDeal(tempDealForm)
+                .then(function(){
+                    console.log('eyy');
+                    $state.transitionTo('dealList');
+                })
+                .catch(function(err){
+    
+                });
+            } else {
+                DealsService.updateDeal(tempDealForm)
+                .then(function(){
+                    $state.transitionTo('dealList');
+                })
+                .catch(function(){
+    
+                });
+            }            
         }
 
         $scope.tryFunction = function () {
             var object = {
-                "ProjectName":"Saas",
+                "ID":"D8ELQ", 
+                "ProjectName":"Dev B",
                 "Client":"TI",
             };
-
-            
         }
 
         //do not initialize dates to the current date since it is not required
