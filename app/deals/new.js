@@ -6,7 +6,7 @@
         .controller('NewDealController', Controller);
 
 
-    function Controller($scope, $rootScope, $state, $filter, ModulesService) {
+    function Controller($scope, $rootScope, $state, $filter, ModulesService, DealsService) {
         $scope.dealForm = getInitialDealForm();
         var tempDealForm = getInitialDealForm();
         $scope.profileFields = [];
@@ -126,6 +126,23 @@
             tempDealForm.process.sow.date = $scope.formatDateInput(tempDealForm.process.sow.date);
             console.log($scope.dealForm.profile.duration);
             console.log(tempDealForm);
+
+            
+        }
+
+        $scope.tryFunction = function () {
+            var object = {
+                "ProjectName":"Saas",
+                "Client":"TI",
+            };
+
+            DealsService.addDeal(object)
+            .then(function(){
+
+            })
+            .catch(function(){
+
+            });
         }
 
         //do not initialize dates to the current date since it is not required
