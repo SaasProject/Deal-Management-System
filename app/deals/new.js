@@ -6,7 +6,7 @@
         .controller('NewDealController', Controller);
 
 
-    function Controller($scope, $rootScope, $state, $filter, ModulesService, DealsService, InputTypeService) {
+    function Controller($scope, $rootScope, $state, $filter, ModulesService, DealsService) {
         $scope.dealForm = getInitialDealForm();
         var tempDealForm = getInitialDealForm();
         $scope.profileFields = [];
@@ -43,7 +43,15 @@
         var DATE_FORMAT = 'dd/MM/yyyy';
 
         function getAllFields() {
-
+            ModulesService.getModuleByName('dealessential').then(function (response) {
+                $scope.essentialFields = response.fields;
+                $scope.essentialFieldsId = response._id;
+                for (var i = 0; i < $scope.essentialFields.length; i++) {
+                    $scope.dealForm.essential[$scope.essentialFields[i].name] = ($scope.essentialFields[i].type !== 'number') ? '' : 0;
+                }
+            }).catch(function (err) {
+                alert(err.msg_error);
+            });
             ModulesService.getModuleByName('dealprofile').then(function (response) {
                 $scope.profileFields = response.fields;
                 $scope.profileFieldsId = response._id;
@@ -115,26 +123,25 @@
             //use Object.assign(target, source) instead
             Object.assign(tempDealForm, $scope.dealForm);
 
-            //format dueDate, duration (start) & (end), srb date, and sow date to a date string
+            //format date inputs to a date string
             /**
              * 2 ways to format:
              * 1. use document.getElementById().value; this format is yyyy-MM-dd
              * 2. use Angular's $filter('date')(date, DATE_FORMAT); format depends on DATE_FORMAT variable
-             */
-            /* tempDealForm.dueDate = $scope.formatDateInput(tempDealForm.dueDate);
-            tempDealForm.profile.duration.start = $scope.formatDateInput(tempDealForm.profile.duration.start);
-            tempDealForm.profile.duration.end = $scope.formatDateInput(tempDealForm.profile.duration.end);
-            tempDealForm.process.srb.date = $scope.formatDateInput(tempDealForm.process.srb.date);
-            tempDealForm.process.sow.date = $scope.formatDateInput(tempDealForm.process.sow.date); */
-            console.log($scope.dealForm.profile.duration);
+             */       
+                        
             console.log(tempDealForm);
+            
+            DealsService.addDeal(tempDealForm)
+            .then(function(){
+                console.log('eyy');
+                $state.transitionTo('dealList');
+            })
+            .catch(function(err){
 
+            });
             
         }
-
-        $scope.pushDateToAllEntry = function(fieldName, inputDate, category) {
-            $scope.dealForm[category][fieldName] = InputTypeService.formatDate(inputDate);
-        };
 
         $scope.tryFunction = function () {
             var object = {
@@ -142,21 +149,15 @@
                 "Client":"TI",
             };
 
-            DealsService.addDeal(object)
-            .then(function(){
-
-            })
-            .catch(function(){
-
-            });
+            
         }
 
         //do not initialize dates to the current date since it is not required
         function getInitialDealForm() {
             return {
-                name: '',
-                //dueDate: new Date(),
-                dueDate: '',
+                essential: {
+
+                },
                 profile: {
 
                 },
@@ -185,7 +186,9 @@
                 status: {
 
                 },
-                content: ''
+                content: {
+                    'Main Message': ''
+                }
             };
         }
     }
