@@ -33,7 +33,7 @@
                     //first condition is to make sure that collections that have 'deal' in its name are only processed.
                     if (allModules[i].name.search('deal') !== -1 && allModules[i].name !== 'deals') {
                         category = allModules[i].name.replace('deal', '');
-                        $scope.fields[category] = allModules[i].fields
+                        $scope.fields[category] = allModules[i].fields;
                     }
                 }
                 console.log($scope.fields);
