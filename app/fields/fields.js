@@ -9,7 +9,7 @@
     function Controller($scope, $rootScope, $state, $filter, ModulesService) {
         $scope.message = '';
         $scope.module = {
-            name: 'deals',
+            name: 'dealessential',
             fields: []
         };
         $scope.fieldForm = {            
@@ -19,6 +19,10 @@
             required: false,
             showInList: false
         };
+
+        $scope.resetMessage = function () {
+            $scope.message = '';
+        }
  
         $scope.resetFieldForm = function () {
             //initialize the fieldForm

@@ -1,8 +1,9 @@
 <div class="row">
     <div class="col-md-3">
-        <select class="form-control" ng-model="module.name" ng-change="getModuleByName()">
-            <option value="deals">Deals</option>
-            <option value="clients">Clients</option>
+        <select class="form-control" ng-model="module.name" ng-change="getModuleByName(); resetMessage()">
+            <!-- <option value="deals">Deals</option> -->
+            <!-- <option value="clients">Clients</option> -->
+            <option value="dealessential">Deal Essential</option>
             <option value="dealprofile">Deal Profile</option>
             <option value="dealprocess">Deal Process</option>
             <option value="dealdistribution">Deal Distribution</option>
@@ -11,7 +12,7 @@
         </select>
         <hr/>
         <form ng-submit="submitField()" class="form-group">
-            <div ng-if="module.name === 'deals'">
+            <!-- <div ng-if="module.name === 'deals'">
                 <label>Category</label>
                 <select class="form-control" ng-model="fieldForm.category" required>
                     <option value="essential">Essential</option>
@@ -20,9 +21,9 @@
                     <option value="distribution">Distribution</option>
                     <option value="status">Status</option>
                 </select>
-            </div>
+            </div> -->
             <label>Name</label>
-            <input type="text" class="form-control" ng-model="fieldForm.name" required />
+            <input type="text" class="form-control" ng-model="fieldForm.name" placeholder="do not include . or $" required />
             <br/>
             <input type="checkbox" ng-model="fieldForm.unique" />
             <b>Unique</b>
