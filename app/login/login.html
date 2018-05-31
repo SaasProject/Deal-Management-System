@@ -4,12 +4,14 @@
     <div class="col-md-4" style="padding-top: 75px;">
         <form ng-submit="login()">
             <label>Email:</label>
-            <input type="text" class="form-control" ng-model="loginForm.email" autofocus required>
+            <input type="email" class="form-control" ng-model="loginForm.email" required>
             <label>Password:</label>
             <input type="password" class="form-control" ng-model="loginForm.password" required>
             <br/>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
+        <br/>
+        <i ng-bind="message"></i>
     </div>
     <div class="col-md-4"></div>
 </div>

@@ -61,7 +61,7 @@ function authenticate(email, password) {
             deferred.resolve({token: jwt.sign({ sub: user._id }, config.secret), user: user});
         } else {
             // authentication failed
-            deferred.resolve();
+            deferred.reject();
         }
     });
  
