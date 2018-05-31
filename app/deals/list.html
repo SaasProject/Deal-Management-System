@@ -1,43 +1,58 @@
-
 <div>
     <button class="btn btn-primary" ui-sref="newDeal">New Deal</button>
 </div>
-    
+
 <div class="form-inline pull-right">
-    <label>Filter by: &nbsp;</label>
+    <!-- <label>Filter by: &nbsp;</label>
     <select class="form-control" ng-model="filter" ng-selected="console()">
         <option ng-repeat="option in filterOptions">{{option}}</option>
-    </select>
+    </select> -->
     <label>Search: &nbsp;</label>
     <input type="text" class="form-control" ng-model="searchText">
 </div>
 <table class="table">
     <thead>
+        <th ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList">
+            {{essentialField.name}}
+        </th>
+        <th ng-repeat="profileField in fields.profile" ng-if="profileField.showInList">
+            {{profileField.name}}
+        </th>
+        <th ng-repeat="processField in fields.process" ng-if="processField.showInList">
+            {{processField.name}}
+        </th>
+        <th ng-repeat="distributionField in fields.distribution" ng-if="distributionField.showInList">
+            {{distributionField.name}}
+        </th>
+        <th ng-repeat="statusField in fields.status" ng-if="statusField.showInList">
+            {{statusField.name}}
+        </th>
         <th></th>
-        <th>Client Name</th>
-        <th>Company</th>
-        <th>Contact</th>
-        <th>Client Name</th>
-        <th>Company</th>
-        <th>Contact</th>
-        <th>Client Name</th>
-        <th>Company</th>
-        <th>Contact</th>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                <a class="fa fa-list-alt" data-toggle="tooltip" title="View"></a>
+        <tr ng-repeat="deal in deals | filter: searchText">
+            <td ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList">
+                {{deal.essential[essentialField.name]}}
             </td>
-            <td>Sir Bert</td>
-            <td>AWS</td>
-            <td>0999999999</td>
-            <td>Sir Bert</td>
-            <td>AWS</td>
-            <td>0999999999</td>
-            <td>Sir Bert</td>
-            <td>AWS</td>
-            <td>0999999999</td>
+            <td ng-repeat="profileField in fields.profile" ng-if="profileField.showInList">
+                {{deal.profile[profileField.name]}}
+            </td>
+            <td ng-repeat="processField in fields.process" ng-if="processField.showInList">
+                {{deal.process[processField.name]}}
+            </td>
+            <td ng-repeat="distributionField in fields.distribution" ng-if="distributionField.showInList">
+                {{deal.distribution[distributionField.name]}}
+            </td>
+            <td ng-repeat="statusField in fields.status" ng-if="statusField.showInList">
+                {{deal.status[statusField.name]}}
+            </td>
+            <td>
+                <div class="pull-right">
+                    <a style="cursor:pointer">
+                        <i class="fa fa-list-alt" aria-hidden="true" ui-sref="viewDeal(deal._id)" data-toggle="tooltip" title="View"></i>
+                    </a>
+                </div>
+            </td>
         </tr>
     </tbody>
 </table>
