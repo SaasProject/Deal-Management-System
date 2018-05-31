@@ -66,6 +66,8 @@ function editDeal(deal){
 	var deferred = Q.defer();
 
 
+	delete deal._id;
+
 	db.deals.update({ID : deal.ID}, {$set: deal}, function(err){
             if(err) {
                deferred.reject(err);
