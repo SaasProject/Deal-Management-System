@@ -37,11 +37,14 @@
                 templateUrl: 'deals/list.html',
                 controller: 'DealListController'
             })
-            .state('newDeal', {
-                url: '/deals/new',
+            .state('dealForm', {
+                url: '/deals/dealForm',
                 parent: 'main',
-                templateUrl: 'deals/new.html',
-                controller: 'NewDealController'
+                params: {
+                    ID: null
+                },
+                templateUrl: 'deals/dealForm.html',
+                controller: 'DealFormController'
             })
             .state('newClient', {
                 url: '/clients/new',
