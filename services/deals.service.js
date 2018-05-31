@@ -14,7 +14,8 @@ var fs = require('fs');
 var service = {};
 
 service.addDeal = addDeal; 
-service.editDeal = editDeal;    // macku
+service.editDeal = editDeal;  
+service.getDealById = getDealById;   // macku
 
  
 module.exports = service;
@@ -73,4 +74,25 @@ function editDeal(deal){
         });
 
 	return deferred.promise;
+}
+
+
+function getDealById(ID) {
+    var deferred = Q.defer();
+    
+    console.log(ID);
+ 
+    db.deals.findOne({ID:ID}, function (err, deal) {
+        if (err) deferred.reject(err);
+ 
+        	//console.log(deal)
+        	if(deal){
+            	deferred.resolve(deal);
+            }else{
+            	deferred.reject();
+            }
+
+    });
+
+    return deferred.promise;
 }

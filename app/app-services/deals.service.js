@@ -10,6 +10,7 @@
  
         service.addDeal = addDeal;
         service.updateDeal = updateDeal;
+        service.getDealById = getDealById;
  
         return service;  
         
@@ -21,6 +22,10 @@
         function updateDeal(dealsForm) {
             //console.log(dealsForm)
             return $http.put('/deals/editDeal', dealsForm).then(handleSuccess, handleError);
+        }
+
+        function getDealById(dealId) {
+            return $http.get('/deals/' + dealId).then(handleSuccess, handleError);
         }
  
         // private functions

@@ -30,5 +30,18 @@ router.put('/editDeal', function(req, res, next) {
     });
 });
 
+router.get('/:ID', function(req, res, next) {
+    
+    var ID = req.params.ID;
+
+    dealsService.getDealById(ID)
+    .then(function(deal) {
+        res.status(200).send(deal);
+    })
+    .catch(function(err) {
+        res.status(400).send();
+    });
+});
+
 module.exports = router;
 
