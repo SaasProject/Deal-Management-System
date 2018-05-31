@@ -1,673 +1,736 @@
 <form ng-submit="submit()">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-inline">
-                <label>Deal Name: &nbsp;</label>
-                <input type="text" class="form-control pull-right" ng-model="dealForm.name">
-            </div>
-            <br>
-            <div class="form-inline">
-                <label>Due Date: &nbsp;</label>
-                <input type="date" id="dueDate" class="form-control pull-right" ng-model="dealForm.dueDate">
-            </div>
-        </div>
-        <div class="col-md-2 pull-right">
-            <button type="button" ng-click="tryFunction()">try lang</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-default">Cancel</button>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <h4>Profile</h4>
-            <table class="table table-striped table-condensed table-hover">
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            Country
-                            <select class="form-control pull-right" ng-model="dealForm.profile.country">
-                                <option>PH</option>
-                                <option>JP</option>
-                                <option>CN</option>
-                                <option>US</option>
-                                <option>GR</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            Division
-                            <select class="form-control pull-right" ng-model="dealForm.profile.division">
-                                <option>GD</option>
-                                <option>ESD</option>
-                            </select>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            Client
-                            <select class="form-control pull-right" ng-model="dealForm.profile.client.clientID">
-                                <option value="id(58FH)">58PH</option>
-                                <option value="id(AIS)">AIS</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            Client Resp
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.profile.client.clientResp">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            Service
-                            <select class="form-control pull-right" ng-model="dealForm.profile.service">
-                                <option>A</option>
-                                <option>B</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            Level / Step
-                            <small style="color:red;">(step options must depend on the level choice)</small>
-                            <div class="pull-right">
-                                <select class="form-control" ng-model="dealForm.profile.level">
-                                    <option ng-repeat="level in levels">{{level.level}}</option>
-                                </select>
-                                /
-                                <select class="form-control" ng-model="dealForm.profile.step">
-                                    <option ng-repeat="step in levels[dealForm.profile.level].steps">{{step}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            Type
-                            <select class="form-control pull-right" ng-model="dealForm.profile.type">
-                                <option>New</option>
-                                <option>Renew</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            Confidence
-                            <select class="form-control pull-right" ng-model="dealForm.profile.confidence">
-                                <option>A</option>
-                                <option>B</option>
-                            </select>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            Resource Size
-                            <div class="pull-right">
-                                <input type="number" class="form-control" ng-model="dealForm.profile.resourceSize.mm"> (MM)
-                                <br> /
-                                <br>
-                                <input type="number" class="form-control" ng-model="dealForm.profile.resourceSize.fte"> (FTE)
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            Revenue
-                            <div class="pull-right">
-                                <input type="number" class="form-control" ng-model="dealForm.profile.revenue"> (JPY)
-                            </div>
-                        </div>
-                        <div class="form-inline">
-                            CM
-                            <div class="pull-right">
-                                <input type="number" class="form-control" ng-model="dealForm.profile.cm"> (JPY)
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <small style="color:red;">Start must be less than End</small>
-                        <div class="form-inline">
-                            Duration (Start)
-                            <input type="date" class="form-control pull-right" ng-model="dealForm.profile.duration.start">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            Duration (End)
-                            <input type="date" class="form-control pull-right" ng-model="dealForm.profile.duration.end">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            AWS Resp (Sales)
-                            <select class="form-control pull-right" ng-model="dealForm.profile.awsResp.sales">
-                                <option>Jeremy Christian Reccion</option>
-                                <option>Jano Omugtong</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            AWS Resp (Dev)
-                            <select class="form-control pull-right" ng-model="dealForm.profile.awsResp.dev">
-                                <option>Jenny Ayala</option>
-                                <option>Macku Sanchez</option>
-                                <option>Glenn Flamiano</option>
-                            </select>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            Key Assignment
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.profile.keyAssignment">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            Remark
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.profile.remark">
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <div>
-                <div class="col-md-6 form-inline">
-                    <table class="table">
-                        <tbody>
-                            <tr ng-repeat="field in profileFields">
-                                <td ng-if="$even">
-                                        <label for = "{{field.name}}"> {{field.name}} </label>
-                                        <span style = "color:red" ng-if="field.required">*</span>
-                                        
-                                        <!--show textbox-->
-                                        <input data="{{field.type}}" type="text" ng-show="field.type=='text'" ng-model="dealForm.dealprofile[field.name]"  class="form-control pull-right" ng-required=field.required />
-                        
-                                        <!-- show email -->
-                                        <input name="{{field.type}}" data="{{field.type}}" type="email" ng-show="field.type=='email'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
-                        
-                                        <!-- show number -->
-                                        <input name="{{field.type}}" data="{{field.type}}" type="text" ng-show="field.type=='number'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
-                        
-                                        <!-- show password -->
-                                        <input name="{{field.type}}" data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-show="field.type=='password'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
-                        
-                                        <!-- show confirm password -->
-                                        <label ng-show="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
-                                        <input name="{{'confirm '+field.type}}" data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-show="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
-                        
-                                        <!-- show text area -->
-                                        <textarea data="{{field.type}}" ng-show="field.type=='textarea'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
-                        
-                                        <!-- show checkbox -->
-                                        <div class="{{'checkBoxAdd '+field.name}}" name="checkBoxInput" ng-repeat="option in field.options" data="{{field.type}}" ng-show="field.type=='checkbox'">
-                                            <input class="{{option}}" type="checkbox" name="{{option}}" ng-model="optionSelected" ng-checked="isChoosed(field.name, option)" data="{{option}}" ng-click="pushToAEntry(field.name, option)">{{option}}<br>
-                                        </div>
-                        
-                                        <!-- show radio -->
-                                        <div ng-repeat="option in field.options" data="{{field.type}}" ng-show="field.type=='radio'">
-                                            <input class="{{option}}" type="radio" name="{{field.name}} {{option}}" ng-model="radioSelected" ng-click="putToModel(option, field.name)" ng-hide = "" value="{{option}}" ng-checked="isChoosed(field.name, option)">{{option}}<br>
-                                        </div>
-                        
-                                        <!-- show date -->
-                                        <input data="{{field.type}}" type="{{field.type}}" ng-show="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAAssets(field.name, this.tempDate)" class="form-control addTicketDateInput" ng-required=field.required>
-                        
-                                        <!-- show dropdown -->
-                                        <select class="form-control pull-right" data="{{field.type}}" ng-show="field.type=='dropdown'" ng-model="dealForm.dealprofile[field.name]" ng-required="field.required">
-                                            <option value="" ng-if="!field.required"></option>
-                                            <!-- <option value="" ng-if="field.required" selected hidden></option> -->
-                                            <option ng-repeat="option in field.options">{{option}}</option>
-                                        </select>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-inline">
+                    <label>Deal Name: &nbsp;</label>
+                    <input type="text" class="form-control pull-right" ng-model="dealForm.name">
                 </div>
-                <div class="col-md-6 form-inline">
-                    <table class="table">
-                        <tbody>
-                            <tr ng-repeat="field in profileFields">
-                                <td ng-if="$odd">
-                                        <label for = "{{field.name}}"> {{field.name}} </label>
-                                        <span style = "color:red" ng-if="field.required">*</span>
-                                        
-                                        <!--show textbox-->
-                                        <input data="{{field.type}}" type="text" ng-show="field.type=='text'" ng-model="dealForm.dealprofile[field.name]"  class="form-control pull-right" ng-required=field.required />
-                        
-                                        <!-- show email -->
-                                        <input name="{{field.type}}" data="{{field.type}}" type="email" ng-show="field.type=='email'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
-                        
-                                        <!-- show number -->
-                                        <input name="{{field.type}}" data="{{field.type}}" type="text" ng-show="field.type=='number'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
-                        
-                                        <!-- show password -->
-                                        <input name="{{field.type}}" data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-show="field.type=='password'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required />
-                        
-                                        <!-- show confirm password -->
-                                        <label ng-show="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
-                                        <input name="{{'confirm '+field.type}}" data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-show="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
-                        
-                                        <!-- show text area -->
-                                        <textarea data="{{field.type}}" ng-show="field.type=='textarea'" ng-model="dealForm.dealprofile[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
-                        
-                                        <!-- show checkbox -->
-                                        <div class="{{'checkBoxAdd '+field.name}}" name="checkBoxInput" ng-repeat="option in field.options" data="{{field.type}}" ng-show="field.type=='checkbox'">
-                                            <input class="{{option}}" type="checkbox" name="{{option}}" ng-model="optionSelected" ng-checked="isChoosed(field.name, option)" data="{{option}}" ng-click="pushToAEntry(field.name, option)">{{option}}<br>
-                                        </div>
-                        
-                                        <!-- show radio -->
-                                        <div ng-repeat="option in field.options" data="{{field.type}}" ng-show="field.type=='radio'">
-                                            <input class="{{option}}" type="radio" name="{{field.name}} {{option}}" ng-model="radioSelected" ng-click="putToModel(option, field.name)" ng-hide = "" value="{{option}}" ng-checked="isChoosed(field.name, option)">{{option}}<br>
-                                        </div>
-                        
-                                        <!-- show date -->
-                                        <input data="{{field.type}}" type="{{field.type}}" ng-show="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAAssets(field.name, this.tempDate)" class="form-control addTicketDateInput" ng-required=field.required>
-                        
-                                        <!-- show dropdown -->
-                                        <select class="form-control pull-right" data="{{field.type}}" ng-show="field.type=='dropdown'" ng-model="dealForm.dealprofile[field.name]" ng-required="field.required">
-                                            <option value="" ng-if="!field.required"></option>
-                                            <!-- <option value="" ng-if="field.required" selected hidden></option> -->
-                                            <option ng-repeat="option in field.options">{{option}}</option>
-                                        </select>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <br>
+                <div class="form-inline">
+                    <label>Due Date: &nbsp;</label>
+                    <input type="date" id="dueDate" class="form-control pull-right" ng-model="dealForm.dueDate">
                 </div>
             </div>
+            <div class="col-md-2 pull-right">
+                <button type="button" ng-click="tryFunction()">try lang</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-default">Cancel</button>
+            </div>
         </div>
-        <div class="col-md-1"></div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <h4>Process</h4>
-            <table class="table table-striped table-condensed table-hover">
-                <tr>
-                    <td></td>
-                    <td>
-                        <div class="form-inline">
-                            SOW Scheme
-                            <select class="form-control pull-right" ng-model="dealForm.process.sow.scheme">
-                                <option>A</option>
-                                <option>B</option>
-                            </select>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            SRB No. (e.g. PS-0095)
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.process.srb.number">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            SOW No. (e.g. AWS-2013-2575)
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.process.sow.number">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            SRB Date
-                            <input type="date" class="form-control pull-right" ng-model="dealForm.process.srb.date">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            SOW Date
-                            <input type="date" class="form-control pull-right" ng-model="dealForm.process.sow.date">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            SRB Status
-                            <select class="form-control pull-right" ng-model="dealForm.process.srb.status">
-                                <option>A</option>
-                                <option>B</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            SOW Status
-                            <select class="form-control pull-right" ng-model="dealForm.process.sow.status">
-                                <option>A</option>
-                                <option>B</option>
-                            </select>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-md-1"></div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <h4>Distribution</h4>
-            <table class="table table-striped table-condensed table-hover">
-                <table class="table table-striped table-condensed table-hover">
-                    <!--header-->
-                    <tr>
-                        <th>MONTH</th>
-                        <th></th>
-                        <th>05/{{dealForm.distribution.fiscalYear[0]}}</th>
-                        <th>06/{{dealForm.distribution.fiscalYear[0]}}</th>
-                        <th>07/{{dealForm.distribution.fiscalYear[0]}}</th>
-                        <th>08/{{dealForm.distribution.fiscalYear[0]}}</th>
-                        <th>09/{{dealForm.distribution.fiscalYear[0]}}</th>
-                        <th>10/{{dealForm.distribution.fiscalYear[0]}}</th>
-                    </tr>
-
-                    <!--row-->
-                    <tr>
-                        <td>
-                            Resource (MM):
-                        </td>
-                        <td>
-                            JP
-                            <br/><br/> GD
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].may">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].may">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].jun">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].jun">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].jul">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].jul">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].aug">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].aug">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].sep">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].sep">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].oct">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].oct">
-                        </td>
-                    </tr>
-
-                    <!--row-->
-                    <tr>
-                        <td>
-                            Revenue (JPY) *1:
-                        </td>
-                        <td>
-                            JP
-                            <br/><br/> GD
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].may">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].may">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].jun">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].jun">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].jul">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].jul">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].aug">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].aug">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].sep">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].sep">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].oct">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].oct">
-                        </td>
-                    </tr>
-
-                    <!--row-->
-                    <tr>
-                        <td>
-                            CM(JPY)
-                        </td>
-                        <td>
-                            ALL
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].may">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].jun">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].jul">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].aug">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].sep">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].oct">
-                        </td>
-                    </tr>
-                </table>
-                <!--another same table-->
-                <table class="table table-striped table-condensed table-hover">
-                    <!--header-->
-                    <tr>
-                        <th>MONTH</th>
-                        <th></th>
-                        <th>11/{{dealForm.distribution.fiscalYear[0]}}</th>
-                        <th>12/{{dealForm.distribution.fiscalYear[0]}}</th>
-                        <th>01/{{dealForm.distribution.fiscalYear[1]}}</th>
-                        <th>02/{{dealForm.distribution.fiscalYear[1]}}</th>
-                        <th>03/{{dealForm.distribution.fiscalYear[1]}}</th>
-                        <th>04/{{dealForm.distribution.fiscalYear[1]}}</th>
-                    </tr>
-
-                    <!--row-->
-                    <tr>
-                        <td>
-                            Resource (MM):
-                        </td>
-                        <td>
-                            JP
-                            <br/><br/> GD
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].nov">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].nov">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].dec">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].dec">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].jan">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].jan">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].feb">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].feb">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].mar">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].mar">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].apr">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].apr">
-                        </td>
-                    </tr>
-
-                    <!--row-->
-                    <tr>
-                        <td>
-                            Revenue (JPY) *1:
-                        </td>
-                        <td>
-                            JP
-                            <br/><br/> GD
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].nov">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].nov">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].dec">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].dec">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].jan">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].jan">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].feb">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].feb">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].mar">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].mar">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].apr">
-                            <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].apr">
-                        </td>
-                    </tr>
-
-                    <!--row-->
-                    <tr>
-                        <td>
-                            CM(JPY)
-                        </td>
-                        <td>
-                            ALL
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].nov">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].dec">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].jan">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].feb">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].mar">
-                        </td>
-                        <td>
-                            <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].apr">
-                        </td>
-                    </tr>
-                </table>
-                <div class="row">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4">
-                        <table class="table table-striped table-condensed table-hover">
-                            <tr>
-                                <th>Total</th>
-                                <td>{{totalRES}} (MM)</td>
-                                <td>{{totalREV}} (JPY)</td>
-                            </tr>
-                            <tr>
-                                <th>Average</th>
-                                <td></td>
-                                <td>{{totalREV / totalRES}} (JPY/MM)</td>
-                            </tr>
-                            <tr>
-                                <th>CM</th>
-                                <td>(JPY)</td>
-                                <td>(%)</td>
-                            </tr>
+        <hr>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h4>Profile</h4>
+                <div>
+                    <div class="col-md-6 form-inline">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr ng-repeat="field in profileFields">
+                                    <td ng-if="$even">
+                                            <label for = "{{field.name}}"> {{field.name}} </label>
+                                            <span style = "color:red" ng-if="field.required">*</span>
+                                            
+                                            <!--show textbox-->
+                                            <input data="{{field.type}}" type="text" ng-if="field.type=='text'" ng-model="dealForm.profile[field.name]"  class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show email -->
+                                            <input  data="{{field.type}}" type="email" ng-if="field.type=='email'" ng-model="dealForm.profile[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show number -->
+                                            <input  data="{{field.type}}" type="text" ng-if="field.type=='number'" ng-model="dealForm.profile[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show password -->
+                                            <input  data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="dealForm.profile[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show confirm password -->
+                                            <label ng-if="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                            <input data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                            
+                                            <!-- show text area -->
+                                            <textarea data="{{field.type}}" ng-if="field.type=='textarea'" ng-model="dealForm.profile[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                            
+                                            <!-- show date -->
+                                            <input data="{{field.type}}" type="{{field.type}}" ng-if="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAllEntry(field.name, this.tempDate, 'profile')" class="form-control pull-right addTicketDateInput" ng-required=field.required>
+                            
+                                            <!-- show dropdown -->
+                                            <select class="form-control pull-right" data="{{field.type}}" ng-if="field.type=='dropdown'" ng-model="dealForm.profile[field.name]" ng-required="field.required">
+                                                <option value="" ng-if="!field.required"></option>
+                                                <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                                <option ng-repeat="option in field.options">{{option}}</option>
+                                            </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6 form-inline">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr ng-repeat="field in profileFields">
+                                    <td ng-if="$odd">
+                                            <label for = "{{field.name}}"> {{field.name}} </label>
+                                            <span style = "color:red" ng-if="field.required">*</span>
+                                            
+                                            <!--show textbox-->
+                                            <input data="{{field.type}}" type="text" ng-if="field.type=='text'" ng-model="dealForm.profile[field.name]"  class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show email -->
+                                            <input  data="{{field.type}}" type="email" ng-if="field.type=='email'" ng-model="dealForm.profile[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show number -->
+                                            <input  data="{{field.type}}" type="text" ng-if="field.type=='number'" ng-model="dealForm.profile[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show password -->
+                                            <input  data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="dealForm.profile[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show confirm password -->
+                                            <label ng-if="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                            <input data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                            
+                                            <!-- show text area -->
+                                            <textarea data="{{field.type}}" ng-if="field.type=='textarea'" ng-model="dealForm.profile[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                            
+                                            <!-- show date -->
+                                            <input data="{{field.type}}" type="{{field.type}}" ng-if="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAllEntry(field.name, this.tempDate, 'profile')" class="form-control pull-right addTicketDateInput" ng-required=field.required>
+                            
+                                            <!-- show dropdown -->
+                                            <select class="form-control pull-right" data="{{field.type}}" ng-if="field.type=='dropdown'" ng-model="dealForm.profile[field.name]" ng-required="field.required">
+                                                <option value="" ng-if="!field.required"></option>
+                                                <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                                <option ng-repeat="option in field.options">{{option}}</option>
+                                            </select>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-1"></div>
         </div>
-        <div class="col-md-1"></div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <h4>Status</h4>
-            <table class="table table-striped table-condensed table-hover">
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            Dependency
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.status.dependency">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            Action
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.status.action">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-inline">
-                            Status
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.status.status">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-inline">
-                            Step to Close
-                            <input type="text" class="form-control pull-right" ng-model="dealForm.status.stepToClose">
-                        </div>
-                    </td>
-                </tr>
-            </table>
+        <hr>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h4>Process</h4>
+                <div>
+                    <div class="col-md-6 form-inline">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr ng-repeat="field in processFields">
+                                    <td ng-if="$even">
+                                            <label for = "{{field.name}}"> {{field.name}} </label>
+                                            <span style = "color:red" ng-if="field.required">*</span>
+                                            
+                                            <!--show textbox-->
+                                            <input data="{{field.type}}" type="text" ng-if="field.type=='text'" ng-model="dealForm.process[field.name]"  class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show email -->
+                                            <input  data="{{field.type}}" type="email" ng-if="field.type=='email'" ng-model="dealForm.process[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show number -->
+                                            <input  data="{{field.type}}" type="text" ng-if="field.type=='number'" ng-model="dealForm.process[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show password -->
+                                            <input  data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="dealForm.process[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show confirm password -->
+                                            <label ng-if="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                            <input  data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                            
+                                            <!-- show text area -->
+                                            <textarea data="{{field.type}}" ng-if="field.type=='textarea'" ng-model="dealForm.process[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                            
+                                            <!-- show date -->
+                                            <input data="{{field.type}}" type="{{field.type}}" ng-if="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAllEntry(field.name, this.tempDate, 'process')" class="form-control pull-right addTicketDateInput" ng-required=field.required>
+                            
+                                            <!-- show dropdown -->
+                                            <select class="form-control pull-right" data="{{field.type}}" ng-if="field.type=='dropdown'" ng-model="dealForm.process[field.name]" ng-required="field.required">
+                                                <option value="" ng-if="!field.required"></option>
+                                                <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                                <option ng-repeat="option in field.options">{{option}}</option>
+                                            </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6 form-inline">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr ng-repeat="field in processFields">
+                                    <td ng-if="$odd">
+                                            <label for = "{{field.name}}"> {{field.name}} </label>
+                                            <span style = "color:red" ng-if="field.required">*</span>
+                                            
+                                            <!--show textbox-->
+                                            <input data="{{field.type}}" type="text" ng-if="field.type=='text'" ng-model="dealForm.process[field.name]"  class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show email -->
+                                            <input  data="{{field.type}}" type="email" ng-if="field.type=='email'" ng-model="dealForm.process[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show number -->
+                                            <input  data="{{field.type}}" type="text" ng-if="field.type=='number'" ng-model="dealForm.process[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show password -->
+                                            <input  data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="dealForm.process[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show confirm password -->
+                                            <label ng-if="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                            <input data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                            
+                                            <!-- show text area -->
+                                            <textarea data="{{field.type}}" ng-if="field.type=='textarea'" ng-model="dealForm.process[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                            
+                                            <!-- show date -->
+                                            <input data="{{field.type}}" type="{{field.type}}" ng-if="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAllEntry(field.name, this.tempDate, 'process')" class="form-control pull-right addTicketDateInput" ng-required=field.required>
+                            
+                                            <!-- show dropdown -->
+                                            <select class="form-control pull-right" data="{{field.type}}" ng-if="field.type=='dropdown'" ng-model="dealForm.process[field.name]" ng-required="field.required">
+                                                <option value="" ng-if="!field.required"></option>
+                                                <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                                <option ng-repeat="option in field.options">{{option}}</option>
+                                            </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
         </div>
-        <div class="col-md-1"></div>
-    </div>
-    <small>
-        <b>Note:</b> 1. If deal is via AWS JP, specify the amount of SOW with AWS JP. If it's a direct deal with client, specify
-        the amount of SOW with client exclusive of T&L (to measure the PH revenue and profit)
-    </small>
-    <hr>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <h4>Content:</h4>
-            <textarea class="form-control" ng-model="dealForm.content"></textarea>
+        <hr>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h4>Distribution</h4>
+                <table class="table table-striped table-condensed table-hover">
+                    <table class="table table-striped table-condensed table-hover">
+                        <!--header-->
+                        <tr>
+                            <th>MONTH</th>
+                            <th></th>
+                            <th>05/{{dealForm.distribution.fiscalYear[0]}}</th>
+                            <th>06/{{dealForm.distribution.fiscalYear[0]}}</th>
+                            <th>07/{{dealForm.distribution.fiscalYear[0]}}</th>
+                            <th>08/{{dealForm.distribution.fiscalYear[0]}}</th>
+                            <th>09/{{dealForm.distribution.fiscalYear[0]}}</th>
+                            <th>10/{{dealForm.distribution.fiscalYear[0]}}</th>
+                        </tr>
+    
+                        <!--row-->
+                        <tr>
+                            <td>
+                                Resource (MM):
+                            </td>
+                            <td>
+                                JP
+                                <br/><br/> GD
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].may">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].may">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].jun">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].jun">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].jul">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].jul">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].aug">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].aug">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].sep">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].sep">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].oct">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].oct">
+                            </td>
+                        </tr>
+    
+                        <!--row-->
+                        <tr>
+                            <td>
+                                Revenue (JPY) *1:
+                            </td>
+                            <td>
+                                JP
+                                <br/><br/> GD
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].may">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].may">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].jun">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].jun">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].jul">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].jul">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].aug">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].aug">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].sep">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].sep">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].oct">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].oct">
+                            </td>
+                        </tr>
+    
+                        <!--row-->
+                        <tr>
+                            <td>
+                                CM(JPY)
+                            </td>
+                            <td>
+                                ALL
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].may">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].jun">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].jul">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].aug">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].sep">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].oct">
+                            </td>
+                        </tr>
+                    </table>
+                    <!--another same table-->
+                    <table class="table table-striped table-condensed table-hover">
+                        <!--header-->
+                        <tr>
+                            <th>MONTH</th>
+                            <th></th>
+                            <th>11/{{dealForm.distribution.fiscalYear[0]}}</th>
+                            <th>12/{{dealForm.distribution.fiscalYear[0]}}</th>
+                            <th>01/{{dealForm.distribution.fiscalYear[1]}}</th>
+                            <th>02/{{dealForm.distribution.fiscalYear[1]}}</th>
+                            <th>03/{{dealForm.distribution.fiscalYear[1]}}</th>
+                            <th>04/{{dealForm.distribution.fiscalYear[1]}}</th>
+                        </tr>
+    
+                        <!--row-->
+                        <tr>
+                            <td>
+                                Resource (MM):
+                            </td>
+                            <td>
+                                JP
+                                <br/><br/> GD
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].nov">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].nov">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[0]].dec">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[0]].dec">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].jan">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].jan">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].feb">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].feb">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].mar">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].mar">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.jp[dealForm.distribution.fiscalYear[1]].apr">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.res.gd[dealForm.distribution.fiscalYear[1]].apr">
+                            </td>
+                        </tr>
+    
+                        <!--row-->
+                        <tr>
+                            <td>
+                                Revenue (JPY) *1:
+                            </td>
+                            <td>
+                                JP
+                                <br/><br/> GD
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].nov">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].nov">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[0]].dec">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[0]].dec">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].jan">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].jan">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].feb">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].feb">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].mar">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].mar">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.jp[dealForm.distribution.fiscalYear[1]].apr">
+                                <br/> <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.rev.gd[dealForm.distribution.fiscalYear[1]].apr">
+                            </td>
+                        </tr>
+    
+                        <!--row-->
+                        <tr>
+                            <td>
+                                CM(JPY)
+                            </td>
+                            <td>
+                                ALL
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].nov">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[0]].dec">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].jan">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].feb">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].mar">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control pull-right" ng-model="dealForm.distribution.cm[dealForm.distribution.fiscalYear[1]].apr">
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4">
+                            <table class="table table-striped table-condensed table-hover">
+                                <tr>
+                                    <th>Total</th>
+                                    <td>{{totalRES}} (MM)</td>
+                                    <td>{{totalREV}} (JPY)</td>
+                                </tr>
+                                <tr>
+                                    <th>Average</th>
+                                    <td></td>
+                                    <td>{{totalREV / totalRES}} (JPY/MM)</td>
+                                </tr>
+                                <tr>
+                                    <th>CM</th>
+                                    <td>(JPY)</td>
+                                    <td>(%)</td>
+                                </tr>
+                            </table>
+                            <div>
+                                    <div class="col-md-6 form-inline">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                <tr ng-repeat="field in distributionFields">
+                                                    <td ng-if="$even">
+                                                            <label for = "{{field.name}}"> {{field.name}} </label>
+                                                            <span style = "color:red" ng-if="field.required">*</span>
+                                                            
+                                                            <!--show textbox-->
+                                                            <input data="{{field.type}}" type="text" ng-if="field.type=='text'" ng-model="dealForm.distribution[field.name]"  class="form-control pull-right" ng-required=field.required />
+                                            
+                                                            <!-- show email -->
+                                                            <input  data="{{field.type}}" type="email" ng-if="field.type=='email'" ng-model="dealForm.distribution[field.name]" class="form-control pull-right" ng-required=field.required />
+                                            
+                                                            <!-- show number -->
+                                                            <input  data="{{field.type}}" type="text" ng-if="field.type=='number'" ng-model="dealForm.distribution[field.name]" class="form-control pull-right" ng-required=field.required />
+                                            
+                                                            <!-- show password -->
+                                                            <input  data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="dealForm.distribution[field.name]" class="form-control pull-right" ng-required=field.required />
+                                            
+                                                            <!-- show confirm password -->
+                                                            <label ng-if="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                                            <input data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                                            
+                                                            <!-- show text area -->
+                                                            <textarea data="{{field.type}}" ng-if="field.type=='textarea'" ng-model="dealForm.distribution[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                                            
+                                                            <!-- show date -->
+                                                            <input data="{{field.type}}" type="{{field.type}}" ng-if="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAllEntry(field.name, this.tempDate, 'distribution')" class="form-control pull-right addTicketDateInput" ng-required=field.required>
+                                            
+                                                            <!-- show dropdown -->
+                                                            <select class="form-control pull-right" data="{{field.type}}" ng-if="field.type=='dropdown'" ng-model="dealForm.distribution[field.name]" ng-required="field.required">
+                                                                <option value="" ng-if="!field.required"></option>
+                                                                <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                                                <option ng-repeat="option in field.options">{{option}}</option>
+                                                            </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-6 form-inline">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                <tr ng-repeat="field in distributionFields">
+                                                    <td ng-if="$odd">
+                                                            <label for = "{{field.name}}"> {{field.name}} </label>
+                                                            <span style = "color:red" ng-if="field.required">*</span>
+                                                            
+                                                            <!--show textbox-->
+                                                            <input data="{{field.type}}" type="text" ng-if="field.type=='text'" ng-model="dealForm.distribution[field.name]"  class="form-control pull-right" ng-required=field.required />
+                                            
+                                                            <!-- show email -->
+                                                            <input  data="{{field.type}}" type="email" ng-if="field.type=='email'" ng-model="dealForm.distribution[field.name]" class="form-control pull-right" ng-required=field.required />
+                                            
+                                                            <!-- show number -->
+                                                            <input  data="{{field.type}}" type="text" ng-if="field.type=='number'" ng-model="dealForm.distribution[field.name]" class="form-control pull-right" ng-required=field.required />
+                                            
+                                                            <!-- show password -->
+                                                            <input  data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="dealForm.distribution[field.name]" class="form-control pull-right" ng-required=field.required />
+                                            
+                                                            <!-- show confirm password -->
+                                                            <label ng-if="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                                            <input data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                                            
+                                                            <!-- show text area -->
+                                                            <textarea data="{{field.type}}" ng-if="field.type=='textarea'" ng-model="dealForm.distribution[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                                            
+                                                            <!-- show date -->
+                                                            <input data="{{field.type}}" type="{{field.type}}" ng-if="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAllEntry(field.name, this.tempDate, 'distribution')" class="form-control pull-right addTicketDateInput" ng-required=field.required>
+                                            
+                                                            <!-- show dropdown -->
+                                                            <select class="form-control pull-right" data="{{field.type}}" ng-if="field.type=='dropdown'" ng-model="dealForm.distribution[field.name]" ng-required="field.required">
+                                                                <option value="" ng-if="!field.required"></option>
+                                                                <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                                                <option ng-repeat="option in field.options">{{option}}</option>
+                                                            </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-1"></div>
         </div>
-        <div class="col-md-1"></div>
-    </div>
-</form>
+        <hr>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h4>Status</h4>
+                <div>
+                        <div class="col-md-6 form-inline">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr ng-repeat="field in statusFields">
+                                        <td ng-if="$even">
+                                                <label for = "{{field.name}}"> {{field.name}} </label>
+                                                <span style = "color:red" ng-if="field.required">*</span>
+                                                
+                                                <!--show textbox-->
+                                                <input data="{{field.type}}" type="text" ng-if="field.type=='text'" ng-model="dealForm.status[field.name]"  class="form-control pull-right" ng-required=field.required />
+                                
+                                                <!-- show email -->
+                                                <input  data="{{field.type}}" type="email" ng-if="field.type=='email'" ng-model="dealForm.status[field.name]" class="form-control pull-right" ng-required=field.required />
+                                
+                                                <!-- show number -->
+                                                <input  data="{{field.type}}" type="text" ng-if="field.type=='number'" ng-model="dealForm.status[field.name]" class="form-control pull-right" ng-required=field.required />
+                                
+                                                <!-- show password -->
+                                                <input  data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="dealForm.status[field.name]" class="form-control pull-right" ng-required=field.required />
+                                
+                                                <!-- show confirm password -->
+                                                <label ng-if="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                                <input data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                                
+                                                <!-- show text area -->
+                                                <textarea data="{{field.type}}" ng-if="field.type=='textarea'" ng-model="dealForm.status[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                                
+                                                <!-- show date -->
+                                                <input data="{{field.type}}" type="{{field.type}}" ng-if="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAllEntry(field.name, this.tempDate, 'status')" class="form-control pull-right addTicketDateInput" ng-required=field.required>
+                                
+                                                <!-- show dropdown -->
+                                                <select class="form-control pull-right" data="{{field.type}}" ng-if="field.type=='dropdown'" ng-model="dealForm.status[field.name]" ng-required="field.required">
+                                                    <option value="" ng-if="!field.required"></option>
+                                                    <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                                    <option ng-repeat="option in field.options">{{option}}</option>
+                                                </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6 form-inline">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr ng-repeat="field in statusFields">
+                                        <td ng-if="$odd">
+                                                <label for = "{{field.name}}"> {{field.name}} </label>
+                                                <span style = "color:red" ng-if="field.required">*</span>
+                                                
+                                                <!--show textbox-->
+                                                <input data="{{field.type}}" type="text" ng-if="field.type=='text'" ng-model="dealForm.status[field.name]"  class="form-control pull-right" ng-required=field.required />
+                                
+                                                <!-- show email -->
+                                                <input  data="{{field.type}}" type="email" ng-if="field.type=='email'" ng-model="dealForm.status[field.name]" class="form-control pull-right" ng-required=field.required />
+                                
+                                                <!-- show number -->
+                                                <input  data="{{field.type}}" type="text" ng-if="field.type=='number'" ng-model="dealForm.status[field.name]" class="form-control pull-right" ng-required=field.required />
+                                
+                                                <!-- show password -->
+                                                <input  data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="dealForm.status[field.name]" class="form-control pull-right" ng-required=field.required />
+                                
+                                                <!-- show confirm password -->
+                                                <label ng-if="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                                <input data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                                
+                                                <!-- show text area -->
+                                                <textarea data="{{field.type}}" ng-if="field.type=='textarea'" ng-model="dealForm.status[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                                
+                                                <!-- show date -->
+                                                <input data="{{field.type}}" type="{{field.type}}" ng-if="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAllEntry(field.name, this.tempDate, 'status')" class="form-control pull-right addTicketDateInput" ng-required=field.required>
+                                
+                                                <!-- show dropdown -->
+                                                <select class="form-control pull-right" data="{{field.type}}" ng-if="field.type=='dropdown'" ng-model="dealForm.status[field.name]" ng-required="field.required">
+                                                    <option value="" ng-if="!field.required"></option>
+                                                    <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                                    <option ng-repeat="option in field.options">{{option}}</option>
+                                                </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <small>
+            <b>Note:</b> 1. If deal is via AWS JP, specify the amount of SOW with AWS JP. If it's a direct deal with client, specify
+            the amount of SOW with client exclusive of T&L (to measure the PH revenue and profit)
+        </small>
+        <hr>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h4>Content:</h4>
+                <textarea class="form-control" ng-model="dealForm.content.mainMsg"></textarea>
+            </div>
+            <div>
+                    <div class="col-md-6 form-inline">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr ng-repeat="field in contentFields">
+                                    <td ng-if="$even">
+                                            <label for = "{{field.name}}"> {{field.name}} </label>
+                                            <span style = "color:red" ng-if="field.required">*</span>
+                                            
+                                            <!--show textbox-->
+                                            <input data="{{field.type}}" type="text" ng-if="field.type=='text'" ng-model="dealForm.content[field.name]"  class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show email -->
+                                            <input  data="{{field.type}}" type="email" ng-if="field.type=='email'" ng-model="dealForm.content[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show number -->
+                                            <input  data="{{field.type}}" type="text" ng-if="field.type=='number'" ng-model="dealForm.content[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show password -->
+                                            <input  data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="dealForm.content[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show confirm password -->
+                                            <label ng-if="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                            <input data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                            
+                                            <!-- show text area -->
+                                            <textarea data="{{field.type}}" ng-if="field.type=='textarea'" ng-model="dealForm.content[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                            
+                                            <!-- show date -->
+                                            <input data="{{field.type}}" type="{{field.type}}" ng-if="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAllEntry(field.name, this.tempDate, 'content')" class="form-control pull-right addTicketDateInput" ng-required=field.required>
+                            
+                                            <!-- show dropdown -->
+                                            <select class="form-control pull-right" data="{{field.type}}" ng-if="field.type=='dropdown'" ng-model="dealForm.content[field.name]" ng-required="field.required">
+                                                <option value="" ng-if="!field.required"></option>
+                                                <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                                <option ng-repeat="option in field.options">{{option}}</option>
+                                            </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6 form-inline">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr ng-repeat="field in contentFields">
+                                    <td ng-if="$odd">
+                                            <label for = "{{field.name}}"> {{field.name}} </label>
+                                            <span style = "color:red" ng-if="field.required">*</span>
+                                            
+                                            <!--show textbox-->
+                                            <input data="{{field.type}}" type="text" ng-if="field.type=='text'" ng-model="dealForm.content[field.name]"  class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show email -->
+                                            <input  data="{{field.type}}" type="email" ng-if="field.type=='email'" ng-model="dealForm.content[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show number -->
+                                            <input  data="{{field.type}}" type="text" ng-if="field.type=='number'" ng-model="dealForm.content[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show password -->
+                                            <input  data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="dealForm.content[field.name]" class="form-control pull-right" ng-required=field.required />
+                            
+                                            <!-- show confirm password -->
+                                            <label ng-if="field.type=='password'" for=field.name>Confirm {{field.name}}: </label>
+                                            <input data="{{field.type}}" type="{{field.type=='password'?'password':'text';}}" ng-if="field.type=='password'" ng-model="confirmPassword[field.name]" class="form-control" />
+                            
+                                            <!-- show text area -->
+                                            <textarea data="{{field.type}}" ng-if="field.type=='textarea'" ng-model="dealForm.content[field.name]" class="form-control pull-right" ng-required=field.required rows="4" cols="50"></textarea>
+                            
+                                            <!-- show date -->
+                                            <input data="{{field.type}}" type="{{field.type}}" ng-if="field.type=='date'" ng-model="tempDate" ng-change="pushDateToAllEntry(field.name, this.tempDate, 'content')" class="form-control pull-right addTicketDateInput" ng-required=field.required>
+                            
+                                            <!-- show dropdown -->
+                                            <select class="form-control pull-right" data="{{field.type}}" ng-if="field.type=='dropdown'" ng-model="dealForm.content[field.name]" ng-required="field.required">
+                                                <option value="" ng-if="!field.required"></option>
+                                                <!-- <option value="" ng-if="field.required" selected hidden></option> -->
+                                                <option ng-repeat="option in field.options">{{option}}</option>
+                                            </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+            <div class="col-md-1"></div>
+        </div>
+    </form>

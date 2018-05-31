@@ -6,7 +6,7 @@
         .controller('NewDealController', Controller);
 
 
-    function Controller($scope, $rootScope, $state, $filter, ModulesService, DealsService) {
+    function Controller($scope, $rootScope, $state, $filter, ModulesService, DealsService, InputTypeService) {
         $scope.dealForm = getInitialDealForm();
         var tempDealForm = getInitialDealForm();
         $scope.profileFields = [];
@@ -92,6 +92,8 @@
         getAllFields();
         
 
+
+        
         //use this to convert date inputs to a datestring with the prescribed format
         $scope.formatDateInput = function (date) {
             return $filter('date')(date, DATE_FORMAT);
@@ -119,16 +121,20 @@
              * 1. use document.getElementById().value; this format is yyyy-MM-dd
              * 2. use Angular's $filter('date')(date, DATE_FORMAT); format depends on DATE_FORMAT variable
              */
-            tempDealForm.dueDate = $scope.formatDateInput(tempDealForm.dueDate);
+            /* tempDealForm.dueDate = $scope.formatDateInput(tempDealForm.dueDate);
             tempDealForm.profile.duration.start = $scope.formatDateInput(tempDealForm.profile.duration.start);
             tempDealForm.profile.duration.end = $scope.formatDateInput(tempDealForm.profile.duration.end);
             tempDealForm.process.srb.date = $scope.formatDateInput(tempDealForm.process.srb.date);
-            tempDealForm.process.sow.date = $scope.formatDateInput(tempDealForm.process.sow.date);
+            tempDealForm.process.sow.date = $scope.formatDateInput(tempDealForm.process.sow.date); */
             console.log($scope.dealForm.profile.duration);
             console.log(tempDealForm);
 
             
         }
+
+        $scope.pushDateToAllEntry = function(fieldName, inputDate, category) {
+            $scope.dealForm[category][fieldName] = InputTypeService.formatDate(inputDate);
+        };
 
         $scope.tryFunction = function () {
             var object = {
