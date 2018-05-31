@@ -17,5 +17,18 @@ router.post('/addDeal', function(req, res, next) {
     });
 });
 
+router.put('/editDeal', function(req, res, next) {
+    
+    console.log(req.body);
+
+    dealsService.editDeal(req.body)
+    .then(function(token) {
+        res.status(200);
+    })
+    .catch(function(err) {
+        res.status(400);
+    });
+});
+
 module.exports = router;
 

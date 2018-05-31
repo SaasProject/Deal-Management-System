@@ -138,11 +138,12 @@
 
         $scope.tryFunction = function () {
             var object = {
-                "ProjectName":"Saas",
+                "ID":"D8ELQ", 
+                "ProjectName":"Dev B",
                 "Client":"TI",
             };
 
-            DealsService.addDeal(object)
+            DealsService.updateDeal(object)
             .then(function(){
 
             })
