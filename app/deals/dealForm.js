@@ -9,6 +9,7 @@
     function Controller($scope, $rootScope, $state, $stateParams, $filter, ModulesService, DealsService) {
         $scope.dealForm = getInitialDealForm();
         var tempDealForm = getInitialDealForm();
+        var DATE_FORMAT = 'MM/dd/yyyy';
 
         //from jano's code (multiple getModuleByName)
         $scope.profileFields = [];
@@ -112,9 +113,9 @@
              * 2. use Angular's $filter('date')(date, DATE_FORMAT); format depends on DATE_FORMAT variable
              */       
             //explicitly convert dates of Due Date, Duration (Start) & Duration (End) to datestring of prescribed format
-            /* tempDealForm.essential['Due Date'] = $filter('date')(tempDealForm.essential['Due Date'], DATE_FORMAT);
+            tempDealForm.essential['Due Date'] = $filter('date')(tempDealForm.essential['Due Date'], DATE_FORMAT);
             tempDealForm.profile['Duration (Start)'] = $filter('date')(tempDealForm.profile['Duration (Start)'], DATE_FORMAT);
-            tempDealForm.profile['Duration (End)'] = $filter('date')(tempDealForm.profile['Duration (End)'], DATE_FORMAT); */
+            tempDealForm.profile['Duration (End)'] = $filter('date')(tempDealForm.profile['Duration (End)'], DATE_FORMAT);
 
             console.log(tempDealForm);
 
