@@ -23,7 +23,11 @@ module.exports = service;
 function addDeal(deal){
     var deferred = Q.defer();
 
-    var possibleID = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var ID = "DL-0000";
+    var IDnumber;
+    var previousID;
+
+    /*var possibleID = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	var randomedID ="";
 
 	randomize();
@@ -58,6 +62,44 @@ function addDeal(deal){
 	            });
 	}
 
+*/
+
+
+	db.deals.find({}).toArray(function(err, deals) {
+        if (err) deferred.reject(err);
+ 
+        if (deals) {
+            previousID = deals[deals.length-1].ID;
+            IDnumber = previousID.slice(3,7);
+            IDnumber++;
+            if(IDnumber<=9){
+                ID = previousID.slice(0,6)+IDnumber;
+            }else if(IDnumber>9||IDnumber<=99){
+            	ID = previousID.slice(0,5)+IDnumber;
+            }else if(IDnumber>99||IDnumber<=999){
+                ID = previousID.slice(0,4)+IDnumber;
+            }else{
+            	ID = previousID.slice(0,3)+IDnumber;
+            }
+            saveToDB();
+        }else{
+        	saveToDB();
+        }
+    });
+
+    function saveToDB(){
+
+    	deal.ID = ID;
+    	
+		 db.deals.insert(
+			deal,
+			function (err, doc) {
+			    if (err) deferred.reject(err);
+			 
+			    deferred.resolve();
+			});
+
+    }
 
     return deferred.promise;
 }
