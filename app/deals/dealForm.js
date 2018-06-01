@@ -123,12 +123,34 @@
             }            
         }
 
-        $scope.tryFunction = function () {
+        tryFunction();
+
+        function tryFunction() {
             var object = {
                 "ID":"D8ELQ", 
                 "ProjectName":"Dev B",
                 "Client":"TI",
             };
+            
+            /*var ID = "DL-0000";
+            var a = 56;
+
+            if(a<=9){
+                console.log(ID.slice(0,6)+a);
+            }else if(a>9||a<=99){
+                console.log(ID.slice(0,5)+a);
+            }*/
+            var a = "0003";
+            a++;
+            console.log(a);
+
+            /*DealsService.addDeal(object)
+                .then(function() {
+                    //$state.transitionTo('dealList');
+                })
+                .catch(function(err) {
+    
+                });*/
         }
 
         //do not initialize dates to the current date since it is not required
