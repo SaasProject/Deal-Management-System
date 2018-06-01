@@ -7,6 +7,9 @@
 
     
     function Controller($scope, $rootScope, $state, ModulesService) {
+
+        $scope.DATE_FORMAT = 'MM/dd/yyyy';
+
         $scope.filterOptions = [
             'Active',
             '1-2 months',
@@ -36,7 +39,6 @@
                         $scope.fields[category] = allModules[i].fields;
                     }
                 }
-                console.log($scope.fields);
             }).catch(function (err) {
             });
         }
@@ -46,16 +48,11 @@
         function getAllDeals () {
             ModulesService.getAllModuleDocs('deals').then(function (allDeals) {
                 $scope.deals = allDeals;
-                console.log(allDeals);
             }).catch(function () {
 
             });
         }
 
         getAllDeals();
-
-        $scope.console = function () {
-            console.log($scope.filter);
-        }
     }
 })();

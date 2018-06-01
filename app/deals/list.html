@@ -32,19 +32,19 @@
     <tbody>
         <tr ng-repeat="deal in deals | filter: searchText">
             <td ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList">
-                {{deal.essential[essentialField.name]}}
+                {{(essentialField.type !== 'date') ? deal.essential[essentialField.name] : deal.essential[essentialField.name] | date: DATE_FORMAT}}
             </td>
             <td ng-repeat="profileField in fields.profile" ng-if="profileField.showInList">
-                {{deal.profile[profileField.name]}}
+                {{(profileField.type !== 'date') ? deal.profile[profileField.name] : deal.profile[profileField.name] | date: DATE_FORMAT}}
             </td>
             <td ng-repeat="processField in fields.process" ng-if="processField.showInList">
-                {{deal.process[processField.name]}}
+                {{(processField.type !== 'date') ? deal.process[processField.name] : deal.process[processField.name] | date: DATE_FORMAT}}
             </td>
             <td ng-repeat="distributionField in fields.distribution" ng-if="distributionField.showInList">
-                {{deal.distribution[distributionField.name]}}
+                {{(distributionField.type !== 'date') ? deal.distribution[distributionField.name] : deal.distribution[distributionField.name] | date: DATE_FORMAT}}
             </td>
             <td ng-repeat="statusField in fields.status" ng-if="statusField.showInList">
-                {{deal.status[statusField.name]}}
+                {{(statusField.type !== 'date') ? deal.status[statusField.name] : deal.status[essentialField.name] | date: DATE_FORMAT}}
             </td>
             <td>
                 <div class="pull-right">
