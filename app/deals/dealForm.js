@@ -96,13 +96,27 @@
             Object.assign(tempDealForm, $scope.dealForm);
    
             //explicitly convert dates of Due Date, Duration (Start) & Duration (End) to datestring of prescribed format
-            tempDealForm.essential['Due Date'] = $filter('date')(tempDealForm.essential['Due Date'], DATE_FORMAT);
+            /* tempDealForm.essential['Due Date'] = $filter('date')(tempDealForm.essential['Due Date'], DATE_FORMAT);
             tempDealForm.profile['Duration (Start)'] = $filter('date')(tempDealForm.profile['Duration (Start)'], DATE_FORMAT);
-            tempDealForm.profile['Duration (End)'] = $filter('date')(tempDealForm.profile['Duration (End)'], DATE_FORMAT);
+            tempDealForm.profile['Duration (End)'] = $filter('date')(tempDealForm.profile['Duration (End)'], DATE_FORMAT); */
 
             console.log(tempDealForm);
 
-            tryFunction();
+            //convert all date objects to datestring
+            angular.forEach(tempDealForm, function(fields, category){
+                if (category === 'essential' 
+                || category === 'profile' 
+                || category === 'process' 
+                || category === 'distribution' 
+                || category === 'status' 
+                || category === 'content') {
+                    angular.forEach(tempDealForm[category], function(value, key){
+                        if (tempDealForm[category][key] instanceof Date) {
+                            tempDealForm[category][key] = $filter('date')(tempDealForm[category][key], DATE_FORMAT);
+                        }
+                    });
+                }
+            });
 
             if (tempDealForm._id === undefined) {
                 DealsService.addDeal(tempDealForm)
@@ -123,35 +137,6 @@
             }            
         }
 
-        tryFunction();
-
-        function tryFunction() {
-            var object = {
-                "ID":"D8ELQ", 
-                "ProjectName":"Dev B",
-                "Client":"TI",
-            };
-            
-            /*var ID = "DL-0000";
-            var a = 56;
-
-            if(a<=9){
-                console.log(ID.slice(0,6)+a);
-            }else if(a>9||a<=99){
-                console.log(ID.slice(0,5)+a);
-            }*/
-            var a = "0003";
-            a++;
-            console.log(a);
-
-            /*DealsService.addDeal(object)
-                .then(function() {
-                    //$state.transitionTo('dealList');
-                })
-                .catch(function(err) {
-    
-                });*/
-        }
 
         //do not initialize dates to the current date since it is not required
         function getInitialDealForm() {
@@ -194,23 +179,7 @@
         }
 
         function tryFunction () {
-            console.log('hmmm');
-            angular.forEach(tempDealForm, function(fields, category){
-                if (category === 'essential' 
-                || category === 'profile' 
-                || category === 'process' 
-                || category === 'distribution' 
-                || category === 'status' 
-                || category === 'content') {
-                    console.log(tempDealForm[category]);
 
-                    angular.forEach(category, function(value, key){
-                        if (tempDealForm[category][key] instanceof Date) {
-                            console.log('it is a date', tempDealForm[category][key]);
-                        }
-                    });
-                }
-            });
         }
 
         $scope.currentFiscalYear = [];
@@ -218,20 +187,14 @@
 
         $scope.getCurrentFiscalYear = function () {
             $scope.currentFiscalYear = [];
+            if ($scope.startingMonthYear === null) {
+                $scope.startingMonthYear = new Date();
+            }
             var setMonth = $scope.startingMonthYear.getMonth() + 1; 
             var setYear = $scope.startingMonthYear.getFullYear();
             var temp = '';
             var i;
-            /* for(i = 1; i <= 12; i++) {
-                //next year
-                if (i < setMonth) {
-                    temp = (i < 10) ? ('0' + i + '/' + (setYear + 1)) : (i + '/' + (setYear + 1));
-                    $scope.currentFiscalYear.push(temp);
-                } else {
-                    temp = (i < 10) ? ('0' + i + '/' + setYear) : (i + '/' + setYear);
-                    $scope.currentFiscalYear.push(temp);
-                }
-            } */
+            
             i = setMonth;
             do {
                 //next year
@@ -246,19 +209,9 @@
 
                 i = (i % 12 === 0) ? 1 : (i + 1);
             } while (i != setMonth);
-
-            console.log($scope.currentFiscalYear);
         }
 
         $scope.getCurrentFiscalYear();
-
-
-
-
-
-
-
-
 
     }
 })();
