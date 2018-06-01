@@ -38,11 +38,8 @@
                 controller: 'DealListController'
             })
             .state('dealForm', {
-                url: '/deals/dealForm',
+                url: '/deals/dealForm/:ID',
                 parent: 'main',
-                params: {
-                    ID: null
-                },
                 templateUrl: 'deals/dealForm.html',
                 controller: 'DealFormController'
             })
