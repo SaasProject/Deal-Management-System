@@ -89,35 +89,20 @@
              }).catch(function() {
                 $scope.message = 'Cannot find the deal';
             });
-            /**
-             * if function to convert date inputs to datestrings during submit is working,
-             * process $scope.dealForm so that the date strings are converted to date objects
-             * */
         }
 
         $scope.submit = function () {
-            /**
-             * copy the object to a local variable, then use the local variable to manipulate 
-             * do not use = because this is a reference; meaning any changes on one affects the other 
-             * tempDealForm = $scope.dealForm; ---> X
-             */
-
-
             //use Object.assign(target, source) instead
             Object.assign(tempDealForm, $scope.dealForm);
-
-            //format date inputs to a date string
-            /**
-             * 2 ways to format:
-             * 1. use document.getElementById().value; this format is yyyy-MM-dd
-             * 2. use Angular's $filter('date')(date, DATE_FORMAT); format depends on DATE_FORMAT variable
-             */       
+   
             //explicitly convert dates of Due Date, Duration (Start) & Duration (End) to datestring of prescribed format
             tempDealForm.essential['Due Date'] = $filter('date')(tempDealForm.essential['Due Date'], DATE_FORMAT);
             tempDealForm.profile['Duration (Start)'] = $filter('date')(tempDealForm.profile['Duration (Start)'], DATE_FORMAT);
             tempDealForm.profile['Duration (End)'] = $filter('date')(tempDealForm.profile['Duration (End)'], DATE_FORMAT);
 
             console.log(tempDealForm);
+
+            tryFunction();
 
             if (tempDealForm._id === undefined) {
                 DealsService.addDeal(tempDealForm)
@@ -185,5 +170,73 @@
                 }
             };
         }
+
+        function tryFunction () {
+            console.log('hmmm');
+            angular.forEach(tempDealForm, function(fields, category){
+                if (category === 'essential' 
+                || category === 'profile' 
+                || category === 'process' 
+                || category === 'distribution' 
+                || category === 'status' 
+                || category === 'content') {
+                    console.log(tempDealForm[category]);
+
+                    angular.forEach(category, function(value, key){
+                        if (tempDealForm[category][key] instanceof Date) {
+                            console.log('it is a date', tempDealForm[category][key]);
+                        }
+                    });
+                }
+            });
+        }
+
+        $scope.currentFiscalYear = [];
+        $scope.startingMonthYear = new Date();
+
+        $scope.getCurrentFiscalYear = function () {
+            $scope.currentFiscalYear = [];
+            var setMonth = $scope.startingMonthYear.getMonth() + 1; 
+            var setYear = $scope.startingMonthYear.getFullYear();
+            var temp = '';
+            var i;
+            /* for(i = 1; i <= 12; i++) {
+                //next year
+                if (i < setMonth) {
+                    temp = (i < 10) ? ('0' + i + '/' + (setYear + 1)) : (i + '/' + (setYear + 1));
+                    $scope.currentFiscalYear.push(temp);
+                } else {
+                    temp = (i < 10) ? ('0' + i + '/' + setYear) : (i + '/' + setYear);
+                    $scope.currentFiscalYear.push(temp);
+                }
+            } */
+            i = setMonth;
+            do {
+                //next year
+                if (i < setMonth) {
+                    temp = (i < 10) ? ('0' + i + '/' + (setYear + 1)) : (i + '/' + (setYear + 1));
+                //current year
+                } else {
+                    temp = (i < 10) ? ('0' + i + '/' + setYear) : (i + '/' + setYear);
+                }
+
+                $scope.currentFiscalYear.push(temp);
+
+                i = (i % 12 === 0) ? 1 : (i + 1);
+            } while (i != setMonth);
+
+            console.log($scope.currentFiscalYear);
+        }
+
+        $scope.getCurrentFiscalYear();
+
+
+
+
+
+
+
+
+
     }
 })();
