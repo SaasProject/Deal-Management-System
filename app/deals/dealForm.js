@@ -9,82 +9,57 @@
     function Controller($scope, $rootScope, $state, $stateParams, $filter, ModulesService, DealsService) {
         $scope.dealForm = getInitialDealForm();
         var tempDealForm = getInitialDealForm();
+
+        //from jano's code (multiple getModuleByName)
         $scope.profileFields = [];
         $scope.processFields = [];
         $scope.distributionFields = [];
         $scope.statusFields = [];
-
-        //hard code level and steps. steps depend on the selected level
-        $scope.levels = [
-            {
-                level: 9,
-                steps: [
-                    9.1
-                ]
-            },
-            {
-                level: 5,
-                steps: [
-                    5.2,
-                    5.1
-                ]
-            },
-            {
-                level: 4,
-                steps: [
-                    4.2,
-                    4.1
-                ]
-            }
-        ];
-
-        $scope.totalRES;
-
-        var DATE_FORMAT = 'dd/MM/yyyy';
+        $scope.contentFields = [];
 
         function getAllFields() {
             ModulesService.getModuleByName('dealessential').then(function (response) {
                 $scope.essentialFields = response.fields;
                 $scope.essentialFieldsId = response._id;
-                for (var i = 0; i < $scope.essentialFields.length; i++) {
+                /* for (var i = 0; i < $scope.essentialFields.length; i++) {
                     $scope.dealForm.essential[$scope.essentialFields[i].name] = ($scope.essentialFields[i].type !== 'number') ? '' : 0;
-                }
+                } */
             }).catch(function (err) {
                 alert(err.msg_error);
             });
             ModulesService.getModuleByName('dealprofile').then(function (response) {
                 $scope.profileFields = response.fields;
                 $scope.profileFieldsId = response._id;
-                for (var i = 0; i < $scope.profileFields.length; i++) {
+                /* for (var i = 0; i < $scope.profileFields.length; i++) {
                     $scope.dealForm.profile[$scope.profileFields[i].name] = ($scope.profileFields[i].type !== 'number') ? '' : 0;
-                }
+                } */
             }).catch(function (err) {
                 alert(err.msg_error);
             });
             ModulesService.getModuleByName('dealprocess').then(function (response) {
                 $scope.processFields = response.fields;
                 $scope.processFieldsId = response._id;
-                for (var i = 0; i < $scope.processFields.length; i++) {
+                /* for (var i = 0; i < $scope.processFields.length; i++) {
                     $scope.dealForm.process[$scope.processFields[i].name] = ($scope.processFields[i].type !== 'number') ? '' : 0;
-                }
+                } */
             }).catch(function (err) {
                 alert(err.msg_error);
             });
             ModulesService.getModuleByName('dealdistribution').then(function (response) {
                 $scope.distributionFields = response.fields;
                 $scope.distributionFieldsId = response._id;
-                for (var i = 0; i < $scope.distributionFields.length; i++) {
+                /* for (var i = 0; i < $scope.distributionFields.length; i++) {
                     $scope.dealForm.distribution[$scope.distributionFields[i].name] = ($scope.distributionFields[i].type !== 'number') ? '' : 0;
-                }
+                } */
             }).catch(function (err) {
                 alert(err.msg_error);
             });
             ModulesService.getModuleByName('dealstatus').then(function (response) {
                 $scope.statusFields = response.fields;
                 $scope.statusFieldsId = response._id;
-                for (var i = 0; i < $scope.statusFields.length; i++) {
+                /* for (var i = 0; i < $scope.statusFields.length; i++) {
                     $scope.dealForm.status[$scope.statusFields[i].name] = ($scope.statusFields[i].type !== 'number') ? '' : 0;
-                }
+                } */
             }).catch(function (err) {
                 alert(err.msg_error);
             });
@@ -95,32 +70,28 @@
             }).catch(function (err) {
                 alert(err.msg_error);
             });
-        };
+        }
 
         getAllFields();
         
         //if there is a parameter, it means that a deal is going to be updated
-        if ($stateParams.ID !== null) {
+        if ($stateParams.ID !== '') {
             //get one then store to $scope.dealForm;
             DealsService.getDealById($stateParams.ID).then(function(aDeal) {
                 $scope.dealForm = aDeal;
-            }).catch(function() {
+
+                //explicitly convert dates of Due Date, Duration (Start) & Duration (End) to date objects
+                $scope.dealForm.essential['Due Date'] = new Date($scope.dealForm.essential['Due Date']);
+                $scope.dealForm.profile['Duration (Start)'] = new Date($scope.dealForm.profile['Duration (Start)']);
+                $scope.dealForm.profile['Duration (End)'] = new Date($scope.dealForm.profile['Duration (End)']);
+
+             }).catch(function() {
                 $scope.message = 'Cannot find the deal';
             });
             /**
              * if function to convert date inputs to datestrings during submit is working,
              * process $scope.dealForm so that the date strings are converted to date objects
              * */
-        }
-
-        //use this to convert date inputs to a datestring with the prescribed format
-        $scope.formatDateInput = function (date) {
-            return $filter('date')(date, DATE_FORMAT);
-        }
-
-        //use this to convert datestring to a date object
-        $scope.convertDateString = function (date) {
-            return new Date(date);
         }
 
         $scope.submit = function () {
@@ -140,23 +111,27 @@
              * 1. use document.getElementById().value; this format is yyyy-MM-dd
              * 2. use Angular's $filter('date')(date, DATE_FORMAT); format depends on DATE_FORMAT variable
              */       
-                        
+            //explicitly convert dates of Due Date, Duration (Start) & Duration (End) to datestring of prescribed format
+            /* tempDealForm.essential['Due Date'] = $filter('date')(tempDealForm.essential['Due Date'], DATE_FORMAT);
+            tempDealForm.profile['Duration (Start)'] = $filter('date')(tempDealForm.profile['Duration (Start)'], DATE_FORMAT);
+            tempDealForm.profile['Duration (End)'] = $filter('date')(tempDealForm.profile['Duration (End)'], DATE_FORMAT); */
+
             console.log(tempDealForm);
-            
+
             if (tempDealForm._id === undefined) {
                 DealsService.addDeal(tempDealForm)
-                .then(function(){
+                .then(function() {
                     $state.transitionTo('dealList');
                 })
-                .catch(function(err){
+                .catch(function(err) {
     
                 });
             } else {
                 DealsService.updateDeal(tempDealForm)
-                .then(function(){
+                .then(function() {
                     $state.transitionTo('dealList');
                 })
-                .catch(function(){
+                .catch(function() {
     
                 });
             }            
