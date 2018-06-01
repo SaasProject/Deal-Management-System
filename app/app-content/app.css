@@ -166,7 +166,7 @@ table {
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-	background-color: #9EB8ED;
+	background-color: #313a3a;
 	position: fixed;
 	height: 100%;
 	overflow-x: hidden; /* Disable horizontal scroll */
@@ -178,13 +178,15 @@ table {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 16px;
-    color: #818181;
+    color: #aaaaaa;
     display: block;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
     color: #f1f1f1;
+    background-color: #589ea3;
+    border-radius: 3px;
 }
 
 /* Style page content */
@@ -197,4 +199,14 @@ table {
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+}
+
+/* turning input boxes beige */
+/* made by glenn */
+.deal-form-control .form-control {
+    background-color: #f8fcc7;
+}
+
+.panel-heading {
+	background-color: #eaebf9;
 }
