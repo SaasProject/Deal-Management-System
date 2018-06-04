@@ -68,7 +68,8 @@ function addDeal(deal){
 	db.deals.find({}).toArray(function(err, deals) {
         if (err) deferred.reject(err);
  
-        if (deals) {
+		//use .length to get number of documents
+        if (deals.length > 0) {
             previousID = deals[deals.length-1].ID;
             IDnumber = previousID.slice(3,7);
             IDnumber++;
