@@ -3,7 +3,7 @@
 <form class='deal-form-control' ng-submit="submit()">
     <div class="row">
         <div class="col-md-6">
-            <div ng-repeat="field in fields.essential" class="form-inline">
+            <div ng-repeat="field in fields.essential" class="form-inline" ng-if="field.name !== 'ID'">
                 <label>{{field.name}}</label>
                 <span style="color:red" ng-if="field.required">*</span>
                 <input type="{{field.type}}" class="form-control pull-right" ng-model="dealForm.essential[field.name]" ng-required="{{field.required}}">
@@ -39,7 +39,9 @@
                             <tr>
                                 <td>
                                     <label>Country</label>
-                                    <select class="form-control pull-right" ng-model="dealForm.profile['Country']">
+                                    <span style="color:red" ng-if="getField('profile', 'Country').required">*</span>
+                                    <select class="form-control pull-right" 
+                                    ng-model="dealForm.profile['Country']" ng-required="getField('profile', 'Country').required">
                                         <option ng-repeat="option in getField('profile', 'Country').options">
                                             {{option}}
                                         </option>
@@ -49,7 +51,9 @@
                             <tr>
                                 <td>
                                     <label>Client</label>
-                                    <select class="form-control pull-right" ng-model="dealForm.profile['Client']">
+                                    <span style="color:red" ng-if="getField('profile', 'Client').required">*</span>
+                                    <select class="form-control pull-right" 
+                                    ng-model="dealForm.profile['Client']" ng-required="getField('profile', 'Client').required">
                                         <option>Get from Client List</option>
                                     </select>
                                 </td>
@@ -57,7 +61,9 @@
                             <tr>
                                 <td>
                                     <label>Service</label>
-                                    <select class="form-control pull-right" ng-model="dealForm.profile['Service']">
+                                    <span style="color:red" ng-if="getField('profile', 'Service').required">*</span>
+                                    <select class="form-control pull-right" ng-model="dealForm.profile['Service']" 
+                                    ng-required="getField('profile', 'Service').required">
                                         <option ng-repeat="option in getField('profile', 'Service').options">
                                             {{option}}
                                         </option>
@@ -67,7 +73,9 @@
                             <tr>
                                 <td>
                                     <label>Type</label>
-                                    <select class="form-control pull-right" ng-model="dealForm.profile['Type']">
+                                    <span style="color:red" ng-if="getField('profile', 'Type').required">*</span>
+                                    <select class="form-control pull-right" ng-model="dealForm.profile['Type']" 
+                                    ng-required="getField('profile', 'Type').required">
                                         <option ng-repeat="option in getField('profile', 'Type').options">
                                             {{option}}
                                         </option>
@@ -77,30 +85,40 @@
                             <tr>
                                 <td>
                                     <label>Resource</label>
+                                    <span style="color:red" ng-if="getField('profile', 'Type').required">*</span>
                                     <div class="pull-right">
-                                        <input type="number" min="0" class="form-control" ng-model="dealForm.profile['Resource Size (MM)']"> (MM)
+                                        <input type="number" min="0" class="form-control" 
+                                        ng-model="dealForm.profile['Resource Size (MM)']" 
+                                        ng-required="getField('profile', 'Resource Size (MM)').required"> (MM)
                                         <br/> /
                                         <br/>
-                                        <input type="number" min="0" class="form-control" ng-model="dealForm.profile['Resource Size (FTE)']"> (FTE)
+                                        <input type="number" min="0" class="form-control" 
+                                        ng-model="dealForm.profile['Resource Size (FTE)']"
+                                        ng-required="getField('profile', 'Resource Size (FTE)').required"> (FTE)
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>Duration (Start)</label>
-                                    <input type="date" class="form-control pull-right" ng-model="dealForm.profile['Duration (Start)']">
+                                    <span style="color:red" ng-if="getField('profile', 'Duration (Start)').required">*</span>
+                                    <input type="date" class="form-control pull-right" ng-model="dealForm.profile['Duration (Start)']"
+                                    ng-required="getField('profile', 'Duration (Start)').required">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>AWS Resp (Sales)</label>
+                                    <span style="color:red" ng-if="getField('profile', 'AWS Resp (Sales) person').required">*</span>
                                     <div class="pull-right">
-                                        <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Sales) person']">
+                                        <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Sales) person']"
+                                        ng-required="getField('profile', 'AWS Resp (Sales) person').required">
                                             <option>Get from Sales persons list</option>
                                         </select>
                                         <br/> /
                                         <br/>
-                                        <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Sales) BU']">
+                                        <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Sales) BU']"
+                                        ng-required="getField('profile', 'AWS Resp (Sales) BU').required">
                                             <option>Get from Sales persons's BU list ???</option>
                                         </select>
                                     </div>
@@ -109,7 +127,9 @@
                             <tr>
                                 <td>
                                     <label>Key Assignment</label>
-                                    <input type="text" class="form-control pull-right" ng-model="dealForm.profile['Key Assignment']">
+                                    <span style="color:red" ng-if="getField('profile', 'Key Assignment').required">*</span>   
+                                    <input type="text" class="form-control pull-right" ng-model="dealForm.profile['Key Assignment']"
+                                    ng-required="getField('profile', 'Key Assignment').required">
                                 </td>
                             </tr>
                             <tr ng-repeat="field in fields.profile track by field.id">
@@ -143,7 +163,9 @@
                             <tr>
                                 <td>
                                     <label>Division</label>
-                                    <select class="form-control pull-right" ng-model="dealForm.profile['Division']">
+                                    <span style="color:red" ng-if="getField('profile', 'Division').required">*</span>
+                                    <select class="form-control pull-right" ng-model="dealForm.profile['Division']"
+                                    ng-required="getField('profile', 'Division').required">
                                         <option ng-repeat="option in getField('profile', 'Division').options">
                                             {{option}}
                                         </option>
@@ -153,19 +175,25 @@
                             <tr>
                                 <td>
                                     <label>Client Resp</label>
-                                    <input type="text" class="form-control pull-right" ng-model="dealForm.profile['Client Resp']">
+                                    <span style="color:red" ng-if="getField('profile', 'Client Resp').required">*</span>
+                                    <input type="text" class="form-control pull-right" ng-model="dealForm.profile['Client Resp']"
+                                    ng-required="getField('profile', 'Client Resp').required">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>Level / Step</label>
+                                    <span style="color:red" ng-if="getField('profile', 'Level').required">*</span>
                                     <div class="pull-right">
-                                        <select class="form-control" ng-model="dealForm.profile['Level']">
+                                        <select class="form-control" ng-model="dealForm.profile['Level']"
+                                        ng-required="getField('profile', 'Level').required">
                                             <option ng-repeat="option in getField('profile', 'Level').options">{{option}}</option>
                                         </select>
                                         /
-                                        <select class="form-control" ng-model="dealForm.profile['Step']">
-                                            <option ng-repeat="option in getField('profile', 'Step').options | filter: (dealForm.profile['Level'] + '.')">{{option}}</option>
+                                        <select class="form-control" ng-model="dealForm.profile['Step']"
+                                        ng-required="getField('profile', 'Step').required">
+                                            <option ng-repeat="option in getField('profile', 'Step').options | 
+                                            filter: (dealForm.profile['Level'] + '.')">{{option}}</option>
                                         </select>
                                     </div>
                                 </td>
@@ -173,7 +201,9 @@
                             <tr>
                                 <td>
                                     <label>Confidence</label>
-                                    <select class="form-control pull-right" ng-model="dealForm.profile['Confidence']">
+                                    <span style="color:red" ng-if="getField('profile', 'Confidence').required">*</span>
+                                    <select class="form-control pull-right" ng-model="dealForm.profile['Confidence']"
+                                    ng-required="getField('profile', 'Confidence').required">
                                         <option ng-repeat="option in getField('profile', 'Confidence').options">
                                             {{option}}
                                         </option>
@@ -183,33 +213,42 @@
                             <tr>
                                 <td>
                                     <label>Revenue</label>
+                                    <span style="color:red" ng-if="getField('profile', 'Revenue').required">*</span>
                                     <div class="pull-right">
-                                        <input type="number" min="0" class="form-control" ng-model="dealForm.profile['Revenue']"> (JPY)
+                                        <input type="number" min="0" class="form-control" ng-model="dealForm.profile['Revenue']"
+                                        ng-required="getField('profile', 'Revenue').required"> (JPY)
                                     </div>
                                     <br/>
                                     <br/>
                                     <label>CM</label>
+                                    <span style="color:red" ng-if="getField('profile', 'CM').required">*</span>
                                     <div class="pull-right">
-                                        <input type="number" min="0" class="form-control" ng-model="dealForm.profile['CM']"> (JPY)
+                                        <input type="number" min="0" class="form-control" ng-model="dealForm.profile['CM']"
+                                        ng-required="getField('profile', 'CM').required"> (JPY)
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>Duration (End)</label>
-                                    <input type="date" class="form-control pull-right" ng-model="dealForm.profile['Duration (End)']">
+                                    <span style="color:red" ng-if="getField('profile', 'Duration (End)').required">*</span>
+                                    <input type="date" class="form-control pull-right" ng-model="dealForm.profile['Duration (End)']"
+                                    ng-required="getField('profile', 'Duration (End)').required">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>AWS Resp (Dev)</label>
+                                    <span style="color:red" ng-if="getField('profile', 'AWS Resp (Dev) person').required">*</span>
                                     <div class="pull-right">
-                                        <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Dev) person']">
+                                        <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Dev) person']"
+                                        ng-required="getField('profile', 'AWS Resp (Dev) person').required">
                                             <option>Get from Dev persons list</option>
                                         </select>
                                         <br/> /
                                         <br/>
-                                        <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Dev) BU']">
+                                        <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Dev) BU']"
+                                        ng-required="getField('profile', 'AWS Resp (Dev) BU').required">
                                             <option>Get from Dev persons's BU list ???</option>
                                         </select>
                                     </div>
@@ -218,7 +257,9 @@
                             <tr>
                                 <td>
                                     <label>Remark</label>
-                                    <input type="text" class="form-control pull-right" ng-model="dealForm.profile['Remark']">
+                                    <span style="color:red" ng-if="getField('profile', 'Remark').required">*</span>
+                                    <input type="text" class="form-control pull-right" ng-model="dealForm.profile['Remark']"
+                                    ng-required="getField('profile', 'Remark').required">
                                 </td>
                             </tr>
                             <tr ng-repeat="field in fields.profile track by field.id">
@@ -272,20 +313,26 @@
                             <tr>
                                 <td>
                                     <label>SRB No. (e.g. PS-0095)</label>
-                                    <input type="text" class="form-control pull-right" ng-model="dealForm.process['SRB No']">
+                                    <span style="color:red" ng-if="getField('process', 'SRB No').required">*</span>
+                                    <input type="text" class="form-control pull-right" ng-model="dealForm.process['SRB No']"
+                                    ng-required="getField('process', 'SRB No').required">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>SRB Date</label>
-                                    <input type="date" class="form-control pull-right" ng-model="dealForm.process['SRB Date']">
+                                    <span style="color:red" ng-if="getField('process', 'SRB Date').required">*</span>
+                                    <input type="date" class="form-control pull-right" ng-model="dealForm.process['SRB Date']"
+                                    ng-required="getField('process', 'SRB Date').required">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>SRB Status</label>
+                                    <span style="color:red" ng-if="getField('process', 'SRB Status').required">*</span>
                                     <select class="form-control pull-right" ng-model="dealForm.process['SRB Status']">
-                                        <option ng-repeat="option in getField('process', 'SRB Status').options">
+                                        <option ng-repeat="option in getField('process', 'SRB Status').options"
+                                        ng-required="getField('process', 'SRB Status').required">
                                             {{option}}
                                         </option>
                                     </select>
@@ -322,7 +369,9 @@
                             <tr>
                                 <td>
                                     <label>SOW Scheme</label>
-                                    <select class="form-control pull-right" ng-model="dealForm.process['SOW Scheme']">
+                                    <span style="color:red" ng-if="getField('process', 'SOW Scheme').required">*</span>
+                                    <select class="form-control pull-right" ng-model="dealForm.process['SOW Scheme']"
+                                    ng-required="getField('process', 'SOW Scheme').required">
                                         <option ng-repeat="option in getField('process', 'SOW Scheme').options">
                                             {{option}}
                                         </option>
@@ -332,19 +381,26 @@
                             <tr>
                                 <td>
                                     <label>SOW No. (e.g. AWS-2013-2575)</label>
-                                    <input type="text" class="form-control pull-right" ng-model="dealForm.process['SOW No']">
+                                    <span style="color:red" ng-if="getField('process', 'SOW No').required">*</span>
+                                    <input type="text" class="form-control pull-right" 
+                                    ng-model="dealForm.process['SOW No']"
+                                    ng-required="getField('process', 'SOW No').required">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>SOW Date</label>
-                                    <input type="date" class="form-control pull-right" ng-model="dealForm.process['SOW Date']">
+                                    <span style="color:red" ng-if="getField('process', 'SOW Date').required">*</span>
+                                    <input type="date" class="form-control pull-right" ng-model="dealForm.process['SOW Date']"
+                                    ng-required="getField('process', 'SOW Date').required">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>SOW Status</label>
-                                    <select class="form-control pull-right" ng-model="dealForm.process['SOW Status']">
+                                    <span style="color:red" ng-if="getField('process', 'SOW Status').required">*</span>
+                                    <select class="form-control pull-right" ng-model="dealForm.process['SOW Status']"
+                                    ng-required="getField('process', 'SOW Status').required">
                                         <option ng-repeat="option in getField('process', 'SOW Status').options">
                                             {{option}}
                                         </option>
@@ -602,13 +658,17 @@
                             <tr>
                                 <td>
                                     <label>Dependency</label>
-                                    <input type="text" class="form-control pull-right" ng-model="dealForm.status['Dependency']">
+                                    <span style="color:red" ng-if="getField('status', 'Dependency').required">*</span>
+                                    <input type="text" class="form-control pull-right" ng-model="dealForm.status['Dependency']"
+                                    ng-required="getField('status', 'Dependency').required">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>Action</label>
-                                    <input type="text" class="form-control pull-right" ng-model="dealForm.status['Action']">
+                                    <span style="color:red" ng-if="getField('status', 'Action').required">*</span>
+                                    <input type="text" class="form-control pull-right" ng-model="dealForm.status['Action']"
+                                    ng-required="getField('status', 'Action').required">
                                 </td>
                             </tr>
                             <tr ng-repeat="field in fields.status track by field.id">
@@ -642,13 +702,17 @@
                             <tr>
                                 <td>
                                     <label>Status</label>
-                                    <input type="text" class="form-control pull-right" ng-model="dealForm.status['Status']">
+                                    <span style="color:red" ng-if="getField('status', 'Status').required">*</span>
+                                    <input type="text" class="form-control pull-right" ng-model="dealForm.status['Status']"
+                                    ng-required="getField('status', 'Status').required">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <label>Step to Close</label>
-                                    <input type="text" class="form-control pull-right" ng-model="dealForm.status['Step to Close']">
+                                    <span style="color:red" ng-if="getField('status', 'Step to Close').required">*</span>
+                                    <input type="text" class="form-control pull-right" ng-model="dealForm.status['Step to Close']"
+                                    ng-required="getField('status', 'Step to Close').required">
                                 </td>
                             </tr>
                             <tr ng-repeat="field in fields.status track by field.id">
