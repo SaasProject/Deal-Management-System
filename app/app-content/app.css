@@ -210,3 +210,12 @@ table {
 .panel-heading {
 	background-color: #eaebf9;
 }
+
+.navCategory{
+	color: #718c8c;
+	font-weight: bold;
+}
+
+.sidenav hr {
+	border-top: dotted 1px #aaaaaa;
+}

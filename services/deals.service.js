@@ -90,7 +90,7 @@ function addDeal(deal){
 
     function saveToDB(){
 
-    	deal.ID = ID;
+    	deal.essential.ID = ID;
     	
 		 db.deals.insert(
 			deal,
