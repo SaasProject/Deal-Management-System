@@ -28,6 +28,23 @@
             content: []
         };
 
+        $scope.validateBlankInputs = function(){
+            console.log('glenn');
+            //glenn's code to loop category fields if there is required
+            var targetCategory = ['profileSection', 'processSection', 'distributionSection', 'statusSection', 'contentSection'];
+
+            for (var a = 0; a < targetCategory.length; a++){
+                var categoryInputs = document.getElementById(targetCategory[a]).getElementsByTagName("input");
+                var inputLength = categoryInputs.length;
+                for (var i = 0; i < inputLength; i++) {
+                    if (categoryInputs[i].value === '' && categoryInputs[i].required){
+                        $('#'+targetCategory[a]).collapse('show');
+                        break;
+                    }
+                }
+            }
+        }
+
         //get the fields arrays of dealessential, dealprofile, dealprocess, dealstatus, and dealcontent
         function getAllFields () {
             ModulesService.getAllModules().then(function (allModules) {
@@ -64,25 +81,28 @@
             Object.assign(tempDealForm, $scope.dealForm);            
 
             //use false to convert date objects to datestrings
-            tempDealForm = preProcess(tempDealForm, false);
-
-            if (tempDealForm._id === undefined) {
-                DealsService.addDeal(tempDealForm)
-                .then(function() {
-                    $state.transitionTo('dealList');
-                })
-                .catch(function(err) {
-    
-                });
-            } else {
-                DealsService.updateDeal(tempDealForm)
-                .then(function() {
-                    $state.transitionTo('dealList');
-                })
-                .catch(function() {
-    
-                });
-            }            
+            try {
+                tempDealForm = preProcess(tempDealForm, false);
+                if (tempDealForm._id === undefined) {
+                    DealsService.addDeal(tempDealForm)
+                    .then(function() {
+                        $state.transitionTo('dealList');
+                    })
+                    .catch(function(err) {
+        
+                    });
+                } else {
+                    DealsService.updateDeal(tempDealForm)
+                    .then(function() {
+                        $state.transitionTo('dealList');
+                    })
+                    .catch(function() {
+        
+                    });
+                }     
+            } catch (e) {
+                $scope.message = e.message;
+            }
         }
 
         //do not initialize dates to the current date since it is not required
@@ -158,9 +178,18 @@
         $scope.getCurrentFiscalYear();
 
         function preProcess(dealForm, isLoaded) {
+            console.log('jeremy');
             var tempObject = dealForm;
+
+            //perform this during submit
+            if (!isLoaded && tempObject.profile['Duration (Start)'] > tempObject.profile['Duration (End)']) {
+                //throw an error if start > end
+                throw new Error('End date must be greater than or equal to the start date');
+            }
+
             //use $scope.fields and iterate each array
             angular.forEach($scope.fields, function(fields, category) {
+                console.log(category);
                 var i, currentField, arrayLength = fields.length;
                 for(i = 0; i < arrayLength; i++) {
                     currentField = $scope.fields[category][i];
@@ -183,7 +212,7 @@
         $scope.getField = function (category, fieldName) {
             return $scope.fields[category].find(function(field) {
                 return field.name === fieldName;
-            })
+            });
         }
 
     }
