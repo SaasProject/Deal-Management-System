@@ -18,6 +18,21 @@
         $scope.statusFields = [];
         $scope.contentFields = [];
 
+        $scope.validateBlankInputs = function(){
+            //glenn's code to loop category fields if there is required
+            var targetCategory = ['profileSection', 'processSection', 'distributionSection', 'statusSection', 'contentSection'];
+
+            for (var a = 0; a < targetCategory.length; a++){
+                var categoryInputs = document.getElementById(targetCategory[a]).getElementsByTagName("input");
+                var inputLength = categoryInputs.length;
+                for (var i = 0; i < inputLength; i++) {
+                    if (categoryInputs[i].value == "" && categoryInputs[i].required){
+                        $('#'+targetCategory[a]).collapse('show');
+                    }
+                }
+            }
+        }
+
         function getAllFields() {
             ModulesService.getModuleByName('dealessential').then(function (response) {
                 $scope.essentialFields = response.fields;
