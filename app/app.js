@@ -102,6 +102,10 @@
             } else if ($rootScope.user.email !== undefined && toState.name === 'login') {
                 //return to previous page
                 $state.transitionTo($rootScope.fromState.name);
+            //restrict access of 'users' to fields page
+            } else if ($rootScope.user.role !== 'Admin' && toState.name === 'fields') {
+                //go back to previous
+                $state.transitionTo(fromState.name);
             //access is allowed
             } else {
                 //save fromState (except login) to rootScope variable

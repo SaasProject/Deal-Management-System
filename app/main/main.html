@@ -1,10 +1,26 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2 sidenav">
-            <a ui-sref="dealList">Deals</a>
-            <a ui-sref="clientList">Clients</a>
-            <a ui-sref="fields" ng-if="user.role === 'Admin'">Fields</a>
-            <a href="#" ng-click="logout()">Logout</a>
+            <div>
+                <a ui-sref="home"><b>Home</b></a>
+            </div>
+            <hr>
+            <label class='navCategory'>Main</label>
+            <div>
+                <a ui-sref="dealList">Deals</a>
+                <a ui-sref="clientList">Clients</a>
+            </div>
+            <hr>
+            <div ng-if="user.role === 'Admin'">
+                <label class='navCategory'>Admin</label>
+                <a ui-sref="fields">Fields</a>
+                <hr>
+            </div>
+            
+            <label class='navCategory'>Settings</label>
+            <div>
+                <a href="#" ng-click="logout()">Logout</a>
+            </div>
         </div>
 
         <!-- trick to offset the main page. class sidenav is fixed,
