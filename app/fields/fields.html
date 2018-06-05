@@ -23,12 +23,12 @@
                 </select>
             </div> -->
             <label>Name</label>
-            <input type="text" class="form-control" ng-model="fieldForm.name" placeholder="do not include . or $" required />
+            <input type="text" class="form-control" ng-model="fieldForm.name" placeholder="do not include . or $" required ng-readonly="fieldForm.default"/>
             <br/>
-            <input type="checkbox" ng-model="fieldForm.unique" />
+            <input type="checkbox" ng-model="fieldForm.unique" ng-disabled="fieldForm.default"/>
             <b>Unique</b>
             <br/>
-            <input type="checkbox" ng-model="fieldForm.required" />
+            <input type="checkbox" ng-model="fieldForm.required"/>
             <b>Required</b>
             <br/>
             <input type="checkbox" ng-model="fieldForm.showInList" />
@@ -36,7 +36,7 @@
             <br/>
             <br/>
             <label>Type</label>
-            <select class="form-control" ng-model="fieldForm.type" required>
+            <select class="form-control" ng-model="fieldForm.type" required ng-disabled="fieldForm.default">
                 <option>text</option>
                 <option>number</option>
                 <option>email</option>
@@ -50,7 +50,7 @@
                 <label>Options</label>
                 <br/>
                 <small>input options separated by comma (,)</small>
-                <textarea class="form-control" rows="5" ng-model="fieldOptions"></textarea>
+                <textarea class="form-control" rows="5" ng-model="fieldOptions" ng-readonly="fieldForm.default"></textarea>
             </div>
             <br/>
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -75,15 +75,13 @@
                     <td>{{field.showInList}}</td>
                     <td>
                         <div class="pull-right">
-                            <div ng-if="!field.default">
-                                <a style="cursor:pointer">
-                                    <i class="fa fa-list-alt" aria-hidden="true" ng-click="editField(field)" data-toggle="tooltip" title="Edit"></i>
-                                </a>
-                                |
-                                <a style="cursor:pointer">
-                                    <i class="fa fa-trash" aria-hidden="true" ng-click="deleteField(field)" data-toggle="tooltip" title="Delete"></i>
-                                </a>
-                            </div>
+                            <a style="cursor:pointer" ng-if="field.name !== 'ID'">
+                                <i class="fa fa-list-alt" aria-hidden="true" ng-click="editField(field)" data-toggle="tooltip" title="Edit"></i>
+                            </a>
+                            |
+                            <a style="cursor:pointer" ng-if="!field.default">
+                                <i class="fa fa-trash" aria-hidden="true" ng-click="deleteField(field)" data-toggle="tooltip" title="Delete"></i>
+                            </a>
                             <text ng-if="field.default">DEFAULT</text>
                         </div>
                     </td>
