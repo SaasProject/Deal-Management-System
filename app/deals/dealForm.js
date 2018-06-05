@@ -28,6 +28,14 @@
             content: []
         };
 
+        //default of distribution
+        var distributionStrings = {
+            direct: 'Direct to Client',
+            middle1: 'To Middleman',
+            middle2: 'Middleman to Client'
+        }
+        $scope.contracts = [distributionStrings.direct];
+
         $scope.validateBlankInputs = function(){
             console.log('glenn');
             //glenn's code to loop category fields if there is required
@@ -70,6 +78,7 @@
                 //use true to convert datestrings to date objects
                 $scope.dealForm = preProcess(aDeal, true);
 
+                console.log($scope.dealForm);
              }).catch(function() {
                 $scope.message = 'Cannot find the deal';
             });
@@ -101,6 +110,7 @@
                     });
                 }     
             } catch (e) {
+                //console.log(e);
                 $scope.message = e.message;
             }
         }
@@ -118,7 +128,7 @@
 
                 },
                 distribution: {
-                    total: {
+                    /* total: {
                         resource: 0,
                         revenue: 0,
                         cm: 0,
@@ -133,7 +143,7 @@
                     rev: {
                         jp: {},
                         gd: {}
-                    }
+                    } */
                 },
                 status: {
 
@@ -181,10 +191,30 @@
             console.log('jeremy');
             var tempObject = dealForm;
 
-            //perform this during submit
-            if (!isLoaded && tempObject.profile['Duration (Start)'] > tempObject.profile['Duration (End)']) {
-                //throw an error if start > end
-                throw new Error('End date must be greater than or equal to the start date');
+            //perform operations on variables that you can explicitly determine
+            //during load
+            if (isLoaded) {
+                //set the sow scheme (for the distribution table)
+                $scope.setContracts(tempObject.process['SOW Scheme']);
+            //during submit
+            } else {
+                //explicitly set SOW scheme (because default selected options is not working) to Direct
+                if (tempObject.process['SOW Scheme'] === null || tempObject.process['SOW Scheme'] === undefined) {
+                    tempObject.process['SOW Scheme'] = 'Direct';
+                }
+                
+                //throw error if start date > end date
+                if(tempObject.profile['Duration (Start)'] > tempObject.profile['Duration (End)']) {
+                    throw new Error('End date must be greater than or equal to the start date');
+                }
+
+                //delete the other to avoid being included in computation and being stored in database
+                /* if (tempObject.process['SOW Scheme'] === 'Indirect') {
+                    delete tempObject.distribution[distributionStrings.direct];
+                } else {
+                    delete tempObject.distribution[distributionStrings.middle1];
+                    delete tempObject.distribution[distributionStrings.middle2];
+                } */
             }
 
             //use $scope.fields and iterate each array
@@ -193,13 +223,31 @@
                 var i, currentField, arrayLength = fields.length;
                 for(i = 0; i < arrayLength; i++) {
                     currentField = $scope.fields[category][i];
-                    //check the input type and process only dates
-                    if(currentField.type === 'date') {
-                        //if it is loaded from database, convert the datestring to date object
-                        //else, convert the date object to a datestring with the prescribed format
-                        tempObject[category][currentField.name] = (isLoaded) ? 
-                        new Date(tempObject[category][currentField.name]) : 
-                        $filter('date')(tempObject[category][currentField.name], DATE_FORMAT);
+
+                    //not working, workaround is to use validateBlankInputs() during ng-click
+                   /*  if(!isLoaded && currentField.required && 
+                        (tempObject[category][currentField.name] === '' ||
+                        tempObject[category][currentField.name] === null || 
+                        tempObject[category][currentField.name] === undefined)) {
+                            throw {REQUIRED_ERROR: true, category: category};
+                    } */
+
+                    
+                    //preprocess when loading
+                    if (isLoaded) {
+                        if(currentField.type === 'date' && tempObject[category][currentField.name] !== null) {
+                            tempObject[category][currentField.name] = new Date(tempObject[category][currentField.name]);
+                        }
+                    //preprocess during submit
+                    } else {
+                        //do not store keys with null values
+                        if (tempObject[category][currentField.name] === null) {
+                            delete tempObject[category][currentField.name];
+                        }
+
+                        if(currentField.type === 'date' && tempObject[category][currentField.name] !== null) {
+                            tempObject[category][currentField.name] = $filter('date')(tempObject[category][currentField.name], DATE_FORMAT);
+                        } 
                     }
                 }
                 
@@ -213,6 +261,18 @@
             return $scope.fields[category].find(function(field) {
                 return field.name === fieldName;
             });
+        }
+
+        $scope.setContracts = function (sowScheme) {
+            //$scope.contracts = [];
+            
+            //why is it not working huhu
+            //always else huhu
+            if(sowScheme === 'Indirect') {
+                $scope.contracts = [distributionStrings.middle1, distributionStrings.middle2];
+            } else {                
+                $scope.contracts = [distributionStrings.direct];
+            }
         }
 
     }
