@@ -32,7 +32,7 @@
     <tbody>
         <tr ng-repeat="deal in deals | filter: searchText">
             <td ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList">
-                {{deal.essential[essentialField.name]}}
+                {{(essentialField.name === 'ID') ? deal.ID : deal.essential[essentialField.name]}}
             </td>
             <td ng-repeat="profileField in fields.profile" ng-if="profileField.showInList">
                 {{deal.profile[profileField.name]}}
