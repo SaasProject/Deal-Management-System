@@ -1,7 +1,9 @@
 /*
     Deals Service for Angular
     Author(s): Sanchez, Macku
+                Jeremy Reccion
     Date Created: June 2018
+    Date Modified: June 6, 2018
     Description: Angular Service for the Deals Page
     Functions:
         addDeal();
@@ -25,6 +27,7 @@
         service.addDeal = addDeal;
         service.updateDeal = updateDeal;
         service.getDealById = getDealById;
+        service.deleteDeal = deleteDeal;
  
         return service;  
         
@@ -40,6 +43,10 @@
 
         function getDealById(dealId) {
             return $http.get('/deals/' + dealId).then(handleSuccess, handleError);
+        }
+
+        function deleteDeal(dealId) {
+            return $http.delete('/deals/deleteDeal/' + dealId).then(handleSuccess, handleError);
         }
  
         // private functions

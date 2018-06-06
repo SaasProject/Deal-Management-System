@@ -27,6 +27,7 @@ var service = {};
 service.addDeal = addDeal; 
 service.editDeal = editDeal;  
 service.getDealById = getDealById;
+service.deleteDeal = deleteDeal;
 
  
 module.exports = service;
@@ -114,4 +115,25 @@ function getDealById(ID) {
     });
 
     return deferred.promise;
+}
+
+//jeremy - 06/06/2018
+//ID is the deal's ID (e.g. DL-0000) not _id
+function deleteDeal(ID) {
+    var deferred = Q.defer();
+
+    db.deals.remove({ID: ID}, function(err, writeResult) {
+        if(err){
+            deferred.reject(err);
+        }
+        else{
+            //n is used to know if the document was removed
+            if(writeResult.result.n == 0){
+                deferred.reject({notFound: true});
+            }
+            else{
+                deferred.resolve();
+            }
+        }
+    });
 }
