@@ -1,3 +1,17 @@
+/*
+    Deals Service for Angular
+    Author(s): Sanchez, Macku
+    Date Created: June 2018
+    Description: Angular Service for the Deals Page
+    Functions:
+        addDeal();
+        updateDeal();
+        getDealById();
+        handleSuccess();
+        handleError();
+*/
+
+
 (function () {
     'use strict';
  

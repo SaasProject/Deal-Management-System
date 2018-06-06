@@ -1,3 +1,11 @@
+/*
+    Deals Controller
+    Author(s): Sanchez, Macku
+    Date Created: June 2018
+    Description: Middleware for the Deals Service
+*/
+
+
 var express = require('express');
 var router = express.Router();
 var dealsService = require('services/deals.service');

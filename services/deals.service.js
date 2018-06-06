@@ -1,3 +1,14 @@
+/*
+    Deals Service
+    Author(s): Sanchez, Macku
+    Date Created: June 2018
+    Description: Service for the Deals Page
+    Functions:
+        addDeal();
+        editDeal();
+        getDealById();
+*/
+
 var config = require('config.json');
 var _ = require('lodash');
 var jwt = require('jsonwebtoken');
@@ -15,7 +26,7 @@ var service = {};
 
 service.addDeal = addDeal; 
 service.editDeal = editDeal;  
-service.getDealById = getDealById;   // macku
+service.getDealById = getDealById;
 
  
 module.exports = service;
@@ -26,43 +37,6 @@ function addDeal(deal){
     var ID = "DL-0000";
     var IDnumber;
     var previousID;
-
-    /*var possibleID = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	var randomedID ="";
-
-	randomize();
-
-    function randomize(){
-	    
-	    for (var z = 0; z < 5; z++){
-			     randomedID += possibleID.charAt(Math.floor(Math.random() * possibleID.length));
-			}
-		deal.ID = randomedID;
-		checkForDuplicate();
-	}
-
-	function checkForDuplicate(){
-		db.deals.findOne({ ID: deal.ID }, function (err, deal) {
-	        if(deal){
-	        	randomize();
-	        }else{
-	        	addDealtoDB();
-	        }
-	    });
-	}
-
-
-	function addDealtoDB(){
-	    db.deals.insert(
-	            deal,
-	            function (err, doc) {
-	                if (err) deferred.reject(err);
-	 
-	                deferred.resolve();
-	            });
-	}
-
-*/
 
 
 	db.deals.find({}).toArray(function(err, deals) {
