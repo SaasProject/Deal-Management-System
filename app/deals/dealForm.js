@@ -42,7 +42,7 @@
             var targetCategory = ['profileSection', 'processSection', 'distributionSection', 'statusSection', 'contentSection'];
 
             for (var a = 0; a < targetCategory.length; a++){
-                var categoryInputs = document.getElementById(targetCategory[a]).getElementsByTagName("input");
+                var categoryInputs = document.getElementById(targetCategory[a]).querySelectorAll('input,textarea,select');
                 var inputLength = categoryInputs.length;
                 for (var i = 0; i < inputLength; i++) {
                     if (categoryInputs[i].value === '' && categoryInputs[i].required){
