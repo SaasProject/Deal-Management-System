@@ -5,7 +5,7 @@
         .module('app')
         .factory('TableService', Service);
  
-    function Service(FlashService) {
+    function Service() {
         var service = {};
  
         service.sortSelectedColumn = sortSelectedColumn;

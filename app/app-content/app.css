@@ -219,3 +219,31 @@ table {
 .sidenav hr {
 	border-top: dotted 1px #aaaaaa;
 }
+
+/* table sort arrows */
+.arrow-down:after,.arrow-up:after,.arrow-dormant:after{
+ content: ' ';
+ position: relative;
+ left: 2px;
+ border: 8px solid transparent;
+}
+
+.arrow-down:after{
+ top: 10px;
+ border-top-color: black;
+}
+
+.arrow-up:after{
+ bottom: 15px;
+ border-bottom-color: black;
+}
+
+.arrow-dormant:after{
+ bottom: 15px;
+ border-bottom-color: gray;
+}
+
+.arrow-down,.arrow-up,.arrow-dormant{
+ padding-right: 10px;
+}
+/* end */
