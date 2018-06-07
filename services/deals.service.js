@@ -1,12 +1,15 @@
 /*
     Deals Service
     Author(s): Sanchez, Macku
+                Reccion, Jeremy
     Date Created: June 2018
+    Date Modified: June 07, 2018
     Description: Service for the Deals Page
     Functions:
         addDeal();
         editDeal();
         getDealById();
+        deleteDeal();
 */
 
 var config = require('config.json');
@@ -65,7 +68,9 @@ function addDeal(deal){
 
     function saveToDB(){
 
-    	deal.ID = ID;
+        deal.ID = ID;
+        //set deleted flag to false
+        deal.deleted = false;
     	
 		 db.deals.insert(
 			deal,
@@ -122,13 +127,14 @@ function getDealById(ID) {
 function deleteDeal(ID) {
     var deferred = Q.defer();
 
-    db.deals.remove({ID: ID}, function(err, writeResult) {
+    //set the deleted flag to true
+    db.deals.update({ID: ID}, {deleted: true}, function(err, writeResult) {
         if(err){
             deferred.reject(err);
         }
         else{
             //n is used to know if the document was removed
-            if(writeResult.result.n == 0){
+            if(writeResult.result.nModified === 0){
                 deferred.reject({notFound: true});
             }
             else{
