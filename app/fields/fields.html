@@ -23,12 +23,13 @@
                 </select>
             </div> -->
             <label>Name</label>
-            <input type="text" class="form-control" ng-model="fieldForm.name" placeholder="do not include . or $" required ng-readonly="fieldForm.default"/>
+            <input type="text" class="form-control" ng-model="fieldForm.name" placeholder="do not include . or $" required ng-readonly="fieldForm.default"
+            />
             <br/>
-            <input type="checkbox" ng-model="fieldForm.unique" ng-disabled="fieldForm.default"/>
+            <input type="checkbox" ng-model="fieldForm.unique" ng-disabled="fieldForm.default" />
             <b>Unique</b>
             <br/>
-            <input type="checkbox" ng-model="fieldForm.required"/>
+            <input type="checkbox" ng-model="fieldForm.required" />
             <b>Required</b>
             <br/>
             <input type="checkbox" ng-model="fieldForm.showInList" />
@@ -71,8 +72,14 @@
             <tbody>
                 <tr ng-repeat="field in module.fields">
                     <td>{{field.name}}</td>
-                    <td>{{field.required}}</td>
-                    <td>{{field.showInList}}</td>
+                    <td>
+                        <i class="fa fa-check" ng-if="field.required" style="color:green"></i>
+                        <i class="fa fa-times" ng-if="!field.required" style="color:red"></i>
+                    </td>
+                    <td>
+                        <i class="fa fa-check" ng-if="field.showInList" style="color:green"></i>
+                        <i class="fa fa-times" ng-if="!field.showInList" style="color:red"></i>
+                    </td>
                     <td>
                         <div class="pull-right">
                             <a style="cursor:pointer" ng-if="field.name !== 'ID'">
