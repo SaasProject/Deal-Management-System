@@ -6,7 +6,7 @@
             <div ng-repeat="field in fields.essential" class="form-inline" ng-if="field.name !== 'ID'">
                 <label>{{field.name}}</label>
                 <span style="color:red" ng-if="field.required">*</span>
-                <input type="{{field.type}}" class="form-control pull-right" ng-model="dealForm.essential[field.name]" required="{{field.required}}">
+                <input type="{{field.type}}" class="form-control pull-right" ng-model="dealForm.essential[field.name]" ng-required="{{field.required}}">
                 <br/>
                 <br/>
             </div>
@@ -132,16 +132,16 @@
                                     <span style="color:red" ng-if="field.required">*</span>
                                     <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email' || field.type === 'date'"
                                         class="pull-right">
-                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.profile[field.name]" required="{{field.required}}"
+                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}"
                                         />
                                     </div>
                                     <div ng-if="field.type === 'textarea'" class="pull-right">
                                         <!-- show text area -->
-                                        <textarea ng-model="dealForm.profile[field.name]" class="form-control" required="{{field.required}}" rows="4" cols="50"></textarea>
+                                        <textarea ng-model="dealForm.profile[field.name]" class="form-control" ng-required="{{field.required}}" rows="4" cols="50"></textarea>
                                     </div>
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
-                                        <select class="form-control" ng-model="dealForm.profile[field.name]" required="{{field.required}}">
+                                        <select class="form-control" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}">
                                             <option value=""></option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
@@ -257,16 +257,16 @@
                                     <span style="color:red" ng-if="field.required">*</span>
                                     <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email' || field.type === 'date'"
                                         class="pull-right">
-                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.profile[field.name]" required="{{field.required}}"
+                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}"
                                         />
                                     </div>
                                     <div ng-if="field.type === 'textarea'" class="pull-right">
                                         <!-- show text area -->
-                                        <textarea ng-model="dealForm.profile[field.name]" class="form-control" required="{{field.required}}" rows="4" cols="50"></textarea>
+                                        <textarea ng-model="dealForm.profile[field.name]" class="form-control" ng-required="{{field.required}}" rows="4" cols="50"></textarea>
                                     </div>
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
-                                        <select class="form-control" ng-model="dealForm.profile[field.name]" required="{{field.required}}">
+                                        <select class="form-control" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}">
                                             <option value=""></option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
@@ -317,8 +317,7 @@
                                 <td>
                                     <label>SRB Status</label>
                                     <span style="color:red" ng-if="getField('process', 'SRB Status').required">*</span>
-                                    <select class="form-control pull-right" ng-model="dealForm.process['SRB Status']" 
-                                    ng-required="getField('process', 'SRB Status').required">
+                                    <select class="form-control pull-right" ng-model="dealForm.process['SRB Status']" ng-required="getField('process', 'SRB Status').required">
                                         <option value=""></option>
                                         <option ng-repeat="option in getField('process', 'SRB Status').options" value="{{option}}">
                                             {{option}}
@@ -332,16 +331,16 @@
                                     <span style="color:red" ng-if="field.required">*</span>
                                     <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email' || field.type === 'date'"
                                         class="pull-right">
-                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.process[field.name]" required="{{field.required}}"
+                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}"
                                         />
                                     </div>
                                     <div ng-if="field.type === 'textarea'" class="pull-right">
                                         <!-- show text area -->
-                                        <textarea ng-model="dealForm.process[field.name]" class="form-control" required="{{field.required}}" rows="4" cols="50"></textarea>
+                                        <textarea ng-model="dealForm.process[field.name]" class="form-control" ng-required="{{field.required}}" rows="4" cols="50"></textarea>
                                     </div>
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
-                                        <select class="form-control" ng-model="dealForm.process[field.name]" required="{{field.required}}">
+                                        <select class="form-control" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}">
                                             <option value=""></option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
@@ -358,9 +357,8 @@
                                 <td>
                                     <label>SOW Scheme</label>
                                     <span style="color:red" ng-if="getField('process', 'SOW Scheme').required">*</span>
-                                    <select class="form-control pull-right" ng-model="dealForm.process['SOW Scheme']" 
-                                    ng-required="getField('process', 'SOW Scheme').required"
-                                    ng-change="setContracts(dealForm.process['SOW Scheme'])">
+                                    <select class="form-control pull-right" ng-model="dealForm.process['SOW Scheme']" ng-required="getField('process', 'SOW Scheme').required"
+                                        ng-change="setContracts(dealForm.process['SOW Scheme'])">
                                         <option value=""></option>
                                         <option ng-repeat="option in getField('process', 'SOW Scheme').options" value="{{option}}">
                                             {{option}}
@@ -386,8 +384,7 @@
                                 <td>
                                     <label>SOW Status</label>
                                     <span style="color:red" ng-if="getField('process', 'SOW Status').required">*</span>
-                                    <select class="form-control pull-right" ng-model="dealForm.process['SOW Status']" 
-                                    ng-required="getField('process', 'SOW Status').required">
+                                    <select class="form-control pull-right" ng-model="dealForm.process['SOW Status']" ng-required="getField('process', 'SOW Status').required">
                                         <option value=""></option>
                                         <option ng-repeat="option in getField('process', 'SOW Status').options" value="{{option}}">
                                             {{option}}
@@ -401,16 +398,16 @@
                                     <span style="color:red" ng-if="field.required">*</span>
                                     <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email' || field.type === 'date'"
                                         class="pull-right">
-                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.process[field.name]" required="{{field.required}}"
+                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}"
                                         />
                                     </div>
                                     <div ng-if="field.type === 'textarea'" class="pull-right">
                                         <!-- show text area -->
-                                        <textarea ng-model="dealForm.process[field.name]" class="form-control" required="{{field.required}}" rows="4" cols="50"></textarea>
+                                        <textarea ng-model="dealForm.process[field.name]" class="form-control" ng-required="{{field.required}}" rows="4" cols="50"></textarea>
                                     </div>
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
-                                        <select class="form-control" ng-model="dealForm.process[field.name]" required="{{field.required}}">
+                                        <select class="form-control" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}">
                                             <option value=""></option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
@@ -431,7 +428,7 @@
         <div class="col-md-10">
             <div class="panel-heading">
                 <h4 class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-target="#distributionSection">
-                <span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Distribution</h4>
+                    <span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Distribution</h4>
             </div>
             <div id="distributionSection" class="collapse">
                 <div class="col-md-3">
@@ -551,29 +548,29 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <table class="table table-striped table-condensed table-hover">
+                            <tr>
+                                <th>Total</th>
+                                <td>{{total[dealForm.process['SOW Scheme']].resource}} (MM)</td>
+                                <td>{{total[dealForm.process['SOW Scheme']].revenue}} (JPY)</td>
+                            </tr>
+                            <tr>
+                                <th>Average</th>
+                                <td>{{total[dealForm.process['SOW Scheme']].average}}</td>
+                                <td>(JPY/MM)</td>
+                            </tr>
+                            <tr>
+                                <th>CM</th>
+                                <td>{{total.cm}} (JPY)</td>
+                                <td>(%)</td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="row">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4">
-                                <table class="table table-striped table-condensed table-hover">
-                                    <tr>
-                                        <th>Total</th>
-                                        <td>{{totalRES}} (MM)</td>
-                                        <td>{{totalREV}} (JPY)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Average</th>
-                                        <td></td>
-                                        <td>{{totalREV / totalRES}} (JPY/MM)</td>
-                                    </tr>
-                                    <tr>
-                                        <th>CM</th>
-                                        <td>(JPY)</td>
-                                        <td>(%)</td>
-                                    </tr>
-                                </table>
-                            </div>
                     <div>
                         <div class="col-md-6 form-inline">
                             <table class="table table-hover">
@@ -584,16 +581,16 @@
                                             <span style="color:red" ng-if="field.required">*</span>
                                             <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email' || field.type === 'date'"
                                                 class="pull-right">
-                                                <input type="{{field.type}}" class="form-control" ng-model="dealForm.distribution[field.name]" required="{{field.required}}"
+                                                <input type="{{field.type}}" class="form-control" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}"
                                                 />
                                             </div>
                                             <div ng-if="field.type === 'textarea'" class="pull-right">
                                                 <!-- show text area -->
-                                                <textarea ng-model="dealForm.distribution[field.name]" class="form-control" required="{{field.required}}" rows="4" cols="50"></textarea>
+                                                <textarea ng-model="dealForm.distribution[field.name]" class="form-control" ng-required="{{field.required}}" rows="4" cols="50"></textarea>
                                             </div>
                                             <div ng-if="field.type ==='dropdown'" class="pull-right">
                                                 <!-- show dropdown -->
-                                                <select class="form-control" ng-model="dealForm.distribution[field.name]" required="{{field.required}}">
+                                                <select class="form-control" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}">
                                                     <option value=""></option>
                                                     <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                                 </select>
@@ -612,16 +609,16 @@
                                             <span style="color:red" ng-if="field.required">*</span>
                                             <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email' || field.type === 'date'"
                                                 class="pull-right">
-                                                <input type="{{field.type}}" class="form-control" ng-model="dealForm.distribution[field.name]" required="{{field.required}}"
+                                                <input type="{{field.type}}" class="form-control" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}"
                                                 />
                                             </div>
                                             <div ng-if="field.type === 'textarea'" class="pull-right">
                                                 <!-- show text area -->
-                                                <textarea ng-model="dealForm.distribution[field.name]" class="form-control" required="{{field.required}}" rows="4" cols="50"></textarea>
+                                                <textarea ng-model="dealForm.distribution[field.name]" class="form-control" ng-required="{{field.required}}" rows="4" cols="50"></textarea>
                                             </div>
                                             <div ng-if="field.type ==='dropdown'" class="pull-right">
                                                 <!-- show dropdown -->
-                                                <select class="form-control" ng-model="dealForm.distribution[field.name]" required="{{field.required}}">
+                                                <select class="form-control" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}">
                                                     <option value=""></option>
                                                     <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                                 </select>
@@ -669,16 +666,16 @@
                                     <span style="color:red" ng-if="field.required">*</span>
                                     <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email' || field.type === 'date'"
                                         class="pull-right">
-                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.status[field.name]" required="{{field.required}}"
+                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.status[field.name]" ng-required="{{field.required}}"
                                         />
                                     </div>
                                     <div ng-if="field.type === 'textarea'" class="pull-right">
                                         <!-- show text area -->
-                                        <textarea ng-model="dealForm.status[field.name]" class="form-control" required="{{field.required}}" rows="4" cols="50"></textarea>
+                                        <textarea ng-model="dealForm.status[field.name]" class="form-control" ng-required="{{field.required}}" rows="4" cols="50"></textarea>
                                     </div>
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
-                                        <select class="form-control" ng-model="dealForm.status[field.name]" required="{{field.required}}">
+                                        <select class="form-control" ng-model="dealForm.status[field.name]" ng-required="{{field.required}}">
                                             <option value=""></option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
@@ -711,16 +708,16 @@
                                     <span style="color:red" ng-if="field.required">*</span>
                                     <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email' || field.type === 'date'"
                                         class="pull-right">
-                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.status[field.name]" required="{{field.required}}"
+                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.status[field.name]" ng-required="{{field.required}}"
                                         />
                                     </div>
                                     <div ng-if="field.type === 'textarea'" class="pull-right">
                                         <!-- show text area -->
-                                        <textarea ng-model="dealForm.status[field.name]" class="form-control" required="{{field.required}}" rows="4" cols="50"></textarea>
+                                        <textarea ng-model="dealForm.status[field.name]" class="form-control" ng-required="{{field.required}}" rows="4" cols="50"></textarea>
                                     </div>
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
-                                        <select class="form-control" ng-model="dealForm.status[field.name]" required="{{field.required}}">
+                                        <select class="form-control" ng-model="dealForm.status[field.name]" ng-required="{{field.required}}">
                                             <option value=""></option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
@@ -758,16 +755,16 @@
                                     <span style="color:red" ng-if="field.required">*</span>
                                     <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email' || field.type === 'date'"
                                         class="pull-right">
-                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.content[field.name]" required="{{field.required}}"
+                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.content[field.name]" ng-required="{{field.required}}"
                                         />
                                     </div>
                                     <div ng-if="field.type === 'textarea'" class="pull-right">
                                         <!-- show text area -->
-                                        <textarea ng-model="dealForm.content[field.name]" class="form-control" required="{{field.required}}" rows="4" cols="50"></textarea>
+                                        <textarea ng-model="dealForm.content[field.name]" class="form-control" ng-required="{{field.required}}" rows="4" cols="50"></textarea>
                                     </div>
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
-                                        <select class="form-control" ng-model="dealForm.content[field.name]" required="{{field.required}}">
+                                        <select class="form-control" ng-model="dealForm.content[field.name]" ng-required="{{field.required}}">
                                             <option value=""></option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
@@ -786,16 +783,16 @@
                                     <span style="color:red" ng-if="field.required">*</span>
                                     <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email' || field.type === 'date'"
                                         class="pull-right">
-                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.content[field.name]" required="{{field.required}}"
+                                        <input type="{{field.type}}" class="form-control" ng-model="dealForm.content[field.name]" ng-required="{{field.required}}"
                                         />
                                     </div>
                                     <div ng-if="field.type === 'textarea'" class="pull-right">
                                         <!-- show text area -->
-                                        <textarea ng-model="dealForm.content[field.name]" class="form-control" required="{{field.required}}" rows="4" cols="50"></textarea>
+                                        <textarea ng-model="dealForm.content[field.name]" class="form-control" ng-required="{{field.required}}" rows="4" cols="50"></textarea>
                                     </div>
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
-                                        <select class="form-control" ng-model="dealForm.content[field.name]" required="{{field.required}}">
+                                        <select class="form-control" ng-model="dealForm.content[field.name]" ng-required="{{field.required}}">
                                             <option value=""></option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
