@@ -23,7 +23,7 @@
 
 
     
-    function Controller($scope, $rootScope, $state, ModulesService, TableService) {
+    function Controller($scope, $rootScope, $state, ModulesService, DealsService, TableService) {
 
         $scope.DATE_FORMAT = 'MM/dd/yyyy';
 
@@ -46,6 +46,8 @@
         $scope.currentPage = 1;
         $scope.pageSize = 10;
 
+        $scope.reverse = false;
+
         function getAllFields () {
             ModulesService.getAllModules().then(function (allModules) {
                 var category;
@@ -65,17 +67,33 @@
         function getAllDeals () {
             ModulesService.getAllModuleDocs('deals').then(function (allDeals) {
                 $scope.deals = allDeals;
-            }).catch(function () {
+                $scope.deals = $scope.deals.filter(function(aDeal) {
+                    return !aDeal.deleted;
+                });
+            }).catch(function (err) {
 
             });
         }
 
         getAllDeals();
-        $scope.reverse = false;
+        
         $scope.sortColumn = function (category, fieldName) {
             //$scope.column = category + '.' + fieldName;
             $scope.column = category + "['" + fieldName + "']";
-            $scope.reverse = !$scope.reverse;
+            $scope.reverse = TableService.sortSelectedColumn($scope.reverse, $scope.column).result;
+        }
+        
+        $scope.sortClass = function (category, fieldName) {
+            return TableService.sortSelectedClass($scope.reverse, category + "['" + fieldName + "']", $scope.column);
+        }
+
+        $scope.deleteDeal = function (aDeal) {
+            console.log('weee');
+            if (confirm('are you sure you want to delete ' + aDeal.essential['Deal Name'] + '?')) {
+                DealsService.deleteDeal(aDeal.ID).then(function () {
+                    getAllDeals();
+                }).catch(function (err) {});
+            }
         }
     }
 })();

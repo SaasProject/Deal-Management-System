@@ -15,33 +15,26 @@
 </div>
 <table class="table">
     <thead>
-        <!-- <th ng-repeat="field in allFieldName" ng-if="field.showInList" ng-click='sortColumn(field.category + " " + field.name)' ng-class='sortClass(field.category + " " + field.name)' class="cutOverflow">
-            {{field.name}}
-        </th> -->
-        <th ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList" ng-click="sortColumn('essential', essentialField.name)">
+        <th ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList" ng-click="sortColumn('essential', essentialField.name)" ng-class="sortClass('essential', essentialField.name)">
             {{essentialField.name}}
         </th>
-        <th ng-repeat="profileField in fields.profile" ng-if="profileField.showInList" ng-click="sortColumn('profile', profileField.name)">
+        <th ng-repeat="profileField in fields.profile" ng-if="profileField.showInList" ng-click="sortColumn('profile', profileField.name)" ng-class="sortClass('profile', profileField.name)">
             {{profileField.name}}
         </th>
-        <th ng-repeat="processField in fields.process" ng-if="processField.showInList" ng-click="sortColumn('process', processField.name)">
+        <th ng-repeat="processField in fields.process" ng-if="processField.showInList" ng-click="sortColumn('process', processField.name)" ng-class="sortClass('process', processField.name)">
             {{processField.name}}
         </th>
-        <th ng-repeat="distributionField in fields.distribution" ng-if="distributionField.showInList" ng-click="sortColumn('distribution', distributionField.name)">
+        <th ng-repeat="distributionField in fields.distribution" ng-if="distributionField.showInList" ng-click="sortColumn('distribution', distributionField.name)" ng-class="sortClass('distribution', distributionField.name)">
             {{distributionField.name}}
         </th>
-        <th ng-repeat="statusField in fields.status" ng-if="statusField.showInList" ng-click="sortColumn('status', statusField.name)">
+        <th ng-repeat="statusField in fields.status" ng-if="statusField.showInList" ng-click="sortColumn('status', statusField.name)" ng-class="sortClass('status', statusField.name)">
             {{statusField.name}}
         </th>
         <th></th>
     </thead>
     <tbody>
-        <tr ng-repeat="deal in deals | filter: searchText | orderBy: column : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
-            <!-- <td ng-repeat="field in allFieldName" ng-if="field.showInList">
-                <div ng repeat="this in deal">
-                {{deal[field.category + ' ' + field.name]}}
-                </div>
-            </td> -->
+        <tr ng-repeat="deal in deals | filter: searchText | orderBy: column : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize"
+            ng-if="!deal.deleted">
             <td ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList">
                 {{(essentialField.name === 'ID') ? deal.ID : deal.essential[essentialField.name]}}
             </td>
@@ -57,13 +50,17 @@
             <td ng-repeat="statusField in fields.status" ng-if="statusField.showInList">
                 {{deal.status[statusField.name]}}
             </td>
-            <!-- <td>
+            <td>
                 <div class="pull-right">
                     <a style="cursor:pointer">
                         <i class="fa fa-list-alt" aria-hidden="true" ui-sref="dealForm({ID: deal.ID})" data-toggle="tooltip" title="View"></i>
                     </a>
+                    |
+                    <a style="cursor:pointer">
+                        <i class="fa fa-trash" aria-hidden="true" ng-click="deleteDeal(deal)" data-toggle="tooltip" title="Delete"></i>
+                    </a>
                 </div>
-            </td> -->
+            </td>
         </tr>
     </tbody>
 </table>
