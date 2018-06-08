@@ -48,22 +48,6 @@
 
         $scope.reverse = false;
 
-        function getAllFields () {
-            ModulesService.getAllModules().then(function (allModules) {
-                var category;
-                for (var i = 0; i < allModules.length; i++) {
-                    //first condition is to make sure that collections that have 'deal' in its name are only processed.
-                    if (allModules[i].name.search('deal') !== -1 && allModules[i].name !== 'deals') {
-                        category = allModules[i].name.replace('deal', '');
-                        $scope.fields[category] = allModules[i].fields;                        
-                    }
-                }
-            }).catch(function (err) {
-            });
-        }
-
-        getAllFields();
-
         function getAllDeals () {
             ModulesService.getAllModuleDocs('deals').then(function (allDeals) {
                 $scope.deals = allDeals;
@@ -76,6 +60,32 @@
         }
 
         getAllDeals();
+
+        function getAllFields () {
+            ModulesService.getAllModules().then(function (allModules) {
+                var category;
+                for (var i = 0; i < allModules.length; i++) {
+                    //first condition is to make sure that collections that have 'deal' in its name are only processed.
+                    if (allModules[i].name.search('deal') !== -1 && allModules[i].name !== 'deals') {
+                        category = allModules[i].name.replace('deal', '');
+                        $scope.fields[category] = allModules[i].fields;
+
+                        //ewww dirty code 2 for loops, bale 3 nested loops all in all :(
+                        //delete properties of each deal which are not shown in the list to avoid its values being searched
+                        angular.forEach($scope.fields[category], function(aField) {
+                            angular.forEach($scope.deals, function (aDeal) {
+                                if(!aField.showInList) {
+                                    delete aDeal[category][aField.name];
+                                }
+                            });
+                        });                       
+                    }
+                }
+            }).catch(function (err) {
+            });
+        }
+
+        getAllFields();
         
         $scope.sortColumn = function (category, fieldName) {
             //$scope.column = category + '.' + fieldName;
