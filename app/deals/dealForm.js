@@ -12,7 +12,7 @@
         $scope.dealForm = getInitialDealForm();
 
         //working format for two way conversion
-        var DATE_FORMAT = 'MM/dd/yyyy';
+        var DATE_FORMAT = 'yyyy-MM-dd';
 
         //initialize variables for distribution section
         $scope.currentFiscalYear = [];
