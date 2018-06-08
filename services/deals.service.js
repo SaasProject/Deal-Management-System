@@ -128,7 +128,7 @@ function deleteDeal(ID) {
     var deferred = Q.defer();
 
     //set the deleted flag to true
-    db.deals.update({ID: ID}, {deleted: true}, function(err, writeResult) {
+    db.deals.update({ID: ID}, {$set: {deleted: true}}, function(err, writeResult) {
         if(err){
             deferred.reject(err);
         }
@@ -142,4 +142,6 @@ function deleteDeal(ID) {
             }
         }
     });
+
+    return deferred.promise;
 }

@@ -53,11 +53,9 @@ router.get('/:ID', function(req, res, next) {
 
 //jeremy - 06/06/2018
 router.delete('/deleteDeal/:ID', function(req, res, next) {
-    dealsService.deleteDeal(req.params.ID)
-    .then(function() {
+    dealsService.deleteDeal(req.params.ID).then(function() {
         res.status(200).send();
-    })
-    .catch(function(err) {
+    }).catch(function(err) {
         res.status(400).send(err);
     });
 });
