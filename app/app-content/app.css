@@ -201,7 +201,7 @@ table {
     .sidenav a {font-size: 18px;}
 }
 
-/* turning input boxes beige */
+/* turning input boxes beige */	
 /* made by glenn */
 .deal-form-control .form-control {
     background-color: #f8fcc7;
@@ -220,30 +220,11 @@ table {
 	border-top: dotted 1px #aaaaaa;
 }
 
-/* table sort arrows */
-.arrow-down:after,.arrow-up:after,.arrow-dormant:after{
- content: ' ';
- position: relative;
- left: 2px;
- border: 8px solid transparent;
+.dealsCollapsible {
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
-.arrow-down:after{
- top: 10px;
- border-top-color: black;
+.panel-heading {
+    padding: 3px 5px;
 }
-
-.arrow-up:after{
- bottom: 15px;
- border-bottom-color: black;
-}
-
-.arrow-dormant:after{
- bottom: 15px;
- border-bottom-color: gray;
-}
-
-.arrow-down,.arrow-up,.arrow-dormant{
- padding-right: 10px;
-}
-/* end */

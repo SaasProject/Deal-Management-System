@@ -16,23 +16,15 @@
             <!-- <button type="button" class="btn btn-default">Cancel</button> -->
         </div>
     </div>
-    <hr>
+    <hr class="dealsCollapsible">
     <div class="row">
         <div class="col-md-1"></div>
-        <!--<div class="container">
-          <div data-toggle="collapse" data-target="#demo">Simple collapsible</div>
-          <div id="demo" class="collapse in">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </div>
-        </div>-->
         <div class="col-md-10">
             <div class="panel-heading">
                 <h4 class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-target="#profileSection">
-                    <span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Profile</h4>
+                    <span class="glyphicon glyphicon-chevron-down">&nbsp;</span>Profile</h4>
             </div>
-            <div id="profileSection" class="collapse">
+            <div id="profileSection" class="collapse in">
                 <div class="col-md-6 form-inline">
                     <table class="table table-hover">
                         <tbody>
@@ -280,15 +272,15 @@
         </div>
         <div class="col-md-1"></div>
     </div>
-    <hr>
+    <hr class="dealsCollapsible">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
             <div class="panel-heading">
                 <h4 class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-target="#processSection">
-                    <span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Process</h4>
+                    <span class="glyphicon glyphicon-chevron-down">&nbsp;</span>Process</h4>
             </div>
-            <div id="processSection" class="collapse">
+            <div id="processSection" class="collapse in">
                 <div class="col-md-6 form-inline">
                     <table class="table table-hover">
                         <tbody>
@@ -422,15 +414,15 @@
     </div>
     <div class="col-md-1"></div>
     </div>
-    <hr>
+    <hr class="dealsCollapsible">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
             <div class="panel-heading">
                 <h4 class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-target="#distributionSection">
-                    <span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Distribution</h4>
+                    <span class="glyphicon glyphicon-chevron-down">&nbsp;</span>Distribution</h4>
             </div>
-            <div id="distributionSection" class="collapse">
+            <div id="distributionSection" class="collapse in">
                 <div class="col-md-3">
                     <label>Input Starting Month:</label>
                     <input type="month" class="form-control" ng-model="startingMonthYear" ng-change="getCurrentFiscalYear()" />
@@ -634,15 +626,15 @@
         </div>
         <div class="col-md-1"></div>
     </div>
-    <hr>
+    <hr class="dealsCollapsible">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
             <div class="panel-heading">
                 <h4 class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-target="#statusSection">
-                    <span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Status</h4>
+                    <span class="glyphicon glyphicon-chevron-down">&nbsp;</span>Status</h4>
             </div>
-            <div id="statusSection" class="collapse">
+            <div id="statusSection" class="collapse in">
                 <div class="col-md-6 form-inline">
                     <table class="table table-hover">
                         <tbody>
@@ -736,15 +728,15 @@
     </div>
     <div class="col-md-1"></div>
     </div>
-    <hr>
+    <hr class="dealsCollapsible">
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
             <div class="panel-heading">
                 <h4 class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-target="#contentSection">
-                    <span class="glyphicon glyphicon-chevron-right">&nbsp;</span>Content</h4>
+                    <span class="glyphicon glyphicon-chevron-down">&nbsp;</span>Content</h4>
             </div>
-            <div id="contentSection" class="collapse">
+            <div id="contentSection" class="collapse in">
                 <textarea class="form-control" ng-model="dealForm.content['Main Message']"></textarea>
                 <div class="col-md-6 form-inline">
                     <table class="table table-hover">
