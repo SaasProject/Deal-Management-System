@@ -31,8 +31,7 @@
         //default of distribution
         var distributionStrings = {
             direct: 'Direct to Client',
-            middle1: 'To Middleman',
-            middle2: 'Middleman to Client'
+            intra: 'Intra-Company'
         };
 
         $scope.contracts = [distributionStrings.direct];
@@ -273,8 +272,8 @@
 
             //why is it not working huhu
             //always else huhu
-            if (sowScheme === 'Indirect') {
-                $scope.contracts = [distributionStrings.middle1, distributionStrings.middle2];
+            if (sowScheme === 'Intra-Company') {
+                $scope.contracts = [distributionStrings.intra, distributionStrings.direct];
             } else {
                 $scope.contracts = [distributionStrings.direct];
             }
