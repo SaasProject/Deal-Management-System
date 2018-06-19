@@ -549,17 +549,17 @@
                             <table class="table table-striped table-condensed table-hover">
                                 <tr>
                                     <th>Total</th>
-                                    <td>{{total[dealForm.process['SOW Scheme']].resource}} (MM)</td>
-                                    <td>{{total[dealForm.process['SOW Scheme']].revenue}} (JPY)</td>
+                                    <td>{{total[contract].resource}} (MM)</td>
+                                    <td>{{total[contract].revenue}} (JPY)</td>
                                 </tr>
                                 <tr>
                                     <th>Average</th>
-                                    <td>{{total[dealForm.process['SOW Scheme']].average}}</td>
+                                    <td>{{total[contract].average | number: 3}}</td>
                                     <td>(JPY/MM)</td>
                                 </tr>
                                 <tr>
                                     <th>CM</th>
-                                    <td>{{total.cm}} (JPY)</td>
+                                    <td>{{total[contract].cm}} (JPY)</td>
                                     <td>(%)</td>
                                 </tr>
                             </table>

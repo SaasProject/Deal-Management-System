@@ -39,6 +39,9 @@
         //store total computations outside of dealForm.distribution to avoid registering changes in $scope.$watch
         //set this to dealForm.distribution[dealForm.process['SOW Scheme']].total during submit
         $scope.total = {};
+        //initialize $scope.total based from distribution strings
+        $scope.total[distributionStrings.direct] = {};
+        $scope.total[distributionStrings.intra] = {};
 
         $scope.validateBlankInputs = function () {
             console.log('glenn');
@@ -66,12 +69,6 @@
                         category = allModules[i].name.replace('deal', '');
                         $scope.fields[category] = allModules[i].fields;
                     }
-                }
-
-                //initialize $scope.total based from SOW Scheme options here
-                var sowSchemeStrings = $scope.getField('process', 'SOW Scheme').options;
-                for (var j = 0; j < sowSchemeStrings.length; j++) {
-                    $scope.total[sowSchemeStrings[j]] = {};
                 }
             }).catch(function (err) {
             });
@@ -198,7 +195,7 @@
             if (isLoaded) {
                 //set the sow scheme (for the distribution table)
                 $scope.setContracts(tempObject.process['SOW Scheme']);
-                //during submit
+            //during submit
             } else {
                 //explicitly set SOW scheme (because default selected options is not working) to Direct
                 if (tempObject.process['SOW Scheme'] === null || tempObject.process['SOW Scheme'] === undefined) {
@@ -209,6 +206,9 @@
                 if (tempObject.profile['Duration (Start)'] > tempObject.profile['Duration (End)']) {
                     throw new Error('End date must be greater than or equal to the start date');
                 }
+
+                //set $scope.total to distribution[total]
+                tempObject.distribution['total'] = $scope.total;
 
                 //set $scope.total to dealForm.distribution.total
 
@@ -291,14 +291,24 @@
             }
         }, true);
 
+        /**
+             * nakakapagcompute na ng total resource. considered na lahat ng months ng both jp & gd.
+             * kaso kapag nagswitch yung SOW Scheme, magrerecompute sya at maooverwrite yung lumang totals
+             * e.g. put some values when SOW Scheme is undefined/Direct. kapag magsswitch,
+             * hindi nakasave sa variable yung total ni direct. magrerecompute ulit sya kapag naging direct ulit
+             * yung sow scheme, which is inefficient
+             */
+
         function computeDistribution() {
             //console.log($scope.dealForm.distribution);
             //use variables like sumRes as temporary sum
-            var i, resJP = [], resGD = [], revJP = [], revGD = [], cm = [];
-            var resSum = 0, revSum = 0, cmSum = 0;
+            var i, resJP, resGD, revJP, revGD, cm, resSum, revSum, cmSum;
             //for direct or indirect
             for (i = 0; i < $scope.contracts.length; i++) {
                 //console.log($scope.dealForm.distribution[$scope.contracts[i]].res);
+                //reset per contract
+                resJP = [], resGD = [], revJP = [], revGD = [], cm = [];
+                resSum = 0, revSum = 0, cmSum = 0;
                 //compute total resource
                 if ($scope.dealForm.distribution[$scope.contracts[i]] !== undefined) {
                     /**
@@ -316,6 +326,13 @@
                         if ($scope.dealForm.distribution[$scope.contracts[i]].res.gd !== undefined) {
                             resGD = Object.values($scope.dealForm.distribution[$scope.contracts[i]].res.gd);
                         }
+
+                        //compute total resource
+                        if (resJP.length > 0 || resGD.length > 0) {
+                            resSum = resJP.concat(resGD).reduce(function (total, value) {
+                                return (value !== undefined && value !== null) ? total + value : total + 0;
+                            });
+                        }
                     }
 
                     if ($scope.dealForm.distribution[$scope.contracts[i]].rev !== undefined) {
@@ -327,64 +344,44 @@
                         if ($scope.dealForm.distribution[$scope.contracts[i]].rev.gd !== undefined) {
                             revGD = Object.values($scope.dealForm.distribution[$scope.contracts[i]].rev.gd);
                         }
+
+                        //compute total revenue
+                        if (revJP.length > 0 || revGD.length > 0) {
+                            revSum = revJP.concat(revGD).reduce(function (total, value) {
+                                return (value !== undefined && value !== null) ? total + value : total + 0;
+                            });
+                        }
                     }
+
+                    //compute average
+                    var average = revSum / resSum;
+                    //check average value
+                    /* if(isNaN(average) || average === Infinity) {
+                        average = 0;
+                    } */
 
                     //check cm
                     if ($scope.dealForm.distribution[$scope.contracts[i]].cm !== undefined) {
                         cm = Object.values($scope.dealForm.distribution[$scope.contracts[i]].cm);
+
+                        //compute total cm
+                        if (cm.length > 0) {
+                            cmSum = cm.reduce(function (total, value) {
+                                return (value !== undefined && value !== null) ? total + value : total + 0;
+                            });
+                        }
                     }
+
+                    //console.log(resSum, revSum, cmSum);
+
+                    $scope.total[$scope.contracts[i]].resource = (resSum !== null) ? resSum : 0;
+                    $scope.total[$scope.contracts[i]].revenue = (revSum !== null) ? revSum : 0;
+                    //((revSum / resSum) !== NaN) does not work
+
+                    $scope.total[$scope.contracts[i]].average = average;
+                    $scope.total[$scope.contracts[i]].cm = (cmSum !== null) ? cmSum : 0;
+                    //console.log($scope.total);
                 }
-            }
-
-            //compute total resource
-            if (resJP.length > 0 || resGD.length > 0) {
-                resSum = resJP.concat(resGD).reduce(function (total, value) {
-                    return (value !== undefined && value !== null) ? total + value : total + 0;
-                });
-            }
-
-            //compute total revenue
-            if (revJP.length > 0 || revGD.length > 0) {
-                revSum = revJP.concat(revGD).reduce(function (total, value) {
-                    return (value !== undefined && value !== null) ? total + value : total + 0;
-                });
-            }
-
-            //compute average
-            var average = revSum / resSum;
-            //check average value
-            /* if(isNaN(average) || average === Infinity) {
-                average = 0;
-            } */
-
-            //compute total cm
-            if (cm.length > 0) {
-                cmSum = cm.reduce(function (total, value) {
-                    return (value !== undefined && value !== null) ? total + value : total + 0;
-                });
-            }
-
-            console.log(resSum, revSum, cmSum);
-
-
-            /**
-             * nakakapagcompute na ng total resource. considered na lahat ng months ng both jp & gd.
-             * kaso kapag nagswitch yung SOW Scheme, magrerecompute sya at maooverwrite yung lumang totals
-             * e.g. put some values when SOW Scheme is undefined/Direct. kapag magsswitch,
-             * hindi nakasave sa variable yung total ni direct. magrerecompute ulit sya kapag naging direct ulit
-             * yung sow scheme, which is inefficient
-             */
-
-            //if sir bert states that these should be stored in the database, do this.
-            //if not, diretso scope.total tapos hindi iseset sa dealForm.distribution
-            if ($scope.dealForm.process['SOW Scheme'] !== undefined) {
-                $scope.total[$scope.dealForm.process['SOW Scheme']].resource = (resSum !== null) ? resSum : 0;
-                $scope.total[$scope.dealForm.process['SOW Scheme']].revenue = (revSum !== null) ? revSum : 0;
-                //((revSum / resSum) !== NaN) does not work
-
-                $scope.total[$scope.dealForm.process['SOW Scheme']].average = average;
-                $scope.total[$scope.dealForm.process['SOW Scheme']].cm = (cmSum !== null) ? cmSum : 0;
-                console.log($scope.total);
             }
         }
     }
