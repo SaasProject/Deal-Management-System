@@ -6,11 +6,14 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ng-toast/2.0.0/ngToast-animations.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ng-toast/2.0.0/ngToast.min.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="app-content/app.css" rel="stylesheet" />
 </head>
 <body ng-app="app">
     <!-- main -->
+    <toast></toast>
     <main ui-view></main>
     
     <!-- footer -->
@@ -26,6 +29,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.15.0/sortable.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-toast/2.0.0/ngToast.min.js"></script>
+
 
     <!-- added by jeremy to implement ng-csv (angular included above) -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-sanitize.js"></script>
@@ -33,7 +38,7 @@
     
     <!-- added by jeremy for ui-bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
- 
+    
     <!-- application scripts (controllers) -->
     <script src="app.js"></script>  	
     <script src="login/login.js"></script>  
@@ -51,8 +56,6 @@
     <script src="app-services/deals.service.js"></script>
     <script src="app-services/inputType.service.js"></script>
     <script src="app-services/table.service.js"></script>
-    
-
     
 </body>
 </html>
