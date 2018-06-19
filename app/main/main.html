@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2 sidenav">
+        <div class="sidenav">
             <div>
                 <a ui-sref="home"><b>Home</b></a>
             </div>
@@ -22,14 +22,8 @@
                 <a href="#" ng-click="logout()">Logout</a>
             </div>
         </div>
-
-        <!-- trick to offset the main page. class sidenav is fixed,
-            therefore removed from document flow. use this as replacement-->
-        <div class="col-md-2"></div>
-        <!-- -->
-
-        <div class="col-md-10 main">
-            <div ui-view></div>
+        <div class="main">
+            <div ui-view class="main-page"></div>
         </div>
     </div>
 </div>

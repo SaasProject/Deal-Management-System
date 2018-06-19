@@ -163,14 +163,18 @@ table {
 /* The sidebar menu */
 .sidenav {
     /*width: 160px; /* Set the width of the sidebar */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
+    /*z-index: 1;*/ /* Stay on top */
+    margin-top: 0; /* Stay at the top */
     left: 0;
 	background-color: #313a3a;
-	position: fixed;
+	position: fixed;	
 	height: 100%;
 	overflow-x: hidden; /* Disable horizontal scroll */
 	padding-top: 100px;
+	float: left;
+	width: 20%;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 /* The navigation menu links */
@@ -192,7 +196,11 @@ table {
 /* Style page content */
 .main {
 	/*margin-left: 160px; /* Same as the width of the sidebar */
+	width:80%;
 	padding-top: 75px;
+	float: right;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
