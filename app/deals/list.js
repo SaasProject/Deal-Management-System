@@ -51,8 +51,9 @@
         function getAllDeals () {
             ModulesService.getAllModuleDocs('deals').then(function (allDeals) {
                 $scope.deals = allDeals;
+                //compare to '9' not 9 because dropdown values are strings :(
                 $scope.deals = $scope.deals.filter(function(aDeal) {
-                    return !aDeal.deleted;
+                    return aDeal.profile['Level'] !== '9';
                 });
             }).catch(function (err) {
 
@@ -97,13 +98,13 @@
             return TableService.sortSelectedClass($scope.reverse, category + "['" + fieldName + "']", $scope.column);
         }
 
-        $scope.deleteDeal = function (aDeal) {
+        /* $scope.deleteDeal = function (aDeal) {
             console.log('weee');
             if (confirm('are you sure you want to delete ' + aDeal.essential['Deal Name'] + '?')) {
                 DealsService.deleteDeal(aDeal.ID).then(function () {
                     getAllDeals();
                 }).catch(function (err) {});
             }
-        }
+        } */
     }
 })();
