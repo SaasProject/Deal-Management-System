@@ -46,7 +46,7 @@
                                     <span style="color:red" ng-if="getField('profile', 'Client').required">*</span>
                                     <select class="form-control pull-right" ng-model="dealForm.profile['Client']" ng-required="getField('profile', 'Client').required">
                                         <option value=""></option>
-                                        <option>Get from Client List</option>
+                                        <option ng-repeat="client in clients" value="{{client.cmpnyNameShort}}">{{client.cmpnyNameShort}}</option>
                                     </select>
                                 </td>
                             </tr>

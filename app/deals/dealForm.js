@@ -6,7 +6,7 @@
         .controller('DealFormController', Controller);
 
 
-    function Controller($scope, $rootScope, $state, $stateParams, $filter, ModulesService, DealsService) {
+    function Controller($scope, $rootScope, $state, $stateParams, $filter, ModulesService, DealsService, ClientService) {
 
         //ng-model for a deal
         $scope.dealForm = getInitialDealForm();
@@ -14,6 +14,9 @@
         //working format for two way conversion
         var DATE_FORMAT = 'yyyy-MM-dd';
 
+        //initialize clients array
+        $scope.clients = [];
+        
         //initialize variables for distribution section
         $scope.currentFiscalYear = [];
         $scope.startingMonthYear = new Date();
@@ -75,6 +78,16 @@
         }
 
         getAllFields();
+
+        function getClients() {
+            ClientService.getAllClients().then(function (clients) {
+                $scope.clients = clients;
+            }).catch(function () {
+
+            });
+        }
+
+        getClients();
 
         //if there is a parameter, it means that a deal is going to be updated
         if ($stateParams.ID !== '') {
