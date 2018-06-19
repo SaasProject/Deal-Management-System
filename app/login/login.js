@@ -6,7 +6,7 @@
         .controller('LoginController', Controller);
 
     
-    function Controller($scope, $rootScope, $state, UserService) {
+    function Controller($scope, $rootScope, $state, UserService, ngToast) {
         $scope.loginForm = {
             email: '',
             password: ''
@@ -18,7 +18,8 @@
                 $rootScope.user = user;
                 $state.transitionTo('home');
             }).catch(function(err) {
-                $scope.message = 'Username/Password incorrect';
+                //$scope.message = 'Username/Password incorrect';
+                ngToast.danger('Username/Password incorrect');
                 console.log(err);
             });
         }

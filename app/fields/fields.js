@@ -6,7 +6,7 @@
         .controller('FieldsController', Controller);
 
     
-    function Controller($scope, $rootScope, $state, $filter, ModulesService) {
+    function Controller($scope, $rootScope, $state, $filter, ModulesService, ngToast) {
         $scope.message = '';
         $scope.module = {
             name: 'dealessential',
@@ -20,9 +20,9 @@
             showInList: false
         };
 
-        $scope.resetMessage = function () {
+        /* $scope.resetMessage = function () {
             $scope.message = '';
-        }
+        } */
  
         $scope.resetFieldForm = function () {
             //initialize the fieldForm
@@ -43,7 +43,8 @@
                 $scope.module = aModule;
                 $scope.resetFieldForm();
             }).catch(function (err) {
-                $scope.message = 'Not found';
+                //$scope.message = 'Not found';
+                ngToast.danger('Not Found');
                 $scope.resetFieldForm();
                 console.log($scope.fieldForm);
                 //reset the module.fields to remove the fields of a previously selected module
@@ -64,7 +65,8 @@
 
                 //check if the array is empty
                 if ($scope.fieldForm.options.length === 0) {
-                    $scope.message = 'No options inputted';
+                    //$scope.message = 'No options inputted';
+                    ngToast.danger('No options inputted');
                     //exit the function instead of proceeding
                     return;
                 }
@@ -78,22 +80,26 @@
             //add since there is no id property
             if ($scope.fieldForm.id === undefined) {
                 ModulesService.addModuleField(forSave).then(function () {
-                    $scope.message = 'Field added';
+                    //$scope.message = 'Field added';
+                    ngToast.success('Field added');
                     $scope.resetFieldForm();
                     $scope.getModuleByName();
                 }).catch(function (err) {
                     console.log(err);
-                    $scope.message = 'Cannot add the field';
+                    //$scope.message = 'Cannot add the field';
+                    ngToast.danger('Cannot add the field');
                 });
             //update
             } else {
                 ModulesService.updateModuleField(forSave).then(function () {
-                    $scope.message = 'Field updated';
+                    //$scope.message = 'Field updated';
+                    ngToast.success('Field updated');
                     $scope.resetFieldForm();
                     $scope.getModuleByName();
                 }).catch(function (err) {
                     console.log(err);
-                    $scope.message = 'Cannot update the field';
+                    //$scope.message = 'Cannot update the field';
+                    ngToast.danger('Cannot update the field');
                 });
             }
         }
@@ -108,11 +114,13 @@
 
         $scope.deleteField = function (aField) {
             ModulesService.deleteModuleField($scope.module.name, aField.id).then(function () {
-                $scope.message = 'Field deleted';
+                //$scope.message = 'Field deleted';
+                ngToast.success('Field deleted');
                 $scope.resetFieldForm();
                 $scope.getModuleByName();
             }).catch(function (err) {
-                $scope.message = 'Cannot delete the field';
+                //$scope.message = 'Cannot delete the field';
+                ngToast.danger('Cannot delete the field');
             });
         }
 
