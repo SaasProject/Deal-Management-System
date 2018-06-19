@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-3">
-        <select class="form-control" ng-model="module.name" ng-change="getModuleByName(); resetMessage()">
+        <select class="form-control" ng-model="module.name" ng-change="getModuleByName();">
             <!-- <option value="deals">Deals</option> -->
             <!-- <option value="clients">Clients</option> -->
             <option value="dealessential">Deal Essential</option>
@@ -58,7 +58,6 @@
             <button type="button" class="btn btn-default" ng-click="resetFieldForm()">Cancel</button>
             <br/>
             <br/>
-            <i ng-bind="message"></i>
         </form>
     </div>
     <div class="col-md-9">
