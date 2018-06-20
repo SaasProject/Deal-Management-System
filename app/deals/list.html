@@ -8,7 +8,7 @@
         <option ng-repeat="option in filterOptions">{{option}}</option>
     </select> -->
     <label for="pageSize">Page size</label>
-    <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{allDeals.length}}>
+    <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{deals.length}}>
     &nbsp;
     <label>Search: &nbsp;</label>
     <input type="text" class="form-control" ng-model="searchText">
