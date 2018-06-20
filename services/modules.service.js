@@ -21,6 +21,7 @@ service.deleteModuleField = deleteModuleField;
 
 service.addModuleDoc = addModuleDoc;
 service.getAllModuleDocs = getAllModuleDocs;
+service.getModuleDocById = getModuleDocById;
 service.updateModuleDoc = updateModuleDoc;
 service.deleteModuleDoc = deleteModuleDoc;
 
@@ -626,6 +627,24 @@ function updateFieldArray(moduleName, fieldArray){
         }
         else{
             deferred.resolve();
+        }
+    });
+
+    return deferred.promise;
+}
+
+function getModuleDocById(moduleName, id) {
+    var deferred = Q.defer();
+    moduleName = moduleName.toLowerCase();
+    db.bind(moduleName);
+
+    db[moduleName].findOne({_id: mongo.helper.toObjectID(id)}, function(err, moduleDoc) {
+        if (err) {
+            deferred.reject(err);
+        } else if (moduleDoc) {
+            deferred.resolve(moduleDoc);
+        } else {
+            deferred.reject(notFound);
         }
     });
 

@@ -17,6 +17,7 @@ router.put('/deleteModuleField/:name/:id', deleteModuleField);
 router.get('/getModuleByName/:name', getModuleByName);
 router.post('/addModuleDoc', addModuleDoc);
 router.get('/getAllModuleDocs/:name', getAllModuleDocs);
+router.get('/getModuleDocById/:name/:id', getModuleDocById);
 router.put('/updateModuleDoc', updateModuleDoc);
 router.delete('/deleteModuleDoc/:name/:id', deleteModuleDoc);
 
@@ -159,6 +160,14 @@ function deleteModuleDoc(req, res){
 function updateFieldArray(req, res){
     ModulesService.updateFieldArray(req.body.moduleName, req.body.fieldArray).then(function(){
         res.status(200).send();
+    }).catch(function(err){
+        res.status(400).send(err);
+    });
+}
+
+function getModuleDocById(req, res){
+    ModulesService.getModuleDocById(req.params.name, req.params.id).then(function(moduleDoc){
+        res.status(200).send(moduleDoc);
     }).catch(function(err){
         res.status(400).send(err);
     });
