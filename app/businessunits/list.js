@@ -14,6 +14,8 @@
 
         $scope.reverse = false;
 
+        //showInList not yet implemented, therefore searchbar will search all
+
         function getBUFields() {
             ModulesService.getModuleByName('businessunits').then(function(aModule) {
                 $scope.module = aModule;
@@ -25,7 +27,7 @@
         getBUFields();
 
         function getAllBUs() {
-            ModulesService.getAllModuleDocs('businessunits').then(function(businessUnits) {
+            ModulesService.getAllModuleDocs('businessunits').then(function(businessUnits) {                
                 $scope.businessUnits = businessUnits;
             }).catch(function(err) {
 
