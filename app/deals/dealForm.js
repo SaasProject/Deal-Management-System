@@ -9,7 +9,14 @@
     function Controller($scope, $rootScope, $state, $stateParams, $filter, ModulesService, DealsService, ClientService, ngToast) {
 
         //ng-model for a deal
-        $scope.dealForm = getInitialDealForm();
+        $scope.dealForm = {
+            essential: {},
+            profile: {},
+            process: {},
+            distribution: {},
+            status: {},
+            content: {}
+        };
 
         //working format for two way conversion
         var DATE_FORMAT = 'yyyy-MM-dd';
@@ -137,40 +144,6 @@
             }
         }
 
-        //do not initialize dates to the current date since it is not required
-        function getInitialDealForm() {
-            return {
-                essential: {
-
-                },
-                profile: {
-
-                },
-                process: {
-
-                },
-                distribution: {
-                    /*
-                    average: 0,
-                    cm: {},
-                    res: {
-                        jp: {},
-                        gd: {}
-                    },
-                    rev: {
-                        jp: {},
-                        gd: {}
-                    } */
-                },
-                status: {
-
-                },
-                content: {
-                    'Main Message': ''
-                }
-            };
-        }
-
         $scope.getCurrentFiscalYear = function () {
             //reset the array
             $scope.currentFiscalYear = [];
@@ -289,7 +262,7 @@
 
             //why is it not working huhu
             //always else huhu
-            if (sowScheme === 'Intra-Company') {
+            if (sowScheme === 'Transfer Pricing to UBICOM') {
                 $scope.contracts = [distributionStrings.intra, distributionStrings.direct];
             } else {
                 $scope.contracts = [distributionStrings.direct];
@@ -370,8 +343,6 @@
                         }
                     }
 
-                    //compute average
-                    var average = revSum / resSum;
                     //check average value
                     /* if(isNaN(average) || average === Infinity) {
                         average = 0;
@@ -395,8 +366,9 @@
                     $scope.total[$scope.contracts[i]].revenue = (revSum !== null) ? revSum : 0;
                     //((revSum / resSum) !== NaN) does not work
 
-                    $scope.total[$scope.contracts[i]].average = average;
+                    $scope.total[$scope.contracts[i]].average = revSum / resSum;
                     $scope.total[$scope.contracts[i]].cm = (cmSum !== null) ? cmSum : 0;
+                    $scope.total[$scope.contracts[i]].percent = (cmSum / revSum) * 100;
                     //console.log($scope.total);
                 }
             }
