@@ -217,6 +217,11 @@ table {
 
 .panel-heading {
 	background-color: #eaebf9;
+	padding: 3px 5px;
+}
+
+.profile-heading {
+	padding-left: 20px;
 }
 
 .navCategory{
@@ -231,8 +236,4 @@ table {
 .dealsCollapsible {
 	margin-top: 5px;
 	margin-bottom: 5px;
-}
-
-.panel-heading {
-    padding: 3px 5px;
 }
