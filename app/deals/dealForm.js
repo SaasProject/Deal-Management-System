@@ -6,7 +6,7 @@
         .controller('DealFormController', Controller);
 
 
-    function Controller($scope, $rootScope, $state, $stateParams, $filter, ModulesService, DealsService, ClientService) {
+    function Controller($scope, $rootScope, $state, $stateParams, $filter, ModulesService, DealsService, ClientService, ngToast) {
 
         //ng-model for a deal
         $scope.dealForm = getInitialDealForm();
@@ -98,7 +98,8 @@
 
                 console.log($scope.dealForm);
             }).catch(function () {
-                $scope.message = 'Cannot find the deal';
+                //$scope.message = 'Cannot find the deal';
+                ngToast.danger('Cannot find the deal');
             });
         }
 
@@ -113,6 +114,7 @@
                 if (tempDealForm._id === undefined) {
                     DealsService.addDeal(tempDealForm)
                         .then(function () {
+                            ngToast.success('Deal added');
                             $state.transitionTo('dealList');
                         })
                         .catch(function (err) {
@@ -121,6 +123,7 @@
                 } else {
                     DealsService.updateDeal(tempDealForm)
                         .then(function () {
+                            ngToast.success('Deal updated');
                             $state.transitionTo('dealList');
                         })
                         .catch(function () {
@@ -129,7 +132,8 @@
                 }
             } catch (e) {
                 //console.log(e);
-                $scope.message = e.message;
+                //$scope.message = e.message;
+                ngToast.danger(e.message);
             }
         }
 
