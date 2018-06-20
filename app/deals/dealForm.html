@@ -33,7 +33,7 @@
                                     <label>Country</label>
                                     <span style="color:red" ng-if="getField('profile', 'Country').required">*</span>
                                     <select class="form-control pull-right" ng-model="dealForm.profile['Country']" ng-required="getField('profile', 'Country').required">
-                                        <option value=""></option>
+                                        <option value="">- select -</option>
                                         <option ng-repeat="option in getField('profile', 'Country').options" value="{{option}}">
                                             {{option}}
                                         </option>
@@ -45,7 +45,7 @@
                                     <label>Client</label>
                                     <span style="color:red" ng-if="getField('profile', 'Client').required">*</span>
                                     <select class="form-control pull-right" ng-model="dealForm.profile['Client']" ng-required="getField('profile', 'Client').required">
-                                        <option value=""></option>
+                                        <option value="">- select -</option>
                                         <option ng-repeat="client in clients" value="{{client.cmpnyNameShort}}">{{client.cmpnyNameShort}}</option>
                                     </select>
                                 </td>
@@ -55,7 +55,7 @@
                                     <label>Service</label>
                                     <span style="color:red" ng-if="getField('profile', 'Service').required">*</span>
                                     <select class="form-control pull-right" ng-model="dealForm.profile['Service']" ng-required="getField('profile', 'Service').required">
-                                        <option value=""></option>
+                                        <option value="">- select -</option>
                                         <option ng-repeat="option in getField('profile', 'Service').options" value="{{option}}">
                                             {{option}}
                                         </option>
@@ -67,7 +67,7 @@
                                     <label>Type</label>
                                     <span style="color:red" ng-if="getField('profile', 'Type').required">*</span>
                                     <select class="form-control pull-right" ng-model="dealForm.profile['Type']" ng-required="getField('profile', 'Type').required">
-                                        <option value=""></option>
+                                        <option value="">- select -</option>
                                         <option ng-repeat="option in getField('profile', 'Type').options" value="{{option}}">
                                             {{option}}
                                         </option>
@@ -99,13 +99,13 @@
                                     <span style="color:red" ng-if="getField('profile', 'AWS Resp (Sales) person').required">*</span>
                                     <div class="pull-right">
                                         <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Sales) person']" ng-required="getField('profile', 'AWS Resp (Sales) person').required">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option>Get from Sales persons list</option>
                                         </select>
                                         <br/> /
                                         <br/>
                                         <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Sales) BU']" ng-required="getField('profile', 'AWS Resp (Sales) BU').required">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option>Get from Sales persons's BU list ???</option>
                                         </select>
                                     </div>
@@ -134,7 +134,7 @@
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
                                         <select class="form-control" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
                                     </div>
@@ -151,7 +151,7 @@
                                     <label>Division</label>
                                     <span style="color:red" ng-if="getField('profile', 'Division').required">*</span>
                                     <select class="form-control pull-right" ng-model="dealForm.profile['Division']" ng-required="getField('profile', 'Division').required">
-                                        <option value=""></option>
+                                        <option value="">- select -</option>
                                         <option ng-repeat="option in getField('profile', 'Division').options" value="{{option}}">
                                             {{option}}
                                         </option>
@@ -171,12 +171,12 @@
                                     <span style="color:red" ng-if="getField('profile', 'Level').required">*</span>
                                     <div class="pull-right">
                                         <select class="form-control" ng-model="dealForm.profile['Level']" ng-required="getField('profile', 'Level').required">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Level').options" value="{{option}}">{{option}}</option>
                                         </select>
                                         /
                                         <select class="form-control" ng-model="dealForm.profile['Step']" ng-required="getField('profile', 'Step').required">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Step').options | 
                                             filter: (dealForm.profile['Level'] + '.')" value="{{option}}">{{option}}</option>
                                         </select>
@@ -188,7 +188,7 @@
                                     <label>Confidence</label>
                                     <span style="color:red" ng-if="getField('profile', 'Confidence').required">*</span>
                                     <select class="form-control pull-right" ng-model="dealForm.profile['Confidence']" ng-required="getField('profile', 'Confidence').required">
-                                        <option value=""></option>
+                                        <option value="">- select -</option>
                                         <option ng-repeat="option in getField('profile', 'Confidence').options" value="{{option}}">
                                             {{option}}
                                         </option>
@@ -224,13 +224,13 @@
                                     <span style="color:red" ng-if="getField('profile', 'AWS Resp (Dev) person').required">*</span>
                                     <div class="pull-right">
                                         <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Dev) person']" ng-required="getField('profile', 'AWS Resp (Dev) person').required">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option>Get from Dev persons list</option>
                                         </select>
                                         <br/> /
                                         <br/>
                                         <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Dev) BU']" ng-required="getField('profile', 'AWS Resp (Dev) BU').required">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option>Get from Dev persons's BU list ???</option>
                                         </select>
                                     </div>
@@ -259,7 +259,7 @@
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
                                         <select class="form-control" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
                                     </div>
@@ -310,7 +310,7 @@
                                     <label>SRB Status</label>
                                     <span style="color:red" ng-if="getField('process', 'SRB Status').required">*</span>
                                     <select class="form-control pull-right" ng-model="dealForm.process['SRB Status']" ng-required="getField('process', 'SRB Status').required">
-                                        <option value=""></option>
+                                        <option value="">- select -</option>
                                         <option ng-repeat="option in getField('process', 'SRB Status').options" value="{{option}}">
                                             {{option}}
                                         </option>
@@ -333,7 +333,7 @@
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
                                         <select class="form-control" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
                                     </div>
@@ -351,7 +351,7 @@
                                     <span style="color:red" ng-if="getField('process', 'SOW Scheme').required">*</span>
                                     <select class="form-control pull-right" ng-model="dealForm.process['SOW Scheme']" ng-required="getField('process', 'SOW Scheme').required"
                                         ng-change="setContracts(dealForm.process['SOW Scheme'])">
-                                        <option value=""></option>
+                                        <option value="">- select -</option>
                                         <option ng-repeat="option in getField('process', 'SOW Scheme').options" value="{{option}}">
                                             {{option}}
                                         </option>
@@ -377,7 +377,7 @@
                                     <label>SOW Status</label>
                                     <span style="color:red" ng-if="getField('process', 'SOW Status').required">*</span>
                                     <select class="form-control pull-right" ng-model="dealForm.process['SOW Status']" ng-required="getField('process', 'SOW Status').required">
-                                        <option value=""></option>
+                                        <option value="">- select -</option>
                                         <option ng-repeat="option in getField('process', 'SOW Status').options" value="{{option}}">
                                             {{option}}
                                         </option>
@@ -400,7 +400,7 @@
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
                                         <select class="form-control" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
                                     </div>
@@ -560,7 +560,7 @@
                                 <tr>
                                     <th>CM</th>
                                     <td>{{total[contract].cm}} (JPY)</td>
-                                    <td>(%)</td>
+                                    <td> {{total[contract].percent | number: 1}} (%)</td>
                                 </tr>
                             </table>
                         </div>
@@ -586,7 +586,7 @@
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
                                             <select class="form-control" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}">
-                                                <option value=""></option>
+                                                <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
                                         </div>
@@ -614,7 +614,7 @@
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
                                             <select class="form-control" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}">
-                                                <option value=""></option>
+                                                <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
                                         </div>
@@ -671,7 +671,7 @@
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
                                         <select class="form-control" ng-model="dealForm.status[field.name]" ng-required="{{field.required}}">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
                                     </div>
@@ -713,7 +713,7 @@
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
                                         <select class="form-control" ng-model="dealForm.status[field.name]" ng-required="{{field.required}}">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
                                     </div>
@@ -760,7 +760,7 @@
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
                                         <select class="form-control" ng-model="dealForm.content[field.name]" ng-required="{{field.required}}">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
                                     </div>
@@ -788,7 +788,7 @@
                                     <div ng-if="field.type ==='dropdown'" class="pull-right">
                                         <!-- show dropdown -->
                                         <select class="form-control" ng-model="dealForm.content[field.name]" ng-required="{{field.required}}">
-                                            <option value=""></option>
+                                            <option value="">- select -</option>
                                             <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                         </select>
                                     </div>
