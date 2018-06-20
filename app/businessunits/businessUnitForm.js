@@ -19,7 +19,7 @@
 
         getBUFields();
 
-        if($stateParams._id !== undefined) {
+        if($stateParams._id !== '') {
             ModulesService.getModuleDocById('businessunits', $stateParams._id).then(function(moduleDoc) {
                 console.log(moduleDoc);
                 $scope.businessUnitForm = moduleDoc;
