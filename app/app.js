@@ -54,6 +54,18 @@
                 parent: 'main',
                 templateUrl: 'fields/fields.html',
                 controller: 'FieldsController'
+            })
+            .state('BUList', {
+                url: '/businessunits/list',
+                parent: 'main',
+                templateUrl: 'businessunits/list.html',
+                controller: 'BUListController'
+            })
+            .state('BUForm', {
+                url: '/businessunits/businessUnitForm/:_id',
+                parent: 'main',
+                templateUrl: 'businessunits/businessUnitForm.html',
+                controller: 'BUFormController'
             });
 
         $httpProvider.interceptors.push(function($q, $window, $location){
@@ -103,7 +115,8 @@
                 //return to previous page
                 $state.transitionTo($rootScope.fromState.name);
             //restrict access of 'users' to fields page
-            } else if ($rootScope.user.role !== 'Admin' && toState.name === 'fields') {
+            } else if ($rootScope.user.role !== 'Admin' && 
+                (toState.name === 'fields' || toState.name === 'businessunits')) {
                 //go back to previous
                 $state.transitionTo(fromState.name);
             //access is allowed
