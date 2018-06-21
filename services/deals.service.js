@@ -71,7 +71,15 @@ function addDeal(deal){
         deal.ID = ID;
         //set deleted flag to false
         deal.deleted = false;
-    	
+        
+        if(deal.profile['Level'] === '1'){
+            var currentDate = new Date();
+            var currentMonth = currentDate.getMonth() + 1;
+            currentMonth = (currentMonth < 10) ? '0' + currentMonth : currentMonth;
+            
+            deal.closedDate = currentDate.getFullYear() + currentMonth + currentDate.getDate();
+            console.log(deal.closedDate);
+        }
 		 db.deals.insert(
 			deal,
 			function (err, doc) {
@@ -89,7 +97,16 @@ function editDeal(deal){
 	var deferred = Q.defer();
 
 
-	delete deal._id;
+    delete deal._id;
+    
+    if(deal.profile['Level'] === '1'){
+        var currentDate = new Date();
+        var currentMonth = currentDate.getMonth() + 1;
+        currentMonth = (currentMonth < 10) ? '0' + currentMonth : currentMonth;
+        
+        deal.closedDate = currentDate.getFullYear() + '-' + currentMonth + '-' + currentDate.getDate();
+        console.log(deal.closedDate);
+    }
 
 	db.deals.update({ID : deal.ID}, {$set: deal}, function(err){
             if(err) {
