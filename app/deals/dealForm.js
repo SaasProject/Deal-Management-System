@@ -23,10 +23,17 @@
 
         //initialize clients array
         $scope.clients = [];
-        
+
         //initialize variables for distribution section
-        $scope.currentFiscalYear = [];
+        $scope.currentMonths = [];
         $scope.startingMonthYear = new Date();
+        //this will not change even if startingMonthYear is changed
+        //starting day is april 01, ending month is march 31
+        $scope.currentFiscalYear = {
+            currentYear: $scope.startingMonthYear.getFullYear() + '-04-01',
+            nextYear: ($scope.startingMonthYear.getFullYear() + 1) + '-03-31',
+            years: $scope.startingMonthYear.getFullYear() + '-' + ($scope.startingMonthYear.getFullYear() + 1)
+        };
 
         //store in arrays to be able to use ng-repeat
         $scope.fields = {
@@ -51,7 +58,9 @@
         $scope.total = {};
         //initialize $scope.total based from distribution strings
         $scope.total[distributionStrings.direct] = {};
+        $scope.total[distributionStrings.direct][$scope.currentFiscalYear.years] = {};
         $scope.total[distributionStrings.intra] = {};
+        $scope.total[distributionStrings.intra][$scope.currentFiscalYear.years] = {};
 
         $scope.validateBlankInputs = function () {
             console.log('glenn');
@@ -144,9 +153,9 @@
             }
         }
 
-        $scope.getCurrentFiscalYear = function () {
+        $scope.getCurrentDisplay = function () {
             //reset the array
-            $scope.currentFiscalYear = [];
+            $scope.currentMonths = [];
 
             //assign to the current date if input is null
             if ($scope.startingMonthYear === null) {
@@ -162,20 +171,20 @@
             do {
                 //next year
                 if (i < setMonth) {
-                    temp = (i < 10) ? ('0' + i + '/' + (setYear + 1)) : (i + '/' + (setYear + 1));
+                    temp = (i < 10) ? ((setYear + 1) + '-' + '0' + i) : ((setYear + 1) + '-' + i);
                     //current year
                 } else {
-                    temp = (i < 10) ? ('0' + i + '/' + setYear) : (i + '/' + setYear);
+                    temp = (i < 10) ? (setYear + '-' + '0' + i) : (setYear + '-' + i);
                 }
 
-                $scope.currentFiscalYear.push(temp);
+                $scope.currentMonths.push(temp);
 
                 //use modulo to set i as 1 instead of 13
                 i = (i % 12 === 0) ? 1 : (i + 1);
             } while (i != setMonth);
         }
 
-        $scope.getCurrentFiscalYear();
+        $scope.getCurrentDisplay();
 
         function preProcess(dealForm, isLoaded) {
             var tempObject = dealForm;
@@ -185,7 +194,7 @@
             if (isLoaded) {
                 //set the sow scheme (for the distribution table)
                 $scope.setContracts(tempObject.process['SOW Scheme']);
-            //during submit
+                //during submit
             } else {
                 //explicitly set SOW scheme (because default selected options is not working) to Direct
                 if (tempObject.process['SOW Scheme'] === null || tempObject.process['SOW Scheme'] === undefined) {
@@ -292,7 +301,7 @@
         function computeDistribution() {
             //console.log($scope.dealForm.distribution);
             //use variables like sumRes as temporary sum
-            var i, resJP, resGD, revJP, revGD, cm, resSum, revSum, cmSum;
+            var i, resJP, resGD, revJP, revGD, cm, resSum, revSum, cmSum, forCompute;
             //for direct or indirect
             for (i = 0; i < $scope.contracts.length; i++) {
                 //console.log($scope.dealForm.distribution[$scope.contracts[i]].res);
@@ -309,12 +318,33 @@
                     //check resources of JP
                     if ($scope.dealForm.distribution[$scope.contracts[i]].res !== undefined) {
                         if ($scope.dealForm.distribution[$scope.contracts[i]].res.jp !== undefined) {
-                            resJP = Object.values($scope.dealForm.distribution[$scope.contracts[i]].res.jp);
+                            forCompute = {};
+                            Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].res.jp);
+                            for (var prop in forCompute) {
+                                //place '-01' for correct format
+                                if (!moment(prop + '-01')
+                                    .isBetween($scope.currentFiscalYear.currentYear,
+                                    $scope.currentFiscalYear.nextYear) || forCompute[prop] === null) {
+                                    
+                                    delete forCompute[prop];
+                                }
+                            }
+                            resJP = Object.values(forCompute);
                         }
 
                         //check resources of GD
                         if ($scope.dealForm.distribution[$scope.contracts[i]].res.gd !== undefined) {
-                            resGD = Object.values($scope.dealForm.distribution[$scope.contracts[i]].res.gd);
+                            forCompute = {};
+                            Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].res.gd);
+                            for (var prop in forCompute) {
+                                if (!moment(prop + '-01')
+                                    .isBetween($scope.currentFiscalYear.currentYear,
+                                    $scope.currentFiscalYear.nextYear) || forCompute[prop] === null) {
+                                    
+                                    delete forCompute[prop];
+                                }
+                            }
+                            resGD = Object.values(forCompute);
                         }
 
                         //compute total resource
@@ -328,11 +358,31 @@
                     if ($scope.dealForm.distribution[$scope.contracts[i]].rev !== undefined) {
                         //check revenue of JP
                         if ($scope.dealForm.distribution[$scope.contracts[i]].rev.jp !== undefined) {
-                            revJP = Object.values($scope.dealForm.distribution[$scope.contracts[i]].rev.jp);
+                            forCompute = {};
+                            Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].rev.jp);
+                            for (var prop in forCompute) {
+                                if (!moment(prop + '-01')
+                                    .isBetween($scope.currentFiscalYear.currentYear,
+                                    $scope.currentFiscalYear.nextYear) || forCompute[prop] === null) {
+                                    
+                                    delete forCompute[prop];
+                                }
+                            }
+                            revJP = Object.values(forCompute);
                         }
                         //check revenue of GD
                         if ($scope.dealForm.distribution[$scope.contracts[i]].rev.gd !== undefined) {
-                            revGD = Object.values($scope.dealForm.distribution[$scope.contracts[i]].rev.gd);
+                            forCompute = {};
+                            Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].rev.gd);
+                            for (var prop in forCompute) {
+                                if (!moment(prop + '-01')
+                                    .isBetween($scope.currentFiscalYear.currentYear,
+                                    $scope.currentFiscalYear.nextYear) || forCompute[prop] === null) {
+                                    
+                                    delete forCompute[prop];
+                                }
+                            }
+                            revGD = Object.values(forCompute);
                         }
 
                         //compute total revenue
@@ -350,7 +400,17 @@
 
                     //check cm
                     if ($scope.dealForm.distribution[$scope.contracts[i]].cm !== undefined) {
-                        cm = Object.values($scope.dealForm.distribution[$scope.contracts[i]].cm);
+                        forCompute = {};
+                        Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].cm);
+                        for (var prop in forCompute) {
+                            if (!moment(prop + '-01')
+                                .isBetween($scope.currentFiscalYear.currentYear,
+                                $scope.currentFiscalYear.nextYear) || forCompute[prop] === null) {
+                                
+                                delete forCompute[prop];
+                            }
+                        }
+                        cm = Object.values(forCompute);
 
                         //compute total cm
                         if (cm.length > 0) {
@@ -362,13 +422,13 @@
 
                     //console.log(resSum, revSum, cmSum);
 
-                    $scope.total[$scope.contracts[i]].resource = (resSum !== null) ? resSum : 0;
-                    $scope.total[$scope.contracts[i]].revenue = (revSum !== null) ? revSum : 0;
+                    $scope.total[$scope.contracts[i]][$scope.currentFiscalYear.years].resource = (resSum !== null) ? resSum : 0;
+                    $scope.total[$scope.contracts[i]][$scope.currentFiscalYear.years].revenue = (revSum !== null) ? revSum : 0;
                     //((revSum / resSum) !== NaN) does not work
 
-                    $scope.total[$scope.contracts[i]].average = revSum / resSum;
-                    $scope.total[$scope.contracts[i]].cm = (cmSum !== null) ? cmSum : 0;
-                    $scope.total[$scope.contracts[i]].percent = (cmSum / revSum) * 100;
+                    $scope.total[$scope.contracts[i]][$scope.currentFiscalYear.years].average = revSum / resSum;
+                    $scope.total[$scope.contracts[i]][$scope.currentFiscalYear.years].cm = (cmSum !== null) ? cmSum : 0;
+                    $scope.total[$scope.contracts[i]][$scope.currentFiscalYear.years].percent = (cmSum / revSum) * 100;
                     //console.log($scope.total);
                 }
             }
