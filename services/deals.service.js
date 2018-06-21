@@ -99,7 +99,7 @@ function editDeal(deal){
 
     delete deal._id;
     
-    if(deal.profile['Level'] === '1'){
+    if(deal.profile['Level'] === '1'  && (deal.closedDate === undefined || deal.closedDate === null)){
         var currentDate = new Date();
         var currentMonth = currentDate.getMonth() + 1;
         currentMonth = (currentMonth < 10) ? '0' + currentMonth : currentMonth;
