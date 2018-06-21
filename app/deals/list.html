@@ -3,31 +3,41 @@
 </div>
 
 <div class="form-inline pull-right">
-    <!-- <label>Filter by: &nbsp;</label>
-    <select class="form-control" ng-model="filter" ng-selected="console()">
-        <option ng-repeat="option in filterOptions">{{option}}</option>
-    </select> -->
+    <label>Display Options: </label>
+    <select class="form-control" ng-model="displayOption" ng-change="getDeals()">
+        <option>Active</option>
+        <option>Mine (not yet working)</option>
+        <option>1 Month</option>
+        <option>2-3 Months</option>
+        <option>Over Due</option>
+        <option>Closed in 2018</option>
+        <option>ALL</option>
+    </select>
     <label for="pageSize">Page size</label>
-    <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{deals.length}}>
-    &nbsp;
+    <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{deals.length}}> &nbsp;
     <label>Search: &nbsp;</label>
     <input type="text" class="form-control" ng-model="searchText">
 </div>
 <table class="table">
     <thead>
-        <th ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList" ng-click="sortColumn('essential', essentialField.name)" ng-class="sortClass('essential', essentialField.name)">
+        <th ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList" ng-click="sortColumn('essential', essentialField.name)"
+            ng-class="sortClass('essential', essentialField.name)">
             {{essentialField.name}}
         </th>
-        <th ng-repeat="profileField in fields.profile" ng-if="profileField.showInList" ng-click="sortColumn('profile', profileField.name)" ng-class="sortClass('profile', profileField.name)">
+        <th ng-repeat="profileField in fields.profile" ng-if="profileField.showInList" ng-click="sortColumn('profile', profileField.name)"
+            ng-class="sortClass('profile', profileField.name)">
             {{profileField.name}}
         </th>
-        <th ng-repeat="processField in fields.process" ng-if="processField.showInList" ng-click="sortColumn('process', processField.name)" ng-class="sortClass('process', processField.name)">
+        <th ng-repeat="processField in fields.process" ng-if="processField.showInList" ng-click="sortColumn('process', processField.name)"
+            ng-class="sortClass('process', processField.name)">
             {{processField.name}}
         </th>
-        <th ng-repeat="distributionField in fields.distribution" ng-if="distributionField.showInList" ng-click="sortColumn('distribution', distributionField.name)" ng-class="sortClass('distribution', distributionField.name)">
+        <th ng-repeat="distributionField in fields.distribution" ng-if="distributionField.showInList" ng-click="sortColumn('distribution', distributionField.name)"
+            ng-class="sortClass('distribution', distributionField.name)">
             {{distributionField.name}}
         </th>
-        <th ng-repeat="statusField in fields.status" ng-if="statusField.showInList" ng-click="sortColumn('status', statusField.name)" ng-class="sortClass('status', statusField.name)">
+        <th ng-repeat="statusField in fields.status" ng-if="statusField.showInList" ng-click="sortColumn('status', statusField.name)"
+            ng-class="sortClass('status', statusField.name)">
             {{statusField.name}}
         </th>
         <th></th>
@@ -59,4 +69,5 @@
         </tr>
     </tbody>
 </table>
-<ul class="pagination" uib-pagination total-items="deals.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true" max-size="4" force-ellipses="true" first-text="<<" previous-text="<" next-text=">" last-text=">>"></ul>
+<ul class="pagination" uib-pagination total-items="deals.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true"
+    max-size="4" force-ellipses="true" first-text="<<" previous-text="<" next-text=">" last-text=">>"></ul>
