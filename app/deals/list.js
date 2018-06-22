@@ -48,7 +48,7 @@
 
         $scope.reverse = false;
 
-        $scope.displayOption = 'Active';
+        $scope.displayOption = 'Active';        
 
         $scope.getDeals = function () {
             ModulesService.getAllModuleDocs('deals').then(function (allDeals) {
@@ -58,6 +58,14 @@
                     case 'Active': {
                         $scope.deals = $scope.deals.filter(function(aDeal) {
                             return aDeal.profile['Level'] !== '1' && aDeal.profile['Level'] !== '9';
+                        });
+                    }break;
+                    
+                    case 'Mine': {
+                        $scope.deals = $scope.deals.filter(function(aDeal) {
+                            return ((aDeal.profile['Level'] !== '1' && aDeal.profile['Level'] !== '9') &&
+                            (aDeal.profile['AWS Resp (Sales) person'] === $rootScope.user.nickname ||
+                            aDeal.profile['AWS Resp (Dev) person'] === $rootScope.user.nickname));
                         });
                     }break;
                     //1 - same as active
