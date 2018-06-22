@@ -5,7 +5,7 @@
         .module('app')
         .factory('InputValidationService', Service);
  
-    function Service(FlashService) {
+    function Service() {
         var service = {};
  
         service.AllValid = AllValid;
@@ -13,6 +13,7 @@
         service.CheckNumbers = CheckNumbers;
         service.CheckPasswords = CheckPasswords;
         service.CheckConfirmPasswords = CheckConfirmPasswords;
+        service.checkPasswordChars = checkPasswordChars;
  
         return service;
  
@@ -34,16 +35,16 @@
             var everythingValid = true;
             if(!CheckEmails()){
                 everythingValid = false;
-                FlashService.Error(commons.invalidEmail);
+                //FlashService.Error(commons.invalidEmail);
             }else if(!CheckNumbers()){
                 everythingValid = false;
-                FlashService.Error(commons.invalidNo);
+                //FlashService.Error(commons.invalidNo);
             }else if(!CheckPasswords()){
                 everythingValid = false;
-                FlashService.Error(commons.containPass);
+                //FlashService.Error(commons.containPass);
             }else if(!CheckConfirmPasswords(fields, allEntry, confirmPassword)){
                 everythingValid = false;
-                FlashService.Error(commons.confirmPass);
+                //FlashService.Error(commons.confirmPass);
             }
 
             return everythingValid;

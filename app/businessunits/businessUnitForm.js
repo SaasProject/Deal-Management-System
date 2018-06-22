@@ -8,6 +8,7 @@
     function Controller($scope, $state, ModulesService, ngToast, $stateParams) {
         $scope.businessUnitForm = {};
         $scope.module = {};
+        $scope.userList = {};
 
         function getBUFields() {
             ModulesService.getModuleByName('businessunits').then(function(aModule) {
@@ -18,6 +19,22 @@
         }
 
         getBUFields();
+
+        function getAllUsers() {
+            ModulesService.getAllModuleDocs('users').then(function(users) {                
+                $scope.users = users;
+                console.log(users);
+                for(var key in users){
+                    //console.log(users[key]);
+                    $scope.userList[key] = users[key];
+                }
+                console.log($scope.userList);
+            }).catch(function(err) {
+
+            });
+        }
+
+        getAllUsers();
 
         if($stateParams._id !== '') {
             ModulesService.getModuleDocById('businessunits', $stateParams._id).then(function(moduleDoc) {

@@ -10,7 +10,8 @@
 
                 <select class="form-control" ng-model="businessUnitForm[field.name]" ng-if="field.type === 'dropdown'" ng-required="field.required">
                     <option value=""></option>
-                    <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
+                    <option ng-if="field.name != 'Manager'" ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
+                    <option ng-if="field.name == 'Manager'" ng-repeat="option in userList" value="{{option.nickname}}">{{option.nickname}}</option>
                 </select>
 
                 <textarea class="form-control" ng-model="businessUnitForm[field.name]" ng-if="field.type === 'textarea'" ng-required="field.required">

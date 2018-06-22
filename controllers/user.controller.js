@@ -31,4 +31,27 @@ router.get('/logout', function(req, res, next){
     res.status(200).send();
 });
 
+//glenn
+router.post('/addUser', function(req, res, next) {
+    userService.insert(req.body)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+});
+
+router.put('/:_id', function(req, res, next) {
+    var userId = req.params._id
+ 
+    userService.update(userId, req.body)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+});
+
 module.exports = router;

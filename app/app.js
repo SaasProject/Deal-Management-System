@@ -66,7 +66,26 @@
                 parent: 'main',
                 templateUrl: 'businessunits/businessUnitForm.html',
                 controller: 'BUFormController'
+            })
+            .state('UserList', {
+                url: '/users/list',
+                parent: 'main',
+                templateUrl: 'users/list.html',
+                controller: 'UserListController'
+            })
+            .state('UserForm', {
+                url: '/users/userForm/:_id',
+                parent: 'main',
+                templateUrl: 'users/userForm.html',
+                controller: 'UserFormController'
+            })
+            .state('changePassword', {
+                url: '/changePassword/changePassword',
+                parent: 'main',
+                templateUrl: 'changePassword/changePassword.html',
+                controller: 'ChangePasswordController'
             });
+
 
         $httpProvider.interceptors.push(function($q, $window, $location){
             return {
