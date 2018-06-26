@@ -97,15 +97,16 @@
                                     <label>AWS Resp (Sales)</label>
                                     <span style="color:red" ng-if="getField('profile', 'AWS Resp (Sales) person').required">*</span>
                                     <div class="pull-right">
-                                        <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Sales) person']" ng-required="getField('profile', 'AWS Resp (Sales) person').required">
+                                        <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Sales) person']" 
+                                        ng-required="getField('profile', 'AWS Resp (Sales) person').required">
                                             <option value="">- select -</option>
-                                            <option>Get from Sales persons list</option>
+                                            <option ng-repeat="user in users" value="{{user.nickname}}">{{user.nickname}}</option>
                                         </select>
                                         <br/> /
                                         <br/>
                                         <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Sales) BU']" ng-required="getField('profile', 'AWS Resp (Sales) BU').required">
                                             <option value="">- select -</option>
-                                            <option>Get from Sales persons's BU list ???</option>
+                                            <option ng-repeat="businessUnit in businessUnits" value="{{businessUnit.BU}}">{{businessUnit.BU}}</option>
                                         </select>
                                     </div>
                                 </td>
@@ -224,13 +225,13 @@
                                     <div class="pull-right">
                                         <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Dev) person']" ng-required="getField('profile', 'AWS Resp (Dev) person').required">
                                             <option value="">- select -</option>
-                                            <option>Get from Dev persons list</option>
+                                            <option ng-repeat="user in users" value="{{user.nickname}}">{{user.nickname}}</option>
                                         </select>
                                         <br/> /
                                         <br/>
                                         <select class="form-control pull-right" ng-model="dealForm.profile['AWS Resp (Dev) BU']" ng-required="getField('profile', 'AWS Resp (Dev) BU').required">
                                             <option value="">- select -</option>
-                                            <option>Get from Dev persons's BU list ???</option>
+                                            <option ng-repeat="businessUnit in businessUnits" value="{{businessUnit.BU}}">{{businessUnit.BU}}</option>
                                         </select>
                                     </div>
                                 </td>

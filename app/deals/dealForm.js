@@ -24,6 +24,11 @@
         //initialize clients array
         $scope.clients = [];
 
+        //initialize users array
+        //initialize business units array
+        $scope.users = [];
+        $scope.businessUnits = [];
+
         //initialize variables for distribution section
         $scope.currentMonths = [];
         $scope.startingMonthYear = new Date();
@@ -104,6 +109,45 @@
         }
 
         getClients();
+
+        function getAllUsers() {
+            ModulesService.getAllModuleDocs('users').then(function(users) {                
+                $scope.users = users.filter(function(aUser) {
+                    return aUser.role !== 'Admin';
+                });
+            }).catch(function(err) {
+
+            });
+        }
+
+        getAllUsers();
+
+        function getAllBUs() {
+            ModulesService.getAllModuleDocs('businessunits').then(function(businessUnits) {                
+                $scope.businessUnits = businessUnits;
+            }).catch(function(err) {
+
+            });
+        }
+
+        getAllBUs();
+
+        //not yet used, kasi pano kung more than 1 BU ang hawak ng isang manager... 
+        //ang .find() ay 1st occurrence lang so baka magkamali pa
+        $scope.getBUOfPerson = function (managerType) {
+            var property = 'AWS Resp (' + managerType + ') ';
+
+            console.log($scope.dealForm.profile[property + 'person']);
+            
+            //find the business unit object that has the manager's nickname and use its BU property
+            var result = $scope.businessUnits.find(function(businessUnit) {
+                return businessUnit.Manager === $scope.dealForm.profile[property + 'person'];
+            });
+
+            if(result !== undefined) {
+                $scope.dealForm.profile[property + 'BU'] = result.BU;
+            }
+        }
 
         //if there is a parameter, it means that a deal is going to be updated
         if ($stateParams.ID !== '') {
