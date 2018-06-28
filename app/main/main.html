@@ -1,4 +1,4 @@
-<!--<div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
         <div class="sidenav">
             <div>
@@ -15,11 +15,13 @@
                 <label class='navCategory'>Admin</label>
                 <a ui-sref="fields">Fields</a>
                 <a ui-sref="BUList">Business Units</a>
+                <a ui-sref="UserList">Manage Users</a>
                 <hr>
             </div>
             
             <label class='navCategory'>Settings</label>
             <div>
+                <a ui-sref="changePassword">Change Password</a>
                 <a href="#" ng-click="logout()">Logout</a>
             </div>
         </div>
@@ -27,72 +29,6 @@
             <div ui-view class="main-page"></div>
         </div>
     </div>
-</div>-->
-<div id="sideNavigation" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <div>
-        <a ui-sref="home"><b>Home</b></a>
-        <br>
-    </div>
-    <label class='navCategory'>Main</label>
-    <div>
-        <a ui-sref="dealList">Deals</a>
-        <a ui-sref="clientList">Clients</a>
-        <br>
-    </div>
-    <div ng-if="user.role === 'Admin'">
-        <label class='navCategory'>Admin</label>
-        <a ui-sref="fields">Fields</a>
-        <a ui-sref="BUList">Business Units</a>
-        <a ui-sref="UserList">Manage Users</a>
-        <br>
-    </div>
-    <label class='navCategory'>Settings</label>
-    <div>
-        <a ui-sref="changePassword">Change Password</a>
-        <a href="#" ng-click="logout()">Logout</a>
-    </div>
 </div>
-
-<nav class="topnav">
-    <a href="#" onclick="openNav()">
-        <svg width="30" height="30" id="icoOpen">
-            <path d="M0,5 30,5" stroke="#000" stroke-width="5"/>
-            <path d="M0,14 30,14" stroke="#000" stroke-width="5"/>
-            <path d="M0,23 30,23" stroke="#000" stroke-width="5"/>
-        </svg>
-    </a>
-
-    <svg width="30" height="30">
-        <img class="logo" src="logo.png"/>
-    </svg>
-</nav>
-
-<div id="main">
-<!-- Add all your websites page content here  -->
-    <div ui-view class="main-page"></div>
-</div>
-
-<script>
-function openNav() {
-    document.getElementById("sideNavigation").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-}
- 
-function closeNav() {
-    document.getElementById("sideNavigation").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-}
-
-/*$('.topnav a').click(function(){
-  $('#sideNavigation').style.width = "250px";
-  $("#main").style.marginLeft = "250px";
-});
- 
-$('.closebtn').click(function(){
-  $('#sideNavigation').style.width = "0";
-  $("#main").style.marginLeft = "0";
-});*/
-</script>
 
 

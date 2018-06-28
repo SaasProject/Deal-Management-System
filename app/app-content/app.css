@@ -1,29 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Exo+2');
-
 body {
     padding: 0;
-    overflow-x: hidden;
-    font-family: "Verdana";
-}
-
-.bg {
-    background-image: url("skyscraperslight.png");
-    height: 100%;
-    background-position: center;
-    /*background-repeat: no-repeat;*/
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
 }
  
 .flash-message {
@@ -182,6 +158,41 @@ p:hover {
 table {
     table-layout: fixed;
 }
+
+
+/* The sidebar menu */
+.sidenav {
+    /*width: 160px; /* Set the width of the sidebar */
+    /*z-index: 1;*/ /* Stay on top */
+    margin-top: 0; /* Stay at the top */
+    left: 0;
+	background-color: #313a3a;
+	position: fixed;	
+	height: 100%;
+	overflow-x: hidden; /* Disable horizontal scroll */
+	padding-top: 100px;
+	float: left;
+	width: 20%;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #aaaaaa;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+    background-color: #589ea3;
+    border-radius: 3px;
+}
+
 /* Style page content */
 .main {
 	/*margin-left: 160px; /* Same as the width of the sidebar */
@@ -205,9 +216,8 @@ table {
 }
 
 .panel-heading {
-	background: rgba(112, 129, 158, 0.8);
+	background-color: #eaebf9;
 	padding: 3px 5px;
-    color: white;
 }
 
 .profile-heading {
@@ -215,9 +225,8 @@ table {
 }
 
 .navCategory{
-	color: #48636b;
+	color: #718c8c;
 	font-weight: bold;
-    padding-left: 15px;
 }
 
 .sidenav hr {
@@ -228,138 +237,3 @@ table {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
-
-/* slide nav */
-/* The side navigation menu */
-.sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0;
-    left: 0;
-    background-color: #c2d1e8; /* light blue */
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-}
-
-/* The navigation menu links */
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #0c0f14;
-    display: block;
-    transition: 0.1s;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover, .offcanvas a:focus{
-    color: #edefef;
-    text-shadow: 2px 2px 5px black;
-}
-
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-    transition: margin-left .5s;
-    padding: 20px;
-    overflow:hidden;
-    width:100%;
-}
-
-/* Add a black background color to the top navigation */
-.topnav {
-    background-color: transparent;
-    overflow: hidden;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-    background-color: #4CAF50;
-    color: white;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-}
-
-a svg{
-  transition:all .5s ease;
- 
-  &:hover{
-    #transform:rotate(180deg);
-  }
-}
- 
-#ico{
-  display: none;
-}
-
-.menu{
-  background: #000;
-  display: none;
-  padding: 5px;
-  width: 320px;
-  @include border-radius(5px);
- 
-  #transition: all 0.5s ease;
- 
-  a{
-    display: block;
-    color: #fff;
-    text-align: center;
-    padding: 10px 2px;
-    margin: 3px 0;
-    text-decoration: none;
-    background: #444;
- 
-    &:nth-child(1){
-      margin-top: 0;
-      @include border-radius(3px 3px 0 0 );
-    }
-    &:nth-child(5){
-      margin-bottom: 0;
-      @include border-radius(0 0 3px 3px);
-    }
- 
-    &:hover{
-      background: #555;
-    }
-  }
-}
-
-.logo {
-    float: right;
-    padding-right: 10px;
-    height: 60px;
-}
-/* end */
