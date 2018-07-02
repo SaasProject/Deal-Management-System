@@ -23,7 +23,7 @@
 
 
     
-    function Controller($scope, $rootScope, $state, ModulesService, DealsService, TableService) {
+    function Controller($scope, $rootScope, $state, ModulesService, DealsService, TableService, ngToast) {
 
         $scope.DATE_FORMAT = 'MM/dd/yyyy';
 
@@ -164,5 +164,16 @@
                 }).catch(function (err) {});
             }
         } */
+
+        $scope.uploadFile = function() {
+            const file = $('#newDealFile')[0].files[0];
+            DealsService.newDealFile(file).then(function() {
+                ngToast.success('File uploaded');
+                $scope.getDeals();
+            })
+            .catch(function(err) {
+                ngToast.danger('Error in uploading file');
+            });
+        }
     }
 })();

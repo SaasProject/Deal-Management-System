@@ -28,25 +28,38 @@
         service.updateDeal = updateDeal;
         service.getDealById = getDealById;
         service.deleteDeal = deleteDeal;
+        service.newDealFile = newDealFile;
  
         return service;  
         
         function addDeal(dealsForm) {
             //console.log(clientForm)
-            return $http.post('/deals/addDeal', dealsForm).then(handleSuccess, handleError);
+            return $http.post('/api/deals/addDeal', dealsForm).then(handleSuccess, handleError);
         }
 
         function updateDeal(dealsForm) {
             //console.log(dealsForm)
-            return $http.put('/deals/editDeal', dealsForm).then(handleSuccess, handleError);
+            return $http.put('/api/deals/editDeal', dealsForm).then(handleSuccess, handleError);
         }
 
         function getDealById(dealId) {
-            return $http.get('/deals/' + dealId).then(handleSuccess, handleError);
+            return $http.get('/api/deals/' + dealId).then(handleSuccess, handleError);
         }
 
         function deleteDeal(dealId) {
-            return $http.delete('/deals/deleteDeal/' + dealId).then(handleSuccess, handleError);
+            return $http.delete('/api/deals/deleteDeal/' + dealId).then(handleSuccess, handleError);
+        }
+
+        function newDealFile(file) {
+            var formData = new FormData();
+            var name = 'deal_file';
+            formData.append(name, file);
+            const httpOptions = {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            }
+
+            return $http.post('/api/deals/upload/' + name, formData, httpOptions).then(handleSuccess, handleError);
         }
  
         // private functions

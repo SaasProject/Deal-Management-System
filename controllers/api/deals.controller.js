@@ -60,5 +60,13 @@ router.delete('/deleteDeal/:ID', function(req, res, next) {
     });
 });
 
+router.post('/upload/:name', function(req, res, next) {
+    dealsService.uploadFile(req, res).then(function() {
+        res.status(200).send();
+    }).catch(function(err) {
+        res.status(400).send(err);
+    });
+});
+
 module.exports = router;
 
