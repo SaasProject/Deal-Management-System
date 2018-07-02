@@ -1,5 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2');
+
 body {
     padding: 0;
+    overflow-x: hidden;
+    font-family: "Verdana";
+}
+
+.bg {
+    background-image: url("skyscraperslight.png");
+    height: 100%;
+    background-position: center;
+    /*background-repeat: no-repeat;*/
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.logo {
+    float: left;
+    padding-left: 10px;
+    height: 60px;
 }
  
 .flash-message {
@@ -166,41 +185,42 @@ table {
     /*z-index: 1;*/ /* Stay on top */
     margin-top: 0; /* Stay at the top */
     left: 0;
-	background-color: #313a3a;
+	background-color: #c2d1e8;
 	position: fixed;	
 	height: 100%;
 	overflow-x: hidden; /* Disable horizontal scroll */
-	padding-top: 100px;
+	padding-top: 12px;
 	float: left;
-	width: 20%;
+	width: 17%;
 	padding-left: 15px;
-	padding-right: 15px;
+	padding-right: 3px;
 }
 
 /* The navigation menu links */
 .sidenav a {
-    padding: 6px 8px 6px 16px;
+    padding: 6px 8px 6px 12px;
     text-decoration: none;
-    font-size: 16px;
-    color: #aaaaaa;
+    font-size: 11pt;
+    color: #0c0f14;
     display: block;
+    transition: 0.1s;
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-    color: #f1f1f1;
-    background-color: #589ea3;
-    border-radius: 3px;
+.sidenav a:hover, .offcanvas a:focus{
+    color: #edefef;
+    text-shadow: 2px 2px 5px black;
 }
 
 /* Style page content */
 .main {
 	/*margin-left: 160px; /* Same as the width of the sidebar */
-	width:80%;
-	padding-top: 75px;
+	width:83%;
+	padding-top: 35px;
 	float: right;
 	padding-left: 15px;
 	padding-right: 15px;
+	font-size: 10pt;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
@@ -216,8 +236,9 @@ table {
 }
 
 .panel-heading {
-	background-color: #eaebf9;
+	background: rgba(112, 129, 158, 0.8);
 	padding: 3px 5px;
+    color: white;
 }
 
 .profile-heading {
@@ -225,8 +246,9 @@ table {
 }
 
 .navCategory{
-	color: #718c8c;
+	color: #48636b;
 	font-weight: bold;
+    padding-left: 1px;
 }
 
 .sidenav hr {
