@@ -25,6 +25,10 @@ body {
   	width: auto;
 }
 
+.dealTable {
+	font-size: 10px;
+}
+
 .div-padded {
   padding-left: 15px;
   padding-right: 15px;
