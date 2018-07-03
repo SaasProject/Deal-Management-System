@@ -19,7 +19,7 @@
         };
 
         //working format for two way conversion
-        var DATE_FORMAT = 'yyyy-MM-dd';
+        $scope.DATE_FORMAT = 'yyyy/MM/dd';
 
         //initialize clients array
         $scope.clients = [];
@@ -34,6 +34,7 @@
         $scope.startingMonthYear = new Date();
         //this will not change even if startingMonthYear is changed
         //starting day is april 01, ending month is march 31
+        //even though display format is yyyy/MM/dd, use yyyy-MM-dd in conversion or computation of dates since the latter is a standard format
         $scope.currentFiscalYear = {
             currentYear: $scope.startingMonthYear.getFullYear() + '-04-01',
             nextYear: ($scope.startingMonthYear.getFullYear() + 1) + '-03-31',
@@ -111,11 +112,11 @@
         getClients();
 
         function getAllUsers() {
-            ModulesService.getAllModuleDocs('users').then(function(users) {                
-                $scope.users = users.filter(function(aUser) {
+            ModulesService.getAllModuleDocs('users').then(function (users) {
+                $scope.users = users.filter(function (aUser) {
                     return aUser.role !== 'Admin';
                 });
-            }).catch(function(err) {
+            }).catch(function (err) {
 
             });
         }
@@ -123,9 +124,9 @@
         getAllUsers();
 
         function getAllBUs() {
-            ModulesService.getAllModuleDocs('businessunits').then(function(businessUnits) {                
+            ModulesService.getAllModuleDocs('businessunits').then(function (businessUnits) {
                 $scope.businessUnits = businessUnits;
-            }).catch(function(err) {
+            }).catch(function (err) {
 
             });
         }
@@ -138,13 +139,13 @@
             var property = 'AWS Resp (' + managerType + ') ';
 
             console.log($scope.dealForm.profile[property + 'person']);
-            
+
             //find the business unit object that has the manager's nickname and use its BU property
-            var result = $scope.businessUnits.find(function(businessUnit) {
+            var result = $scope.businessUnits.find(function (businessUnit) {
                 return businessUnit.Manager === $scope.dealForm.profile[property + 'person'];
             });
 
-            if(result !== undefined) {
+            if (result !== undefined) {
                 $scope.dealForm.profile[property + 'BU'] = result.BU;
             }
         }
@@ -215,10 +216,10 @@
             do {
                 //next year
                 if (i < setMonth) {
-                    temp = (i < 10) ? ((setYear + 1) + '-' + '0' + i) : ((setYear + 1) + '-' + i);
+                    temp = (i < 10) ? ((setYear + 1) + '/' + '0' + i) : ((setYear + 1) + '/' + i);
                     //current year
                 } else {
-                    temp = (i < 10) ? (setYear + '-' + '0' + i) : (setYear + '-' + i);
+                    temp = (i < 10) ? (setYear + '/' + '0' + i) : (setYear + '/' + i);
                 }
 
                 $scope.currentMonths.push(temp);
@@ -282,8 +283,9 @@
 
                     //preprocess when loading
                     if (isLoaded) {
-                        if (currentField.type === 'date' && tempObject[category][currentField.name] !== null) {
-                            tempObject[category][currentField.name] = new Date(tempObject[category][currentField.name]);
+                        if (currentField.type === 'date' && tempObject[category][currentField.name] !== null && tempObject[category][currentField.name] !== undefined) {
+                            const tempDate = tempObject[category][currentField.name].replace(/\//g, '-');
+                            tempObject[category][currentField.name] = new Date(tempDate);
                         }
                         //preprocess during submit
                     } else {
@@ -293,7 +295,7 @@
                         }
 
                         if (currentField.type === 'date' && tempObject[category][currentField.name] !== null) {
-                            tempObject[category][currentField.name] = $filter('date')(tempObject[category][currentField.name], DATE_FORMAT);
+                            tempObject[category][currentField.name] = $filter('date')(tempObject[category][currentField.name], $scope.DATE_FORMAT);
                         }
                     }
                 }
@@ -345,7 +347,7 @@
         function computeDistribution() {
             //console.log($scope.dealForm.distribution);
             //use variables like sumRes as temporary sum
-            var i, resJP, resGD, revJP, revGD, cm, resSum, revSum, cmSum, forCompute;
+            var i, resJP, resGD, revJP, revGD, cm, resSum, revSum, cmSum, forCompute, editedProp;
             //for direct or indirect
             for (i = 0; i < $scope.contracts.length; i++) {
                 //console.log($scope.dealForm.distribution[$scope.contracts[i]].res);
@@ -365,11 +367,13 @@
                             forCompute = {};
                             Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].res.jp);
                             for (var prop in forCompute) {
-                                //place '-01' for correct format
-                                if (!moment(prop + '-01')
+                                //prop is assumed to have yyyy/MM format (from $scope.getCurrentDisplay())
+                                //to properly use moment, convert it to yyyy-MM-01 (01 since date is not given)
+                                editedProp = prop.replace(/\//, '-') + '-01';
+                                if (!moment(editedProp)
                                     .isBetween($scope.currentFiscalYear.currentYear,
                                     $scope.currentFiscalYear.nextYear) || forCompute[prop] === null) {
-                                    
+
                                     delete forCompute[prop];
                                 }
                             }
@@ -381,10 +385,11 @@
                             forCompute = {};
                             Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].res.gd);
                             for (var prop in forCompute) {
-                                if (!moment(prop + '-01')
+                                editedProp = prop.replace(/\//, '-') + '-01';
+                                if (!moment(editedProp)
                                     .isBetween($scope.currentFiscalYear.currentYear,
                                     $scope.currentFiscalYear.nextYear) || forCompute[prop] === null) {
-                                    
+
                                     delete forCompute[prop];
                                 }
                             }
@@ -405,10 +410,11 @@
                             forCompute = {};
                             Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].rev.jp);
                             for (var prop in forCompute) {
-                                if (!moment(prop + '-01')
+                                editedProp = prop.replace(/\//, '-') + '-01';
+                                if (!moment(editedProp)
                                     .isBetween($scope.currentFiscalYear.currentYear,
                                     $scope.currentFiscalYear.nextYear) || forCompute[prop] === null) {
-                                    
+
                                     delete forCompute[prop];
                                 }
                             }
@@ -419,10 +425,11 @@
                             forCompute = {};
                             Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].rev.gd);
                             for (var prop in forCompute) {
-                                if (!moment(prop + '-01')
+                                editedProp = prop.replace(/\//, '-') + '-01';
+                                if (!moment(editedProp)
                                     .isBetween($scope.currentFiscalYear.currentYear,
                                     $scope.currentFiscalYear.nextYear) || forCompute[prop] === null) {
-                                    
+
                                     delete forCompute[prop];
                                 }
                             }
@@ -447,10 +454,11 @@
                         forCompute = {};
                         Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].cm);
                         for (var prop in forCompute) {
-                            if (!moment(prop + '-01')
+                            editedProp = prop.replace(/\//, '-') + '-01';
+                            if (!moment(editedProp)
                                 .isBetween($scope.currentFiscalYear.currentYear,
                                 $scope.currentFiscalYear.nextYear) || forCompute[prop] === null) {
-                                
+
                                 delete forCompute[prop];
                             }
                         }
@@ -477,5 +485,12 @@
                 }
             }
         }
+
+        //sample code, if user enters wrong input values, focus on the input
+        $('input').blur(function (event) {
+            event.target.checkValidity();
+        }).bind('invalid', function (event) {
+            console.log('invalid number!');
+        });
     }
 })();
