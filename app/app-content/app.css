@@ -20,6 +20,15 @@ body {
     padding-left: 10px;
     height: 60px;
 }
+
+.compact{
+  	width: auto;
+}
+
+.div-padded {
+  padding-left: 15px;
+  padding-right: 15px;
+}
  
 .flash-message {
     margin-top: 20px;
@@ -174,11 +183,6 @@ p:hover {
 	margin-right: auto;
 }
 
-table {
-    table-layout: fixed;
-}
-
-
 /* The sidebar menu */
 .sidenav {
     /*width: 160px; /* Set the width of the sidebar */
@@ -192,13 +196,13 @@ table {
 	padding-top: 12px;
 	float: left;
 	width: 17%;
-	padding-left: 15px;
+	padding-left: 5px;
 	padding-right: 3px;
 }
 
 /* The navigation menu links */
 .sidenav a {
-    padding: 6px 8px 6px 12px;
+    padding: 6px 8px 6px 20px;
     text-decoration: none;
     font-size: 11pt;
     color: #0c0f14;
@@ -248,7 +252,7 @@ table {
 .navCategory{
 	color: #48636b;
 	font-weight: bold;
-    padding-left: 1px;
+    padding-left: 9px;
 }
 
 .sidenav hr {

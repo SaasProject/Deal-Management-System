@@ -1,36 +1,39 @@
-<div>
+<div class="row div-padded">
     <button class="btn btn-primary" ui-sref="UserForm">New User</button>
 </div>
-
-<div class="form-inline pull-right">
-    <label for="pageSize">Page size</label>
-    <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{users.length}}> &nbsp;
-    <label>Search: &nbsp;</label>
-    <input type="text" class="form-control" ng-model="searchText">
+<div class="row div-padded">
+    <div class="form-inline pull-right">
+        <label for="pageSize">Page size</label>
+        <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{users.length}}> &nbsp;
+        <label>Search: &nbsp;</label>
+        <input type="text" class="form-control" ng-model="searchText">
+    </div>
 </div>
-<table class="table">
-    <thead>
-        <th ng-repeat="field in module.fields" ng-click="sortColumn(field.name)" ng-class="sortClass(field.name)">
-            {{field.name}}
-        </th>
-        <th></th>
-    </thead>
-    <tbody>
-        <tr ng-repeat="user in users | orderBy : column : reverse | filter : searchText | pagination: (currentPage - 1) * pageSize | limitTo: pageSize ">
-            <td ng-repeat="field in module.fields">
-                {{user[field.name]}}
-            </td>
-            <td>
-                <a>
-                    <i class="fa fa-list-alt" aria-hidden="true" ui-sref="UserForm({_id: user._id})" data-toggle="tooltip" title="Edit" ng-click="disableEmailInput()"></i>
-                </a>
-                |
-                <a>
-                    <i class="fa fa-trash" aria-hidden="true" ng-click="" data-toggle="tooltip" title="Delete"></i>
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<ul class="pagination" uib-pagination total-items="users.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true"
-    max-size="4" force-ellipses="true" first-text="<<" previous-text="<" next-text=">" last-text=">>"></ul>
+<div class="row div-padded">
+    <table class="table compact">
+        <thead>
+            <th ng-repeat="field in module.fields" ng-click="sortColumn(field.name)" ng-class="sortClass(field.name)">
+                {{field.name}}
+            </th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users | orderBy : column : reverse | filter : searchText | pagination: (currentPage - 1) * pageSize | limitTo: pageSize ">
+                <td ng-repeat="field in module.fields">
+                    {{user[field.name]}}
+                </td>
+                <td>
+                    <a>
+                        <i class="fa fa-list-alt" aria-hidden="true" ui-sref="UserForm({_id: user._id})" data-toggle="tooltip" title="Edit" ng-click="disableEmailInput()"></i>
+                    </a>
+                    |
+                    <a>
+                        <i class="fa fa-trash" aria-hidden="true" ng-click="" data-toggle="tooltip" title="Delete"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ul class="pagination" uib-pagination total-items="users.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true"
+        max-size="4" force-ellipses="true" first-text="<<" previous-text="<" next-text=">" last-text=">>"></ul>
+</div>

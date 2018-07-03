@@ -1,34 +1,38 @@
 
-<div>
+<div class="row div-padded">
     <button class="btn btn-primary" ui-sref="newClient">New Client</button>
 </div>
         
-<div class="form-inline pull-right">
+<div class="row div-padded">
     <!-- <label>Filter by: &nbsp;</label>
     <select class="form-control" ng-model="filter" ng-selected="console()">
         <option ng-repeat="option in filterOptions">{{option}}</option>
     </select> -->
-    <label>Search: &nbsp;</label>
-    <input type="text" class="form-control" ng-model="searchText">
+    <div class="form-inline pull-right">
+        <label>Search: &nbsp;</label>
+        <input type="text" class="form-control" ng-model="searchText">
+    </div>
 </div>
-<table class="table">
-    <thead>
-        <th>Company Name (Short)</th>
-        <th>Company Name (Long)</th>
-        <th>Country</th>
-        <th>Contact Person</th>
-        <th>Contact Number</th>
-    </thead>
-    <tbody>
-        <tr>
-           <tr ng-repeat="client in allClients | orderObjectBy : column : reverse | filter : search | pagination: (currentPage - 1) * pageSize | limitTo: pageSize ">
-                <td class="cutOverflow" ng-repeat="data in client" ng-if="$index > 0">
-                    {{data}}
-                </td>
-                <td>
-                    <a><i class="fa fa-list-alt" aria-hidden="true" ng-click="" data-toggle="tooltip"></i><a>
-                </td>
+<div class="row div-padded">
+    <table class="table compact">
+        <thead>
+            <th>Company Name (Short)</th>
+            <th>Company Name (Long)</th>
+            <th>Country</th>
+            <th>Contact Person</th>
+            <th>Contact Number</th>
+        </thead>
+        <tbody>
+            <tr>
+               <tr ng-repeat="client in allClients | orderObjectBy : column : reverse | filter : search | pagination: (currentPage - 1) * pageSize | limitTo: pageSize ">
+                    <td class="cutOverflow" ng-repeat="data in client" ng-if="$index > 0">
+                        {{data}}
+                    </td>
+                    <td>
+                        <a><i class="fa fa-list-alt" aria-hidden="true" ng-click="" data-toggle="tooltip"></i><a>
+                    </td>
+                </tr>
             </tr>
-        </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
