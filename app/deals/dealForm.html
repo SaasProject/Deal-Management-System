@@ -1,6 +1,6 @@
 <i ng-bind="message">
 </i>
-<form class='deal-form-control' ng-submit="submit()" name="myForm">
+<form class='deal-form-control' ng-submit="myForm.$valid && submit()" name="myForm" novalidate>
     <div class="row">
         <div class="col-md-6">
             <strong>Document Number:</strong>
@@ -11,16 +11,17 @@
             <div class="form-inline" ng-class="{'has-error': myForm['essential Deal Name'].$invalid && myForm['essential Deal Name'].$touched}">
                 <label>Deal Name:</label>
                 <span style="color:red" ng-required="getField('essential', 'Deal Name').required">*</span>
-                <input type="text" name="essential Deal Name" class="form-control pull-right" ng-model="dealForm.essential['Deal Name']" ng-required="getField('essential', 'Deal Name').required">
+                <input type="text" name="essential Deal Name" class="form-control pull-right" ng-model="dealForm.essential['Deal Name']"
+                    ng-required="getField('essential', 'Deal Name').required">
             </div>
             <br/>
             <br/>
-            <div class="form-inline">
+            <div class="form-inline" ng-class="{'has-error': myForm['essential Due Date'].$invalid && myForm['essential Due Date'].$touched}">
                 <label>Due Date:</label>
                 <span style="color:red" ng-required="getField('essential', 'Due Date').required">*</span>
-                <div class="input-group pull-right pull-right">
-                    <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['essential']['Due Date']" class="form-control"
-                        ng-model="dealForm.essential['Due Date']" ng-required="getField('essential', 'Due Date').required">
+                <div class="input-group pull-right">
+                    <input type="text" name="essential Due Date" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['essential']['Due Date']"
+                        class="form-control" ng-model="dealForm.essential['Due Date']" ng-required="getField('essential', 'Due Date').required">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="opened['essential']['Due Date'] = true">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -30,7 +31,7 @@
             </div>
         </div>
         <div class="col-md-2 pull-right">
-            <button type="submit" class="btn btn-primary" ng-click='validateBlankInputs()'>Submit</button>
+            <button type="submit" class="btn btn-primary" ng-click='validateBlankInputs()' ng-disabled="myForm.$invalid">Submit</button>
             <!-- <button type="button" class="btn btn-default">Cancel</button> -->
         </div>
     </div>
@@ -42,53 +43,61 @@
                 <h4>Profile</h4>
             </div>
             <div id="profileSection">
-                <div class="col-md-6 form-inline">
+                <div class="col-md-6">
                     <table class="table table-hover">
                         <tbody>
                             <tr>
                                 <td>
-                                    <label>Country</label>
-                                    <span style="color:red" ng-if="getField('profile', 'Country').required">*</span>
-                                    <select class="form-control pull-right" ng-model="dealForm.profile['Country']" ng-required="getField('profile', 'Country').required">
-                                        <option value="">- select -</option>
-                                        <option ng-repeat="option in getField('profile', 'Country').options" value="{{option}}">
-                                            {{option}}
-                                        </option>
-                                    </select>
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Country'].$invalid && myForm['Profile Country'].$touched}">
+                                        <label>Country</label>
+                                        <span style="color:red" ng-if="getField('profile', 'Country').required">*</span>
+                                        <select class="form-control pull-right" name="profile Country" ng-model="dealForm.profile['Country']" ng-required="getField('profile', 'Country').required">
+                                            <option value="">- select -</option>
+                                            <option ng-repeat="option in getField('profile', 'Country').options" value="{{option}}">
+                                                {{option}}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Client</label>
-                                    <span style="color:red" ng-if="getField('profile', 'Client').required">*</span>
-                                    <select class="form-control pull-right" ng-model="dealForm.profile['Client']" ng-required="getField('profile', 'Client').required">
-                                        <option value="">- select -</option>
-                                        <option ng-repeat="client in clients" value="{{client.cmpnyNameShort}}">{{client.cmpnyNameShort}}</option>
-                                    </select>
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Client'].$invalid && myForm['Profile Client'].$touched}">
+                                        <label>Client</label>
+                                        <span style="color:red" ng-if="getField('profile', 'Client').required">*</span>
+                                        <select class="form-control pull-right" name="profile Client" ng-model="dealForm.profile['Client']" ng-required="getField('profile', 'Client').required">
+                                            <option value="">- select -</option>
+                                            <option ng-repeat="client in clients" value="{{client.cmpnyNameShort}}">{{client.cmpnyNameShort}}</option>
+                                        </select>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Service</label>
-                                    <span style="color:red" ng-if="getField('profile', 'Service').required">*</span>
-                                    <select class="form-control pull-right" ng-model="dealForm.profile['Service']" ng-required="getField('profile', 'Service').required">
-                                        <option value="">- select -</option>
-                                        <option ng-repeat="option in getField('profile', 'Service').options" value="{{option}}">
-                                            {{option}}
-                                        </option>
-                                    </select>
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Service'].$invalid && myForm['Profile Service'].$touched}">
+                                        <label>Service</label>
+                                        <span style="color:red" ng-if="getField('profile', 'Service').required">*</span>
+                                        <select class="form-control pull-right" name="profile Service" ng-model="dealForm.profile['Service']" ng-required="getField('profile', 'Service').required">
+                                            <option value="">- select -</option>
+                                            <option ng-repeat="option in getField('profile', 'Service').options" value="{{option}}">
+                                                {{option}}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Type</label>
-                                    <span style="color:red" ng-if="getField('profile', 'Type').required">*</span>
-                                    <select class="form-control pull-right" ng-model="dealForm.profile['Type']" ng-required="getField('profile', 'Type').required">
-                                        <option value="">- select -</option>
-                                        <option ng-repeat="option in getField('profile', 'Type').options" value="{{option}}">
-                                            {{option}}
-                                        </option>
-                                    </select>
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Type'].$invalid && myForm['profile Type'].$touched}">
+                                        <label>Type</label>
+                                        <span style="color:red" ng-if="getField('profile', 'Type').required">*</span>
+                                        <select class="form-control pull-right" name="profile Type" ng-model="dealForm.profile['Type']" ng-required="getField('profile', 'Type').required">
+                                            <option value="">- select -</option>
+                                            <option ng-repeat="option in getField('profile', 'Type').options" value="{{option}}">
+                                                {{option}}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -96,8 +105,10 @@
                                     <label>Resource</label>
                                     <span style="color:red" ng-if="getField('profile', 'Resource Size (MM)').required">*</span>
                                     <div class="pull-right">
-                                        <div class="form-group">
-                                            <input type="number" min="0" step="0.01" class="form-control form-control-sm" ng-model="dealForm.profile['Resource Size (MM)']"
+                                        <div class="form-inline" ng-class="{'has-error': myForm['profile Resource Size (MM)'].$invalid && myForm['profile Resource Size (MM)'].$touched}">
+                                            <input type="number" min="0" step="'0.01'" class="form-control form-control-sm" 
+                                            name="profile Resource Size (MM)"
+                                            ng-model="dealForm.profile['Resource Size (MM)']"
                                                 ng-required="getField('profile', 'Resource Size (MM)').required"> (MM)
                                         </div>
                                         <br/> /
@@ -110,9 +121,9 @@
                                 <td>
                                     <label>Duration (Start)</label>
                                     <span style="color:red" ng-if="getField('profile', 'Duration (Start)').required">*</span>
-                                    <div class="input-group pull-right pull-right" ng-class="{'has-error': myForm['essential Duration (Start)'].$invalid && !myForm['essential Duration (Start)'].$pristine}">
-                                        <input type="text" name="essential Duration (Start)" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile']['Duration (Start)']" class="form-control"
-                                            ng-model="dealForm.profile['Duration (Start)']" ng-required="getField('profile', 'Duration (Start)').required">
+                                    <div class="input-group pull-right" ng-class="{'has-error': myForm['essential Duration (Start)'].$invalid && !myForm['essential Duration (Start)'].$pristine}">
+                                        <input type="text" name="essential Duration (Start)" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile']['Duration (Start)']"
+                                            class="form-control" ng-model="dealForm.profile['Duration (Start)']" ng-required="getField('profile', 'Duration (Start)').required">
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-default" ng-click="opened['profile']['Duration (Start)'] = true">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -300,8 +311,8 @@
                                     </div>
                                     <div ng-if="field.type === 'date'">
                                         <div class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile'][field.name]" class="form-control"
-                                                ng-model="dealForm.profile[field.name]" ng-required="field.required">
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile'][field.name]" class="form-control" ng-model="dealForm.profile[field.name]"
+                                                ng-required="field.required">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="opened['profile'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -361,8 +372,8 @@
                                     <label>SRB Date</label>
                                     <span style="color:red" ng-if="getField('process', 'SRB Date').required">*</span>
                                     <div class="input-group pull-right">
-                                        <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process']['SRB Date']" class="form-control"
-                                            ng-model="dealForm.process['SRB Date']" ng-required="getField('process', 'SRB Date').required">
+                                        <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process']['SRB Date']" class="form-control" ng-model="dealForm.process['SRB Date']"
+                                            ng-required="getField('process', 'SRB Date').required">
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-default" ng-click="opened['process']['SRB Date'] = true">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -393,8 +404,8 @@
                                     </div>
                                     <div ng-if="field.type === 'date'">
                                         <div class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control"
-                                                ng-model="dealForm.process[field.name]" ng-required="field.required">
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control" ng-model="dealForm.process[field.name]"
+                                                ng-required="field.required">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="opened['process'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -479,8 +490,8 @@
                                     </div>
                                     <div ng-if="field.type === 'date'">
                                         <div class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control"
-                                                ng-model="dealForm.process[field.name]" ng-required="field.required">
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control" ng-model="dealForm.process[field.name]"
+                                                ng-required="field.required">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="opened['process'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -521,7 +532,15 @@
             <div id="distributionSection" class="collapse in">
                 <div class="col-md-3">
                     <label>Input Starting Month:</label>
-                    <input type="month" class="form-control form-control-sm" ng-model="startingMonthYear" ng-change="getCurrentDisplay()" />
+                    <div class="input-group pull-right">
+                        <input type="text" uib-datepicker-popup="yyyy/MM" datepicker-options="{minMode: 'month'}" datepickerMode="'month'" is-open="opened['distribution']['startingMonthYear']"
+                            class="form-control" ng-readonly="true" ng-model="startingMonthYear" required>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="opened['distribution']['startingMonthYear'] = true">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </button>
+                        </span>
+                    </div>
                 </div>
                 <div ng-repeat="contract in contracts">
                     <table class="table table-striped table-condensed">
@@ -785,8 +804,8 @@
                                     </div>
                                     <div ng-if="field.type === 'date'">
                                         <div class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control"
-                                                ng-model="dealForm.status[field.name]" ng-required="field.required">
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control" ng-model="dealForm.status[field.name]"
+                                                ng-required="field.required">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="opened['status'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -840,8 +859,8 @@
                                     </div>
                                     <div ng-if="field.type === 'date'">
                                         <div class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control"
-                                                ng-model="dealForm.status[field.name]" ng-required="field.required">
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control" ng-model="dealForm.status[field.name]"
+                                                ng-required="field.required">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="opened['status'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -898,8 +917,8 @@
                                     </div>
                                     <div ng-if="field.type === 'date'">
                                         <div class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control"
-                                                ng-model="dealForm.content[field.name]" ng-required="field.required">
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control" ng-model="dealForm.content[field.name]"
+                                                ng-required="field.required">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="opened['content'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -937,8 +956,8 @@
                                     </div>
                                     <div ng-if="field.type === 'date'">
                                         <div class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control"
-                                                ng-model="dealForm.content[field.name]" ng-required="field.required">
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control" ng-model="dealForm.content[field.name]"
+                                                ng-required="field.required">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default" ng-click="opened['content'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>

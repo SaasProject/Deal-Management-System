@@ -198,7 +198,7 @@
             }
         }
 
-        $scope.getCurrentDisplay = function () {
+        $scope.$watch('startingMonthYear', function () {
             //reset the array
             $scope.currentMonths = [];
 
@@ -227,9 +227,9 @@
                 //use modulo to set i as 1 instead of 13
                 i = (i % 12 === 0) ? 1 : (i + 1);
             } while (i != setMonth);
-        }
+        });
 
-        $scope.getCurrentDisplay();
+        //$scope.getCurrentDisplay();
 
         function preProcess(dealForm, isLoaded) {
             var tempObject = dealForm;
