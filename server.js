@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use(session({ secret: config.secret, resave: false, saveUninitialized: true})); //equvalent of 9h (same as jwt)
  
 // use JWT auth to secure the api   // edited by dyan0: added '/api/users/emailOn'
-app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/user/login', '/user/logout'] }), function(err, req, res, next) {
+app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/api/user/login', '/api/user/logout'] }), function(err, req, res, next) {
 
 });
  
