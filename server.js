@@ -33,8 +33,8 @@ app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/user/log
  
 // routes
 app.use('/app', require('./controllers/app.controller'));
-app.use('/api/user', require('./controllers/user.controller'));
-app.use('/api/client', require('./controllers/client.controller'));
+app.use('/api/user', require('./controllers/api/user.controller'));
+app.use('/api/client', require('./controllers/api/client.controller'));
 app.use('/api/deals', require('./controllers/api/deals.controller'));
 app.use('/api/modules', require('./controllers/api/modules.controller'));
 
