@@ -94,7 +94,7 @@
 
                     if(rejection.status == 401){
                         console.log('401 detected');
-                        location.reload();
+                        $window.location.href="/app/#!/login";
                     }
 
                     defer.reject(rejection);
@@ -112,6 +112,14 @@
             name: 'home',
             url: '/'
         };
+
+        $rootScope.logout = function () {
+            UserService.logout().then(function() {
+                $rootScope.user = {};
+                delete $http.defaults.headers.common['Authorization'];
+                $state.transitionTo('login');
+            });            
+        }
 
         // add JWT token as default auth header
         $http.get('/app/token').then(function(res){
@@ -151,20 +159,4 @@
             }
         });
     }
- 
-    /* // manually bootstrap angular after the JWT token is retrieved from the server
-    $(function () {
-        // get JWT token from server
-        $.get('/app/token', function (token) {
-            //alert(token);
-            if(token.indexOf('<html>') != -1){
-                location.reload();
-            }
-            else{
-                window.jwtToken = token;
- 
-                angular.bootstrap(document, ['app']);
-            }
-        });
-    }); */
 })();

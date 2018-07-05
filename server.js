@@ -27,12 +27,14 @@ app.use(bodyParser.json());
 app.use(session({ secret: config.secret, resave: false, saveUninitialized: true})); //equvalent of 9h (same as jwt)
  
 // use JWT auth to secure the api   // edited by dyan0: added '/api/users/emailOn'
-//app.use('/api', expressJwt({ secret: config.secret }).unless({ path: [] }));
+app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/user/login', '/user/logout'] }), function(err, req, res, next) {
+
+});
  
 // routes
 app.use('/app', require('./controllers/app.controller'));
-app.use('/user', require('./controllers/user.controller'));
-app.use('/client', require('./controllers/client.controller'));
+app.use('/api/user', require('./controllers/user.controller'));
+app.use('/api/client', require('./controllers/client.controller'));
 app.use('/api/deals', require('./controllers/api/deals.controller'));
 app.use('/api/modules', require('./controllers/api/modules.controller'));
 

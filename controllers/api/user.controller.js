@@ -8,7 +8,7 @@ router.post('/login', function(req, res, next) {
             req.session.token = token.token;
             req.session.user = token.user;
 
-            res.status(200).send(token.user);
+            res.status(200).send(token);
         }
     }).catch(function(err) {
         console.log(err);
@@ -47,6 +47,7 @@ router.put('/:_id', function(req, res, next) {
  
     userService.update(userId, req.body)
         .then(function () {
+            req.session.user.firstTimeLoggedIn = req.body.firstTimeLoggedIn;
             res.sendStatus(200);
         })
         .catch(function (err) {
