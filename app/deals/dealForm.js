@@ -133,23 +133,6 @@
 
         getAllBUs();
 
-        //not yet used, kasi pano kung more than 1 BU ang hawak ng isang manager... 
-        //ang .find() ay 1st occurrence lang so baka magkamali pa
-        $scope.getBUOfPerson = function (managerType) {
-            var property = 'AWS Resp (' + managerType + ') ';
-
-            console.log($scope.dealForm.profile[property + 'person']);
-
-            //find the business unit object that has the manager's nickname and use its BU property
-            var result = $scope.businessUnits.find(function (businessUnit) {
-                return businessUnit.Manager === $scope.dealForm.profile[property + 'person'];
-            });
-
-            if (result !== undefined) {
-                $scope.dealForm.profile[property + 'BU'] = result.BU;
-            }
-        }
-
         //if there is a parameter, it means that a deal is going to be updated
         if ($stateParams.ID !== '') {
             //get one then store to $scope.dealForm;
@@ -251,19 +234,8 @@
                     throw new Error('End date must be greater than or equal to the start date');
                 }
 
-                //set $scope.total to distribution[total]
+                //set $scope.total to distribution['total']
                 tempObject.distribution['total'] = $scope.total;
-
-                //set $scope.total to dealForm.distribution.total
-
-                //delete the other to avoid being included in computation and being stored in database
-                //kung hindi pwde sabay ang direct & indirect, uncomment this
-                /* if (tempObject.process['SOW Scheme'] === 'Indirect') {
-                    delete tempObject.distribution[distributionStrings.direct];
-                } else {
-                    delete tempObject.distribution[distributionStrings.middle1];
-                    delete tempObject.distribution[distributionStrings.middle2];
-                } */
             }
 
             //use $scope.fields and iterate each array
