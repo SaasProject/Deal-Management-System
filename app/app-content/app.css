@@ -3,7 +3,8 @@
 body {
     padding: 0;
     overflow-x: hidden;
-    font-family: "Verdana";
+	font-family: "Verdana";
+	height: 100%;
 }
 
 .bg {
@@ -27,6 +28,8 @@ body {
 
 .dealTable {
 	font-size: 10px;
+	display: block;
+	overflow-x: auto;
 }
 
 .div-padded {
@@ -62,10 +65,6 @@ body {
 
 .arrow-down,.arrow-up,.arrow-dormant{
  padding-right: 10px;
-}
-
-.cutOverflow{
-    word-break: break-all;
 }
 
 .modal-body {
