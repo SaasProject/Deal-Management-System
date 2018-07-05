@@ -458,6 +458,20 @@
             }
         }
 
+        //get the latest change date for the specified level from $scope.dealForm['Change History'] array
+        //since all changes are pushed into the change history, get the last index
+        $scope.getLatestChangeDate = function(level) {
+            if($scope.dealForm['Change History'] !== undefined) {
+                var tempArray = [];
+                tempArray = $scope.dealForm['Change History'].filter(function(change) {
+                    return change.level === level;
+                });
+                return (tempArray[tempArray.length - 1]) ? tempArray[tempArray.length - 1].date : '';
+            } else {
+                return '';
+            }
+        }
+
         //sample code, if user enters wrong input values, focus on the input
         $('input').blur(function (event) {
             event.target.checkValidity();

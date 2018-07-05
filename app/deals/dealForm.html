@@ -1075,8 +1075,41 @@
         <div class="col-md-10">
             <u>Change History:</u>
             <div ng-repeat="change in dealForm['Change History']">
-                {{change.date}}, {{change.user}}, {{change.content}} <br/>
+                {{change.date}}, {{change.user}}, {{change.content}}
+                <br/>
             </div>
+            <table class="table table-hover">
+                <thead>
+                    <th>LEVEL</th>
+                    <th>DATE</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Level 5</td>
+                        <td>{{getLatestChangeDate('5')}}</td>
+                    </tr>
+                    <tr>
+                        <td>Level 4</td>
+                        <td>{{getLatestChangeDate('4')}}</td>
+                    </tr>
+                    <tr>
+                        <td>Level 3</td>
+                        <td>{{getLatestChangeDate('3')}}</td>
+                    </tr>
+                    <tr>
+                        <td>Level 2</td>
+                        <td>{{getLatestChangeDate('2')}}</td>
+                    </tr>
+                    <tr>
+                        <td>Level 1</td>
+                        <td>{{getLatestChangeDate('1')}}</td>
+                    </tr>
+                    <tr>
+                        <td>Level 9</td>
+                        <td>{{getLatestChangeDate('9')}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="col-md-1"></div>
     </div>
