@@ -1,6 +1,5 @@
 <div class="row div-padded">
     <button class="btn btn-primary" ui-sref="dealForm">New Deal</button>
-    <button class="btn btn-default" ng-click="getDeals()">Refresh List</button>
     <!-- <div class="col-md-4">
         <form ng-submit="uploadFile()">
             <div class="input-group">
@@ -32,28 +31,31 @@
     </div>
 </div>
 <div class="row div-padded">
+    <div style = "text-align:center" class = "spinner" ng-show = "loading"> 
+        <img src="loader.gif"/>
+    </div>
     <table class="table compact dealTable">
         <thead>
             <th ng-click="sortColumn('essential', 'ID')" ng-class="sortClass('essential', 'ID')">No</th>
-            <th>Client</th>
-            <th>Deal Name</th>
-            <th>AWS Sales</th>
-            <th>AWS Dev</th>
-            <th>Type</th>
-            <th>Level</th>
-            <th>Confidence</th>
-            <th>FTE</th>
-            <th>MM</th>
-            <th>Budget</th>
-            <th>CM%</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>SRB No</th>
-            <th>SRB</th>
-            <th>SRB Status</th>
-            <th>SOW Scheme</th>
-            <th>SOW</th>
-            <th>Due</th>
+            <th ng-click="sortColumn('profile', 'Client')" ng-class="sortClass('profile', 'Client')">Client</th>
+            <th ng-click="sortColumn('essential', 'Deal Name')" ng-class="sortClass('essential', 'Deal Name')">Deal Name</th>
+            <th ng-click="sortColumn('profile', 'AWS Resp (Sales) person')" ng-class="sortClass('profile', 'AWS Resp (Sales) person')">AWS Sales</th>
+            <th ng-click="sortColumn('profile', 'AWS Resp (Dev) person')" ng-class="sortClass('profile', 'AWS Resp (Dev) person')">AWS Dev</th>
+            <th ng-click="sortColumn('profile', 'Type')" ng-class="sortClass('profile', 'Type')">Type</th>
+            <th ng-click="sortColumn('profile', 'Level')" ng-class="sortClass('profile', 'Level')">Level</th>
+            <th ng-click="sortColumn('profile', 'Confidence')" ng-class="sortClass('profile', 'Confidence')">Confidence</th>
+            <th ng-click="sortColumn('profile', 'Resource Size (FTE)')" ng-class="sortClass('profile', 'Resource Size (FTE)')">FTE</th>
+            <th ng-click="sortColumn('profile', 'Resource Size (MM)')" ng-class="sortClass('profile', 'Resource Size (MM)')">MM</th>
+            <th ng-click="sortColumn('profile', 'Revenue')" ng-class="sortClass('profile', 'Revenue')">Budget</th>
+            <th ng-click="sortColumn('profile', 'CM')" ng-class="sortClass('profile', 'CM')">CM%</th>
+            <th ng-click="sortColumn('profile', 'Duration (Start)')" ng-class="sortClass('profile', 'Duration (Start)')">Start</th>
+            <th ng-click="sortColumn('profile', 'Duration (End)')" ng-class="sortClass('profile', 'Duration (End)')">End</th>
+            <th ng-click="sortColumn('process', 'SRB No')" ng-class="sortClass('process', 'SRB No')">SRB No</th>
+            <th ng-click="sortColumn('process', 'SRB Date')" ng-class="sortClass('process', 'SRB Date')">SRB</th>
+            <th ng-click="sortColumn('process', 'SRB Status')" ng-class="sortClass('process', 'SRB Status')">SRB Status</th>
+            <th ng-click="sortColumn('process', 'SOW Scheme')" ng-class="sortClass('process', 'SOW Scheme')">SOW Scheme</th>
+            <th ng-click="sortColumn('process', 'SOW Date')" ng-class="sortClass('process', 'SOW Date')">SOW</th>
+            <th ng-click="sortColumn('essential', 'Due Date')" ng-class="sortClass('essential', 'Due Date')">Due</th>
             <th ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList && !essentialField.default" ng-click="sortColumn('essential', essentialField.name)"
                 ng-class="sortClass('essential', essentialField.name)">
                 {{essentialField.name}}
@@ -77,7 +79,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="deal in deals | filter: searchText | orderBy: column : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
-                <td><a ui-sref="dealForm({ID: deal.ID})" target="_blank">{{deal['ID']}}</a></td>
+                <td><a ui-sref="dealForm({ID: deal.ID})" target="_blank" onclick="clickAndDisable(this);">{{deal['ID']}}</a></td>
                 <td>{{deal['profile']['Client']}}</td>
                 <td>{{deal['essential']['Deal Name']}}</td>
                 <td>{{deal['profile']['AWS Resp (Sales) person']}}</td>
@@ -92,13 +94,13 @@
                 <td>{{deal['profile']['Duration (Start)']}}</td>
                 <td>{{deal['profile']['Duration (End)']}}</td>
                 <td>{{deal['process']['SRB No']}}</td>
-                <td>{{deal['process']['SRB Date'] | date: 'MM/dd'}}</td>
+                <td>{{deal['process']['SRB Date']}}</td>
                 <td>{{deal['process']['SRB Status']}}</td>
                 <td>{{deal['process']['SOW Scheme']}}</td>
-                <td>{{deal['process']['SOW Date'] | date: 'MM/dd'}}</td>
-                <td>{{deal['essential']['Due Date'] | date: 'MM/dd'}}</td>
+                <td>{{deal['process']['SOW Date']}}</td>
+                <td>{{deal['essential']['Due Date']}}</td>
                 <td ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList && !essentialField.default">
-                    <div ng-if="essentialField.name === 'ID'"><a ui-sref="dealForm({ID: deal.ID})" target="_blank">{{(essentialField.name === 'ID') ? deal.ID : deal.essential[essentialField.name]}}</a></div>
+                    <div ng-if="essentialField.name === 'ID'"><a ui-sref="dealForm({ID: deal.ID})" target="_blank" onclick="clickAndDisable(this);">{{(essentialField.name === 'ID') ? deal.ID : deal.essential[essentialField.name]}}</a></div>
                     <div ng-if="essentialField.name !== 'ID'">{{(essentialField.name === 'ID') ? deal.ID : deal.essential[essentialField.name]}}</div>
                 </td>
                 <td ng-repeat="profileField in fields.profile" ng-if="profileField.showInList && !profileField.default">
@@ -119,3 +121,13 @@
     <ul class="pagination" uib-pagination total-items="deals.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true"
         max-size="4" force-ellipses="true" first-text="<<" previous-text="<" next-text=">" last-text=">>"></ul>
 </div>
+
+<!-- link is disabled after click -->
+<script> 
+   function clickAndDisable(link) {
+     // disable subsequent clicks
+     link.onclick = function(event) {
+        event.preventDefault();
+     }
+   }   
+</script>

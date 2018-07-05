@@ -10,6 +10,9 @@
     </div>
 </div>
 <div class="row div-padded">
+    <div style = "text-align:center" class = "spinner" ng-show = "loading"> 
+        <img src="loader.gif"/>
+    </div>
     <table class="table compact">
         <thead>
             <th ng-repeat="field in module.fields" ng-click="sortColumn(field.name)" ng-class="sortClass(field.name)">

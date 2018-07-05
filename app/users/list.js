@@ -6,6 +6,10 @@
         .controller('UserListController', Controller);
     
     function Controller($scope, ModulesService, TableService, ngToast) {
+
+        //enable load if data for table is not yet fetched
+        $scope.loading = true;
+
         $scope.users = [];
 
         $scope.module = {};
@@ -31,6 +35,8 @@
                 $scope.users = users;
             }).catch(function(err) {
 
+            }).finally(function() {
+                $scope.loading = false;
             });
         }
 

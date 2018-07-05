@@ -6,6 +6,10 @@
         .controller('BUListController', Controller);
     
     function Controller($scope, ModulesService, TableService, ngToast) {
+
+        //enable load if data for table is not yet fetched
+        $scope.loading = true;
+        
         $scope.businessUnits = [];
 
         $scope.module = {};
@@ -31,6 +35,8 @@
                 $scope.businessUnits = businessUnits;
             }).catch(function(err) {
 
+            }).finally(function() {
+                $scope.loading = false;
             });
         }
 
