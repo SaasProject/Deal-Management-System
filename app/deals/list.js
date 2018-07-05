@@ -113,6 +113,9 @@
                         });
                     }
                 }
+
+                //getAllFields();
+
             }).catch(function (err) {
 
             });
