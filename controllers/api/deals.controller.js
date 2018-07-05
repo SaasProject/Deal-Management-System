@@ -16,7 +16,7 @@ router.post('/addDeal', function(req, res, next) {
     
     //console.log(req.body);
 
-    dealsService.addDeal(req.body)
+    dealsService.addDeal(req.body, req.session.user.firstName + ' ' + req.session.user.lastName)
     .then(function() {
         res.status(200).send();
     })
@@ -26,10 +26,7 @@ router.post('/addDeal', function(req, res, next) {
 });
 
 router.put('/editDeal', function(req, res, next) {
-    
-    console.log(req.body);
-
-    dealsService.editDeal(req.body)
+    dealsService.editDeal(req.body, req.session.user.firstName + ' ' + req.session.user.lastName)
     .then(function() {
         res.status(200).send();
     })
@@ -41,7 +38,7 @@ router.put('/editDeal', function(req, res, next) {
 router.get('/:ID', function(req, res, next) {
     
     var ID = req.params.ID;
-
+    console.log(req.user);
     dealsService.getDealById(ID)
     .then(function(deal) {
         res.status(200).send(deal);

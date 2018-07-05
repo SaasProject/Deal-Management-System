@@ -38,7 +38,7 @@ service.uploadFile = uploadFile;
 
 module.exports = service;
 
-function addDeal(deal) {
+function addDeal(deal, user) {
     var deferred = Q.defer();
 
     var ID = "DL-0000";
@@ -72,17 +72,21 @@ function addDeal(deal) {
     function saveToDB() {
 
         deal.ID = ID;
-        //set deleted flag to false
-        deal.deleted = false;
 
+        //add change history array here
+        deal['Change History'] = [];
+        deal['Change History'].push({
+            date: getCurrentDate(),
+            user: user,
+            level: deal.profile['Level'],
+            content: 'Level was changed to ' + deal.profile['Level']
+        });
+
+        //set closedDate only if the level is 1
         if (deal.profile['Level'] === '1') {
-            var currentDate = new Date();
-            var currentMonth = currentDate.getMonth() + 1;
-            currentMonth = (currentMonth < 10) ? '0' + currentMonth : currentMonth;
-
-            deal.closedDate = currentDate.getFullYear() + currentMonth + currentDate.getDate();
-            console.log(deal.closedDate);
+            deal.closedDate = getCurrentDate();
         }
+
         db.deals.insert(
             deal,
             function (err, doc) {
@@ -96,26 +100,42 @@ function addDeal(deal) {
     return deferred.promise;
 }
 
-function editDeal(deal) {
+function editDeal(deal, user) {
     var deferred = Q.defer();
 
-
-    delete deal._id;
-
-    if (deal.profile['Level'] === '1') {
-        var currentDate = new Date();
-        var currentMonth = currentDate.getMonth() + 1;
-        currentMonth = (currentMonth < 10) ? '0' + currentMonth : currentMonth;
-
-        deal.closedDate = currentDate.getFullYear() + '-' + currentMonth + '-' + currentDate.getDate();
-        console.log(deal.closedDate);
-    }
-
-    db.deals.update({ ID: deal.ID }, { $set: deal }, function (err) {
+    //get the old level for change history
+    db.deals.findOne({ _id: mongo.helper.toObjectID(deal._id) }, { 'profile.Level': 1 }, function (err, aDeal) {
         if (err) {
+            console.log(err)
             deferred.reject(err);
+        } else if (aDeal) {
+            //compare current level to the new level. 
+            //if different, push to change history. else, continue
+            if (aDeal.profile['Level'] !== deal.profile['Level']) {
+                //deal['Change History'] array was already created during addDeal()
+                deal['Change History'].push({
+                    date: getCurrentDate(),
+                    user: user,
+                    level: deal.profile['Level'],
+                    content: 'Level was changed to ' + deal.profile['Level']
+                });
+            }
+
+            delete deal._id;
+
+            if (deal.profile['Level'] === '1') {
+                deal.closedDate = getCurrentDate();
+            }
+
+            db.deals.update({ ID: deal.ID }, { $set: deal }, function (err) {
+                if (err) {
+                    deferred.reject(err);
+                }
+                deferred.resolve();
+            });
+        } else {
+            deferred.reject({ notFound: true });
         }
-        deferred.resolve();
     });
 
     return deferred.promise;
@@ -166,26 +186,27 @@ function deleteDeal(ID) {
     return deferred.promise;
 }
 
+//jeremy 2018-07-02
 function uploadFile(req, res) {
     var deferred = Q.defer();
     var storage = multer.diskStorage({
         destination: './uploads',
-        filename: function(req, file, cb) {
+        filename: function (req, file, cb) {
             return cb(null, file.originalname);
         },
     });
-    var upload = multer({ 
-            storage: storage,
-            fileFilter: function(req, file, cb) {
-                if(path.extname(file.originalname) !== '.xls' &&
+    var upload = multer({
+        storage: storage,
+        fileFilter: function (req, file, cb) {
+            if (path.extname(file.originalname) !== '.xls' &&
                 path.extname(file.originalname) !== '.xlsx' &&
                 path.extname(file.originalname) !== '.ods') {
-                    return cb(new Error('Wrong file extension'));
-                }
-
-                cb(null, true);
+                return cb(new Error('Wrong file extension'));
             }
-         }).single(req.params.name);
+
+            cb(null, true);
+        }
+    }).single(req.params.name);
 
     upload(req, res, function (err) {
         if (err) {
@@ -216,4 +237,17 @@ function uploadFile(req, res) {
     });
 
     return deferred.promise;
+}
+
+//jeremy 2018-07-05
+function getCurrentDate() {
+    const currentDate = new Date();
+    //+ 1 since month in javascript starts with 0
+    var currentMonth = currentDate.getMonth() + 1, currentDay = currentDate.getDate();
+    //add leading zeroes for months and days 1 to 9
+    currentMonth = (currentMonth < 10) ? '0' + currentMonth : currentMonth;
+    currentDay = (currentDay < 10) ? '0' + currentDay : currentDay;
+
+    //format to yyyy/MM/dd
+    return currentDate.getFullYear() + '/' + currentMonth + '/' + currentDay;
 }
