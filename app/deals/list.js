@@ -25,6 +25,9 @@
     
     function Controller($scope, $rootScope, $state, ModulesService, DealsService, TableService, ngToast) {
 
+        //enable load if data for table is not yet fetched
+        $scope.loading = true;
+
         $scope.DATE_FORMAT = 'MM/dd/yyyy';
 
         $scope.filterOptions = [
@@ -115,6 +118,8 @@
                 }
             }).catch(function (err) {
 
+            }).finally(function() {
+                $scope.loading = false;
             });
         }
 

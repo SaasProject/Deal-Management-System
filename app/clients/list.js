@@ -43,6 +43,10 @@
 
     
     function Controller($scope, $rootScope, $state, ClientService) {
+
+        //enable load if data for table is not yet fetched
+        $scope.loading = true;
+
         $scope.filterOptions = [
             'Active',
             '1-2 months',
@@ -84,7 +88,7 @@
                 $scope.allClients = clients;
                 $scope.clientLength = Object.size(clients);
             }).finally(function() {
-
+                $scope.loading = false;
             });
         }
         getAllClients();
