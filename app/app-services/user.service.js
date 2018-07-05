@@ -17,15 +17,15 @@
         return service;    
         
         function login(loginForm) {
-            return $http.post('/user/login', loginForm).then(handleSuccess, handleError);
+            return $http.post('/api/user/login', loginForm).then(handleSuccess, handleError);
         }
 
         function getCurrent() {
-            return $http.get('/user/current').then(handleSuccess, handleError);
+            return $http.get('/api/user/current').then(handleSuccess, handleError);
         }
 
         function logout() {
-            return $http.get('/user/logout').then(handleSuccess, handleError);
+            return $http.get('/api/user/logout').then(handleSuccess, handleError);
         }
 
         /*
@@ -37,11 +37,11 @@
             Return: none
         */
         function GetById(_id) {
-            return $http.get('/user/' + _id).then(handleSuccess, handleError);
+            return $http.get('/api/user/' + _id).then(handleSuccess, handleError);
         }
  
         function GetByUsername(username) {
-            return $http.get('/user/' + username).then(handleSuccess, handleError);
+            return $http.get('/api/user/' + username).then(handleSuccess, handleError);
         }
  
         function Create(user) {
@@ -49,15 +49,15 @@
         }
  
         function Update(user) {
-            return $http.put('/user/' + user._id, user).then(handleSuccess, handleError);
+            return $http.put('/api/user/' + user._id, user).then(handleSuccess, handleError);
         }
  
         function Delete(_id) {
-            return $http.delete('/user/' + _id).then(handleSuccess, handleError);
+            return $http.delete('/api/user/' + _id).then(handleSuccess, handleError);
         }
 
         function Insert(user){
-            return $http.post('/user/addUser', user).then(handleSuccess, handleError);
+            return $http.post('/api/user/addUser', user).then(handleSuccess, handleError);
         }
  
         // private functions
