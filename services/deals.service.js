@@ -145,8 +145,6 @@ function editDeal(deal, user) {
 function getDealById(ID) {
     var deferred = Q.defer();
 
-    console.log(ID);
-
     db.deals.findOne({ ID: ID }, function (err, deal) {
         if (err) deferred.reject(err);
 
