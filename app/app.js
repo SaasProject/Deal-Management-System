@@ -94,7 +94,7 @@
 
                     if(rejection.status == 401){
                         console.log('401 detected');
-                        $window.location.href="/app/#!/login";
+                        $window.location.href="/#!/login";
                     }
 
                     defer.reject(rejection);
@@ -131,6 +131,7 @@
             $rootScope.user = user;
         }).catch(function(err) {
             console.log(err);
+            $state.transitionTo('login');
         });
 
         $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
