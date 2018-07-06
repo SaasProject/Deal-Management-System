@@ -56,7 +56,6 @@
         $scope.getDeals = function () {
             ModulesService.getAllModuleDocs('deals').then(function (allDeals) {
                 $scope.deals = allDeals;
-                console.log(allDeals);
                 switch ($scope.displayOption) {
                     //display levels 2,3,4,5 only
                     case 'Active': {
@@ -117,7 +116,6 @@
                         });
                     }
                 }
-                console.log($scope.deals);
                 //getAllFields();
                 processDeals();
 
@@ -180,7 +178,6 @@
             //ewww dirty code 2 for loops, bale 3 nested loops all in all :(
             //delete properties of each deal which are not shown in the list to avoid its values being searched
             for(var category in $scope.fields){
-                console.log(category);
                 angular.forEach($scope.fields[category], function (aField) {
                     angular.forEach($scope.deals, function (aDeal) {
                         if (!aField.showInList) {
@@ -190,7 +187,6 @@
                         //format date to MM/DD
                         //console.log(aDeal[category][aField.name]);
                         if (aField.type === 'date' && aDeal[category][aField.name] !== undefined) {
-                            console.log(aDeal[category][aField.name]);
                             aDeal[category][aField.name] = moment(aDeal[category][aField.name]).format('MM/DD');
                         }
                     });
