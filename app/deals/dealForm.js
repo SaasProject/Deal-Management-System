@@ -68,7 +68,7 @@
         $scope.total[distributionStrings.intra] = {};
         $scope.total[distributionStrings.intra][$scope.currentFiscalYear.years] = {};
 
-        $scope.validateBlankInputs = function () {
+        /* $scope.validateBlankInputs = function () {
             console.log('glenn');
             //glenn's code to loop category fields if there is required
             var targetCategory = ['profileSection', 'processSection', 'distributionSection', 'statusSection', 'contentSection'];
@@ -82,7 +82,7 @@
                     }
                 }
             }
-        }
+        } */
 
         //get the fields arrays of dealessential, dealprofile, dealprocess, dealstatus, and dealcontent
         function getAllFields() {
@@ -232,6 +232,10 @@
                 //throw error if start date > end date
                 if (tempObject.profile['Duration (Start)'] > tempObject.profile['Duration (End)']) {
                     throw new Error('End date must be greater than or equal to the start date');
+                }
+
+                if(tempObject.essential['Due Date'] > tempObject.process['SOW Date']) {
+                    throw new Error('Due date must be less than or equal to the SOW Date');
                 }
 
                 //set $scope.total to distribution['total']
