@@ -52,6 +52,10 @@
                 }).catch(function(err){
                     ngToast.danger(err);
                 });*/
+
+                //Save first time logged in boolean
+                $scope.userForm.firstTimeLoggedIn = true;
+
                 UserService.Insert($scope.userForm)
                     .then(function () {
                     ngToast.success('User added');
