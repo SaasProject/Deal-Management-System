@@ -1,5 +1,5 @@
 <div class="row div-padded">
-    <button class="btn btn-primary" ui-sref="dealForm">New Deal</button>
+    <button class="btn btn-primary newDealBtn" ui-sref="dealForm">New Deal</button>
     <!-- <div class="col-md-4">
         <form ng-submit="uploadFile()">
             <div class="input-group">
@@ -15,7 +15,7 @@
 <div class="row div-padded">
     <div class="form-inline pull-right">
         <label>Display Options: </label>
-        <select class="form-control" ng-model="displayOption" ng-change="getDeals()">
+        <select class="form-control displayOptionsBox" ng-model="displayOption" ng-change="getDeals()">
             <option>Active</option>
             <option>Mine</option>
             <option>1 Month</option>
@@ -26,7 +26,7 @@
         </select>
         <label for="pageSize">Page size</label>
         <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{deals.length}}> &nbsp;
-        <label>Search: &nbsp;</label>
+        <label class="searchBox">Search: &nbsp;</label>
         <input type="text" class="form-control" ng-model="searchText">
     </div>
 </div>
@@ -59,6 +59,7 @@
             <th ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList && !essentialField.default" ng-click="sortColumn('essential', essentialField.name)"
                 ng-class="sortClass('essential', essentialField.name)">
                 {{essentialField.name}}
+                <div ng-if="essentialField.name == 'ID'" class="th_ID"></div>
             </th>
             <th ng-repeat="profileField in fields.profile" ng-if="profileField.showInList && !profileField.default" ng-click="sortColumn('profile', profileField.name)"
                 ng-class="sortClass('profile', profileField.name)">
