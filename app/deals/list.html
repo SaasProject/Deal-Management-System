@@ -36,7 +36,8 @@
     </div>
     <table class="table compact dealTable">
         <thead>
-            <th ng-click="sortColumn('essential', 'ID')" ng-class="sortClass('essential', 'ID')">No</th>
+            <th class="th_ID" ng-click="sortColumn('essential', 'ID')" ng-class="sortClass('essential', 'ID')">No
+            </th>
             <th ng-click="sortColumn('profile', 'Client')" ng-class="sortClass('profile', 'Client')">Client</th>
             <th ng-click="sortColumn('essential', 'Deal Name')" ng-class="sortClass('essential', 'Deal Name')">Deal Name</th>
             <th ng-click="sortColumn('profile', 'AWS Resp (Sales) person')" ng-class="sortClass('profile', 'AWS Resp (Sales) person')">AWS Sales</th>
@@ -59,7 +60,6 @@
             <th ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList && !essentialField.default" ng-click="sortColumn('essential', essentialField.name)"
                 ng-class="sortClass('essential', essentialField.name)">
                 {{essentialField.name}}
-                <div ng-if="essentialField.name == 'ID'" class="th_ID"></div>
             </th>
             <th ng-repeat="profileField in fields.profile" ng-if="profileField.showInList && !profileField.default" ng-click="sortColumn('profile', profileField.name)"
                 ng-class="sortClass('profile', profileField.name)">

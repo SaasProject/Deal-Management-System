@@ -16,11 +16,20 @@
         var introTour = new Tour({
             //debug: true,
             storage : false,
+            template: "<div class='popover tour-tour fight right in'>"+
+                "<div class='arrow'></div>"+
+                "<h3 class='popover-title'></h3>"+
+                "<div class='popover-content'></div>"+
+                "<div class='popover-navigation'>"+
+                    "<div>"+
+                        "<button class='btn btn-default' data-role='next'>Next</button>"+
+                        "<button class='btn btn-default' data-role='end'>End tour</button>"+
+                    "<div>"+
+                "</div>"+
+            "</div>",
             //template: "<div class='popover tour'><div class='arrow'></div><div class='popover-content'></div><div class='popover-navigation'><button class='btn btn-default' data-role='prev'>Å· Prev</button><span data-role='separator'>|</span><button class='btn btn-default' data-role='next'>Next Å‚</button></div><button class='btn btn-default' data-role='end'>End tour</button></div>",
             onEnd: function (tour) { 
-                $rootScope.introTour = true;
-                //$state.go('dealList');
-                //delay: 2000;
+                document.getElementById("overlay").style.display = "none";
             }
         });
         introTour.addSteps([
@@ -45,18 +54,6 @@
             onNext: function (tour) {
                 $state.go('dealList');
             },
-            /*template: "<div class='popover tour-tour fight right in'>"+
-                "<div class='arrow'></div>"+
-                "<h3 class='popover-title'></h3>"+
-                "<div class='popover-content'></div>"+
-                "<div class='popover-navigation'>"+
-                    "<div class='btn-group'>"+
-                        "<button class='btn btn-default' data-role='prev'>Å· Prev</button>"+
-                        "<button class='btn btn-default' data-role='end'>Next Å‚</button>"+
-                        "<button class='btn btn-default' data-role='end'>End tour</button>"+
-                    "<div>"+
-                "</div>"+
-            "</div>",*/
         },
 
         //deal list
@@ -92,11 +89,22 @@
             placement: "top",
             backdrop: false,
             title: "Deal ID Link",
-            content: "You can click the link when you want to edit the deal.",
+            content: "You can click the link when you want to edit the deal.", 
             onNext: function (tour) {
                 $state.go('dealForm');
             },
         },
+        /*{
+            element: ".th_ID",
+            placement: "top",
+            //orphan: true,
+            backdrop: false,
+            title: "Deal ID Link",
+            content: "You can click the link when you want to edit the deal.",
+            onNext: function (tour) {
+                $state.go('dealForm');
+            },
+        },*/
 
         //deal form
         {
@@ -157,7 +165,7 @@
         ]);
 
         // Start the tour
-        console.log($rootScope.user.firstTimeLoggedIn);
+        //console.log($rootScope.user.firstTimeLoggedIn);
         if($rootScope.user._id != undefined && $rootScope.user.firstTimeLoggedIn == true){
 
             //$rootScope.user.firstTimeLoggedIn = false;
@@ -174,6 +182,7 @@
             });
 
             introTour.init();
+            document.getElementById("overlay").style.display = "block";
             introTour.start();
         }
     }
