@@ -20,7 +20,8 @@
     "q": "^1.5.1",
     "request": "^2.83.0",
     "rootpath": "^0.1.2",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "xlsx": "^0.13.2"
   },
   "devDependencies": {},
   "scripts": {
