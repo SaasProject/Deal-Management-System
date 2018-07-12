@@ -7,6 +7,11 @@ body {
 	height: 100%;
 }
 
+.lighten{
+	background-color: rgba(237, 241, 247, 0.4);
+	height: 100vh;
+}
+
 #overlay {
     position: fixed; /* Sit on top of the page content */
     display: none;
@@ -22,7 +27,7 @@ body {
 }
 
 .bg {
-    background-image: url("skyscraperslight.png");
+    background-image: url("homepage.jpg");
     height: 100%;
     background-position: center;
     /*background-repeat: no-repeat;*/
