@@ -57,6 +57,10 @@
             intra: 'Intra-Company'
         };
 
+        //variables for parsing excel file
+        var rABS = true;
+        $scope.showUpload = true;
+
         $scope.contracts = [distributionStrings.direct];
 
         //store total computations outside of dealForm.distribution to avoid registering changes in $scope.$watch
@@ -139,10 +143,11 @@
             DealsService.getDealById($stateParams.ID).then(function (aDeal) {
                 //use true to convert datestrings to date objects
                 $scope.dealForm = preProcess(aDeal, true);
-
+                $scope.showUpload = false;
                 console.log($scope.dealForm);
             }).catch(function () {
                 //$scope.message = 'Cannot find the deal';
+                $scope.showUpload = false;
                 ngToast.danger('Cannot find the deal');
             });
         }
@@ -226,7 +231,7 @@
             } else {
                 //explicitly set SOW scheme (because default selected options is not working) to Direct
                 if (tempObject.process['SOW Scheme'] === null || tempObject.process['SOW Scheme'] === undefined) {
-                    tempObject.process['SOW Scheme'] = 'Direct';
+                    tempObject.process['SOW Scheme'] = 'Direct to Customer';
                 }
 
                 //throw error if start date > end date
@@ -476,11 +481,76 @@
             }
         }
 
-        //sample code, if user enters wrong input values, focus on the input
-        $('input').blur(function (event) {
-            event.target.checkValidity();
-        }).bind('invalid', function (event) {
-            console.log('invalid number!');
-        });
+        function processExcel(e) {
+            var spreadsheet, j, rows;
+            var tempObject = {
+                essential: {},
+                profile: {},
+                process: {},
+                distribution: {},
+                status: {},
+                content: {}
+            };
+            var numberFields = ['Resource Size (MM)', 'Resource Size (FTE)', 'Revenue', 'CM'];
+
+            var files = e.target.files;
+            var f = files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var data = e.target.result;
+                if (!rABS) {
+                    data = new Uint8Array(data);
+                }
+                spreadsheet = XLSX.read(data, { type: (rABS) ? 'binary' : 'array' });
+
+                //console.log('spreadsheet', spreadsheet);
+                //get the contents of each sheet (each category)
+                for (var i = 0; i < spreadsheet['SheetNames'].length; i++) {
+                    //initialize variables
+                    //get the keys which represents the cells
+                    rows = Object.keys(spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]);
+                    j = 1;
+                    tempObject[spreadsheet['SheetNames'][i]] = {};
+                    do {
+                        //store cell's value if not undefined
+                        if (spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j] !== undefined) {
+                            /**
+                                ['A' + j] & ['B' + j] will result to the cell then the 'w' property is the value (formatted text) of that cell
+                                ['A' + j].w is the field from the template, ['B' + j].w is the value inputted by the user
+                                example of object structure
+                                spreadsheet['SheetNames'][i] = 'profile'
+                                spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['A' + j].w = 'Country'
+                                spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j].w = 'PH'
+                                the difference between v & w is that the v is the true value (if number, etc) whereas w is just the formatted text
+                                this is important since Resource Size are in numbers, Level & Step are strings, and Dates are in strings
+                             */
+
+                            //console.log(spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j]);
+                            tempObject[spreadsheet['SheetNames'][i]][spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['A' + j].w] =
+                                (numberFields.indexOf(spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['A' + j].w) !== -1) ?
+                                    spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j].v : spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j].w;
+                        }
+                        //increment j
+                        j++;
+                        //!ref is the last key of each sheet object. this tells the range of cells e.g. 'A1:B4'
+                    } while (rows[j] !== '!ref');
+                }
+
+                //console.log(tempObject);
+                //need to wrap assignment to $scope.$apply() to update the bindings in the html immediately
+                $scope.$apply(function(){
+                    $scope.dealForm = preProcess(tempObject, true);
+                });
+                console.log($scope.dealForm);
+            }
+
+            if (rABS) {
+                reader.readAsBinaryString(f);
+            } else {
+                reader.readAsArrayBuffer(f);
+            }
+        }
+
+        $('#newDealFile')[0].addEventListener('change', processExcel, false);
     }
 })();

@@ -35,8 +35,15 @@
                 </select>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="input-group" ng-show="showUpload">
+                <label>Upload File to fill form</label>
+                <input type="file" class="form-control" id="newDealFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    />
+            </div>
+        </div>
         <div class="col-md-2 pull-right">
-            <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid">Submit</button>
+            <button type="submit" class="btn btn-success" ng-disabled="myForm.$invalid">Submit</button>
             <!-- <button type="button" class="btn btn-default">Cancel</button> -->
         </div>
     </div>
@@ -608,15 +615,15 @@
                                     <b style="color:red">JP</b>
                                     <br/>
                                     <br/>
-                                    <b style="color: blue">GD</b>
+                                    <b style="color: navy">GD</b>
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(0, 6)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' res jp ' + monthYear].$touched}">
-                                        <input type="number" min="0" max="9999" step="0.01" class="form-control pull-right" name="{{'distribution ' + contract + ' res jp ' + monthYear}}"
+                                        <input type="number" min="0" max="9999" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' res jp ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].res.jp[monthYear]" />
                                     </div>
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res gd ' + monthYear].$invalid && myForm['distribution ' + contract + ' res gd ' + monthYear].$touched}">
-                                        <input type="number" min="0" max="9999" step="0.01" class="form-control pull-right" name="{{'distribution ' + contract + ' res gd ' + monthYear}}"
+                                        <input type="number" min="0" max="9999" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' res gd ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].res.gd[monthYear]" />
                                     </div>
                                 </td>
@@ -629,7 +636,7 @@
                                     <b style="color:red">JP</b>
                                     <br/>
                                     <br/>
-                                    <b style="color: blue">GD</b>
+                                    <b style="color: navy">GD</b>
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(0, 6)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' rev jp ' + monthYear].$touched}">
@@ -647,7 +654,7 @@
                                     <b>CM (JPY):</b>
                                 </td>
                                 <td>
-                                    <b style="color: blue">ALL</b>
+                                    <b style="color: navy">ALL</b>
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(0, 6)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' cm ' + monthYear].$invalid && myForm['distribution ' + contract + ' cm ' + monthYear].$touched}">
@@ -676,15 +683,15 @@
                                     <b style="color:red">JP</b>
                                     <br/>
                                     <br/>
-                                    <b style="color: blue">GD</b>
+                                    <b style="color: navy">GD</b>
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(6, 12)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' res jp ' + monthYear].$touched}">
-                                        <input type="number" min="0" max="9999" step="0.01" class="form-control pull-right" name="{{'distribution ' + contract + ' res jp ' + monthYear}}"
+                                        <input type="number" min="0" max="9999" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' res jp ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].res.jp[monthYear]" />
                                     </div>
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res gd ' + monthYear].$invalid && myForm['distribution ' + contract + ' res gd ' + monthYear].$touched}">
-                                        <input type="number" min="0" max="9999" step="0.01" class="form-control pull-right" name="{{'distribution ' + contract + ' res gd ' + monthYear}}"
+                                        <input type="number" min="0" max="9999" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' res gd ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].res.gd[monthYear]" />
                                     </div>
                                 </td>
@@ -697,7 +704,7 @@
                                     <b style="color:red">JP</b>
                                     <br/>
                                     <br/>
-                                    <b style="color: blue">GD</b>
+                                    <b style="color: navy">GD</b>
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(6, 12)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' rev jp ' + monthYear].$touched}">
@@ -715,7 +722,7 @@
                                     <b>CM (JPY):</b>
                                 </td>
                                 <td>
-                                    <b style="color: blue">ALL</b>
+                                    <b style="color: navy">ALL</b>
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(6, 12)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' cm ' + monthYear].$invalid && myForm['distribution ' + contract + ' cm ' + monthYear].$touched}">
