@@ -38,6 +38,8 @@ app.use('/api/client', require('./controllers/api/client.controller'));
 app.use('/api/deals', require('./controllers/api/deals.controller'));
 app.use('/api/modules', require('./controllers/api/modules.controller'));
 
+app.use('/scripts', express.static(__dirname + '/node_modules/'));
+
 
 //added by dyan0
 io.on('connection', function(socket){
