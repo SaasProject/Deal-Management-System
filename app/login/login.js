@@ -19,8 +19,8 @@
                 $rootScope.user = data.user;
                 $state.transitionTo('home');
             }).catch(function(err) {
-                //$scope.message = 'Username/Password incorrect';
-                ngToast.danger('Username/Password incorrect');
+                $scope.message = 'Username/Password incorrect';
+                //ngToast.danger('Username/Password incorrect');
                 console.log(err);
             });
         }
