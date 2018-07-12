@@ -27,6 +27,8 @@ var fs = require('fs');
 var multer = require('multer');
 var path = require('path');
 
+var xlsx = require('xlsx');
+
 var service = {};
 
 service.addDeal = addDeal;
@@ -50,7 +52,7 @@ function addDeal(deal, user) {
         if (err) deferred.reject(err);
 
         //use .length to get number of documents
-        if (deals.length > 0) {
+        if (deals.length > 0 && deals['ID'] === undefined) {
             previousID = deals[deals.length - 1].ID;
             IDnumber = previousID.slice(3, 7);
             IDnumber++;
@@ -198,7 +200,9 @@ function uploadFile(req, res) {
         fileFilter: function (req, file, cb) {
             if (path.extname(file.originalname) !== '.xls' &&
                 path.extname(file.originalname) !== '.xlsx' &&
-                path.extname(file.originalname) !== '.ods') {
+                path.extname(file.originalname) !== '.ods' && 
+                //for testing
+                path.extname(file.originalname) !== '.txt') {
                 return cb(new Error('Wrong file extension'));
             }
 
@@ -206,31 +210,80 @@ function uploadFile(req, res) {
         }
     }).single(req.params.name);
 
+    var spreadsheet, rows, j, tempObject = {};
+    var numberFields = ['Resource Size (MM)', 'Resource Size (FTE)', 'Revenue', 'CM'];
+
     upload(req, res, function (err) {
         if (err) {
-            console.log('error');
+            console.log(err);
             deferred.reject(err);
         } else if (!req.file) {
             console.log('no file uploaded');
             deferred.reject({ NO_FILE: true });
         } else {
-
-            /**
-             * check file type here
-             */
-
-            console.log(req.file);
-            //console.log(req.file.buffer.toString());
-            fs.readFile('./uploads/' + req.file.originalname, function (err, data) {
+            //console.log(req.file);
+            /* fs.readFile('./uploads/' + req.file.originalname, function (err, data) {
                 if (err) {
                     console.log('error', err);
                     deferred.reject(err);
                 } else {
-                    console.log('data is: ' + data);
+                    //console log produces beeping sounds when uploading excel files and printing them on console
                     console.log(data.toString().split('\n'));
                     deferred.resolve();
                 }
-            });
+            }); */
+            spreadsheet = xlsx.readFile('./uploads/' + req.file.originalname);
+            /**
+             * set specific conditions here
+             * this assumes that the excel template is correct
+             */
+
+            //0 is the first (essential) and B1 is the value for Document Number
+            //store it to 'ID' property
+            /* if(spreadsheet['Sheets'][spreadsheet['SheetNames'][0]]['B1'] !== undefined) {
+                tempObject['ID'] = spreadsheet['Sheets'][spreadsheet['SheetNames'][0]]['B1'].w;
+            } */
+
+            //get the contents of each sheet (each category)
+            for(var i = 0; i < spreadsheet['SheetNames'].length; i++) {
+                //initialize variables
+                //get the keys which represents the cells
+                rows = Object.keys(spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]);
+                j = 1;
+                tempObject[spreadsheet['SheetNames'][i]] = {};
+                do {
+                    //store cell's value if not undefined
+                    if(spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j] !== undefined) {
+                        /**
+                            ['A' + j] & ['B' + j] will result to the cell then the 'w' property is the value (formatted text) of that cell
+                            ['A' + j].w is the field from the template, ['B' + j].w is the value inputted by the user
+                            example of object structure
+                            spreadsheet['SheetNames'][i] = 'profile'
+                            spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['A' + j].w = 'Country'
+                            spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j].w = 'PH'
+                            the difference between v & w is that the v is the true value (if number, etc) whereas w is just the formatted text
+                            this is important since Resource Size are in numbers, Level & Step are strings, and Dates are in strings
+                         */
+                        
+                        console.log(spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j]);
+                        tempObject[spreadsheet['SheetNames'][i]][spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['A' + j].w] = 
+                        (numberFields.indexOf(spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['A' + j].w) !== -1) ? 
+                        spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j].v : spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j].w;
+                    }
+                    //increment j
+                    j++;
+                    //!ref is the last key of each sheet object. this tells the range of cells e.g. 'A1:B4'
+                }while(rows[j] !== '!ref');
+            }
+
+            console.log(tempObject);
+
+            //delete essential.Document Number here hmm
+            //delete tempObject['essential']['Document Number'];
+
+            //console.log(tempObject);
+        
+            deferred.resolve();
         }
     });
 
