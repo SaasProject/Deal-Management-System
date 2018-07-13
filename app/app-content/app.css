@@ -47,8 +47,6 @@ body {
 
 .dealTable {
 	font-size: 10px;
-	display: block;
-	overflow-x: auto;
 }
 
 .div-padded {
