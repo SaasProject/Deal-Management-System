@@ -503,12 +503,21 @@
                 }
                 spreadsheet = XLSX.read(data, { type: (rABS) ? 'binary' : 'array' });
 
+                //delete 'options' sheet (this sheet is for dropdown options which MUST be the same as the deal form)
+                spreadsheet['SheetNames'].splice(spreadsheet['SheetNames'].indexOf('options'), 1);
+
                 //console.log('spreadsheet', spreadsheet);
                 //get the contents of each sheet (each category)
                 for (var i = 0; i < spreadsheet['SheetNames'].length; i++) {
                     //initialize variables
                     //get the keys which represents the cells
                     rows = Object.keys(spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]);
+
+                    //check the rows, skip the sheet if it is empty (e.g. distribution table may be empty for now)
+                    if(rows.length === 0) {
+                        continue;
+                    }
+
                     j = 1;
                     tempObject[spreadsheet['SheetNames'][i]] = {};
                     do {
@@ -541,7 +550,7 @@
                 $scope.$apply(function(){
                     $scope.dealForm = preProcess(tempObject, true);
                 });
-                console.log($scope.dealForm);
+                //console.log($scope.dealForm);
             }
 
             if (rABS) {
