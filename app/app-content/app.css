@@ -9,7 +9,7 @@ body {
 
 .lighten{
 	background-color: rgba(237, 241, 247, 0.4);
-	height: 100vh;
+	min-height: 100vh;
 }
 
 #overlay {
