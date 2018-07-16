@@ -193,5 +193,9 @@
                 });
             }
         }
+
+        $scope.open = function(dealID) {
+            window.open($state.href('dealForm', {ID: dealID}), dealID);
+        }
     }
 })();

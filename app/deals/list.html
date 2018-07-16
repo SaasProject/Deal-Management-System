@@ -37,7 +37,7 @@
     <div style = "text-align:center" class = "spinner" ng-show = "loading"> 
         <img src="loader.gif"/>
     </div>
-    <table class="table compact dealTable">
+    <table class="table table-hover compact dealTable">
         <thead>
             <th class="th_ID" ng-click="sortColumn('essential', 'ID')" ng-class="sortClass('essential', 'ID')">No
             </th>
@@ -83,7 +83,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="deal in deals | filter: searchText | orderBy: column : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize">
-                <td><a ui-sref="dealForm({ID: deal.ID})" target="_blank" onclick="clickAndDisable(this);">{{deal['ID']}}</a></td>
+                <td><a href="" ng-click="open(deal['ID'])">{{deal['ID']}}</a></td>
                 <td>{{deal['profile']['Client']}}</td>
                 <td>{{deal['essential']['Deal Name']}}</td>
                 <td>{{deal['profile']['AWS Resp (Sales) person']}}</td>
@@ -104,8 +104,7 @@
                 <td>{{deal['process']['SOW Date']}}</td>
                 <td>{{deal['essential']['Due Date']}}</td>
                 <td ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList && !essentialField.default">
-                    <div ng-if="essentialField.name === 'ID'"><a ui-sref="dealForm({ID: deal.ID})" target="_blank" onclick="clickAndDisable(this);">{{(essentialField.name === 'ID') ? deal.ID : deal.essential[essentialField.name]}}</a></div>
-                    <div ng-if="essentialField.name !== 'ID'">{{(essentialField.name === 'ID') ? deal.ID : deal.essential[essentialField.name]}}</div>
+                    {{deal.profile[essentialField.name]}}
                 </td>
                 <td ng-repeat="profileField in fields.profile" ng-if="profileField.showInList && !profileField.default">
                     {{deal.profile[profileField.name]}}
