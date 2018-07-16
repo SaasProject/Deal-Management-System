@@ -8,7 +8,7 @@
             <div class="form-inline" ng-class="{'has-error': myForm['essential Deal Name'].$invalid && myForm['essential Deal Name'].$touched}">
                 <label>Deal Name:</label>
                 <span style="color:red" ng-if="getField('essential', 'Deal Name').required">*</span>
-                <input type="text" name="essential Deal Name" class="form-control pull-right" ng-model="dealForm.essential['Deal Name']"
+                <input type="text" name="essential Deal Name" class="form-control input-sm pull-right" ng-model="dealForm.essential['Deal Name']"
                     ng-required="getField('essential', 'Deal Name').required">
             </div>
             <br/>
@@ -17,9 +17,9 @@
                 <span style="color:red" ng-if="getField('essential', 'Due Date').required">*</span>
                 <div class="input-group pull-right">
                     <input type="text" name="essential Due Date" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['essential']['Due Date']"
-                        class="form-control" ng-model="dealForm.essential['Due Date']" ng-required="getField('essential', 'Due Date').required">
+                        class="form-control input-sm" ng-model="dealForm.essential['Due Date']" ng-required="getField('essential', 'Due Date').required">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="opened['essential']['Due Date'] = true">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="opened['essential']['Due Date'] = true">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </button>
                     </span>
@@ -29,7 +29,7 @@
             <div class="form-inline" ng-class="{'has-error': myForm['essential Assignee'].$invalid && myForm['essential Assignee'].$touched}">
                 <label>Assignee:</label>
                 <span style="color:red" ng-if="getField('essential', 'Assignee').required">*</span>
-                <select class="form-control pull-right" name="essential Assignee" ng-model="dealForm.essential['Assignee']" ng-required="getField('essential', 'Assignee').required">
+                <select class="form-control input-sm pull-right" name="essential Assignee" ng-model="dealForm.essential['Assignee']" ng-required="getField('essential', 'Assignee').required">
                     <option value="">- select -</option>
                     <option ng-repeat="user in users" value="{{user.nickname}}">{{user.nickname}}</option>
                 </select>
@@ -38,13 +38,13 @@
         <div class="col-md-4">
             <div class="input-group" ng-show="showUpload">
                 <label>Upload File to fill form</label>
-                <input type="file" class="form-control" id="newDealFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                <input type="file" class="form-control input-sm" id="newDealFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                     />
             </div>
         </div>
         <div class="col-md-2 pull-right">
             <button type="submit" class="btn btn-success" ng-disabled="myForm.$invalid">Submit</button>
-            <!-- <button type="button" class="btn btn-default">Cancel</button> -->
+            <!-- <button type="button" class="btn btn-default btn-sm">Cancel</button> -->
         </div>
     </div>
     <hr class="dealsCollapsible">
@@ -56,14 +56,14 @@
             </div>
             <div id="profileSection">
                 <div class="col-md-6">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-condensed">
                         <tbody>
                             <tr>
                                 <td>
                                     <div class="form-inline" ng-class="{'has-error': myForm['profile Country'].$invalid && myForm['profile Country'].$touched}">
                                         <label>Country</label>
                                         <span style="color:red" ng-if="getField('profile', 'Country').required">*</span>
-                                        <select class="form-control pull-right" name="profile Country" ng-model="dealForm.profile['Country']" ng-required="getField('profile', 'Country').required">
+                                        <select class="form-control input-sm pull-right" name="profile Country" ng-model="dealForm.profile['Country']" ng-required="getField('profile', 'Country').required">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Country').options" value="{{option}}">
                                                 {{option}}
@@ -77,7 +77,7 @@
                                     <div class="form-inline" ng-class="{'has-error': myForm['profile Client'].$invalid && myForm['profile Client'].$touched}">
                                         <label>Client</label>
                                         <span style="color:red" ng-if="getField('profile', 'Client').required">*</span>
-                                        <select class="form-control pull-right" name="profile Client" ng-model="dealForm.profile['Client']" ng-required="getField('profile', 'Client').required">
+                                        <select class="form-control input-sm pull-right" name="profile Client" ng-model="dealForm.profile['Client']" ng-required="getField('profile', 'Client').required">
                                             <option value="">- select -</option>
                                             <option ng-repeat="client in clients" value="{{client.cmpnyNameShort}}">{{client.cmpnyNameShort}}</option>
                                         </select>
@@ -89,7 +89,7 @@
                                     <div class="form-inline" ng-class="{'has-error': myForm['profile Service'].$invalid && myForm['profile Service'].$touched}">
                                         <label>Service</label>
                                         <span style="color:red" ng-if="getField('profile', 'Service').required">*</span>
-                                        <select class="form-control pull-right" name="profile Service" ng-model="dealForm.profile['Service']" ng-required="getField('profile', 'Service').required">
+                                        <select class="form-control input-sm pull-right" name="profile Service" ng-model="dealForm.profile['Service']" ng-required="getField('profile', 'Service').required">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Service').options" value="{{option}}">
                                                 {{option}}
@@ -103,7 +103,7 @@
                                     <div class="form-inline" ng-class="{'has-error': myForm['profile Type'].$invalid && myForm['profile Type'].$touched}">
                                         <label>Type</label>
                                         <span style="color:red" ng-if="getField('profile', 'Type').required">*</span>
-                                        <select class="form-control pull-right" name="profile Type" ng-model="dealForm.profile['Type']" ng-required="getField('profile', 'Type').required">
+                                        <select class="form-control input-sm pull-right" name="profile Type" ng-model="dealForm.profile['Type']" ng-required="getField('profile', 'Type').required">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Type').options" value="{{option}}">
                                                 {{option}}
@@ -118,13 +118,13 @@
                                     <span style="color:red" ng-if="getField('profile', 'Resource Size (MM)').required">*</span>
                                     <div class="pull-right">
                                         <div class="form-inline" ng-class="{'has-error': myForm['profile Resource Size (MM)'].$invalid && myForm['profile Resource Size (MM)'].$touched}">
-                                            <input type="number" ng-model="dealForm.profile['Resource Size (MM)']" min="0" max="9999" step="0.01" class="form-control"
+                                            <input type="number" ng-model="dealForm.profile['Resource Size (MM)']" min="0" max="9999" step="0.01" class="form-control input-sm"
                                                 name="profile Resource Size (MM)" ng-required="getField('profile', 'Resource Size (MM)').required"> (MM)
                                         </div>
                                         /
                                         <br/>
                                         <div class="form-inline" ng-class="{'has-error': myForm['profile Resource Size (FTE)'].$invalid && myForm['profile Resource Size (FTE)'].$touched}">
-                                            <input type="number" min="0" step="1" max="9999" class="form-control" name="profile Resource Size (FTE)" ng-model="dealForm.profile['Resource Size (FTE)']"
+                                            <input type="number" min="0" step="1" max="9999" class="form-control input-sm" name="profile Resource Size (FTE)" ng-model="dealForm.profile['Resource Size (FTE)']"
                                                 ng-required="getField('profile', 'Resource Size (FTE)').required"> (FTE)
                                         </div>
                                     </div>
@@ -137,9 +137,9 @@
                                         <span style="color:red" ng-if="getField('profile', 'Duration (Start)').required">*</span>
                                         <div class="input-group pull-right">
                                             <input type="text" name="profile Duration (Start)" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile']['Duration (Start)']"
-                                                class="form-control" ng-model="dealForm.profile['Duration (Start)']" ng-required="getField('profile', 'Duration (Start)').required">
+                                                class="form-control input-sm" ng-model="dealForm.profile['Duration (Start)']" ng-required="getField('profile', 'Duration (Start)').required">
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="opened['profile']['Duration (Start)'] = true">
+                                                <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile']['Duration (Start)'] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </button>
                                             </span>
@@ -153,7 +153,7 @@
                                     <span style="color:red" ng-if="getField('profile', 'AWS Resp (Sales) person').required">*</span>
                                     <div class="pull-right">
                                         <div class="form-inline" ng-class="{'has-error': myForm['profile AWS Resp (Sales) person'].$invalid && myForm['profile AWS Resp (Sales) person'].$touched}">
-                                            <select class="form-control" ng-model="dealForm.profile['AWS Resp (Sales) person']" name="profile AWS Resp (Sales) person"
+                                            <select class="form-control input-sm" ng-model="dealForm.profile['AWS Resp (Sales) person']" name="profile AWS Resp (Sales) person"
                                                 ng-required="getField('profile', 'AWS Resp (Sales) person').required">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="user in users" value="{{user.nickname}}">{{user.nickname}}</option>
@@ -162,7 +162,7 @@
                                         /
                                         <br/>
                                         <div class="form-inline" ng-class="{'has-error': myForm['profile AWS Resp (Sales) BU'].$invalid && myForm['profile AWS Resp (Sales) BU'].$touched}">
-                                            <select class="form-control" ng-model="dealForm.profile['AWS Resp (Sales) BU']" name="profile AWS Resp (Sales) BU" ng-required="getField('profile', 'AWS Resp (Sales) BU').required">
+                                            <select class="form-control input-sm" ng-model="dealForm.profile['AWS Resp (Sales) BU']" name="profile AWS Resp (Sales) BU" ng-required="getField('profile', 'AWS Resp (Sales) BU').required">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="businessUnit in businessUnits" value="{{businessUnit.BU}}">{{businessUnit.BU}}</option>
                                             </select>
@@ -175,7 +175,7 @@
                                     <div class="form-inline" ng-class="{'has-error': myForm['profile Key Assignment'].$invalid && myForm['profile Key Assignment'].$touched}">
                                         <label>Key Assignment</label>
                                         <span style="color:red" ng-if="getField('profile', 'Key Assignment').required">*</span>
-                                        <textarea class="form-control pull-right" name="profile Key Assignment" ng-model="dealForm.profile['Key Assignment']" ng-required="getField('profile', 'Key Assignment').required"></textarea>
+                                        <textarea class="form-control input-sm pull-right" name="profile Key Assignment" ng-model="dealForm.profile['Key Assignment']" ng-required="getField('profile', 'Key Assignment').required"></textarea>
                                     </div>
                                 </td>
                             </tr>
@@ -185,26 +185,26 @@
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
-                                            <input type="{{field.type}}" class="form-control" name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]"
+                                            <input type="{{field.type}}" class="form-control input-sm" name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]"
                                                 ng-required="{{field.required}}" />
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile'][field.name]" class="form-control pull-right"
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile'][field.name]" class="form-control input-sm pull-right"
                                                 name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]" ng-required="field.required">
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="opened['profile'][field.name] = true">
+                                                <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </button>
                                             </span>
                                         </div>
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
-                                            <textarea ng-model="dealForm.profile[field.name]" class="form-control" name="{{'profile ' + field.name}}" ng-required="{{field.required}}"
+                                            <textarea ng-model="dealForm.profile[field.name]" class="form-control input-sm" name="{{'profile ' + field.name}}" ng-required="{{field.required}}"
                                                 rows="4" cols="50"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control" name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -216,14 +216,14 @@
                     </table>
                 </div>
                 <div class="col-md-6 form-inline">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-condensed">
                         <tbody>
                             <tr>
                                 <td>
                                     <div class="form-inline" ng-class="{'has-error': myForm['profile Division'].$invalid && myForm['profile Division'].$touched}">
                                         <label>Division</label>
                                         <span style="color:red" ng-if="getField('profile', 'Division').required">*</span>
-                                        <select class="form-control pull-right" ng-model="dealForm.profile['Division']" name="profile Division" ng-required="getField('profile', 'Division').required">
+                                        <select class="form-control input-sm pull-right" ng-model="dealForm.profile['Division']" name="profile Division" ng-required="getField('profile', 'Division').required">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Division').options" value="{{option}}">
                                                 {{option}}
@@ -237,7 +237,7 @@
                                     <div class="form-inline" ng-class="{'has-error': myForm['profile Client Resp'].$invalid && myForm['profile Client Resp'].$touched}">
                                         <label>Client Resp</label>
                                         <span style="color:red" ng-if="getField('profile', 'Client Resp').required">*</span>
-                                        <input type="text" class="form-control pull-right" name="profile Client Resp" ng-model="dealForm.profile['Client Resp']"
+                                        <input type="text" class="form-control input-sm pull-right" name="profile Client Resp" ng-model="dealForm.profile['Client Resp']"
                                             ng-required="getField('profile', 'Client Resp').required">
                                     </div>
                                 </td>
@@ -248,14 +248,14 @@
                                     <span style="color:red" ng-if="getField('profile', 'Level').required">*</span>
                                     <div class="form-inline pull-right">
                                         <div class="form-group" ng-class="{'has-error': myForm['profile Level'].$invalid && myForm['profile Level'].$touched}">
-                                            <select class="form-control" ng-model="dealForm.profile['Level']" name="profile Level" ng-required="getField('profile', 'Level').required">
+                                            <select class="form-control input-sm" ng-model="dealForm.profile['Level']" name="profile Level" ng-required="getField('profile', 'Level').required">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in getField('profile', 'Level').options" value="{{option}}">{{option}}</option>
                                             </select>
                                         </div>
                                         /
                                         <div class="form-group" ng-class="{'has-error': myForm['profile Step'].$invalid && myForm['profile Step'].$touched}">
-                                            <select class="form-control" ng-model="dealForm.profile['Step']" name="profile Step" ng-required="getField('profile', 'Step').required">
+                                            <select class="form-control input-sm" ng-model="dealForm.profile['Step']" name="profile Step" ng-required="getField('profile', 'Step').required">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in getField('profile', 'Step').options | 
                                                         filter: (dealForm.profile['Level'] + '.')" value="{{option}}">{{option}}</option>
@@ -269,7 +269,7 @@
                                     <div class="form-inline" ng-class="{'has-error': myForm['profile Confidence'].$invalid && myForm['profile Confidence'].$touched}">
                                         <label>Confidence</label>
                                         <span style="color:red" ng-if="getField('profile', 'Confidence').required">*</span>
-                                        <select class="form-control pull-right" ng-model="dealForm.profile['Confidence']" name="profile Confidence" ng-required="getField('profile', 'Confidence').required">
+                                        <select class="form-control input-sm pull-right" ng-model="dealForm.profile['Confidence']" name="profile Confidence" ng-required="getField('profile', 'Confidence').required">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Confidence').options" value="{{option}}">
                                                 {{option}}
@@ -283,7 +283,7 @@
                                     <label>Revenue</label>
                                     <span style="color:red" ng-if="getField('profile', 'Revenue').required">*</span>
                                     <div class="form-inline pull-right" ng-class="{'has-error': myForm['profile Revenue'].$invalid && myForm['profile Revenue'].$touched}">
-                                        <input type="number" min="0" step="1" class="form-control" name="profile Revenue" ng-model="dealForm.profile['Revenue']"
+                                        <input type="number" min="0" step="1" class="form-control input-sm" name="profile Revenue" ng-model="dealForm.profile['Revenue']"
                                             ng-required="getField('profile', 'Revenue').required"> (JPY)
                                     </div>
                                     <br/>
@@ -291,7 +291,7 @@
                                     <label>CM</label>
                                     <span style="color:red" ng-if="getField('profile', 'CM').required">*</span>
                                     <div class="form-inline pull-right" ng-class="{'has-error': myForm['profile CM'].$invalid && myForm['profile CM'].$touched}">
-                                        <input type="number" min="0" step="1" class="form-control" name="profile CM" ng-model="dealForm.profile['CM']" ng-required="getField('profile', 'CM').required"> (JPY)
+                                        <input type="number" min="0" step="1" class="form-control input-sm" name="profile CM" ng-model="dealForm.profile['CM']" ng-required="getField('profile', 'CM').required"> (JPY)
                                     </div>
                                 </td>
                             </tr>
@@ -301,10 +301,10 @@
                                         <label>Duration (End)</label>
                                         <span style="color:red" ng-if="getField('profile', 'Duration (End)').required">*</span>
                                         <div class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile']['Duration (End)']" class="form-control"
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile']['Duration (End)']" class="form-control input-sm"
                                                 name="profile Duration (End)" ng-model="dealForm.profile['Duration (End)']" ng-required="getField('profile', 'Duration (End)').required">
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="opened['profile']['Duration (End)'] = true">
+                                                <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile']['Duration (End)'] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </button>
                                             </span>
@@ -318,7 +318,7 @@
                                     <span style="color:red" ng-if="getField('profile', 'AWS Resp (Dev) person').required">*</span>
                                     <div class="pull-right">
                                         <div class="form-group" ng-class="{'has-error': myForm['profile AWS Resp (Dev) person'].$invalid && myForm['profile AWS Resp (Dev) person'].$touched}">
-                                            <select class="form-control" name="profile AWS Resp (Dev) person" ng-model="dealForm.profile['AWS Resp (Dev) person']" ng-required="getField('profile', 'AWS Resp (Dev) person').required">
+                                            <select class="form-control input-sm" name="profile AWS Resp (Dev) person" ng-model="dealForm.profile['AWS Resp (Dev) person']" ng-required="getField('profile', 'AWS Resp (Dev) person').required">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="user in users" value="{{user.nickname}}">{{user.nickname}}</option>
                                             </select>
@@ -326,7 +326,7 @@
                                         <br/> /
                                         <br/>
                                         <div class="form-group" ng-class="{'has-error': myForm['profile AWS Resp (Dev) BU'].$invalid && myForm['profile AWS Resp (Dev) BU'].$touched}">
-                                            <select class="form-control" name="profile AWS Resp (Dev) BU" ng-model="dealForm.profile['AWS Resp (Dev) BU']" ng-required="getField('profile', 'AWS Resp (Dev) BU').required">
+                                            <select class="form-control input-sm" name="profile AWS Resp (Dev) BU" ng-model="dealForm.profile['AWS Resp (Dev) BU']" ng-required="getField('profile', 'AWS Resp (Dev) BU').required">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="businessUnit in businessUnits" value="{{businessUnit.BU}}">{{businessUnit.BU}}</option>
                                             </select>
@@ -339,7 +339,7 @@
                                     <label>Remark</label>
                                     <span style="color:red" ng-if="getField('profile', 'Remark').required">*</span>
                                     <div class="form-group pull-right" ng-class="{'has-error': myForm['profile Remark'].$invalid && myForm['profile Remark'].$touched}">
-                                        <input type="text" class="form-control" name="profile Remark" ng-model="dealForm.profile['Remark']" ng-required="getField('profile', 'Remark').required">
+                                        <input type="text" class="form-control input-sm" name="profile Remark" ng-model="dealForm.profile['Remark']" ng-required="getField('profile', 'Remark').required">
                                     </div>
                                 </td>
                             </tr>
@@ -349,26 +349,26 @@
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
-                                            <input type="{{field.type}}" class="form-control" name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]"
+                                            <input type="{{field.type}}" class="form-control input-sm" name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]"
                                                 ng-required="{{field.required}}" />
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile'][field.name]" class="form-control" name="{{'profile ' + field.name}}"
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile'][field.name]" class="form-control input-sm" name="{{'profile ' + field.name}}"
                                                 ng-model="dealForm.profile[field.name]" ng-required="field.required">
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="opened['profile'][field.name] = true">
+                                                <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </button>
                                             </span>
                                         </div>
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
-                                            <textarea ng-model="dealForm.profile[field.name]" class="form-control" name="{{'profile ' + field.name}}" ng-required="{{field.required}}"
+                                            <textarea ng-model="dealForm.profile[field.name]" class="form-control input-sm" name="{{'profile ' + field.name}}" ng-required="{{field.required}}"
                                                 rows="4" cols="50"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control" ng-model="dealForm.profile[field.name]" name="{{'profile ' + field.name}}" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" ng-model="dealForm.profile[field.name]" name="{{'profile ' + field.name}}" ng-required="{{field.required}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -393,7 +393,7 @@
             </div>
             <div id="processSection" class="collapse in">
                 <div class="col-md-6 form-inline">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-condensed">
                         <tbody>
                             <tr>
                                 <td>
@@ -407,7 +407,7 @@
                                     <label>SRB No.</label>
                                     <span style="color:red" ng-if="getField('process', 'SRB No').required">*</span>
                                     <div class="form-group pull-right" ng-class="{'has-error': myForm['process SRB No'].$invalid && myForm['process SRB No'].$touched}">
-                                        <input type="text" class="form-control" name="process SRB No" ng-model="dealForm.process['SRB No']" ng-required="getField('process', 'SRB No').required"
+                                        <input type="text" class="form-control input-sm" name="process SRB No" ng-model="dealForm.process['SRB No']" ng-required="getField('process', 'SRB No').required"
                                             placeholder="(e.g. PS-0095)">
                                     </div>
                                 </td>
@@ -417,10 +417,10 @@
                                     <label>SRB Date</label>
                                     <span style="color:red" ng-if="getField('process', 'SRB Date').required">*</span>
                                     <div class="input-group pull-right" ng-class="{'has-error': myForm['process SRB Date'].$invalid && myForm['process SRB Date'].$touched}">
-                                        <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process']['SRB Date']" class="form-control" name="process SRB Date"
+                                        <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process']['SRB Date']" class="form-control input-sm" name="process SRB Date"
                                             ng-model="dealForm.process['SRB Date']" ng-required="getField('process', 'SRB Date').required">
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="opened['process']['SRB Date'] = true">
+                                            <button type="button" class="btn btn-default btn-sm" ng-click="opened['process']['SRB Date'] = true">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </button>
                                         </span>
@@ -432,7 +432,7 @@
                                     <label>SRB Status</label>
                                     <span style="color:red" ng-if="getField('process', 'SRB Status').required">*</span>
                                     <div class="form-group pull-right" ng-class="{'has-error': myForm['process SRB Status'].$invalid && myForm['process SRB Status'].$touched}">
-                                        <select class="form-control" name="process SRB Status" ng-model="dealForm.process['SRB Status']" ng-required="getField('process', 'SRB Status').required">
+                                        <select class="form-control input-sm" name="process SRB Status" ng-model="dealForm.process['SRB Status']" ng-required="getField('process', 'SRB Status').required">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('process', 'SRB Status').options" value="{{option}}">
                                                 {{option}}
@@ -447,26 +447,26 @@
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
-                                            <input type="{{field.type}}" class="form-control" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]"
+                                            <input type="{{field.type}}" class="form-control input-sm" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]"
                                                 ng-required="{{field.required}}" />
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control" name="{{'process ' + field.name}}"
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control input-sm" name="{{'process ' + field.name}}"
                                                 ng-model="dealForm.process[field.name]" ng-required="field.required">
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="opened['process'][field.name] = true">
+                                                <button type="button" class="btn btn-default btn-sm" ng-click="opened['process'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </button>
                                             </span>
                                         </div>
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
-                                            <textarea ng-model="dealForm.process[field.name]" class="form-control" name="{{'process ' + field.name}}" ng-required="{{field.required}}"
+                                            <textarea ng-model="dealForm.process[field.name]" class="form-control input-sm" name="{{'process ' + field.name}}" ng-required="{{field.required}}"
                                                 rows="4" cols="50"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -478,14 +478,14 @@
                     </table>
                 </div>
                 <div class="col-md-6 form-inline">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-condensed">
                         <tbody>
                             <tr>
                                 <td>
                                     <label>SOW Scheme</label>
                                     <span style="color:red" ng-if="getField('process', 'SOW Scheme').required">*</span>
                                     <div class="form-group pull-right" ng-class="{'has-error': myForm['process SOW Scheme'].$invalid && myForm['process SOW Scheme'].$touched}">
-                                        <select class="form-control" ng-model="dealForm.process['SOW Scheme']" name="process SOW Scheme" ng-required="getField('process', 'SOW Scheme').required"
+                                        <select class="form-control input-sm" ng-model="dealForm.process['SOW Scheme']" name="process SOW Scheme" ng-required="getField('process', 'SOW Scheme').required"
                                             ng-change="setContracts(dealForm.process['SOW Scheme'])">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('process', 'SOW Scheme').options" value="{{option}}">
@@ -500,7 +500,7 @@
                                     <label>SOW No.</label>
                                     <span style="color:red" ng-if="getField('process', 'SOW No').required">*</span>
                                     <div class="form-group pull-right" ng-class="{'has-error': myForm['process SOW No'].$invalid && myForm['process SOW No'].$touched}">
-                                        <input type="text" class="form-control" name="process SOW No" ng-model="dealForm.process['SOW No']" ng-required="getField('process', 'SOW No').required"
+                                        <input type="text" class="form-control input-sm" name="process SOW No" ng-model="dealForm.process['SOW No']" ng-required="getField('process', 'SOW No').required"
                                             placeholder="(e.g. AWS-2013-2575)">
                                     </div>
                                 </td>
@@ -510,10 +510,10 @@
                                     <label>SOW Date</label>
                                     <span style="color:red" ng-if="getField('process', 'SOW Date').required">*</span>
                                     <div class="input-group pull-right" ng-class="{'has-error': myForm['process SOW Date'].$invalid && myForm['process SOW Date'].$touched}">
-                                        <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process']['SOW Date']" class="form-control" name="process SOW Date"
+                                        <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process']['SOW Date']" class="form-control input-sm" name="process SOW Date"
                                             ng-model="dealForm.process['SOW Date']" ng-required="getField('process', 'SOW Date').required">
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="opened['process']['SOW Date'] = true">
+                                            <button type="button" class="btn btn-default btn-sm" ng-click="opened['process']['SOW Date'] = true">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </button>
                                         </span>
@@ -525,7 +525,7 @@
                                     <label>SOW Status</label>
                                     <span style="color:red" ng-if="getField('process', 'SOW Status').required">*</span>
                                     <div class="form-group pull-right" ng-class="{'has-error': myForm['process SOW Status'].$invalid && myForm['process SOW Status'].$touched}">
-                                        <select class="form-control" name="process SOW Status" ng-model="dealForm.process['SOW Status']" ng-required="getField('process', 'SOW Status').required">
+                                        <select class="form-control input-sm" name="process SOW Status" ng-model="dealForm.process['SOW Status']" ng-required="getField('process', 'SOW Status').required">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('process', 'SOW Status').options" value="{{option}}">
                                                 {{option}}
@@ -540,26 +540,26 @@
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
-                                            <input type="{{field.type}}" class="form-control" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]"
+                                            <input type="{{field.type}}" class="form-control input-sm" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]"
                                                 ng-required="{{field.required}}" />
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control" name="{{'process ' + field.name}}"
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control input-sm" name="{{'process ' + field.name}}"
                                                 ng-model="dealForm.process[field.name]" ng-required="field.required">
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="opened['process'][field.name] = true">
+                                                <button type="button" class="btn btn-default btn-sm" ng-click="opened['process'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </button>
                                             </span>
                                         </div>
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
-                                            <textarea ng-model="dealForm.process[field.name]" class="form-control" name="{{'process ' + field.name}}" ng-required="{{field.required}}"
+                                            <textarea ng-model="dealForm.process[field.name]" class="form-control input-sm" name="{{'process ' + field.name}}" ng-required="{{field.required}}"
                                                 rows="4" cols="50"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -588,9 +588,9 @@
                     <label>Input Starting Month:</label>
                     <div class="input-group pull-right">
                         <input type="text" uib-datepicker-popup="yyyy/MM" datepicker-options="{minMode: 'month'}" datepickerMode="'month'" is-open="opened['distribution']['startingMonthYear']"
-                            class="form-control customDatePicker" ng-readonly="true" ng-model="startingMonthYear" required>
+                            class="form-control input-sm" ng-readonly="true" ng-model="startingMonthYear" show-button-bar="false" required>
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="opened['distribution']['startingMonthYear'] = true">
+                            <button type="button" class="btn btn-default btn-sm" ng-click="opened['distribution']['startingMonthYear'] = true">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </button>
                         </span>
@@ -619,11 +619,11 @@
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(0, 6)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' res jp ' + monthYear].$touched}">
-                                        <input type="number" min="0" max="9999" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' res jp ' + monthYear}}"
+                                        <input type="number" min="0" max="9999" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' res jp ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].res.jp[monthYear]" />
                                     </div>
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res gd ' + monthYear].$invalid && myForm['distribution ' + contract + ' res gd ' + monthYear].$touched}">
-                                        <input type="number" min="0" max="9999" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' res gd ' + monthYear}}"
+                                        <input type="number" min="0" max="9999" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' res gd ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].res.gd[monthYear]" />
                                     </div>
                                 </td>
@@ -640,11 +640,11 @@
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(0, 6)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' rev jp ' + monthYear].$touched}">
-                                        <input type="number" min="0" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' rev jp ' + monthYear}}"
+                                        <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' rev jp ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].rev.jp[monthYear]" />
                                     </div>
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev gd ' + monthYear].$invalid && myForm['distribution ' + contract + ' rev gd ' + monthYear].$touched}">
-                                        <input type="number" min="0" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' rev gd ' + monthYear}}"
+                                        <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' rev gd ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].rev.gd[monthYear]" />
                                     </div>
                                 </td>
@@ -658,7 +658,7 @@
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(0, 6)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' cm ' + monthYear].$invalid && myForm['distribution ' + contract + ' cm ' + monthYear].$touched}">
-                                        <input type="number" min="0" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' cm ' + monthYear}}"
+                                        <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' cm ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].cm[monthYear]" />
                                     </div>
                                 </td>
@@ -687,11 +687,11 @@
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(6, 12)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' res jp ' + monthYear].$touched}">
-                                        <input type="number" min="0" max="9999" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' res jp ' + monthYear}}"
+                                        <input type="number" min="0" max="9999" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' res jp ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].res.jp[monthYear]" />
                                     </div>
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res gd ' + monthYear].$invalid && myForm['distribution ' + contract + ' res gd ' + monthYear].$touched}">
-                                        <input type="number" min="0" max="9999" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' res gd ' + monthYear}}"
+                                        <input type="number" min="0" max="9999" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' res gd ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].res.gd[monthYear]" />
                                     </div>
                                 </td>
@@ -708,11 +708,11 @@
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(6, 12)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' rev jp ' + monthYear].$touched}">
-                                        <input type="number" min="0" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' rev jp ' + monthYear}}"
+                                        <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' rev jp ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].rev.jp[monthYear]" />
                                     </div>
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev gd ' + monthYear].$invalid && myForm['distribution ' + contract + ' rev gd ' + monthYear].$touched}">
-                                        <input type="number" min="0" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' rev gd ' + monthYear}}"
+                                        <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' rev gd ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].rev.gd[monthYear]" />
                                     </div>
                                 </td>
@@ -726,7 +726,7 @@
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(6, 12)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' cm ' + monthYear].$invalid && myForm['distribution ' + contract + ' cm ' + monthYear].$touched}">
-                                        <input type="number" min="0" step="1" class="form-control pull-right" name="{{'distribution ' + contract + ' cm ' + monthYear}}"
+                                        <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' cm ' + monthYear}}"
                                             ng-model="dealForm.distribution[contract].cm[monthYear]" />
                                     </div>
                                 </td>
@@ -740,18 +740,18 @@
                             <table class="table table-condensed">
                                 <tr class="active">
                                     <th>Total</th>
-                                    <td>{{total[contract][currentFiscalYear.years].resource}} (MM)</td>
-                                    <td>{{total[contract][currentFiscalYear.years].revenue}} (JPY)</td>
+                                    <td>{{total[contract][currentFiscalYear.years].resource}} <text class="pull-right">(MM)</text></td>
+                                    <td>{{total[contract][currentFiscalYear.years].revenue}} <text class="pull-right">(JPY)</text></td>
                                 </tr>
                                 <tr class="active">
                                     <th>Average</th>
-                                    <td>{{total[contract][currentFiscalYear.years].average | number: 3}}</td>
-                                    <td>(JPY/MM)</td>
+                                    <td></td>
+                                    <td>{{total[contract][currentFiscalYear.years].average | number: 3}} <text class="pull-right">(JPY/MM)</text></td>
                                 </tr>
                                 <tr class="active">
                                     <th>CM</th>
-                                    <td>{{total[contract][currentFiscalYear.years].cm}} (JPY)</td>
-                                    <td> {{total[contract][currentFiscalYear.years].percent | number: 1}} (%)</td>
+                                    <td>{{total[contract][currentFiscalYear.years].cm}} <text class="pull-right">(JPY)</text></td>
+                                    <td>{{total[contract][currentFiscalYear.years].percent | number: 1}} <text class="pull-right">(%)</text></td>
                                 </tr>
                             </table>
                         </div>
@@ -759,7 +759,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-inline">
-                        <table class="table table-hover">
+                        <table class="table table-hover table-condensed">
                             <tbody>
                                 <tr ng-repeat="field in fields.distribution track by field.id">
                                     <td ng-if="$even">
@@ -767,27 +767,27 @@
                                             <label for="{{field.name}}"> {{field.name}} </label>
                                             <span style="color:red" ng-if="field.required">*</span>
                                             <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
-                                                <input type="{{field.type}}" class="form-control" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
+                                                <input type="{{field.type}}" class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
                                                     ng-required="{{field.required}}" />
                                             </div>
                                             <div ng-if="field.type === 'date'" class="input-group pull-right">
-                                                <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['distribution'][field.name]" class="form-control"
+                                                <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['distribution'][field.name]" class="form-control input-sm"
                                                     name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
                                                     ng-required="field.required">
                                                 <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-default" ng-click="opened['distribution'][field.name] = true">
+                                                    <button type="button" class="btn btn-default btn-sm" ng-click="opened['distribution'][field.name] = true">
                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                     </button>
                                                 </span>
                                             </div>
                                             <div ng-if="field.type === 'textarea'" class="pull-right">
                                                 <!-- show text area -->
-                                                <textarea ng-model="dealForm.distribution[field.name]" name="{{'distribution ' + field.name}}" class="form-control" ng-required="{{field.required}}"
+                                                <textarea ng-model="dealForm.distribution[field.name]" name="{{'distribution ' + field.name}}" class="form-control input-sm" ng-required="{{field.required}}"
                                                     rows="4" cols="50"></textarea>
                                             </div>
                                             <div ng-if="field.type ==='dropdown'" class="pull-right">
                                                 <!-- show dropdown -->
-                                                <select class="form-control" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}">
+                                                <select class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}">
                                                     <option value="">- select -</option>
                                                     <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                                 </select>
@@ -799,7 +799,7 @@
                         </table>
                     </div>
                     <div class="col-md-6 form-inline">
-                        <table class="table table-hover">
+                        <table class="table table-hover table-condensed">
                             <tbody>
                                 <tr ng-repeat="field in fields.distribution track by field.id">
                                     <td ng-if="$odd">
@@ -807,27 +807,27 @@
                                             <label for="{{field.name}}"> {{field.name}} </label>
                                             <span style="color:red" ng-if="field.required">*</span>
                                             <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
-                                                <input type="{{field.type}}" class="form-control" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
+                                                <input type="{{field.type}}" class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
                                                     ng-required="{{field.required}}" />
                                             </div>
                                             <div ng-if="field.type === 'date'" class="input-group pull-right">
-                                                <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['distribution'][field.name]" class="form-control"
+                                                <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['distribution'][field.name]" class="form-control input-sm"
                                                     name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
                                                     ng-required="field.required">
                                                 <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-default" ng-click="opened['distribution'][field.name] = true">
+                                                    <button type="button" class="btn btn-default btn-sm" ng-click="opened['distribution'][field.name] = true">
                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                     </button>
                                                 </span>
                                             </div>
                                             <div ng-if="field.type === 'textarea'" class="pull-right">
                                                 <!-- show text area -->
-                                                <textarea ng-model="dealForm.distribution[field.name]" class="form-control" name="{{'distribution ' + field.name}}" ng-required="{{field.required}}"
+                                                <textarea ng-model="dealForm.distribution[field.name]" class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-required="{{field.required}}"
                                                     rows="4" cols="50"></textarea>
                                             </div>
                                             <div ng-if="field.type ==='dropdown'" class="pull-right">
                                                 <!-- show dropdown -->
-                                                <select class="form-control" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}">
+                                                <select class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}">
                                                     <option value="">- select -</option>
                                                     <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                                 </select>
@@ -853,14 +853,14 @@
             </div>
             <div id="statusSection" class="collapse in">
                 <div class="col-md-6 form-inline">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-condensed">
                         <tbody>
                             <tr>
                                 <td>
                                     <label>Dependency</label>
                                     <span style="color:red" ng-if="getField('status', 'Dependency').required">*</span>
                                     <div class="form-group pull-right" ng-class="{'has-error': myForm['status Dependency'].$invalid && myForm['status Dependency'].$touched}">
-                                        <textarea class="form-control" rows="3" name="status Dependency" ng-model="dealForm.status['Dependency']" ng-required="getField('status', 'Dependency').required">
+                                        <textarea class="form-control input-sm" rows="3" name="status Dependency" ng-model="dealForm.status['Dependency']" ng-required="getField('status', 'Dependency').required">
                                         </textarea>
                                     </div>
                                 </td>
@@ -870,7 +870,7 @@
                                     <label>Action</label>
                                     <span style="color:red" ng-if="getField('status', 'Action').required">*</span>
                                     <div class="form-group pull-right" ng-class="{'has-error': myForm['status Action'].$invalid && myForm['status Action'].$touched}">
-                                        <textarea class="form-control" rows="3" name="status Action" ng-model="dealForm.status['Action']" ng-required="getField('status', 'Action').required">
+                                        <textarea class="form-control input-sm" rows="3" name="status Action" ng-model="dealForm.status['Action']" ng-required="getField('status', 'Action').required">
                                         </textarea>
                                     </div>
                                 </td>
@@ -881,26 +881,26 @@
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
-                                            <input type="{{field.type}}" class="form-control" name="{{'status ' + field.name}}" ng-model="dealForm.status[field.name]"
+                                            <input type="{{field.type}}" class="form-control input-sm" name="{{'status ' + field.name}}" ng-model="dealForm.status[field.name]"
                                                 ng-required="{{field.required}}" />
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control" name="{{'status ' + field.name}}"
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control input-sm" name="{{'status ' + field.name}}"
                                                 ng-model="dealForm.status[field.name]" ng-required="field.required">
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="opened['status'][field.name] = true">
+                                                <button type="button" class="btn btn-default btn-sm" ng-click="opened['status'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </button>
                                             </span>
                                         </div>
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
-                                            <textarea ng-model="dealForm.status[field.name]" class="form-control" name="{{'status ' + field.name}}" ng-required="{{field.required}}"
+                                            <textarea ng-model="dealForm.status[field.name]" class="form-control input-sm" name="{{'status ' + field.name}}" ng-required="{{field.required}}"
                                                 rows="4" cols="50"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control" name="{{'status ' + field.name}}" ng-model="dealForm.status[field.name]" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" name="{{'status ' + field.name}}" ng-model="dealForm.status[field.name]" ng-required="{{field.required}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -912,14 +912,14 @@
                     </table>
                 </div>
                 <div class="col-md-6 form-inline">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-condensed">
                         <tbody>
                             <tr>
                                 <td>
                                     <label>Status</label>
                                     <span style="color:red" ng-if="getField('status', 'Status').required">*</span>
                                     <div class="form-group pull-right" ng-class="{'has-error': myForm['status Status'].$invalid && myForm['status Status'].$touched}">
-                                        <textarea class="form-control" rows="3" name="status Status" ng-model="dealForm.status['Status']" ng-required="getField('status', 'Status').required">
+                                        <textarea class="form-control input-sm" rows="3" name="status Status" ng-model="dealForm.status['Status']" ng-required="getField('status', 'Status').required">
                                         </textarea>
                                     </div>
                                 </td>
@@ -929,7 +929,7 @@
                                     <label>Step to Close</label>
                                     <span style="color:red" ng-if="getField('status', 'Step to Close').required">*</span>
                                     <div class="form-group pull-right" ng-class="{'has-error': myForm['status Step to Close'].$invalid && myForm['status Step to Close'].$touched}">
-                                        <textarea class="form-control" rows="3" ng-model="dealForm.status['Step to Close']" name="status Step to Close" ng-required="getField('status', 'Step to Close').required">
+                                        <textarea class="form-control input-sm" rows="3" ng-model="dealForm.status['Step to Close']" name="status Step to Close" ng-required="getField('status', 'Step to Close').required">
                                                 </textarea>
                                     </div>
                                 </td>
@@ -940,26 +940,26 @@
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
-                                            <input type="{{field.type}}" class="form-control" name="{{'status ' + field.name}}" ng-model="dealForm.status[field.name]"
+                                            <input type="{{field.type}}" class="form-control input-sm" name="{{'status ' + field.name}}" ng-model="dealForm.status[field.name]"
                                                 ng-required="{{field.required}}" />
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control" name="{{'status ' + field.name}}"
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control input-sm" name="{{'status ' + field.name}}"
                                                 ng-model="dealForm.status[field.name]" ng-required="field.required">
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="opened['status'][field.name] = true">
+                                                <button type="button" class="btn btn-default btn-sm" ng-click="opened['status'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </button>
                                             </span>
                                         </div>
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
-                                            <textarea ng-model="dealForm.status[field.name]" class="form-control" name="{{'status ' + field.name}}" ng-required="{{field.required}}"
+                                            <textarea ng-model="dealForm.status[field.name]" class="form-control input-sm" name="{{'status ' + field.name}}" ng-required="{{field.required}}"
                                                 rows="4" cols="50"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control" ng-model="dealForm.status[field.name]" name="{{'status ' + field.name}}" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" ng-model="dealForm.status[field.name]" name="{{'status ' + field.name}}" ng-required="{{field.required}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -993,9 +993,9 @@
                     <span class="glyphicon glyphicon-chevron-down">&nbsp;</span>Content</h4>
             </div>
             <div id="contentSection" class="collapse in">
-                <textarea class="form-control" ng-model="dealForm.content['Main Message']" rows="5"></textarea>
+                <textarea class="form-control input-sm" ng-model="dealForm.content['Main Message']" rows="5"></textarea>
                 <div class="col-md-6 form-inline">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-condensed">
                         <tbody>
                             <tr ng-repeat="field in fields.content track by field.id">
                                 <td ng-if="$even">
@@ -1003,26 +1003,26 @@
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
-                                            <input type="{{field.type}}" class="form-control" name="{{'content ' + field.name}}" ng-model="dealForm.content[field.name]"
+                                            <input type="{{field.type}}" class="form-control input-sm" name="{{'content ' + field.name}}" ng-model="dealForm.content[field.name]"
                                                 ng-required="{{field.required}}" />
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
-                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control" name="{{'content ' + field.name}}"
+                                            <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control input-sm" name="{{'content ' + field.name}}"
                                                 ng-model="dealForm.content[field.name]" ng-required="field.required">
                                             <span class="input-group-btn">
-                                                <button type="button" class="btn btn-default" ng-click="opened['content'][field.name] = true">
+                                                <button type="button" class="btn btn-default btn-sm" ng-click="opened['content'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </button>
                                             </span>
                                         </div>
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
-                                            <textarea ng-model="dealForm.content[field.name]" class="form-control" name="{{'content ' + field.name}}" ng-required="{{field.required}}"
+                                            <textarea ng-model="dealForm.content[field.name]" class="form-control input-sm" name="{{'content ' + field.name}}" ng-required="{{field.required}}"
                                                 rows="4" cols="50"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control" ng-model="dealForm.content[field.name]" name="{{'content ' + field.name}}" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" ng-model="dealForm.content[field.name]" name="{{'content ' + field.name}}" ng-required="{{field.required}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -1034,7 +1034,7 @@
                     </table>
                 </div>
                 <div class="col-md-6 form-inline">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-condensed">
                         <tbody>
                             <tr ng-repeat="field in fields.content track by field.id">
                                 <td ng-if="$odd">
@@ -1042,15 +1042,15 @@
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
-                                            <input type="{{field.type}}" class="form-control" name="{{'content ' + field.name}}" ng-model="dealForm.content[field.name]"
+                                            <input type="{{field.type}}" class="form-control input-sm" name="{{'content ' + field.name}}" ng-model="dealForm.content[field.name]"
                                                 ng-required="{{field.required}}" />
                                         </div>
                                         <div ng-if="field.type === 'date'">
                                             <div class="input-group pull-right">
-                                                <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control" name="{{'content ' + field.name}}"
+                                                <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control input-sm" name="{{'content ' + field.name}}"
                                                     ng-model="dealForm.content[field.name]" ng-required="field.required">
                                                 <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-default" ng-click="opened['content'][field.name] = true">
+                                                    <button type="button" class="btn btn-default btn-sm" ng-click="opened['content'][field.name] = true">
                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                     </button>
                                                 </span>
@@ -1058,12 +1058,12 @@
                                         </div>
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
-                                            <textarea ng-model="dealForm.content[field.name]" class="form-control" name="{{'content ' + field.name}}" ng-required="{{field.required}}"
+                                            <textarea ng-model="dealForm.content[field.name]" class="form-control input-sm" name="{{'content ' + field.name}}" ng-required="{{field.required}}"
                                                 rows="4" cols="50"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control" name="{{'content ' + field.name}}" ng-model="dealForm.content[field.name]" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" name="{{'content ' + field.name}}" ng-model="dealForm.content[field.name]" ng-required="{{field.required}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -1087,7 +1087,7 @@
                 {{change.date}}, {{change.user}}, {{change.content}}
                 <br/>
             </div>
-            <table class="table table-hover">
+            <table class="table table-hover table-condensed">
                 <thead>
                     <th>LEVEL</th>
                     <th>DATE</th>
