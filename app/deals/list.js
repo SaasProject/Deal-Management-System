@@ -30,12 +30,6 @@
 
         $scope.DATE_FORMAT = 'MM/dd/yyyy';
 
-        $scope.filterOptions = [
-            'Active',
-            '1-2 months',
-            'Mine'
-        ];
-
         $scope.deals = [];
 
         $scope.fields = {
@@ -52,6 +46,38 @@
         $scope.reverse = false;
 
         $scope.displayOption = 'Active';
+
+        $scope.search = {};
+        $scope.searchColumn = 'all,$';
+
+        $scope.columnNames = {
+            essential: {
+                'ID': 'No',
+                'Deal Name': 'Deal Name',
+                'Due Date': 'Due'
+            },
+            profile: {
+                'Client': 'Client',
+                'AWS Resp (Sales) person': 'AWS Sales',
+                'AWS Resp (Dev) person': 'AWS Dev',
+                'Type': 'Type',
+                'Level': 'Level',
+                'Confidence': 'Confidence',
+                'Resource Size (MM)': 'MM',
+                'Resource Size (FTE)': 'FTE',
+                'Revenue': 'Budget',
+                'CM': 'CM%',
+                'Duration (Start)': 'Start',
+                'Duration (End)': 'End'
+            },
+            process: {
+                'SRB No': 'SRB No',
+                'SRB Date': 'SRB',
+                'SRB Status': 'SRB Status',
+                'SOW Scheme': 'SOW Scheme',
+                'SOW Date': 'SOW'
+            }
+        }
 
         $scope.getDeals = function () {
             ModulesService.getAllModuleDocs('deals').then(function (allDeals) {
@@ -180,8 +206,17 @@
             for(var category in $scope.fields){
                 angular.forEach($scope.fields[category], function (aField) {
                     angular.forEach($scope.deals, function (aDeal) {
+
+                        //delete 'Change history'
+                        delete aDeal['Change History'];
+
                         if (!aField.showInList) {
                             delete aDeal[category][aField.name];
+                        } else {
+                            //store user-added fields to column names
+                            if(!aField.default) {
+                                $scope.columnNames[category][aField.name] = aField.name;
+                            }
                         }
     
                         //format date to MM/DD
@@ -196,6 +231,25 @@
 
         $scope.open = function(dealID) {
             window.open($state.href('dealForm', {ID: dealID}), dealID);
+        }
+
+        $scope.setSearch = function() {
+            //console.log($scope.searchColumn);
+            $scope.search = {};
+            var splitted = angular.copy($scope.searchColumn.split(','));
+            if(splitted[0] === 'all') {
+                $scope.search[splitted[1]] = $scope.searchText;
+            } else {
+                if(splitted[1] === 'ID') {
+                    $scope.search[splitted[1]] = $scope.searchText;
+                } else {
+                    //needed to initialize 'first' layer to avoid undefined
+                    $scope.search[splitted[0]] = {};
+                    $scope.search[splitted[0]][splitted[1]] = $scope.searchText;
+                }
+            }
+
+            //console.log($scope.search);
         }
     }
 })();
