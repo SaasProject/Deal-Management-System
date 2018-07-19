@@ -5,19 +5,20 @@
             <text class="pull-right">{{dealForm['ID']}}</text>
             <br/>
             <br/>
-            <div class="form-inline" ng-class="{'has-error': myForm['essential Deal Name'].$invalid && myForm['essential Deal Name'].$touched}">
+            <div class="form-inline" ng-class="{'has-error': myForm['essential Deal Name'].$invalid}">
                 <label>Deal Name:</label>
                 <span style="color:red" ng-if="getField('essential', 'Deal Name').required">*</span>
                 <input type="text" name="essential Deal Name" class="form-control input-sm pull-right" ng-model="dealForm.essential['Deal Name']"
-                    ng-required="getField('essential', 'Deal Name').required">
+                    ng-required="getField('essential', 'Deal Name').required" uib-tooltip="{{getTooltipMessage(myForm['essential Deal Name'])}}" tooltip-enable="{{myForm['essential Deal Name'].$invalid}}">
             </div>
             <br/>
-            <div class="form-inline" ng-class="{'has-error': myForm['essential Due Date'].$invalid && myForm['essential Due Date'].$touched}">
+            <div class="form-inline" ng-class="{'has-error': myForm['essential Due Date'].$invalid}">
                 <label>Due Date:</label>
                 <span style="color:red" ng-if="getField('essential', 'Due Date').required">*</span>
                 <div class="input-group pull-right">
                     <input type="text" name="essential Due Date" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['essential']['Due Date']"
-                        class="form-control input-sm" ng-model="dealForm.essential['Due Date']" ng-required="getField('essential', 'Due Date').required">
+                        class="form-control input-sm" ng-model="dealForm.essential['Due Date']" ng-required="getField('essential', 'Due Date').required"
+                        uib-tooltip="{{getTooltipMessage(myForm['essential Due Date'])}}" tooltip-enable="{{myForm['essential Due Date'].$invalid}}">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default btn-sm" ng-click="opened['essential']['Due Date'] = true">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -26,10 +27,11 @@
                 </div>
             </div>
             <br/>
-            <div class="form-inline" ng-class="{'has-error': myForm['essential Assignee'].$invalid && myForm['essential Assignee'].$touched}">
+            <div class="form-inline" ng-class="{'has-error': myForm['essential Assignee'].$invalid}">
                 <label>Assignee:</label>
                 <span style="color:red" ng-if="getField('essential', 'Assignee').required">*</span>
-                <select class="form-control input-sm pull-right" name="essential Assignee" ng-model="dealForm.essential['Assignee']" ng-required="getField('essential', 'Assignee').required">
+                <select class="form-control input-sm pull-right" name="essential Assignee" ng-model="dealForm.essential['Assignee']" ng-required="getField('essential', 'Assignee').required"
+                uib-tooltip="{{getTooltipMessage(myForm['essential Assignee'])}}" tooltip-enable="{{myForm['essential Assignee'].$invalid}}">
                     <option value="">- select -</option>
                     <option ng-repeat="user in users" value="{{user.nickname}}">{{user.nickname}}</option>
                 </select>
@@ -60,10 +62,11 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Country'].$invalid && myForm['profile Country'].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Country'].$invalid}">
                                         <label>Country</label>
                                         <span style="color:red" ng-if="getField('profile', 'Country').required">*</span>
-                                        <select class="form-control input-sm pull-right" name="profile Country" ng-model="dealForm.profile['Country']" ng-required="getField('profile', 'Country').required">
+                                        <select class="form-control input-sm pull-right" name="profile Country" ng-model="dealForm.profile['Country']" ng-required="getField('profile', 'Country').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['profile Country'])}}" tooltip-enable="{{myForm['profile Country'].$invalid}}">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Country').options" value="{{option}}">
                                                 {{option}}
@@ -74,10 +77,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Client'].$invalid && myForm['profile Client'].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Client'].$invalid}">
                                         <label>Client</label>
                                         <span style="color:red" ng-if="getField('profile', 'Client').required">*</span>
-                                        <select class="form-control input-sm pull-right" name="profile Client" ng-model="dealForm.profile['Client']" ng-required="getField('profile', 'Client').required">
+                                        <select class="form-control input-sm pull-right" name="profile Client" ng-model="dealForm.profile['Client']" ng-required="getField('profile', 'Client').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['profile Client'])}}" tooltip-enable="{{myForm['profile Client'].$invalid}}">
                                             <option value="">- select -</option>
                                             <option ng-repeat="client in clients" value="{{client.cmpnyNameShort}}">{{client.cmpnyNameShort}}</option>
                                         </select>
@@ -86,10 +90,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Service'].$invalid && myForm['profile Service'].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Service'].$invalid}">
                                         <label>Service</label>
                                         <span style="color:red" ng-if="getField('profile', 'Service').required">*</span>
-                                        <select class="form-control input-sm pull-right" name="profile Service" ng-model="dealForm.profile['Service']" ng-required="getField('profile', 'Service').required">
+                                        <select class="form-control input-sm pull-right" name="profile Service" ng-model="dealForm.profile['Service']" ng-required="getField('profile', 'Service').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['profile Service'])}}" tooltip-enable="{{myForm['profile Service'].$invalid}}">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Service').options" value="{{option}}">
                                                 {{option}}
@@ -100,10 +105,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Type'].$invalid && myForm['profile Type'].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Type'].$invalid}">
                                         <label>Type</label>
                                         <span style="color:red" ng-if="getField('profile', 'Type').required">*</span>
-                                        <select class="form-control input-sm pull-right" name="profile Type" ng-model="dealForm.profile['Type']" ng-required="getField('profile', 'Type').required">
+                                        <select class="form-control input-sm pull-right" name="profile Type" ng-model="dealForm.profile['Type']" ng-required="getField('profile', 'Type').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['profile Type'])}}" tooltip-enable="{{myForm['profile Type'].$invalid}}">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Type').options" value="{{option}}">
                                                 {{option}}
@@ -117,27 +123,30 @@
                                     <label>Resource</label>
                                     <span style="color:red" ng-if="getField('profile', 'Resource Size (MM)').required">*</span>
                                     <div class="pull-right">
-                                        <div class="form-inline" ng-class="{'has-error': myForm['profile Resource Size (MM)'].$invalid && myForm['profile Resource Size (MM)'].$touched}">
+                                        <div class="form-inline" ng-class="{'has-error': myForm['profile Resource Size (MM)'].$invalid}">
                                             <input type="number" ng-model="dealForm.profile['Resource Size (MM)']" min="0" max="9999" step="0.01" class="form-control input-sm"
-                                                name="profile Resource Size (MM)" ng-required="getField('profile', 'Resource Size (MM)').required"> (MM)
+                                                name="profile Resource Size (MM)" ng-required="getField('profile', 'Resource Size (MM)').required"
+                                                uib-tooltip="{{getTooltipMessage(myForm['profile Resource Size (MM)'])}}" tooltip-enable="{{myForm['profile Resource Size (MM)'].$invalid}}"> (MM)
                                         </div>
                                         /
                                         <br/>
-                                        <div class="form-inline" ng-class="{'has-error': myForm['profile Resource Size (FTE)'].$invalid && myForm['profile Resource Size (FTE)'].$touched}">
+                                        <div class="form-inline" ng-class="{'has-error': myForm['profile Resource Size (FTE)'].$invalid}">
                                             <input type="number" min="0" step="1" max="9999" class="form-control input-sm" name="profile Resource Size (FTE)" ng-model="dealForm.profile['Resource Size (FTE)']"
-                                                ng-required="getField('profile', 'Resource Size (FTE)').required"> (FTE)
+                                                ng-required="getField('profile', 'Resource Size (FTE)').required"
+                                                uib-tooltip="{{getTooltipMessage(myForm['profile Resource Size (FTE)'])}}" tooltip-enable="{{myForm['profile Resource Size (FTE)'].$invalid}}"> (FTE)
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Duration (Start)'].$invalid && myForm['profile Duration (Start)'].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Duration (Start)'].$invalid}">
                                         <label>Duration (Start)</label>
                                         <span style="color:red" ng-if="getField('profile', 'Duration (Start)').required">*</span>
                                         <div class="input-group pull-right">
                                             <input type="text" name="profile Duration (Start)" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile']['Duration (Start)']"
-                                                class="form-control input-sm" ng-model="dealForm.profile['Duration (Start)']" ng-required="getField('profile', 'Duration (Start)').required">
+                                                class="form-control input-sm" ng-model="dealForm.profile['Duration (Start)']" ng-required="getField('profile', 'Duration (Start)').required"
+                                                uib-tooltip="{{getTooltipMessage(myForm['profile Duration (Start)'])}}" tooltip-enable="{{myForm['profile Duration (Start)'].$invalid}}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile']['Duration (Start)'] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -152,17 +161,19 @@
                                     <label>AWS Resp (Sales)</label>
                                     <span style="color:red" ng-if="getField('profile', 'AWS Resp (Sales) person').required">*</span>
                                     <div class="pull-right">
-                                        <div class="form-inline" ng-class="{'has-error': myForm['profile AWS Resp (Sales) person'].$invalid && myForm['profile AWS Resp (Sales) person'].$touched}">
+                                        <div class="form-inline" ng-class="{'has-error': myForm['profile AWS Resp (Sales) person'].$invalid}">
                                             <select class="form-control input-sm" ng-model="dealForm.profile['AWS Resp (Sales) person']" name="profile AWS Resp (Sales) person"
-                                                ng-required="getField('profile', 'AWS Resp (Sales) person').required">
+                                                ng-required="getField('profile', 'AWS Resp (Sales) person').required"
+                                                uib-tooltip="{{getTooltipMessage(myForm['profile AWS Resp (Sales) person'])}}" tooltip-enable="{{myForm['profile AWS Resp (Sales) person'].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="user in users" value="{{user.nickname}}">{{user.nickname}}</option>
                                             </select>
                                         </div>
                                         /
                                         <br/>
-                                        <div class="form-inline" ng-class="{'has-error': myForm['profile AWS Resp (Sales) BU'].$invalid && myForm['profile AWS Resp (Sales) BU'].$touched}">
-                                            <select class="form-control input-sm" ng-model="dealForm.profile['AWS Resp (Sales) BU']" name="profile AWS Resp (Sales) BU" ng-required="getField('profile', 'AWS Resp (Sales) BU').required">
+                                        <div class="form-inline" ng-class="{'has-error': myForm['profile AWS Resp (Sales) BU'].$invalid}">
+                                            <select class="form-control input-sm" ng-model="dealForm.profile['AWS Resp (Sales) BU']" name="profile AWS Resp (Sales) BU" ng-required="getField('profile', 'AWS Resp (Sales) BU').required"
+                                            uib-tooltip="{{getTooltipMessage(myForm['profile AWS Resp (Sales) BU'])}}" tooltip-enable="{{myForm['profile AWS Resp (Sales) BU'].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="businessUnit in businessUnits" value="{{businessUnit.BU}}">{{businessUnit.BU}}</option>
                                             </select>
@@ -172,25 +183,27 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Key Assignment'].$invalid && myForm['profile Key Assignment'].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Key Assignment'].$invalid}">
                                         <label>Key Assignment</label>
                                         <span style="color:red" ng-if="getField('profile', 'Key Assignment').required">*</span>
-                                        <textarea class="form-control input-sm pull-right" name="profile Key Assignment" ng-model="dealForm.profile['Key Assignment']" ng-required="getField('profile', 'Key Assignment').required"></textarea>
+                                        <textarea class="form-control input-sm pull-right" name="profile Key Assignment" ng-model="dealForm.profile['Key Assignment']" ng-required="getField('profile', 'Key Assignment').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['profile Key Assignment'])}}" tooltip-enable="{{myForm['profile Key Assignment'].$invalid}}"></textarea>
                                     </div>
                                 </td>
                             </tr>
                             <tr ng-repeat="field in fields.profile track by field.id">
                                 <td ng-if="$even && !field.default">
-                                    <div class="form-inline" ng-class="{'has-error': myForm['profile ' + field.name].$invalid && myForm['profile ' + field.name].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile ' + field.name].$invalid}">
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
                                             <input type="{{field.type}}" class="form-control input-sm" name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]"
-                                                ng-required="{{field.required}}" />
+                                                ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}"/>
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile'][field.name]" class="form-control input-sm pull-right"
-                                                name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]" ng-required="field.required">
+                                                name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}"
+                                                uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -200,11 +213,12 @@
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
                                             <textarea ng-model="dealForm.profile[field.name]" class="form-control input-sm" name="{{'profile ' + field.name}}" ng-required="{{field.required}}"
-                                                rows="4" cols="50"></textarea>
+                                                rows="4" cols="50" uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control input-sm" name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}"
+                                            uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -220,10 +234,11 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Division'].$invalid && myForm['profile Division'].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Division'].$invalid}">
                                         <label>Division</label>
                                         <span style="color:red" ng-if="getField('profile', 'Division').required">*</span>
-                                        <select class="form-control input-sm pull-right" ng-model="dealForm.profile['Division']" name="profile Division" ng-required="getField('profile', 'Division').required">
+                                        <select class="form-control input-sm pull-right" ng-model="dealForm.profile['Division']" name="profile Division" ng-required="getField('profile', 'Division').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['profile Division'])}}" tooltip-enable="{{myForm['profile Division'].$invalid}}">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Division').options" value="{{option}}">
                                                 {{option}}
@@ -234,11 +249,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Client Resp'].$invalid && myForm['profile Client Resp'].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Client Resp'].$invalid}">
                                         <label>Client Resp</label>
                                         <span style="color:red" ng-if="getField('profile', 'Client Resp').required">*</span>
                                         <input type="text" class="form-control input-sm pull-right" name="profile Client Resp" ng-model="dealForm.profile['Client Resp']"
-                                            ng-required="getField('profile', 'Client Resp').required">
+                                            ng-required="getField('profile', 'Client Resp').required"
+                                            uib-tooltip="{{getTooltipMessage(myForm['profile Client Resp'])}}" tooltip-enable="{{myForm['profile Client Resp'].$invalid}}">
                                     </div>
                                 </td>
                             </tr>
@@ -247,15 +263,17 @@
                                     <label>Level / Step</label>
                                     <span style="color:red" ng-if="getField('profile', 'Level').required">*</span>
                                     <div class="form-inline pull-right">
-                                        <div class="form-group" ng-class="{'has-error': myForm['profile Level'].$invalid && myForm['profile Level'].$touched}">
-                                            <select class="form-control input-sm" ng-model="dealForm.profile['Level']" name="profile Level" ng-required="getField('profile', 'Level').required">
+                                        <div class="form-group" ng-class="{'has-error': myForm['profile Level'].$invalid}">
+                                            <select class="form-control input-sm" ng-model="dealForm.profile['Level']" name="profile Level" ng-required="getField('profile', 'Level').required"
+                                            uib-tooltip="{{getTooltipMessage(myForm['profile Level'])}}" tooltip-enable="{{myForm['profile Level'].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in getField('profile', 'Level').options" value="{{option}}">{{option}}</option>
                                             </select>
                                         </div>
                                         /
-                                        <div class="form-group" ng-class="{'has-error': myForm['profile Step'].$invalid && myForm['profile Step'].$touched}">
-                                            <select class="form-control input-sm" ng-model="dealForm.profile['Step']" name="profile Step" ng-required="getField('profile', 'Step').required">
+                                        <div class="form-group" ng-class="{'has-error': myForm['profile Step'].$invalid}">
+                                            <select class="form-control input-sm" ng-model="dealForm.profile['Step']" name="profile Step" ng-required="getField('profile', 'Step').required"
+                                            uib-tooltip="{{getTooltipMessage(myForm['profile Step'])}}" tooltip-enable="{{myForm['profile Step'].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in getField('profile', 'Step').options | 
                                                         filter: (dealForm.profile['Level'] + '.')" value="{{option}}">{{option}}</option>
@@ -266,10 +284,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Confidence'].$invalid && myForm['profile Confidence'].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Confidence'].$invalid}">
                                         <label>Confidence</label>
                                         <span style="color:red" ng-if="getField('profile', 'Confidence').required">*</span>
-                                        <select class="form-control input-sm pull-right" ng-model="dealForm.profile['Confidence']" name="profile Confidence" ng-required="getField('profile', 'Confidence').required">
+                                        <select class="form-control input-sm pull-right" ng-model="dealForm.profile['Confidence']" name="profile Confidence" ng-required="getField('profile', 'Confidence').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['profile Confidence'])}}" tooltip-enable="{{myForm['profile Confidence'].$invalid}}">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('profile', 'Confidence').options" value="{{option}}">
                                                 {{option}}
@@ -282,27 +301,30 @@
                                 <td>
                                     <label>Revenue</label>
                                     <span style="color:red" ng-if="getField('profile', 'Revenue').required">*</span>
-                                    <div class="form-inline pull-right" ng-class="{'has-error': myForm['profile Revenue'].$invalid && myForm['profile Revenue'].$touched}">
+                                    <div class="form-inline pull-right" ng-class="{'has-error': myForm['profile Revenue'].$invalid}">
                                         <input type="number" min="0" step="1" class="form-control input-sm" name="profile Revenue" ng-model="dealForm.profile['Revenue']"
-                                            ng-required="getField('profile', 'Revenue').required"> (JPY)
+                                            ng-required="getField('profile', 'Revenue').required"
+                                            uib-tooltip="{{getTooltipMessage(myForm['profile Revenue'])}}" tooltip-enable="{{myForm['profile Revenue'].$invalid}}"> (JPY)
                                     </div>
                                     <br/>
                                     <br/>
                                     <label>CM</label>
                                     <span style="color:red" ng-if="getField('profile', 'CM').required">*</span>
-                                    <div class="form-inline pull-right" ng-class="{'has-error': myForm['profile CM'].$invalid && myForm['profile CM'].$touched}">
-                                        <input type="number" min="0" step="1" class="form-control input-sm" name="profile CM" ng-model="dealForm.profile['CM']" ng-required="getField('profile', 'CM').required"> (JPY)
+                                    <div class="form-inline pull-right" ng-class="{'has-error': myForm['profile CM'].$invalid}">
+                                        <input type="number" min="0" step="1" class="form-control input-sm" name="profile CM" ng-model="dealForm.profile['CM']" ng-required="getField('profile', 'CM').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['profile CM'])}}" tooltip-enable="{{myForm['profile CM'].$invalid}}"> (JPY)
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Duration (End)'].$invalid && myForm['profile Duration (End)'].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['profile Duration (End)'].$invalid}">
                                         <label>Duration (End)</label>
                                         <span style="color:red" ng-if="getField('profile', 'Duration (End)').required">*</span>
                                         <div class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile']['Duration (End)']" class="form-control input-sm"
-                                                name="profile Duration (End)" ng-model="dealForm.profile['Duration (End)']" ng-required="getField('profile', 'Duration (End)').required">
+                                                name="profile Duration (End)" ng-model="dealForm.profile['Duration (End)']" ng-required="getField('profile', 'Duration (End)').required"
+                                                uib-tooltip="{{getTooltipMessage(myForm['profile Duration (End)'])}}" tooltip-enable="{{myForm['profile Duration (End)'].$invalid}}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile']['Duration (End)'] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -317,16 +339,18 @@
                                     <label>AWS Resp (Dev)</label>
                                     <span style="color:red" ng-if="getField('profile', 'AWS Resp (Dev) person').required">*</span>
                                     <div class="pull-right">
-                                        <div class="form-group" ng-class="{'has-error': myForm['profile AWS Resp (Dev) person'].$invalid && myForm['profile AWS Resp (Dev) person'].$touched}">
-                                            <select class="form-control input-sm" name="profile AWS Resp (Dev) person" ng-model="dealForm.profile['AWS Resp (Dev) person']" ng-required="getField('profile', 'AWS Resp (Dev) person').required">
+                                        <div class="form-group" ng-class="{'has-error': myForm['profile AWS Resp (Dev) person'].$invalid}">
+                                            <select class="form-control input-sm" name="profile AWS Resp (Dev) person" ng-model="dealForm.profile['AWS Resp (Dev) person']" ng-required="getField('profile', 'AWS Resp (Dev) person').required"
+                                            uib-tooltip="{{getTooltipMessage(myForm['profile AWS Resp (Dev) person'])}}" tooltip-enable="{{myForm['profile AWS Resp (Dev) person'].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="user in users" value="{{user.nickname}}">{{user.nickname}}</option>
                                             </select>
                                         </div>
                                         <br/> /
                                         <br/>
-                                        <div class="form-group" ng-class="{'has-error': myForm['profile AWS Resp (Dev) BU'].$invalid && myForm['profile AWS Resp (Dev) BU'].$touched}">
-                                            <select class="form-control input-sm" name="profile AWS Resp (Dev) BU" ng-model="dealForm.profile['AWS Resp (Dev) BU']" ng-required="getField('profile', 'AWS Resp (Dev) BU').required">
+                                        <div class="form-group" ng-class="{'has-error': myForm['profile AWS Resp (Dev) BU'].$invalid}">
+                                            <select class="form-control input-sm" name="profile AWS Resp (Dev) BU" ng-model="dealForm.profile['AWS Resp (Dev) BU']" ng-required="getField('profile', 'AWS Resp (Dev) BU').required"
+                                            uib-tooltip="{{getTooltipMessage(myForm['profile AWS Resp (Dev) BU'])}}" tooltip-enable="{{myForm['profile AWS Resp (Dev) BU'].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="businessUnit in businessUnits" value="{{businessUnit.BU}}">{{businessUnit.BU}}</option>
                                             </select>
@@ -338,8 +362,9 @@
                                 <td>
                                     <label>Remark</label>
                                     <span style="color:red" ng-if="getField('profile', 'Remark').required">*</span>
-                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['profile Remark'].$invalid && myForm['profile Remark'].$touched}">
-                                        <input type="text" class="form-control input-sm" name="profile Remark" ng-model="dealForm.profile['Remark']" ng-required="getField('profile', 'Remark').required">
+                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['profile Remark'].$invalid}">
+                                        <input type="text" class="form-control input-sm" name="profile Remark" ng-model="dealForm.profile['Remark']" ng-required="getField('profile', 'Remark').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['profile Remark'])}}" tooltip-enable="{{myForm['profile Remark'].$invalid}}">
                                     </div>
                                 </td>
                             </tr>
@@ -350,11 +375,11 @@
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
                                             <input type="{{field.type}}" class="form-control input-sm" name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]"
-                                                ng-required="{{field.required}}" />
+                                                ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}"/>
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile'][field.name]" class="form-control input-sm" name="{{'profile ' + field.name}}"
-                                                ng-model="dealForm.profile[field.name]" ng-required="field.required">
+                                                ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -364,11 +389,12 @@
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
                                             <textarea ng-model="dealForm.profile[field.name]" class="form-control input-sm" name="{{'profile ' + field.name}}" ng-required="{{field.required}}"
-                                                rows="4" cols="50"></textarea>
+                                                rows="4" cols="50" uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control input-sm" ng-model="dealForm.profile[field.name]" name="{{'profile ' + field.name}}" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" ng-model="dealForm.profile[field.name]" name="{{'profile ' + field.name}}" ng-required="{{field.required}}"
+                                            uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -406,9 +432,9 @@
                                 <td>
                                     <label>SRB No.</label>
                                     <span style="color:red" ng-if="getField('process', 'SRB No').required">*</span>
-                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['process SRB No'].$invalid && myForm['process SRB No'].$touched}">
+                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['process SRB No'].$invalid}">
                                         <input type="text" class="form-control input-sm" name="process SRB No" ng-model="dealForm.process['SRB No']" ng-required="getField('process', 'SRB No').required"
-                                            placeholder="(e.g. PS-0095)">
+                                            placeholder="(e.g. PS-0095)" uib-tooltip="{{getTooltipMessage(myForm['process SRB No'])}}" tooltip-enable="{{myForm['process SRB No'].$invalid}}">
                                     </div>
                                 </td>
                             </tr>
@@ -416,9 +442,10 @@
                                 <td>
                                     <label>SRB Date</label>
                                     <span style="color:red" ng-if="getField('process', 'SRB Date').required">*</span>
-                                    <div class="input-group pull-right" ng-class="{'has-error': myForm['process SRB Date'].$invalid && myForm['process SRB Date'].$touched}">
+                                    <div class="input-group pull-right" ng-class="{'has-error': myForm['process SRB Date'].$invalid}">
                                         <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process']['SRB Date']" class="form-control input-sm" name="process SRB Date"
-                                            ng-model="dealForm.process['SRB Date']" ng-required="getField('process', 'SRB Date').required">
+                                            ng-model="dealForm.process['SRB Date']" ng-required="getField('process', 'SRB Date').required"
+                                            uib-tooltip="{{getTooltipMessage(myForm['process SRB Date'])}}" tooltip-enable="{{myForm['process SRB Date'].$invalid}}">
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-default btn-sm" ng-click="opened['process']['SRB Date'] = true">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -431,8 +458,9 @@
                                 <td>
                                     <label>SRB Status</label>
                                     <span style="color:red" ng-if="getField('process', 'SRB Status').required">*</span>
-                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['process SRB Status'].$invalid && myForm['process SRB Status'].$touched}">
-                                        <select class="form-control input-sm" name="process SRB Status" ng-model="dealForm.process['SRB Status']" ng-required="getField('process', 'SRB Status').required">
+                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['process SRB Status'].$invalid}">
+                                        <select class="form-control input-sm" name="process SRB Status" ng-model="dealForm.process['SRB Status']" ng-required="getField('process', 'SRB Status').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['process SRB Status'])}}" tooltip-enable="{{myForm['process SRB Status'].$invalid}}">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('process', 'SRB Status').options" value="{{option}}">
                                                 {{option}}
@@ -443,16 +471,16 @@
                             </tr>
                             <tr ng-repeat="field in fields.process track by field.id">
                                 <td ng-if="$even && !field.default">
-                                    <div class="form-inline" ng-class="{'has-error': myForm['process ' + field.name].$invalid && myForm['process ' + field.name].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['process ' + field.name].$invalid}">
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
                                             <input type="{{field.type}}" class="form-control input-sm" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]"
-                                                ng-required="{{field.required}}" />
+                                                ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}" />
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control input-sm" name="{{'process ' + field.name}}"
-                                                ng-model="dealForm.process[field.name]" ng-required="field.required">
+                                                ng-model="dealForm.process[field.name]" ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['process'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -462,11 +490,12 @@
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
                                             <textarea ng-model="dealForm.process[field.name]" class="form-control input-sm" name="{{'process ' + field.name}}" ng-required="{{field.required}}"
-                                                rows="4" cols="50"></textarea>
+                                                rows="4" cols="50" uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control input-sm" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}"
+                                            uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -484,9 +513,10 @@
                                 <td>
                                     <label>SOW Scheme</label>
                                     <span style="color:red" ng-if="getField('process', 'SOW Scheme').required">*</span>
-                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['process SOW Scheme'].$invalid && myForm['process SOW Scheme'].$touched}">
+                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['process SOW Scheme'].$invalid}">
                                         <select class="form-control input-sm" ng-model="dealForm.process['SOW Scheme']" name="process SOW Scheme" ng-required="getField('process', 'SOW Scheme').required"
-                                            ng-change="setContracts(dealForm.process['SOW Scheme'])">
+                                            ng-change="setContracts(dealForm.process['SOW Scheme'])"
+                                            uib-tooltip="{{getTooltipMessage(myForm['process SOW Scheme'])}}" tooltip-enable="{{myForm['process SOW Scheme'].$invalid}}">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('process', 'SOW Scheme').options" value="{{option}}">
                                                 {{option}}
@@ -499,9 +529,9 @@
                                 <td>
                                     <label>SOW No.</label>
                                     <span style="color:red" ng-if="getField('process', 'SOW No').required">*</span>
-                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['process SOW No'].$invalid && myForm['process SOW No'].$touched}">
+                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['process SOW No'].$invalid}">
                                         <input type="text" class="form-control input-sm" name="process SOW No" ng-model="dealForm.process['SOW No']" ng-required="getField('process', 'SOW No').required"
-                                            placeholder="(e.g. AWS-2013-2575)">
+                                            placeholder="(e.g. AWS-2013-2575)" uib-tooltip="{{getTooltipMessage(myForm['process SOW No'])}}" tooltip-enable="{{myForm['process SOW No'].$invalid}}">
                                     </div>
                                 </td>
                             </tr>
@@ -509,9 +539,10 @@
                                 <td>
                                     <label>SOW Date</label>
                                     <span style="color:red" ng-if="getField('process', 'SOW Date').required">*</span>
-                                    <div class="input-group pull-right" ng-class="{'has-error': myForm['process SOW Date'].$invalid && myForm['process SOW Date'].$touched}">
+                                    <div class="input-group pull-right" ng-class="{'has-error': myForm['process SOW Date'].$invalid}">
                                         <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process']['SOW Date']" class="form-control input-sm" name="process SOW Date"
-                                            ng-model="dealForm.process['SOW Date']" ng-required="getField('process', 'SOW Date').required">
+                                            ng-model="dealForm.process['SOW Date']" ng-required="getField('process', 'SOW Date').required"
+                                            uib-tooltip="{{getTooltipMessage(myForm['process SOW Date'])}}" tooltip-enable="{{myForm['process SOW Date'].$invalid}}">
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-default btn-sm" ng-click="opened['process']['SOW Date'] = true">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -524,8 +555,9 @@
                                 <td>
                                     <label>SOW Status</label>
                                     <span style="color:red" ng-if="getField('process', 'SOW Status').required">*</span>
-                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['process SOW Status'].$invalid && myForm['process SOW Status'].$touched}">
-                                        <select class="form-control input-sm" name="process SOW Status" ng-model="dealForm.process['SOW Status']" ng-required="getField('process', 'SOW Status').required">
+                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['process SOW Status'].$invalid}">
+                                        <select class="form-control input-sm" name="process SOW Status" ng-model="dealForm.process['SOW Status']" ng-required="getField('process', 'SOW Status').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['process SOW Status'])}}" tooltip-enable="{{myForm['process SOW Status'].$invalid}}">
                                             <option value="">- select -</option>
                                             <option ng-repeat="option in getField('process', 'SOW Status').options" value="{{option}}">
                                                 {{option}}
@@ -536,16 +568,16 @@
                             </tr>
                             <tr ng-repeat="field in fields.process track by field.id">
                                 <td ng-if="$odd && !field.default">
-                                    <div class="form-inline" ng-class="{'has-error': myForm['process ' + field.name].$invalid && myForm['process ' + field.name].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['process ' + field.name].$invalid}">
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
                                             <input type="{{field.type}}" class="form-control input-sm" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]"
-                                                ng-required="{{field.required}}" />
+                                                ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}"/>
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control input-sm" name="{{'process ' + field.name}}"
-                                                ng-model="dealForm.process[field.name]" ng-required="field.required">
+                                                ng-model="dealForm.process[field.name]" ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['process'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -555,11 +587,12 @@
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
                                             <textarea ng-model="dealForm.process[field.name]" class="form-control input-sm" name="{{'process ' + field.name}}" ng-required="{{field.required}}"
-                                                rows="4" cols="50"></textarea>
+                                                rows="4" cols="50" uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control input-sm" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" name="{{'process ' + field.name}}" ng-model="dealForm.process[field.name]" ng-required="{{field.required}}"
+                                            uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -618,13 +651,15 @@
                                     <b style="color: navy">GD</b>
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(0, 6)">
-                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' res jp ' + monthYear].$touched}">
+                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res jp ' + monthYear].$invalid}">
                                         <input type="number" min="0" max="9999" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' res jp ' + monthYear}}"
-                                            ng-model="dealForm.distribution[contract].res.jp[monthYear]" />
+                                            ng-model="dealForm.distribution[contract].res.jp[monthYear]" 
+                                            uib-tooltip="{{getTooltipMessage(myForm['distribution ' + contract + ' res jp ' + monthYear])}}" tooltip-enable="{{myForm['distribution ' + contract + ' res jp ' + monthYear].$invalid}}"/>
                                     </div>
-                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res gd ' + monthYear].$invalid && myForm['distribution ' + contract + ' res gd ' + monthYear].$touched}">
+                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res gd ' + monthYear].$invalid}">
                                         <input type="number" min="0" max="9999" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' res gd ' + monthYear}}"
-                                            ng-model="dealForm.distribution[contract].res.gd[monthYear]" />
+                                            ng-model="dealForm.distribution[contract].res.gd[monthYear]" 
+                                            uib-tooltip="{{getTooltipMessage(myForm['distribution ' + contract + ' res gd ' + monthYear])}}" tooltip-enable="{{myForm['distribution ' + contract + ' res gd ' + monthYear].$invalid}}"/>
                                     </div>
                                 </td>
                             </tr>
@@ -639,13 +674,15 @@
                                     <b style="color: navy">GD</b>
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(0, 6)">
-                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' rev jp ' + monthYear].$touched}">
+                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev jp ' + monthYear].$invalid}">
                                         <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' rev jp ' + monthYear}}"
-                                            ng-model="dealForm.distribution[contract].rev.jp[monthYear]" />
+                                            ng-model="dealForm.distribution[contract].rev.jp[monthYear]" 
+                                            uib-tooltip="{{getTooltipMessage(myForm['distribution ' + contract + ' rev jp ' + monthYear])}}" tooltip-enable="{{myForm['distribution ' + contract + ' rev jp ' + monthYear].$invalid}}"/>
                                     </div>
-                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev gd ' + monthYear].$invalid && myForm['distribution ' + contract + ' rev gd ' + monthYear].$touched}">
+                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev gd ' + monthYear].$invalid}">
                                         <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' rev gd ' + monthYear}}"
-                                            ng-model="dealForm.distribution[contract].rev.gd[monthYear]" />
+                                            ng-model="dealForm.distribution[contract].rev.gd[monthYear]" 
+                                            uib-tooltip="{{getTooltipMessage(myForm['distribution ' + contract + ' rev gd ' + monthYear])}}" tooltip-enable="{{myForm['distribution ' + contract + ' rev gd ' + monthYear].$invalid}}"/>
                                     </div>
                                 </td>
                             </tr>
@@ -657,9 +694,10 @@
                                     <b style="color: navy">ALL</b>
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(0, 6)">
-                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' cm ' + monthYear].$invalid && myForm['distribution ' + contract + ' cm ' + monthYear].$touched}">
+                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' cm ' + monthYear].$invalid}">
                                         <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' cm ' + monthYear}}"
-                                            ng-model="dealForm.distribution[contract].cm[monthYear]" />
+                                            ng-model="dealForm.distribution[contract].cm[monthYear]" 
+                                            uib-tooltip="{{getTooltipMessage(myForm['distribution ' + contract + ' cm ' + monthYear])}}" tooltip-enable="{{myForm['distribution ' + contract + ' cm ' + monthYear].$invalid}}"/>
                                     </div>
                                 </td>
                             </tr>
@@ -686,13 +724,15 @@
                                     <b style="color: navy">GD</b>
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(6, 12)">
-                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' res jp ' + monthYear].$touched}">
+                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res jp ' + monthYear].$invalid}">
                                         <input type="number" min="0" max="9999" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' res jp ' + monthYear}}"
-                                            ng-model="dealForm.distribution[contract].res.jp[monthYear]" />
+                                            ng-model="dealForm.distribution[contract].res.jp[monthYear]" 
+                                            uib-tooltip="{{getTooltipMessage(myForm['distribution ' + contract + ' res jp ' + monthYear])}}" tooltip-enable="{{myForm['distribution ' + contract + ' res jp ' + monthYear].$invalid}}"/>
                                     </div>
-                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res gd ' + monthYear].$invalid && myForm['distribution ' + contract + ' res gd ' + monthYear].$touched}">
+                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' res gd ' + monthYear].$invalid}">
                                         <input type="number" min="0" max="9999" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' res gd ' + monthYear}}"
-                                            ng-model="dealForm.distribution[contract].res.gd[monthYear]" />
+                                            ng-model="dealForm.distribution[contract].res.gd[monthYear]" 
+                                            uib-tooltip="{{getTooltipMessage(myForm['distribution ' + contract + ' res gd ' + monthYear])}}" tooltip-enable="{{myForm['distribution ' + contract + ' res gd ' + monthYear].$invalid}}"/>
                                     </div>
                                 </td>
                             </tr>
@@ -707,13 +747,15 @@
                                     <b style="color: navy">GD</b>
                                 </td>
                                 <td ng-repeat="monthYear in currentMonths.slice(6, 12)">
-                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev jp ' + monthYear].$invalid && myForm['distribution ' + contract + ' rev jp ' + monthYear].$touched}">
+                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev jp ' + monthYear].$invalid}">
                                         <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' rev jp ' + monthYear}}"
-                                            ng-model="dealForm.distribution[contract].rev.jp[monthYear]" />
+                                            ng-model="dealForm.distribution[contract].rev.jp[monthYear]" 
+                                            uib-tooltip="{{getTooltipMessage(myForm['distribution ' + contract + ' rev jp ' + monthYear])}}" tooltip-enable="{{myForm['distribution ' + contract + ' rev jp ' + monthYear].$invalid}}"/>
                                     </div>
-                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev gd ' + monthYear].$invalid && myForm['distribution ' + contract + ' rev gd ' + monthYear].$touched}">
+                                    <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' rev gd ' + monthYear].$invalid}">
                                         <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' rev gd ' + monthYear}}"
-                                            ng-model="dealForm.distribution[contract].rev.gd[monthYear]" />
+                                            ng-model="dealForm.distribution[contract].rev.gd[monthYear]" 
+                                            uib-tooltip="{{getTooltipMessage(myForm['distribution ' + contract + ' rev gd ' + monthYear])}}" tooltip-enable="{{myForm['distribution ' + contract + ' rev gd ' + monthYear].$invalid}}"/>
                                     </div>
                                 </td>
                             </tr>
@@ -727,7 +769,8 @@
                                 <td ng-repeat="monthYear in currentMonths.slice(6, 12)">
                                     <div class="form-group" ng-class="{'has-error': myForm['distribution ' + contract + ' cm ' + monthYear].$invalid && myForm['distribution ' + contract + ' cm ' + monthYear].$touched}">
                                         <input type="number" min="0" step="1" class="form-control input-sm pull-right" name="{{'distribution ' + contract + ' cm ' + monthYear}}"
-                                            ng-model="dealForm.distribution[contract].cm[monthYear]" />
+                                            ng-model="dealForm.distribution[contract].cm[monthYear]" 
+                                            uib-tooltip="{{getTooltipMessage(myForm['distribution ' + contract + ' cm ' + monthYear])}}" tooltip-enable="{{myForm['distribution ' + contract + ' cm ' + monthYear].$invalid}}"/>
                                     </div>
                                 </td>
                             </tr>
@@ -763,17 +806,19 @@
                             <tbody>
                                 <tr ng-repeat="field in fields.distribution track by field.id">
                                     <td ng-if="$even">
-                                        <div class="form-inline" ng-class="{'has-error': myForm['distribution ' + field.name].$invalid && myForm['distribution ' + field.name].$touched}">
+                                        <div class="form-inline" ng-class="{'has-error': myForm['distribution ' + field.name].$invalid}">
                                             <label for="{{field.name}}"> {{field.name}} </label>
                                             <span style="color:red" ng-if="field.required">*</span>
                                             <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
                                                 <input type="{{field.type}}" class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
-                                                    ng-required="{{field.required}}" />
+                                                    ng-required="{{field.required}}" 
+                                                    uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}"/>
                                             </div>
                                             <div ng-if="field.type === 'date'" class="input-group pull-right">
                                                 <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['distribution'][field.name]" class="form-control input-sm"
                                                     name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
-                                                    ng-required="field.required">
+                                                    ng-required="{{field.required}}"
+                                                    uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}">
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default btn-sm" ng-click="opened['distribution'][field.name] = true">
                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -783,11 +828,12 @@
                                             <div ng-if="field.type === 'textarea'" class="pull-right">
                                                 <!-- show text area -->
                                                 <textarea ng-model="dealForm.distribution[field.name]" name="{{'distribution ' + field.name}}" class="form-control input-sm" ng-required="{{field.required}}"
-                                                    rows="4" cols="50"></textarea>
+                                                    rows="4" cols="50" uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}"></textarea>
                                             </div>
                                             <div ng-if="field.type ==='dropdown'" class="pull-right">
                                                 <!-- show dropdown -->
-                                                <select class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}">
+                                                <select class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}"
+                                                uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}">
                                                     <option value="">- select -</option>
                                                     <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                                 </select>
@@ -803,17 +849,19 @@
                             <tbody>
                                 <tr ng-repeat="field in fields.distribution track by field.id">
                                     <td ng-if="$odd">
-                                        <div class="form-inline" ng-class="{'has-error': myForm['distribution ' + field.name].$invalid && myForm['distribution ' + field.name].$touched}">
+                                        <div class="form-inline" ng-class="{'has-error': myForm['distribution ' + field.name].$invalid}">
                                             <label for="{{field.name}}"> {{field.name}} </label>
                                             <span style="color:red" ng-if="field.required">*</span>
                                             <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
                                                 <input type="{{field.type}}" class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
-                                                    ng-required="{{field.required}}" />
+                                                    ng-required="{{field.required}}" 
+                                                    uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}"/>
                                             </div>
                                             <div ng-if="field.type === 'date'" class="input-group pull-right">
                                                 <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['distribution'][field.name]" class="form-control input-sm"
                                                     name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
-                                                    ng-required="field.required">
+                                                    ng-required="{{field.required}}"
+                                                    uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}">
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default btn-sm" ng-click="opened['distribution'][field.name] = true">
                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -823,11 +871,12 @@
                                             <div ng-if="field.type === 'textarea'" class="pull-right">
                                                 <!-- show text area -->
                                                 <textarea ng-model="dealForm.distribution[field.name]" class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-required="{{field.required}}"
-                                                    rows="4" cols="50"></textarea>
+                                                    rows="4" cols="50" uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}"></textarea>
                                             </div>
                                             <div ng-if="field.type ==='dropdown'" class="pull-right">
                                                 <!-- show dropdown -->
-                                                <select class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}">
+                                                <select class="form-control input-sm" name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]" ng-required="{{field.required}}"
+                                                uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}">
                                                     <option value="">- select -</option>
                                                     <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                                 </select>
@@ -859,8 +908,9 @@
                                 <td>
                                     <label>Dependency</label>
                                     <span style="color:red" ng-if="getField('status', 'Dependency').required">*</span>
-                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['status Dependency'].$invalid && myForm['status Dependency'].$touched}">
-                                        <textarea class="form-control input-sm" rows="3" name="status Dependency" ng-model="dealForm.status['Dependency']" ng-required="getField('status', 'Dependency').required">
+                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['status Dependency'].$invalid}">
+                                        <textarea class="form-control input-sm" rows="3" name="status Dependency" ng-model="dealForm.status['Dependency']" ng-required="getField('status', 'Dependency').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['status Dependency'])}}" tooltip-enable="{{myForm['status Dependency'].$invalid}}">
                                         </textarea>
                                     </div>
                                 </td>
@@ -869,24 +919,27 @@
                                 <td>
                                     <label>Action</label>
                                     <span style="color:red" ng-if="getField('status', 'Action').required">*</span>
-                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['status Action'].$invalid && myForm['status Action'].$touched}">
-                                        <textarea class="form-control input-sm" rows="3" name="status Action" ng-model="dealForm.status['Action']" ng-required="getField('status', 'Action').required">
+                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['status Action'].$invalid}">
+                                        <textarea class="form-control input-sm" rows="3" name="status Action" ng-model="dealForm.status['Action']" ng-required="getField('status', 'Action').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['status Action'])}}" tooltip-enable="{{myForm['status Action'].$invalid}}">
                                         </textarea>
                                     </div>
                                 </td>
                             </tr>
                             <tr ng-repeat="field in fields.status track by field.id">
                                 <td ng-if="$even && !field.default">
-                                    <div class="form-inline" ng-class="{'has-error': myForm['status ' + field.name].$invalid && myForm['status ' + field.name].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['status ' + field.name].$invalid}">
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
                                             <input type="{{field.type}}" class="form-control input-sm" name="{{'status ' + field.name}}" ng-model="dealForm.status[field.name]"
-                                                ng-required="{{field.required}}" />
+                                                ng-required="{{field.required}}" 
+                                                uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}"/>
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control input-sm" name="{{'status ' + field.name}}"
-                                                ng-model="dealForm.status[field.name]" ng-required="field.required">
+                                                ng-model="dealForm.status[field.name]" ng-required="{{field.required}}"
+                                                uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['status'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -896,11 +949,12 @@
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
                                             <textarea ng-model="dealForm.status[field.name]" class="form-control input-sm" name="{{'status ' + field.name}}" ng-required="{{field.required}}"
-                                                rows="4" cols="50"></textarea>
+                                                rows="4" cols="50" uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control input-sm" name="{{'status ' + field.name}}" ng-model="dealForm.status[field.name]" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" name="{{'status ' + field.name}}" ng-model="dealForm.status[field.name]" ng-required="{{field.required}}"
+                                            uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -918,8 +972,9 @@
                                 <td>
                                     <label>Status</label>
                                     <span style="color:red" ng-if="getField('status', 'Status').required">*</span>
-                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['status Status'].$invalid && myForm['status Status'].$touched}">
-                                        <textarea class="form-control input-sm" rows="3" name="status Status" ng-model="dealForm.status['Status']" ng-required="getField('status', 'Status').required">
+                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['status Status'].$invalid}">
+                                        <textarea class="form-control input-sm" rows="3" name="status Status" ng-model="dealForm.status['Status']" ng-required="getField('status', 'Status').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['status Status'])}}" tooltip-enable="{{myForm['status Status'].$invalid}}">
                                         </textarea>
                                     </div>
                                 </td>
@@ -928,24 +983,27 @@
                                 <td>
                                     <label>Step to Close</label>
                                     <span style="color:red" ng-if="getField('status', 'Step to Close').required">*</span>
-                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['status Step to Close'].$invalid && myForm['status Step to Close'].$touched}">
-                                        <textarea class="form-control input-sm" rows="3" ng-model="dealForm.status['Step to Close']" name="status Step to Close" ng-required="getField('status', 'Step to Close').required">
+                                    <div class="form-group pull-right" ng-class="{'has-error': myForm['status Step to Close'].$invalid}">
+                                        <textarea class="form-control input-sm" rows="3" ng-model="dealForm.status['Step to Close']" name="status Step to Close" ng-required="getField('status', 'Step to Close').required"
+                                        uib-tooltip="{{getTooltipMessage(myForm['status Step to Close'])}}" tooltip-enable="{{myForm['status Step to Close'].$invalid}}">
                                                 </textarea>
                                     </div>
                                 </td>
                             </tr>
                             <tr ng-repeat="field in fields.status track by field.id">
                                 <td ng-if="$odd && !field.default">
-                                    <div class="form-inline" ng-class="{'has-error': myForm['status ' + field.name].$invalid && myForm['status ' + field.name].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['status ' + field.name].$invalid}">
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
                                             <input type="{{field.type}}" class="form-control input-sm" name="{{'status ' + field.name}}" ng-model="dealForm.status[field.name]"
-                                                ng-required="{{field.required}}" />
+                                                ng-required="{{field.required}}" 
+                                                uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}"/>
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control input-sm" name="{{'status ' + field.name}}"
-                                                ng-model="dealForm.status[field.name]" ng-required="field.required">
+                                                ng-model="dealForm.status[field.name]" ng-required="{{field.required}}"
+                                                uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['status'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -955,11 +1013,12 @@
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
                                             <textarea ng-model="dealForm.status[field.name]" class="form-control input-sm" name="{{'status ' + field.name}}" ng-required="{{field.required}}"
-                                                rows="4" cols="50"></textarea>
+                                                rows="4" cols="50" uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control input-sm" ng-model="dealForm.status[field.name]" name="{{'status ' + field.name}}" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" ng-model="dealForm.status[field.name]" name="{{'status ' + field.name}}" ng-required="{{field.required}}"
+                                            uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -999,16 +1058,18 @@
                         <tbody>
                             <tr ng-repeat="field in fields.content track by field.id">
                                 <td ng-if="$even">
-                                    <div class="form-inline" ng-class="{'has-error': myForm['content ' + field.name].$invalid && myForm['content ' + field.name].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['content ' + field.name].$invalid}">
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
                                             <input type="{{field.type}}" class="form-control input-sm" name="{{'content ' + field.name}}" ng-model="dealForm.content[field.name]"
-                                                ng-required="{{field.required}}" />
+                                                ng-required="{{field.required}}" 
+                                                uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}"/>
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control input-sm" name="{{'content ' + field.name}}"
-                                                ng-model="dealForm.content[field.name]" ng-required="field.required">
+                                                ng-model="dealForm.content[field.name]" ng-required="{{field.required}}"
+                                                uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['content'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -1018,11 +1079,12 @@
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
                                             <textarea ng-model="dealForm.content[field.name]" class="form-control input-sm" name="{{'content ' + field.name}}" ng-required="{{field.required}}"
-                                                rows="4" cols="50"></textarea>
+                                                rows="4" cols="50" uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}"></textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control input-sm" ng-model="dealForm.content[field.name]" name="{{'content ' + field.name}}" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" ng-model="dealForm.content[field.name]" name="{{'content ' + field.name}}" ng-required="{{field.required}}"
+                                            uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
@@ -1048,7 +1110,7 @@
                                         <div ng-if="field.type === 'date'">
                                             <div class="input-group pull-right">
                                                 <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control input-sm" name="{{'content ' + field.name}}"
-                                                    ng-model="dealForm.content[field.name]" ng-required="field.required">
+                                                    ng-model="dealForm.content[field.name]" ng-required="{{field.required}}">
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default btn-sm" ng-click="opened['content'][field.name] = true">
                                                         <span class="glyphicon glyphicon-calendar"></span>

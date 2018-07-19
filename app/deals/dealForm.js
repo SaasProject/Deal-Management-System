@@ -239,7 +239,7 @@
                     throw new Error('End date must be greater than or equal to the start date');
                 }
 
-                if(tempObject.essential['Due Date'] > tempObject.process['SOW Date']) {
+                if (tempObject.essential['Due Date'] > tempObject.process['SOW Date']) {
                     throw new Error('Due date must be less than or equal to the SOW Date');
                 }
 
@@ -469,10 +469,10 @@
 
         //get the latest change date for the specified level from $scope.dealForm['Change History'] array
         //since all changes are pushed into the change history, get the last index
-        $scope.getLatestChangeDate = function(level) {
-            if($scope.dealForm['Change History'] !== undefined) {
+        $scope.getLatestChangeDate = function (level) {
+            if ($scope.dealForm['Change History'] !== undefined) {
                 var tempArray = [];
-                tempArray = $scope.dealForm['Change History'].filter(function(change) {
+                tempArray = $scope.dealForm['Change History'].filter(function (change) {
                     return change.level === level;
                 });
                 return (tempArray[tempArray.length - 1]) ? tempArray[tempArray.length - 1].date : '';
@@ -514,7 +514,7 @@
                     rows = Object.keys(spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]);
 
                     //check the rows, skip the sheet if it is empty (e.g. distribution table may be empty for now)
-                    if(rows.length === 0) {
+                    if (rows.length === 0) {
                         continue;
                     }
 
@@ -547,7 +547,7 @@
 
                 //console.log(tempObject);
                 //need to wrap assignment to $scope.$apply() to update the bindings in the html immediately
-                $scope.$apply(function(){
+                $scope.$apply(function () {
                     $scope.dealForm = preProcess(tempObject, true);
                 });
                 //console.log($scope.dealForm);
@@ -561,5 +561,21 @@
         }
 
         $('#newDealFile')[0].addEventListener('change', processExcel, false);
+
+        //this is called multiple times (may lead to lag?) but i dont know why. 
+        $scope.getTooltipMessage = function (formName) {
+            if (formName !== undefined) {
+                return (formName.$error.required) ? 'Please fill out this field' :
+                    (formName.$error.parse) ? 'Please input a valid date' :
+                        (formName.$error.email) ? 'Please input a valid email address' :
+                            (formName.$error.min) ? 'Please input a value greater than or equal to ' + formName.$$element[0].min:
+                                (formName.$error.max) ? 'Please input a value less than or equal to ' + formName.$$element[0].max:
+                                    (formName.$error.step) ? 'Please input a value with increments of ' + formName.$$element[0].step :
+                                        (formName.$valid) ? '' :
+                                            'Invalid input';
+            }
+
+            return '';
+        }
     }
 })();
