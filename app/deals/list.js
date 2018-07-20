@@ -111,7 +111,7 @@
                             //using 'months' in .diff() results to 0 for the next month and next next month
                             //e.g. current month is june, so july 31 is next month
                             //if this is used, deals due on august are also included
-                            diff = nextMonth.diff(aDeal.essential['Due Date'], 'months', true);
+                            diff = nextMonth.diff(aDeal.essential['Due Date'].replace(/\//g, '-'), 'months', true);
                             //console.log(diff);
                             return ((aDeal.profile['Level'] !== '1' && aDeal.profile['Level'] !== '9') &&
                                 (diff >= 0));
@@ -124,7 +124,7 @@
                         $scope.deals = $scope.deals.filter(function (aDeal) {
                             //use true to get decimal places. this is to avoid having 0s for adjacent months
                             //i.e. next month & next next month
-                            diff = nextMonth.diff(aDeal.essential['Due Date'], 'months', true);
+                            diff = nextMonth.diff(aDeal.essential['Due Date'].replace(/\//g, '-'), 'months', true);
                             //console.log(diff);
                             return ((aDeal.profile['Level'] !== '1' && aDeal.profile['Level'] !== '9') &&
                                 (diff >= 0 && diff <= 2));
@@ -134,7 +134,7 @@
                         $scope.deals = $scope.deals.filter(function (aDeal) {
                             return aDeal.profile['Level'] !== '1' &&
                                 aDeal.profile['Level'] !== '9' &&
-                                moment().diff(aDeal.essential['Due Date'], 'days') > 0;
+                                moment().diff(aDeal.essential['Due Date'].replace(/\//g, '-'), 'days') > 0;
                         });
                     } break;
 

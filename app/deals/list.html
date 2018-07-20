@@ -114,7 +114,7 @@
                 <td>{{deal['process']['SOW Date']}}</td>
                 <td>{{deal['essential']['Due Date']}}</td>
                 <td ng-repeat="essentialField in fields.essential" ng-if="essentialField.showInList && !essentialField.default">
-                    {{deal.profile[essentialField.name]}}
+                    {{deal.essential[essentialField.name]}}
                 </td>
                 <td ng-repeat="profileField in fields.profile" ng-if="profileField.showInList && !profileField.default">
                     {{deal.profile[profileField.name]}}
