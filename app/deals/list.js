@@ -50,6 +50,7 @@
         $scope.search = {};
         $scope.searchColumn = 'all,$';
 
+        //default names as per review comments
         $scope.columnNames = {
             essential: {
                 'ID': 'No',
@@ -78,6 +79,8 @@
                 'SOW Date': 'SOW'
             }
         }
+
+        $scope.users = [];
 
         $scope.getDeals = function () {
             ModulesService.getAllModuleDocs('deals').then(function (allDeals) {
@@ -166,8 +169,17 @@
             });
         }
 
+        function getUsers() {
+            ModulesService.getAllModuleDocs('users').then(function (users) {
+                $scope.users = users;
+            }).catch(function (err) {
+                ngToast.danger('cannot find users');
+            });
+        }
+
         //getAllFields() must be called first
         getAllFields();
+        getUsers();
         $scope.getDeals();
 
         $scope.sortColumn = function (category, fieldName) {
@@ -189,7 +201,7 @@
             }
         } */
 
-        $scope.uploadFile = function () {
+        /* $scope.uploadFile = function () {
             const file = $('#newDealFile')[0].files[0];
             DealsService.newDealFile(file).then(function () {
                 ngToast.success('File uploaded');
@@ -198,57 +210,73 @@
                 .catch(function (err) {
                     ngToast.danger('Error in uploading file');
                 });
-        }
+        } */
 
         function processDeals() {
             //ewww dirty code 2 for loops, bale 3 nested loops all in all :(
             //delete properties of each deal which are not shown in the list to avoid its values being searched
-            for(var category in $scope.fields){
-                angular.forEach($scope.fields[category], function (aField) {
-                    angular.forEach($scope.deals, function (aDeal) {
+            var awsSales, awsDev;
+            angular.forEach($scope.deals, function (aDeal) {
+                //delete 'Change history'
+                console.log('e');
+                delete aDeal['Change History'];
 
-                        //delete 'Change history'
-                        delete aDeal['Change History'];
+                //find user by the data (id) stored in the deal's AWS Sales & AWS Dev
+                awsSales = $scope.users.find(function (user) {
+                    return user._id === aDeal['profile']['AWS Resp (Sales) person'];
+                });
+
+                awsDev = $scope.users.find(function (user) {
+                    return user._id === aDeal['profile']['AWS Resp (Dev) person'];
+                });
+
+                //assign nickname to AWS Sales & AWS Dev
+                if (awsSales !== undefined) {
+                    aDeal['profile']['AWS Resp (Sales) person'] = awsSales.nickname;
+                }
+
+                if (awsDev !== undefined) {
+                    aDeal['profile']['AWS Resp (Dev) person'] = awsDev.nickname;
+                }
+
+                for (var category in $scope.fields) {
+                    angular.forEach($scope.fields[category], function (aField) {
 
                         if (!aField.showInList) {
                             delete aDeal[category][aField.name];
-                        } else {
+                        } else if (!aField.default) {
                             //store user-added fields to column names
-                            if(!aField.default) {
-                                $scope.columnNames[category][aField.name] = aField.name;
-                            }
+                            $scope.columnNames[category][aField.name] = aField.name;
                         }
-    
+
                         //format date to MM/DD
                         //console.log(aDeal[category][aField.name]);
                         if (aField.type === 'date' && aDeal[category][aField.name] !== undefined) {
                             aDeal[category][aField.name] = moment(aDeal[category][aField.name].replace(/\//g, '-')).format('MM/DD');
                         }
+
                     });
-                });
-            }
+                }
+            });
         }
 
-        $scope.open = function(dealID) {
-            window.open($state.href('dealForm', {ID: dealID}), dealID);
+        $scope.open = function (dealID) {
+            window.open($state.href('dealForm', { ID: dealID }), dealID);
         }
 
-        $scope.setSearch = function() {
+        $scope.setSearch = function () {
             //console.log($scope.searchColumn);
+            //reset the search object
             $scope.search = {};
+
             var splitted = angular.copy($scope.searchColumn.split(','));
-            if(splitted[0] === 'all') {
+            if (splitted[0] === 'all' || splitted[1] === 'ID') {
                 $scope.search[splitted[1]] = $scope.searchText;
             } else {
-                if(splitted[1] === 'ID') {
-                    $scope.search[splitted[1]] = $scope.searchText;
-                } else {
-                    //needed to initialize 'first' layer to avoid undefined
-                    $scope.search[splitted[0]] = {};
-                    $scope.search[splitted[0]][splitted[1]] = $scope.searchText;
-                }
+                //needed to initialize 'first' layer to avoid undefined
+                $scope.search[splitted[0]] = {};
+                $scope.search[splitted[0]][splitted[1]] = $scope.searchText;
             }
-
             //console.log($scope.search);
         }
     }
