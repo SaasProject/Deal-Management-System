@@ -223,11 +223,11 @@
 
                 //find user by the data (id) stored in the deal's AWS Sales & AWS Dev
                 awsSales = $scope.users.find(function (user) {
-                    return user._id === aDeal['profile']['AWS Resp (Sales) person'];
+                    return user.email === aDeal['profile']['AWS Resp (Sales) person'];
                 });
 
                 awsDev = $scope.users.find(function (user) {
-                    return user._id === aDeal['profile']['AWS Resp (Dev) person'];
+                    return user.email === aDeal['profile']['AWS Resp (Dev) person'];
                 });
 
                 //assign nickname to AWS Sales & AWS Dev

@@ -33,7 +33,7 @@
                 <select class="form-control input-sm pull-right" name="essential Assignee" ng-model="dealForm.essential['Assignee']" ng-required="getField('essential', 'Assignee').required"
                 uib-tooltip="{{getTooltipMessage(myForm['essential Assignee'])}}" tooltip-enable="{{myForm['essential Assignee'].$invalid}}">
                     <option value="">- select -</option>
-                    <option ng-repeat="user in users" value="{{user._id}}">{{user.firstName + ' ' + user.lastName}}</option>
+                    <option ng-repeat="user in users" value="{{user.email}}">{{user.firstName + ' ' + user.lastName}}</option>
                 </select>
             </div>
         </div>
@@ -166,7 +166,7 @@
                                                 ng-required="getField('profile', 'AWS Resp (Sales) person').required"
                                                 uib-tooltip="{{getTooltipMessage(myForm['profile AWS Resp (Sales) person'])}}" tooltip-enable="{{myForm['profile AWS Resp (Sales) person'].$invalid}}">
                                                 <option value="">- select -</option>
-                                                <option ng-repeat="user in users" value="{{user._id}}">{{user.firstName + ' ' + user.lastName}}</option>
+                                                <option ng-repeat="user in users" value="{{user.email}}">{{user.firstName + ' ' + user.lastName}}</option>
                                             </select>
                                         </div>
                                         /
@@ -343,7 +343,7 @@
                                             <select class="form-control input-sm" name="profile AWS Resp (Dev) person" ng-model="dealForm.profile['AWS Resp (Dev) person']" ng-required="getField('profile', 'AWS Resp (Dev) person').required"
                                             uib-tooltip="{{getTooltipMessage(myForm['profile AWS Resp (Dev) person'])}}" tooltip-enable="{{myForm['profile AWS Resp (Dev) person'].$invalid}}">
                                                 <option value="">- select -</option>
-                                                <option ng-repeat="user in users" value="{{user._id}}">{{user.firstName + ' ' + user.lastName}}</option>
+                                                <option ng-repeat="user in users" value="{{user.email}}">{{user.firstName + ' ' + user.lastName}}</option>
                                             </select>
                                         </div>
                                         <br/> /
