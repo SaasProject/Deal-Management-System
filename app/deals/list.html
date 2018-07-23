@@ -92,7 +92,7 @@
             </th>
         </thead>
         <tbody>
-            <tr ng-repeat="deal in deals | filter: search | orderBy: column : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize" class="active">
+            <tr ng-repeat="deal in deals | filter: search | orderBy: column : reverse | pagination: (currentPage - 1) * pageSize | limitTo: pageSize" class="">
                 <td><a href="" ng-click="open(deal['ID'])">{{deal['ID']}}</a></td>
                 <td>{{deal['profile']['Client']}}</td>
                 <td>{{deal['essential']['Deal Name']}}</td>
