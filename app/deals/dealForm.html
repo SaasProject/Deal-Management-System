@@ -38,15 +38,12 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="input-group" ng-show="showUpload">
+            <!-- <div class="input-group" ng-show="showUpload">
                 <label>Upload File to fill form</label>
                 <input type="file" class="form-control input-sm" id="newDealFile" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                     />
-            </div>
-        </div>
-        <div class="col-md-2 pull-right">
-            <button type="submit" class="btn btn-success" ng-disabled="myForm.$invalid">Submit</button>
-            <!-- <button type="button" class="btn btn-default btn-sm">Cancel</button> -->
+            </div> -->
+            <button type="submit" class="btn btn-success pull-right" ng-disabled="myForm.$invalid">Submit</button>
         </div>
     </div>
     <hr class="dealsCollapsible">
@@ -146,7 +143,8 @@
                                         <div class="input-group pull-right">
                                             <input type="text" name="profile Duration (Start)" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile']['Duration (Start)']"
                                                 class="form-control input-sm" ng-model="dealForm.profile['Duration (Start)']" ng-required="getField('profile', 'Duration (Start)').required"
-                                                uib-tooltip="{{getTooltipMessage(myForm['profile Duration (Start)'])}}" tooltip-enable="{{myForm['profile Duration (Start)'].$invalid}}">
+                                                uib-tooltip="{{getTooltipMessage(myForm['profile Duration (Start)'])}}" tooltip-enable="{{myForm['profile Duration (Start)'].$invalid}}"
+                                                placeholder="{{DATE_FORMAT | uppercase }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile']['Duration (Start)'] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -163,7 +161,7 @@
                                     <div class="pull-right">
                                         <div class="form-inline" ng-class="{'has-error': myForm['profile AWS Resp (Sales) person'].$invalid}">
                                             <select class="form-control input-sm" ng-model="dealForm.profile['AWS Resp (Sales) person']" name="profile AWS Resp (Sales) person"
-                                                ng-required="getField('profile', 'AWS Resp (Sales) person').required"
+                                                ng-required="getField('profile', 'AWS Resp (Sales) person').required" ng-change="setSalesBU()"
                                                 uib-tooltip="{{getTooltipMessage(myForm['profile AWS Resp (Sales) person'])}}" tooltip-enable="{{myForm['profile AWS Resp (Sales) person'].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="user in users" value="{{user.email}}">{{user.firstName + ' ' + user.lastName}}</option>
@@ -175,7 +173,7 @@
                                             <select class="form-control input-sm" ng-model="dealForm.profile['AWS Resp (Sales) BU']" name="profile AWS Resp (Sales) BU" ng-required="getField('profile', 'AWS Resp (Sales) BU').required"
                                             uib-tooltip="{{getTooltipMessage(myForm['profile AWS Resp (Sales) BU'])}}" tooltip-enable="{{myForm['profile AWS Resp (Sales) BU'].$invalid}}">
                                                 <option value="">- select -</option>
-                                                <option ng-repeat="businessUnit in businessUnits" value="{{businessUnit.BU}}">{{businessUnit.BU}}</option>
+                                                <option ng-repeat="businessUnit in salesBU" value="{{businessUnit.BU}}">{{businessUnit.BU}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -341,7 +339,7 @@
                                     <div class="pull-right">
                                         <div class="form-group" ng-class="{'has-error': myForm['profile AWS Resp (Dev) person'].$invalid}">
                                             <select class="form-control input-sm" name="profile AWS Resp (Dev) person" ng-model="dealForm.profile['AWS Resp (Dev) person']" ng-required="getField('profile', 'AWS Resp (Dev) person').required"
-                                            uib-tooltip="{{getTooltipMessage(myForm['profile AWS Resp (Dev) person'])}}" tooltip-enable="{{myForm['profile AWS Resp (Dev) person'].$invalid}}">
+                                            uib-tooltip="{{getTooltipMessage(myForm['profile AWS Resp (Dev) person'])}}" tooltip-enable="{{myForm['profile AWS Resp (Dev) person'].$invalid}}" ng-change="setDevBU()" >
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="user in users" value="{{user.email}}">{{user.firstName + ' ' + user.lastName}}</option>
                                             </select>
@@ -352,7 +350,7 @@
                                             <select class="form-control input-sm" name="profile AWS Resp (Dev) BU" ng-model="dealForm.profile['AWS Resp (Dev) BU']" ng-required="getField('profile', 'AWS Resp (Dev) BU').required"
                                             uib-tooltip="{{getTooltipMessage(myForm['profile AWS Resp (Dev) BU'])}}" tooltip-enable="{{myForm['profile AWS Resp (Dev) BU'].$invalid}}">
                                                 <option value="">- select -</option>
-                                                <option ng-repeat="businessUnit in businessUnits" value="{{businessUnit.BU}}">{{businessUnit.BU}}</option>
+                                                <option ng-repeat="businessUnit in devBU" value="{{businessUnit.BU}}">{{businessUnit.BU}}</option>
                                             </select>
                                         </div>
                                     </div>
