@@ -71,21 +71,42 @@ var server = http.listen(5000, function () {
     console.log(5000);
     //[sec] (optional) [min] [hour] [day of month] [month] [day of week]
 
-    scheduler.scheduleJob('*/30 * * * *', function () {
-        console.log('every 30 min of the clock');
+    //send @ 05:00 AM
+    scheduler.scheduleJob('0 5 * * *', function () {
         console.log(new Date().toLocaleTimeString());
+        var diff, mailOptions;
         ModuleService.getAllModuleDocs('deals').then(function (deals) {
             for (var i = 0; i < deals.length; i++) {
                 //check the due date and compare to the current date
-                if(moment().diff(deals[i]['essential']['Due Date'].replace(/\//g, '-'), 'days', false) > 0) {
+                diff = moment().diff(deals[i]['essential']['Due Date'].replace(/\//g, '-'), 'days', false);
+                if(diff > 0) {
                     console.log('overdue: ' + deals[i]['essential']['Deal Name']);
                     console.log('people responsible: \n' + deals[i]['essential']['Assignee'] + '\n' + 
                     deals[i]['profile']['AWS Resp (Sales) person'] + '\n' + 
                     deals[i]['profile']['AWS Resp (Dev) person']);
+
+                    //send email to aws dev person (assumed to be jeremybreccion@gmail.com for testing purposes)
+                    mailOptions = {
+                        //sender user & pass
+                        user: config.user,
+                        pass: config.pass,
+                        from: config.from,
+                        to: deals[i]['profile']['AWS Resp (Dev) person'],
+                        subject: 'Deal Management System - Deal overdue: ' + deals[i]['essential']['Deal Name'] + '!',
+                        html: `
+                            <p>The Project ${deals[i]['essential']['Deal Name']} is delayed by ${diff} days.<p>
+                            `
+                    }
+
+                    EmailService.sendMail(mailOptions).then(function() {
+                        console.log('email sent!');
+                    }).catch(function(err) {
+                        console.log(err);
+                        console.log('error sending email');
+                    });
+                    
                 }
             }
         });
-
-        //email jeremy.reccion@awsys-i.com using jeremybreccion@gmail.com
     });
 });
