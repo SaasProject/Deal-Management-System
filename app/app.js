@@ -150,6 +150,10 @@
             //access is allowed
             } else {
                 //save fromState (except login) to rootScope variable
+                if(fromState.name === 'dealForm') {
+                    window.name = null;
+                }
+                
                 $rootScope.fromState = (fromState.name !== 'login') ? {
                     name: fromState.name,
                     url: fromState.url
