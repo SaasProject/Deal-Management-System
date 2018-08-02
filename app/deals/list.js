@@ -41,7 +41,7 @@
         };
 
         $scope.currentPage = 1;
-        $scope.pageSize = 10;
+        $scope.pageSize = 6;
 
         $scope.reverse = false;
 
@@ -96,8 +96,8 @@
                     case 'Mine': {
                         $scope.deals = $scope.deals.filter(function (aDeal) {
                             return ((aDeal.profile['Level'] !== '1' && aDeal.profile['Level'] !== '9') &&
-                                (aDeal.profile['AWS Resp (Sales) person'] === $rootScope.user.nickname ||
-                                    aDeal.profile['AWS Resp (Dev) person'] === $rootScope.user.nickname));
+                                (aDeal.profile['AWS Resp (Sales) person'] === $rootScope.user.email ||
+                                    aDeal.profile['AWS Resp (Dev) person'] === $rootScope.user.email));
                         });
                     } break;
                     //1 - same as active
@@ -215,10 +215,9 @@
         function processDeals() {
             //ewww dirty code 2 for loops, bale 3 nested loops all in all :(
             //delete properties of each deal which are not shown in the list to avoid its values being searched
-            var awsSales, awsDev;
+            var awsSales, awsDev, assignee;
             angular.forEach($scope.deals, function (aDeal) {
                 //delete 'Change history'
-                console.log('e');
                 delete aDeal['Change History'];
 
                 //find user by the data (id) stored in the deal's AWS Sales & AWS Dev
@@ -230,6 +229,10 @@
                     return user.email === aDeal['profile']['AWS Resp (Dev) person'];
                 });
 
+                assignee = $scope.users.find(function (user) {
+                    return user.email === aDeal['essential']['Assignee'];
+                });
+
                 //assign nickname to AWS Sales & AWS Dev
                 if (awsSales !== undefined) {
                     aDeal['profile']['AWS Resp (Sales) person'] = awsSales.nickname;
@@ -237,6 +240,10 @@
 
                 if (awsDev !== undefined) {
                     aDeal['profile']['AWS Resp (Dev) person'] = awsDev.nickname;
+                }
+
+                if (assignee !== undefined) {
+                    aDeal['essential']['Assignee'] = assignee.nickname;
                 }
 
                 for (var category in $scope.fields) {
