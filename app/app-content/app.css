@@ -55,6 +55,7 @@ td {
 
 .dealTable {
 	font-size: 10px;
+	text-align: center;
 }
 
 .div-padded {
@@ -294,4 +295,8 @@ p:hover {
 
 textarea {
 	resize: none;
+}
+
+select {
+	max-width: 150px;
 }
