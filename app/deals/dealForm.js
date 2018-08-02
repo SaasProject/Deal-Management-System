@@ -28,6 +28,8 @@
         //initialize business units array
         $scope.users = [];
         $scope.businessUnits = [];
+        $scope.salesBU = [];
+        $scope.devBU = [];
 
         //initialize variables for distribution section
         $scope.currentMonths = [];
@@ -130,6 +132,13 @@
         function getAllBUs() {
             ModulesService.getAllModuleDocs('businessunits').then(function (businessUnits) {
                 $scope.businessUnits = businessUnits;
+                $scope.salesBU = $scope.businessUnits.filter(function(businessUnit) {
+                    return businessUnit['Category'] === 'Sales';
+                });
+
+                $scope.devBU = $scope.businessUnits.filter(function(businessUnit) {
+                    return businessUnit['Category'] === 'Dev';
+                });
             }).catch(function (err) {
 
             });
@@ -496,6 +505,9 @@
             var files = e.target.files;
             var f = files[0];
             var reader = new FileReader();
+            reader.onerror = function(ex){
+                console.log(ex);
+            };
             reader.onload = function (e) {
                 var data = e.target.result;
                 if (!rABS) {
@@ -523,16 +535,16 @@
                     do {
                         //store cell's value if not undefined
                         if (spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j] !== undefined) {
-                            /**
-                                ['A' + j] & ['B' + j] will result to the cell then the 'w' property is the value (formatted text) of that cell
+                            
+                                /* ['A' + j] & ['B' + j] will result to the cell then the 'w' property is the value (formatted text) of that cell
                                 ['A' + j].w is the field from the template, ['B' + j].w is the value inputted by the user
                                 example of object structure
                                 spreadsheet['SheetNames'][i] = 'profile'
                                 spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['A' + j].w = 'Country'
                                 spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j].w = 'PH'
                                 the difference between v & w is that the v is the true value (if number, etc) whereas w is just the formatted text
-                                this is important since Resource Size are in numbers, Level & Step are strings, and Dates are in strings
-                             */
+                                this is important since Resource Size are in numbers, Level & Step are strings, and Dates are in strings */
+                             
 
                             //console.log(spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['B' + j]);
                             tempObject[spreadsheet['SheetNames'][i]][spreadsheet['Sheets'][spreadsheet['SheetNames'][i]]['A' + j].w] =
@@ -560,7 +572,7 @@
             }
         }
 
-        $('#newDealFile')[0].addEventListener('change', processExcel, false);
+        //$('#newDealFile')[0].addEventListener('change', processExcel, false);
 
         //this is called multiple times (may lead to lag?) but i dont know why. 
         $scope.getTooltipMessage = function (formName) {
@@ -568,14 +580,31 @@
                 return (formName.$error.required) ? 'Please fill out this field' :
                     (formName.$error.parse) ? 'Please input a valid date' :
                         (formName.$error.email) ? 'Please input a valid email address' :
-                            (formName.$error.min) ? 'Please input a value greater than or equal to ' + formName.$$element[0].min:
-                                (formName.$error.max) ? 'Please input a value less than or equal to ' + formName.$$element[0].max:
+                            (formName.$error.min) ? 'Please input a value greater than or equal to ' + formName.$$element[0].min :
+                                (formName.$error.max) ? 'Please input a value less than or equal to ' + formName.$$element[0].max :
                                     (formName.$error.step) ? 'Please input a value with increments of ' + formName.$$element[0].step :
                                         (formName.$valid) ? '' :
                                             'Invalid input';
             }
 
             return '';
+        }
+
+        $scope.setSalesBU = function() {
+            $scope.salesBU = $scope.businessUnits.filter(function(businessUnit) {
+                return businessUnit['Category'] === 'Sales' && businessUnit['Manager'] === $scope.dealForm['profile']['AWS Resp (Sales) person'];
+            });
+        }
+
+        $scope.setDevBU = function() {
+            $scope.devBU = $scope.businessUnits.filter(function(businessUnit) {
+                return businessUnit['Category'] === 'Dev' && businessUnit['Manager'] === $scope.dealForm['profile']['AWS Resp (Dev) person'];
+            });
+
+            //auto-selects the BU if there is only 1 result
+            if($scope.devBU.length === 1) {
+                $scope.dealForm['profile']['AWS Resp (Dev) BU'] = $scope.devBU[0].BU;
+            }
         }
     }
 })();
