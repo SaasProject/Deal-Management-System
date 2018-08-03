@@ -42,23 +42,16 @@
         });
 
     
-    function Controller($scope, $rootScope, $state, ClientService) {
+    function Controller($scope, $rootScope, $state, ClientService, TableService) {
 
         //enable load if data for table is not yet fetched
         $scope.loading = true;
 
-        $scope.filterOptions = [
-            'Active',
-            '1-2 months',
-            'Mine'
-        ];
+        $scope.pageSize = 6;
+        $scope.currentPage = 1;
 
-        $scope.filter = $scope.filterOptions[0];
-
-        $scope.console = function () {
-            console.log($scope.filter);
-        }
-
+        $scope.reverse = false;
+        
         /*
             Function name: Calculate Object size
             Author(s): Flamiano, Glenn
@@ -100,6 +93,16 @@
             }).finally(function() {
 
             });
+        }
+
+        $scope.sortColumn = function (fieldName) {
+            //$scope.column = category + '.' + fieldName;
+            $scope.column = fieldName;
+            $scope.reverse = TableService.sortSelectedColumn($scope.reverse, $scope.column).result;
+        }
+        
+        $scope.sortClass = function (fieldName) {
+            return TableService.sortSelectedClass($scope.reverse, fieldName, $scope.column);
         }
     }
 })();
