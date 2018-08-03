@@ -18,7 +18,8 @@
                 <div class="input-group pull-right">
                     <input type="text" name="essential Due Date" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['essential']['Due Date']"
                         class="form-control input-sm" ng-model="dealForm.essential['Due Date']" ng-required="getField('essential', 'Due Date').required"
-                        uib-tooltip="{{getTooltipMessage(myForm['essential Due Date'])}}" tooltip-enable="{{myForm['essential Due Date'].$invalid}}">
+                        uib-tooltip="{{getTooltipMessage(myForm['essential Due Date'])}}" tooltip-enable="{{myForm['essential Due Date'].$invalid}}"
+                        placeholder="{{DATE_FORMAT | uppercase }}">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default btn-sm" ng-click="opened['essential']['Due Date'] = true">
                             <span class="glyphicon glyphicon-calendar"></span>
@@ -201,7 +202,8 @@
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile'][field.name]" class="form-control input-sm pull-right"
                                                 name="{{'profile ' + field.name}}" ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}"
-                                                uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}">
+                                                uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}"
+                                                placeholder="{{DATE_FORMAT | uppercase }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -322,7 +324,8 @@
                                         <div class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile']['Duration (End)']" class="form-control input-sm"
                                                 name="profile Duration (End)" ng-model="dealForm.profile['Duration (End)']" ng-required="getField('profile', 'Duration (End)').required"
-                                                uib-tooltip="{{getTooltipMessage(myForm['profile Duration (End)'])}}" tooltip-enable="{{myForm['profile Duration (End)'].$invalid}}">
+                                                uib-tooltip="{{getTooltipMessage(myForm['profile Duration (End)'])}}" tooltip-enable="{{myForm['profile Duration (End)'].$invalid}}"
+                                                placeholder="{{DATE_FORMAT | uppercase }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile']['Duration (End)'] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -377,7 +380,8 @@
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['profile'][field.name]" class="form-control input-sm" name="{{'profile ' + field.name}}"
-                                                ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}">
+                                                ng-model="dealForm.profile[field.name]" ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['profile ' + field.name])}}" tooltip-enable="{{myForm['profile ' + field.name].$invalid}}"
+                                                placeholder="{{DATE_FORMAT | uppercase }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['profile'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -443,7 +447,8 @@
                                     <div class="input-group pull-right" ng-class="{'has-error': myForm['process SRB Date'].$invalid}">
                                         <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process']['SRB Date']" class="form-control input-sm" name="process SRB Date"
                                             ng-model="dealForm.process['SRB Date']" ng-required="getField('process', 'SRB Date').required"
-                                            uib-tooltip="{{getTooltipMessage(myForm['process SRB Date'])}}" tooltip-enable="{{myForm['process SRB Date'].$invalid}}">
+                                            uib-tooltip="{{getTooltipMessage(myForm['process SRB Date'])}}" tooltip-enable="{{myForm['process SRB Date'].$invalid}}"
+                                            placeholder="{{DATE_FORMAT | uppercase }}">
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-default btn-sm" ng-click="opened['process']['SRB Date'] = true">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -478,7 +483,8 @@
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control input-sm" name="{{'process ' + field.name}}"
-                                                ng-model="dealForm.process[field.name]" ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}">
+                                                ng-model="dealForm.process[field.name]" ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}"
+                                                placeholder="{{DATE_FORMAT | uppercase }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['process'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -540,7 +546,8 @@
                                     <div class="input-group pull-right" ng-class="{'has-error': myForm['process SOW Date'].$invalid}">
                                         <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process']['SOW Date']" class="form-control input-sm" name="process SOW Date"
                                             ng-model="dealForm.process['SOW Date']" ng-required="getField('process', 'SOW Date').required"
-                                            uib-tooltip="{{getTooltipMessage(myForm['process SOW Date'])}}" tooltip-enable="{{myForm['process SOW Date'].$invalid}}">
+                                            uib-tooltip="{{getTooltipMessage(myForm['process SOW Date'])}}" tooltip-enable="{{myForm['process SOW Date'].$invalid}}"
+                                            placeholder="{{DATE_FORMAT | uppercase }}">
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-default btn-sm" ng-click="opened['process']['SOW Date'] = true">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -575,7 +582,8 @@
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['process'][field.name]" class="form-control input-sm" name="{{'process ' + field.name}}"
-                                                ng-model="dealForm.process[field.name]" ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}">
+                                                ng-model="dealForm.process[field.name]" ng-required="{{field.required}}" uib-tooltip="{{getTooltipMessage(myForm['process ' + field.name])}}" tooltip-enable="{{myForm['process ' + field.name].$invalid}}"
+                                                placeholder="{{DATE_FORMAT | uppercase }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['process'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -603,8 +611,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-1"></div>
+        <div class="col-md-1"></div>
     </div>
     <hr class="dealsCollapsible">
     <div class="row">
@@ -816,7 +823,8 @@
                                                 <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['distribution'][field.name]" class="form-control input-sm"
                                                     name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
                                                     ng-required="{{field.required}}"
-                                                    uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}">
+                                                    uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}"
+                                                    placeholder="{{DATE_FORMAT | uppercase }}">
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default btn-sm" ng-click="opened['distribution'][field.name] = true">
                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -859,7 +867,8 @@
                                                 <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['distribution'][field.name]" class="form-control input-sm"
                                                     name="{{'distribution ' + field.name}}" ng-model="dealForm.distribution[field.name]"
                                                     ng-required="{{field.required}}"
-                                                    uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}">
+                                                    uib-tooltip="{{getTooltipMessage(myForm['distribution ' + field.name])}}" tooltip-enable="{{myForm['distribution ' + field.name].$invalid}}"
+                                                    placeholder="{{DATE_FORMAT | uppercase }}">
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default btn-sm" ng-click="opened['distribution'][field.name] = true">
                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -937,7 +946,8 @@
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control input-sm" name="{{'status ' + field.name}}"
                                                 ng-model="dealForm.status[field.name]" ng-required="{{field.required}}"
-                                                uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}">
+                                                uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}"
+                                                placeholder="{{DATE_FORMAT | uppercase }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['status'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -1001,7 +1011,8 @@
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['status'][field.name]" class="form-control input-sm" name="{{'status ' + field.name}}"
                                                 ng-model="dealForm.status[field.name]" ng-required="{{field.required}}"
-                                                uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}">
+                                                uib-tooltip="{{getTooltipMessage(myForm['status ' + field.name])}}" tooltip-enable="{{myForm['status ' + field.name].$invalid}}"
+                                                placeholder="{{DATE_FORMAT | uppercase }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['status'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -1029,6 +1040,7 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-1"></div>
     </div>
     <div class="row">
         <div class="col-md-1"></div>
@@ -1062,12 +1074,14 @@
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
                                             <input type="{{field.type}}" class="form-control input-sm" name="{{'content ' + field.name}}" ng-model="dealForm.content[field.name]"
                                                 ng-required="{{field.required}}" 
-                                                uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}"/>
+                                                uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}"
+                                                placeholder="{{DATE_FORMAT | uppercase }}">
                                         </div>
                                         <div ng-if="field.type === 'date'" class="input-group pull-right">
                                             <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control input-sm" name="{{'content ' + field.name}}"
                                                 ng-model="dealForm.content[field.name]" ng-required="{{field.required}}"
-                                                uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}">
+                                                uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}"
+                                                placeholder="{{DATE_FORMAT | uppercase }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-default btn-sm" ng-click="opened['content'][field.name] = true">
                                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -1098,17 +1112,20 @@
                         <tbody>
                             <tr ng-repeat="field in fields.content track by field.id">
                                 <td ng-if="$odd">
-                                    <div class="form-inline" ng-class="{'has-error': myForm['content ' + field.name].$invalid && myForm['content ' + field.name].$touched}">
+                                    <div class="form-inline" ng-class="{'has-error': myForm['content ' + field.name].$invalid}">
                                         <label for="{{field.name}}"> {{field.name}} </label>
                                         <span style="color:red" ng-if="field.required">*</span>
                                         <div ng-if="field.type === 'text' || field.type === 'number' || field.type === 'password' || field.type === 'email'" class="pull-right">
                                             <input type="{{field.type}}" class="form-control input-sm" name="{{'content ' + field.name}}" ng-model="dealForm.content[field.name]"
-                                                ng-required="{{field.required}}" />
+                                                ng-required="{{field.required}}" 
+                                                uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}"/>
                                         </div>
                                         <div ng-if="field.type === 'date'">
                                             <div class="input-group pull-right">
                                                 <input type="text" uib-datepicker-popup="{{DATE_FORMAT}}" is-open="opened['content'][field.name]" class="form-control input-sm" name="{{'content ' + field.name}}"
-                                                    ng-model="dealForm.content[field.name]" ng-required="{{field.required}}">
+                                                    ng-model="dealForm.content[field.name]" ng-required="{{field.required}}"
+                                                    uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}"
+                                                    placeholder="{{DATE_FORMAT | uppercase }}">
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default btn-sm" ng-click="opened['content'][field.name] = true">
                                                         <span class="glyphicon glyphicon-calendar"></span>
@@ -1119,11 +1136,14 @@
                                         <div ng-if="field.type === 'textarea'" class="pull-right">
                                             <!-- show text area -->
                                             <textarea ng-model="dealForm.content[field.name]" class="form-control input-sm" name="{{'content ' + field.name}}" ng-required="{{field.required}}"
-                                                rows="4" cols="50"></textarea>
+                                                rows="4" cols="50"
+                                                uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}">
+                                            </textarea>
                                         </div>
                                         <div ng-if="field.type ==='dropdown'" class="pull-right">
                                             <!-- show dropdown -->
-                                            <select class="form-control input-sm" name="{{'content ' + field.name}}" ng-model="dealForm.content[field.name]" ng-required="{{field.required}}">
+                                            <select class="form-control input-sm" name="{{'content ' + field.name}}" ng-model="dealForm.content[field.name]" ng-required="{{field.required}}"
+                                            uib-tooltip="{{getTooltipMessage(myForm['content ' + field.name])}}" tooltip-enable="{{myForm['content ' + field.name].$invalid}}">
                                                 <option value="">- select -</option>
                                                 <option ng-repeat="option in field.options" value="{{option}}">{{option}}</option>
                                             </select>
