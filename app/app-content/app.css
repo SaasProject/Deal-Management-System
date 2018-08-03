@@ -55,6 +55,9 @@ td {
 
 .dealTable {
 	font-size: 10px;
+}
+
+.normal-table th, .normal-table td {
 	text-align: center;
 }
 
@@ -299,4 +302,10 @@ textarea {
 
 select {
 	max-width: 150px;
+}
+
+.table-responsive {
+	height: 450px;
+	overflow-y: auto;
+	width: 100%;
 }
