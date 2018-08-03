@@ -575,15 +575,15 @@
         //$('#newDealFile')[0].addEventListener('change', processExcel, false);
 
         //this is called multiple times (may lead to lag?) but i dont know why. 
-        $scope.getTooltipMessage = function (formName) {
-            if (formName !== undefined) {
-                return (formName.$error.required) ? 'Please fill out this field' :
-                    (formName.$error.parse) ? 'Please input a valid date' :
-                        (formName.$error.email) ? 'Please input a valid email address' :
-                            (formName.$error.min) ? 'Please input a value greater than or equal to ' + formName.$$element[0].min :
-                                (formName.$error.max) ? 'Please input a value less than or equal to ' + formName.$$element[0].max :
-                                    (formName.$error.step) ? 'Please input a value with increments of ' + formName.$$element[0].step :
-                                        (formName.$valid) ? '' :
+        $scope.getTooltipMessage = function (formElementName) {
+            if (formElementName !== undefined) {
+                return (formElementName.$error.required) ? 'Please fill out this field' :
+                    (formElementName.$error.parse) ? 'Please input a valid date' :
+                        (formElementName.$error.email) ? 'Please input a valid email address' :
+                            (formElementName.$error.min) ? 'Please input a value greater than or equal to ' + formElementName.$$element[0].min :
+                                (formElementName.$error.max) ? 'Please input a value less than or equal to ' + formElementName.$$element[0].max :
+                                    (formElementName.$error.step) ? 'Please input a value with increments of ' + formElementName.$$element[0].step :
+                                        (formElementName.$valid) ? '' :
                                             'Invalid input';
             }
 
