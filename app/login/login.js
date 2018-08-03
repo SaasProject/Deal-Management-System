@@ -7,6 +7,8 @@
 
     
     function Controller($scope, $rootScope, $state, UserService, ngToast, $http) {
+
+        $scope.wrongInput = false;
         $scope.loginForm = {
             email: '',
             password: ''
@@ -19,6 +21,7 @@
                 $rootScope.user = data.user;
                 $state.transitionTo('home');
             }).catch(function(err) {
+                $scope.wrongInput = true;
                 $scope.message = 'Username/Password incorrect';
                 //ngToast.danger('Username/Password incorrect');
                 console.log(err);
