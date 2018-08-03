@@ -25,8 +25,8 @@
                 </select>
             </div> -->
             <label>Name</label>
-            <input type="text" class="form-control" ng-model="fieldForm.name" placeholder="do not include . or $" 
-            required ng-readonly="fieldForm.default" pattern="[^.$]+"/>
+            <input type="text" class="form-control" ng-model="fieldForm.name" placeholder="do not include . or $" required ng-readonly="fieldForm.default"
+                pattern="[^.$]+" />
             <br/>
             <input type="checkbox" ng-model="fieldForm.unique" ng-disabled="fieldForm.default" />
             <b>Unique</b>
@@ -56,8 +56,10 @@
                 <textarea class="form-control" rows="5" ng-model="fieldOptions"></textarea>
             </div>
             <br/>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-default" ng-click="resetFieldForm()">Cancel</button>
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" ng-click="resetFieldForm()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
             <br/>
             <br/>
         </form>
@@ -86,7 +88,7 @@
                             <a style="cursor:pointer" ng-if="field.name !== 'ID'">
                                 <i class="fa fa-list-alt" aria-hidden="true" ng-click="editField(field)" data-toggle="tooltip" title="Edit"></i>
                             </a>
-                            |
+                            &nbsp;
                             <a style="cursor:pointer" ng-if="!field.default">
                                 <i class="fa fa-trash" aria-hidden="true" ng-click="deleteField(field)" data-toggle="tooltip" title="Delete"></i>
                             </a>
