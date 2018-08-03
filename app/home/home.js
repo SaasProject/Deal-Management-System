@@ -19,14 +19,7 @@
 
         var deals = {};
         var allBUs = {};
-        var selectBU = [1, 2, 3];
-
-        ModulesService.getAllModuleDocs('businessunits').then(function(businessUnits) {
-          console.log(businessUnits);
-          selectBU = businessUnits;
-        }).catch(function(err) {
-
-        });
+        $scope.selectBU = {};
 
         //for time series
         var dealRevenuePerDate = [];
@@ -235,8 +228,7 @@
                 title: {
                   text: 'Deals Revenue Per Date',
                   adjustLayout: true,
-                  //align: 'left',
-                  marginTop: 7
+                  marginTop: 5
                 },
                 legend: {
                   align: 'center',
@@ -335,7 +327,23 @@
               type: "bar",
               stacked: true,
               title: {
-                text: 'Revenue Per Level'
+                text: 'Revenue Per Level',
+                adjustLayout: true
+              },
+              legend: {
+                align: 'center',
+                verticalAlign: 'top',
+                backgroundColor:'none',
+                borderWidth: 0,
+                item:{
+                  cursor: 'hand'
+                },
+                marker:{
+                  type:'circle',
+                  borderWidth: 0,
+                  cursor: 'hand'
+                },
+
               },
               scaleY: {
                 short:true,
@@ -351,16 +359,16 @@
               },
               series: [
                 {
-                  values:dealRevenueLevel1
+                  values:dealRevenueLevel1, text: 'Level 1'
                 },
                 {
-                  values:dealRevenueLevel2
+                  values:dealRevenueLevel2, text: 'Level 2'
                 },
                 {
-                  values:dealRevenueLevel3
+                  values:dealRevenueLevel3, text: 'Level 3'
                 },
                 {
-                  values:dealRevenueLevel4
+                  values:dealRevenueLevel4, text: 'Level 4'
                 }
               ]
             };
