@@ -23,7 +23,7 @@
 
 
 
-    function Controller($scope, $rootScope, $state, ModulesService, DealsService, TableService, ngToast) {
+    function Controller($scope, $rootScope, $state, ModulesService, DealsService, TableService, ngToast, $filter) {
 
         //enable load if data for table is not yet fetched
         $scope.loading = true;
@@ -31,6 +31,7 @@
         $scope.DATE_FORMAT = 'MM/dd/yyyy';
 
         $scope.deals = [];
+        $scope.filteredDeals = [];
 
         $scope.fields = {
             essential: [],
@@ -41,7 +42,7 @@
         };
 
         $scope.currentPage = 1;
-        $scope.pageSize = 6;
+        $scope.pageSize = 7;
 
         $scope.reverse = false;
 
@@ -217,8 +218,8 @@
             //delete properties of each deal which are not shown in the list to avoid its values being searched
             var awsSales, awsDev, assignee;
             angular.forEach($scope.deals, function (aDeal) {
-                //delete 'Change history'
-                delete aDeal['Change History'];
+                //delete 'Change history' and '_id' property. use 'ID' to open a deal
+                delete aDeal['Change History'], delete aDeal['_id'];
 
                 //find user by the data (id) stored in the deal's AWS Sales & AWS Dev
                 awsSales = $scope.users.find(function (user) {
@@ -265,6 +266,9 @@
                     });
                 }
             });
+
+            //filtered deals is the array of the table
+            $scope.filteredDeals = $scope.deals;
         }
 
         $scope.open = function (dealID) {
@@ -279,12 +283,17 @@
             var splitted = angular.copy($scope.searchColumn.split(','));
             if (splitted[0] === 'all' || splitted[1] === 'ID') {
                 $scope.search[splitted[1]] = $scope.searchText;
-            } else {
+            //perform this only if searchText is not blank and not undefined
+            } else if($scope.searchText !== '' && $scope.searchText !== undefined) {
                 //needed to initialize 'first' layer to avoid undefined
                 $scope.search[splitted[0]] = {};
                 $scope.search[splitted[0]][splitted[1]] = $scope.searchText;
             }
             //console.log($scope.search);
+
+            //filtering is done here to update the filteredDeals's length which is needed in pagination
+            //filter the deals according to the search object
+            $scope.filteredDeals = $filter('filter')($scope.deals, $scope.search);
         }
     }
 })();
