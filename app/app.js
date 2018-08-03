@@ -23,7 +23,7 @@
                 url: '/',
                 parent: 'main',
                 templateUrl: 'home/home.html',
-                //controller: 'HomeController'
+                controller: 'HomeController'
             })
             .state('clientList', {
                 url: '/clients/list',
