@@ -1,41 +1,54 @@
-
-<div class="row div-padded">
-    <button class="btn btn-primary" ui-sref="newClient">New Client</button>
-</div>
-        
-<div class="row div-padded">
-    <!-- <label>Filter by: &nbsp;</label>
-    <select class="form-control" ng-model="filter" ng-selected="console()">
-        <option ng-repeat="option in filterOptions">{{option}}</option>
-    </select> -->
-    <div class="form-inline pull-right">
-        <label>Search: &nbsp;</label>
-        <input type="text" class="form-control" ng-model="searchText">
+<div class="row">
+    <div class="col-md-8 form-inline">
+        <label for="pageSize">Page size: </label>
+        <input id="pageSize" type="number" ng-model="pageSize" class="form-control" min="1" max={{allClients.length}}>
+        <input type="text" class="form-control" ng-model="searchText" placeholder="Search">
+    </div>
+    <div class="col-md-2 pull-right">
+        <button class="btn btn-primary" ui-sref="newClient">New Client</button>
     </div>
 </div>
-<div class="row div-padded">
-    <div style = "text-align:center" class = "spinner" ng-show = "loading"> 
-        <img src="loader.gif"/>
-    </div>
-    <table class="table">
-        <thead>
-            <th>Company Name (Short)</th>
-            <th>Company Name (Long)</th>
-            <th>Country</th>
-            <th>Contact Person</th>
-            <th>Contact Number</th>
-        </thead>
-        <tbody>
-            <tr>
-               <tr ng-repeat="client in allClients | orderObjectBy : column : reverse | filter : search | pagination: (currentPage - 1) * pageSize | limitTo: pageSize ">
-                    <td class="cutOverflow" ng-repeat="data in client" ng-if="$index > 0">
-                        {{data}}
-                    </td>
-                    <td>
-                        <a><i class="fa fa-list-alt" aria-hidden="true" ng-click="" data-toggle="tooltip"></i><a>
-                    </td>
+<br/>
+<div class="row">
+    <div class="col-md-12 table-responsive">
+        <div style="text-align:center" class="spinner" ng-show="loading">
+            <img src="loader.gif" />
+        </div>
+        <table class="table table-hover normal-table">
+            <thead>
+                <tr>
+                    <th ng-click="sortColumn('cmpnyNameShort')" ng-class="sortClass('cmpnyNameShort')">Company Name (Short)</th>
+                    <th ng-click="sortColumn('cmpnyNameLong')" ng-class="sortClass('cmpnyNameLong')">Company Name (Long)</th>
+                    <th ng-click="sortColumn('country')" ng-class="sortClass('country')">Country</th>
+                    <th ng-click="sortColumn('contactPerson')" ng-class="sortClass('contactPerson')">Contact Person</th>
+                    <th ng-click="sortColumn('contactNumber')" ng-class="sortClass('contactNumber')">Contact Number</th>
+                    <th></th>
                 </tr>
-            </tr>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <tr>
+                    <tr ng-repeat="client in allClients | orderObjectBy : column : reverse | filter : searchText | pagination: (currentPage - 1) * pageSize | limitTo: pageSize ">
+                        <td>{{client['cmpnyNameShort']}}</td>
+                        <td>{{client['cmpnyNameLong']}}</td>
+                        <td>{{client['country']}}</td>
+                        <td>{{client['contactPerson']}}</td>
+                        <td>{{client['contactNumber']}}</td>
+                        <td>
+                            <a>
+                                <i class="fa fa-list-alt" aria-hidden="true" ng-click="" data-toggle="tooltip"></i>
+                                <a>
+                        </td>
+                    </tr>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <ul class="pagination" uib-pagination total-items="allClients.length" ng-model="currentPage" items-per-page="pageSize" boundary-links="true"
+            max-size="3" force-ellipses="true" first-text="<<" previous-text="<" next-text=">" last-text=">>"></ul>
+    </div>
+    <div class="col-md-4"></div>
 </div>
