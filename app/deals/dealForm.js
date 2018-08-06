@@ -53,17 +53,18 @@
             content: []
         };
 
-        //default of distribution
+        //default strings for distribution table
         var distributionStrings = {
             direct: 'Direct to Client',
             intra: 'Intra-Company'
         };
 
+        //default selected for distribution table
+        $scope.contracts = [distributionStrings.direct];
+
         //variables for parsing excel file
         var rABS = true;
         $scope.showUpload = true;
-
-        $scope.contracts = [distributionStrings.direct];
 
         //store total computations outside of dealForm.distribution to avoid registering changes in $scope.$watch
         //set this to dealForm.distribution[dealForm.process['SOW Scheme']].total during submit
@@ -73,22 +74,6 @@
         $scope.total[distributionStrings.direct][$scope.currentFiscalYear.years] = {};
         $scope.total[distributionStrings.intra] = {};
         $scope.total[distributionStrings.intra][$scope.currentFiscalYear.years] = {};
-
-        /* $scope.validateBlankInputs = function () {
-            console.log('glenn');
-            //glenn's code to loop category fields if there is required
-            var targetCategory = ['profileSection', 'processSection', 'distributionSection', 'statusSection', 'contentSection'];
-
-            for (var a = 0; a < targetCategory.length; a++) {
-                var categoryInputs = document.getElementById(targetCategory[a]).querySelectorAll('input,textarea,select');
-                for (var i = 0; i < categoryInputs.length; i++) {
-                    if (categoryInputs[i].value === '' && categoryInputs[i].required) {
-                        $('#' + targetCategory[a]).collapse('show');
-                        break;
-                    }
-                }
-            }
-        } */
 
         //get the fields arrays of dealessential, dealprofile, dealprocess, dealstatus, and dealcontent
         function getAllFields() {
@@ -105,6 +90,7 @@
             });
         }
 
+        //called once
         getAllFields();
 
         function getClients() {
@@ -115,8 +101,10 @@
             });
         }
 
+        //called once
         getClients();
 
+        //for now, exclude accounts with admin roles
         function getAllUsers() {
             ModulesService.getAllModuleDocs('users').then(function (users) {
                 $scope.users = users.filter(function (aUser) {
@@ -127,6 +115,7 @@
             });
         }
 
+        //called once
         getAllUsers();
 
         function getAllBUs() {
@@ -144,16 +133,17 @@
             });
         }
 
+        //called once
         getAllBUs();
 
-        //if there is a parameter, it means that a deal is going to be updated
+        //if there is a parameter on the url, it means that a deal is loaded and will be updated
         if ($stateParams.ID !== '') {
             //get one then store to $scope.dealForm;
             DealsService.getDealById($stateParams.ID).then(function (aDeal) {
                 //use true to convert datestrings to date objects
                 $scope.dealForm = preProcess(aDeal, true);
                 $scope.showUpload = false;
-                console.log($scope.dealForm);
+                //console.log($scope.dealForm);
             }).catch(function () {
                 //$scope.message = 'Cannot find the deal';
                 $scope.showUpload = false;
@@ -195,6 +185,7 @@
             }
         }
 
+        //update the distribution table headers whenever input starting month is changed
         $scope.$watch('startingMonthYear', function () {
             //reset the array
             $scope.currentMonths = [];
@@ -210,6 +201,8 @@
             var i;
 
             i = setMonth;
+            //this loop populates table headers for the distribution table (for 1 year)
+            //it also puts leading '0' if month is < 10
             do {
                 //next year
                 if (i < setMonth) {
@@ -223,20 +216,22 @@
 
                 //use modulo to set i as 1 instead of 13
                 i = (i % 12 === 0) ? 1 : (i + 1);
+            //exit loop initial month repeats
             } while (i != setMonth);
         });
 
         //$scope.getCurrentDisplay();
 
+        //this function processes the data (e.g. conversion of date objects [from html] to datestrings)
         function preProcess(dealForm, isLoaded) {
             var tempObject = dealForm;
 
-            //perform operations on variables that you can explicitly determine
+            //perform operations on variables that you can explicitly determine here
             //during load
             if (isLoaded) {
                 //set the sow scheme (for the distribution table)
                 $scope.setContracts(tempObject.process['SOW Scheme']);
-                //during submit
+            //during submit
             } else {
                 //explicitly set SOW scheme (because default selected options is not working) to Direct
                 if (tempObject.process['SOW Scheme'] === null || tempObject.process['SOW Scheme'] === undefined) {
@@ -245,11 +240,12 @@
 
                 //throw error if start date > end date
                 if (tempObject.profile['Duration (Start)'] > tempObject.profile['Duration (End)']) {
-                    throw new Error('End date must be greater than or equal to the start date');
+                    throw new Error('Start Date must be before the End Date');
                 }
 
+                //throw error if Due Date > SOW Date
                 if (tempObject.essential['Due Date'] > tempObject.process['SOW Date']) {
-                    throw new Error('Due date must be less than or equal to the SOW Date');
+                    throw new Error('Due date must be before the SOW Date');
                 }
 
                 //set $scope.total to distribution['total']
@@ -262,18 +258,10 @@
                 for (i = 0; i < fields.length; i++) {
                     currentField = $scope.fields[category][i];
 
-                    //not working, workaround is to use validateBlankInputs() during ng-click
-                    /*  if(!isLoaded && currentField.required && 
-                         (tempObject[category][currentField.name] === '' ||
-                         tempObject[category][currentField.name] === null || 
-                         tempObject[category][currentField.name] === undefined)) {
-                             throw {REQUIRED_ERROR: true, category: category};
-                     } */
-
-
                     //preprocess when loading
                     if (isLoaded) {
-                        if (currentField.type === 'date' && tempObject[category][currentField.name] !== null && tempObject[category][currentField.name] !== undefined) {
+                        if (currentField.type === 'date' && tempObject[category][currentField.name]) {
+                            //change format to yyyy-MM-dd
                             const tempDate = tempObject[category][currentField.name].replace(/\//g, '-');
                             tempObject[category][currentField.name] = new Date(tempDate);
                         }
@@ -284,7 +272,8 @@
                             delete tempObject[category][currentField.name];
                         }
 
-                        if (currentField.type === 'date' && tempObject[category][currentField.name] !== null) {
+                        if (currentField.type === 'date' && tempObject[category][currentField.name]) {
+                            //convert date object to datestring with prescribed format
                             tempObject[category][currentField.name] = $filter('date')(tempObject[category][currentField.name], $scope.DATE_FORMAT);
                         }
                     }
@@ -295,18 +284,16 @@
             return tempObject;
         }
 
-        //returns the field object from the array of specified category
+        //returns the field object from the array of specified category (called from html)
         $scope.getField = function (category, fieldName) {
             return $scope.fields[category].find(function (field) {
                 return field.name === fieldName;
             });
         }
 
+        //updates the distribution table display according to the selected SOW Scheme
+        //$scope.contracts is used in ng-repeat as well as an object property
         $scope.setContracts = function (sowScheme) {
-            //$scope.contracts = [];
-
-            //why is it not working huhu
-            //always else huhu
             if (sowScheme === 'Transfer Pricing to UBICOM') {
                 $scope.contracts = [distributionStrings.intra, distributionStrings.direct];
             } else {
@@ -314,26 +301,16 @@
             }
         }
 
-        // place computeDistribution in $scope.setContracts because it doesnt work here :(
-        /* $scope.$watch("dealForm.process.['SOW Scheme']", function() {
-            computeDistribution();
-        }); */
         //use true to register changes in values
+        //this will be called whenever there is a change in the distribution property of $scope.dealForm
         $scope.$watch('dealForm.distribution', function () {
-            //if distribution is empty, do not compute
+            //perform check so that errors are avoided when $scope.dealForm.distribution is being initialized
             if (!angular.equals($scope.dealForm.distribution, {})) {
                 computeDistribution();
             }
         }, true);
 
-        /**
-             * nakakapagcompute na ng total resource. considered na lahat ng months ng both jp & gd.
-             * kaso kapag nagswitch yung SOW Scheme, magrerecompute sya at maooverwrite yung lumang totals
-             * e.g. put some values when SOW Scheme is undefined/Direct. kapag magsswitch,
-             * hindi nakasave sa variable yung total ni direct. magrerecompute ulit sya kapag naging direct ulit
-             * yung sow scheme, which is inefficient
-             */
-
+        //this function computes total resource, revenue, and CM for the CURRENT fiscal year
         function computeDistribution() {
             //console.log($scope.dealForm.distribution);
             //use variables like sumRes as temporary sum
@@ -351,8 +328,10 @@
                      * for res & rev, need to check both jp & gd if not undefined to avoid errors
                      * */
                     //use object.values since they are all integers
-                    //check resources of JP
+
+                    //Resource (MM)
                     if ($scope.dealForm.distribution[$scope.contracts[i]].res !== undefined) {
+                        //for JP
                         if ($scope.dealForm.distribution[$scope.contracts[i]].res.jp !== undefined) {
                             forCompute = {};
                             Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].res.jp);
@@ -360,6 +339,7 @@
                                 //prop is assumed to have yyyy/MM format (from $scope.getCurrentDisplay())
                                 //to properly use moment, convert it to yyyy-MM-01 (01 since date is not given)
                                 editedProp = prop.replace(/\//, '-') + '-01';
+                                //this condition is to check if yyyy/MM is within current fiscal year
                                 if (!moment(editedProp)
                                     .isBetween($scope.currentFiscalYear.currentYear,
                                     $scope.currentFiscalYear.nextYear) || forCompute[prop] === null) {
@@ -370,7 +350,7 @@
                             resJP = Object.values(forCompute);
                         }
 
-                        //check resources of GD
+                        //for GD
                         if ($scope.dealForm.distribution[$scope.contracts[i]].res.gd !== undefined) {
                             forCompute = {};
                             Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].res.gd);
@@ -394,8 +374,9 @@
                         }
                     }
 
+                    //Revenue (JPY)
                     if ($scope.dealForm.distribution[$scope.contracts[i]].rev !== undefined) {
-                        //check revenue of JP
+                        //for JP
                         if ($scope.dealForm.distribution[$scope.contracts[i]].rev.jp !== undefined) {
                             forCompute = {};
                             Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].rev.jp);
@@ -410,7 +391,7 @@
                             }
                             revJP = Object.values(forCompute);
                         }
-                        //check revenue of GD
+                        //for GD
                         if ($scope.dealForm.distribution[$scope.contracts[i]].rev.gd !== undefined) {
                             forCompute = {};
                             Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].rev.gd);
@@ -434,12 +415,7 @@
                         }
                     }
 
-                    //check average value
-                    /* if(isNaN(average) || average === Infinity) {
-                        average = 0;
-                    } */
-
-                    //check cm
+                    //CM (JPY)
                     if ($scope.dealForm.distribution[$scope.contracts[i]].cm !== undefined) {
                         forCompute = {};
                         Object.assign(forCompute, $scope.dealForm.distribution[$scope.contracts[i]].cm);
@@ -464,6 +440,8 @@
 
                     //console.log(resSum, revSum, cmSum);
 
+                    //perform null check cleared inputs (entered then deleted values) become null
+
                     $scope.total[$scope.contracts[i]][$scope.currentFiscalYear.years].resource = (resSum !== null) ? resSum : 0;
                     $scope.total[$scope.contracts[i]][$scope.currentFiscalYear.years].revenue = (revSum !== null) ? revSum : 0;
                     //((revSum / resSum) !== NaN) does not work
@@ -478,6 +456,7 @@
 
         //get the latest change date for the specified level from $scope.dealForm['Change History'] array
         //since all changes are pushed into the change history, get the last index
+        //called from Change History table in html
         $scope.getLatestChangeDate = function (level) {
             if ($scope.dealForm['Change History'] !== undefined) {
                 var tempArray = [];
@@ -490,6 +469,8 @@
             }
         }
 
+        //function for reading spreadsheet data & filling $scope.dealForm
+        //currently NOT USED because: it works on .ods files BUT NOT on .xls files :(
         function processExcel(e) {
             var spreadsheet, j, rows;
             var tempObject = {
@@ -574,7 +555,7 @@
 
         //$('#newDealFile')[0].addEventListener('change', processExcel, false);
 
-        //this is called multiple times (may lead to lag?) but i dont know why. 
+        //this function returns the corresponding message depending on the error. 
         $scope.getTooltipMessage = function (formElementName) {
             if (formElementName !== undefined) {
                 return (formElementName.$error.required) ? 'Please fill out this field' :
@@ -590,12 +571,14 @@
             return '';
         }
 
+        //filter the options for 'AWS Resp (Sales) BU' depending on the selected 'AWS Resp (Sales) person'
         $scope.setSalesBU = function() {
             $scope.salesBU = $scope.businessUnits.filter(function(businessUnit) {
                 return businessUnit['Category'] === 'Sales' && businessUnit['Manager'] === $scope.dealForm['profile']['AWS Resp (Sales) person'];
             });
         }
 
+        //filter the options for 'AWS Resp (Dev) BU' depending on the selected 'AWS Resp (Dev) person'
         $scope.setDevBU = function() {
             $scope.devBU = $scope.businessUnits.filter(function(businessUnit) {
                 return businessUnit['Category'] === 'Dev' && businessUnit['Manager'] === $scope.dealForm['profile']['AWS Resp (Dev) person'];
