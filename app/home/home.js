@@ -8,18 +8,54 @@
     function Controller($scope, $rootScope, $state, UserService, ModulesService, InputValidationService, ngToast, $stateParams) {  
        
         function getTimeStamp(myDate){
-            var newDate=myDate[1]+"/"+myDate[2]+"/"+myDate[0];
+            var newDate = myDate[1] + "/" + myDate[2] + "/" + myDate[0];
             return new Date(newDate).getTime();
         }
 
         function getMonthOnly(myDate){
-            var newDate=myDate[1]+"/"+myDate[2]+"/"+myDate[0];
-            return new Date(newDate).getMonth() + 1;
+            var month = new Array();
+            month[0] = "Jan";
+            month[1] = "Feb";
+            month[2] = "Mar";
+            month[3] = "Apr";
+            month[4] = "May";
+            month[5] = "Jun";
+            month[6] = "Jul";
+            month[7] = "Aug";
+            month[8] = "Sep";
+            month[9] = "Oct";
+            month[10] = "Nov";
+            month[11] = "Dec";
+
+            var newDate = myDate[1] + "/" + myDate[2] + "/" + myDate[0];
+            var month = month[new Date(newDate).getMonth()];
+            var year = new Date(newDate).getFullYear();
+            return month + ' ' + year;
         }
+
+        var monthNames = {
+          "Apr": 1,
+          "May": 2,
+          "Jun": 3,
+          "Jul": 4,
+          "Aug": 5,
+          "Sept": 6,
+          "Oct": 7,
+          "Nov": 8,
+          "Dec": 9,
+          "Jan": 10,
+          "Feb": 11,
+          "Mar": 12
+        };
 
         var deals = {};
         var allBUs = {};
-        $scope.selectBU = {};
+        $scope.optionsBU = '';
+        $scope.selectedBU = '--ALL--';
+        $scope.selectedDiv = '--ALL--';
+        //$scope.stackedOptions = 'Revenue';
+        $scope.isGD = true;
+        $scope.isESD = false;
 
         //for time series
         var dealRevenuePerDate = [];
@@ -49,7 +85,33 @@
         function init(){
             ModulesService.getAllModuleDocs('deals').then(function (allDeals) {
                 console.log(allDeals);
-                deals = allDeals;
+                if($scope.selectedDiv != '--ALL--'){
+
+                  for(var i = 0; i < allDeals.length; i++){
+                    if($scope.selectedDiv == 'GD'){
+                      if(allDeals[i].profile['AWS Resp (Dev) BU'] != 'Dev A'){
+                        deals.push(allDeals[i]);
+                      }
+                    }else if($scope.selectedDiv == 'ESD'){
+                      if(allDeals[i].profile['AWS Resp (Dev) BU'] == 'Dev A'){
+                        deals.push(allDeals[i]);
+                      }
+                    }
+                  }
+                  
+                }else{
+                  if($scope.selectedBU == '--ALL--'){
+                    deals = allDeals;
+                  } else {
+                    for(var i = 0; i < allDeals.length; i++){
+                      if(allDeals[i].profile['AWS Resp (Dev) BU'] == $scope.selectedBU){
+                        deals.push(allDeals[i]);
+                      }
+                    }
+                  }
+                }
+                
+                //console.log(deals.length);
                 loadBUs();
             }).catch(function (err) {
 
@@ -58,9 +120,27 @@
 
         init();
 
+        $scope.reloadAll = function(){
+          //console.log($scope.selectedBU);
+          deals = [];
+          dealRevenuePerDate = [];
+          dealCMPerDate = [];
+          dealRevenueLevel1 = [];
+          dealRevenueLevel2 = [];
+          dealRevenueLevel3 = [];
+          dealRevenueLevel4 = [];
+          dealRevenue = [];
+          dealCM = [];
+          revenuePerDev = [];
+          dealPerUniqueDate = [];
+          dealPerUniqueMonth = [];
+          init();
+        }
+
         function loadBUs(){
             ModulesService.getAllModuleDocs('businessunits').then(function(businessUnits) {                
                allBUs = businessUnits;
+               $scope.optionsBU = businessUnits;
                loadCharts();
             }).catch(function(err) {
 
@@ -78,7 +158,7 @@
 
                 dealPerUniqueDate.push(getTimeStamp(monthly));
                 dealPerUniqueMonth.push(getMonthOnly(monthly));
-                console.log(getTimeStamp('2018/1/1'));
+                //console.log(getTimeStamp('2018/1/1'));
 
                 /*if(isNaN(deals[j].profile.Revenue)){
                     dealRevenue.push(0);
@@ -96,12 +176,12 @@
                 }*/
             }
 
-            console.log(dealPerUniqueMonth);
+            //console.log(dealPerUniqueMonth);
 
             let unique = (names) => names.filter((v,i) => names.indexOf(v) === i);
             dealPerUniqueDate = unique(dealPerUniqueDate);
             dealPerUniqueMonth = unique(dealPerUniqueMonth);
-            console.log(dealPerUniqueMonth);
+            //console.log(dealPerUniqueMonth);
             
             //initialize time series deals
             for(var i = 0; i < dealPerUniqueDate.length; i++){
@@ -117,10 +197,10 @@
               dealRevenueLevel4.push([dealPerUniqueMonth[i], 0]);
             }
 
-            console.log(dealRevenueLevel1);
+            /*console.log(dealRevenueLevel1);
             console.log(dealRevenueLevel2);
             console.log(dealRevenueLevel3);
-            console.log(dealRevenueLevel4);
+            console.log(dealRevenueLevel4);*/
 
             //load data in revenue line chart
             for(var j = 0; j < deals.length; j++){
@@ -161,7 +241,10 @@
             //load data on hbar chart
             for(var j = 0; j < deals.length; j++){
                 var monthly = deals[j].essential['Due Date'].split('/');
-                console.log(deals[j].profile['Level']+' '+deals[j].profile.Revenue+' '+getMonthOnly(monthly)+' '+deals[j].essential['Due Date']);
+                /*console.log(deals[j].profile['Level'] + ' ' + deals[j].profile.Revenue + ' ' + 
+                  getMonthOnly(monthly) + ' ' + deals[j].essential['Due Date']);*/
+
+
 
                 //level 1
                 for(var k = 0; k < dealRevenueLevel1.length; k++){
@@ -208,10 +291,26 @@
                 }
             }
 
-            console.log(dealRevenueLevel1);
+            //dealRevenueLevel1.sort(function(a, b) { return monthNames[a[0].split(' ')[0]] - monthNames[b[0].split(' ')[0]];});
+
+            /*console.log(dealRevenueLevel1);
             console.log(dealRevenueLevel2);
             console.log(dealRevenueLevel3);
-            console.log(dealRevenueLevel4);
+            console.log(dealRevenueLevel4);*/
+
+            //sort deals revenue level by month
+            dealRevenueLevel1.sort(function(a, b) {
+             return monthNames[a[0].split(' ')[0]] - monthNames[b[0].split(' ')[0]];
+            });
+            dealRevenueLevel2.sort(function(a, b) {
+              return monthNames[a[0].split(' ')[0]] - monthNames[b[0].split(' ')[0]];
+            });
+            dealRevenueLevel3.sort(function(a, b) {
+              return monthNames[a[0].split(' ')[0]] - monthNames[b[0].split(' ')[0]];
+            });
+            dealRevenueLevel4.sort(function(a, b) {
+              return monthNames[a[0].split(' ')[0]] - monthNames[b[0].split(' ')[0]];
+            });
 
             renderCharts();
         }
@@ -330,6 +429,12 @@
                 text: 'Revenue Per Level',
                 adjustLayout: true
               },
+              plot:{
+                valueBox:{
+                  placement:"top-out",
+                  short:true
+                }
+              },
               legend: {
                 align: 'center',
                 verticalAlign: 'top',
@@ -379,90 +484,6 @@
                 height: "100%",
                 width: "100%"
             });
-
-            /*var myPie = {
-                type: "pie", 
-                plot: {
-                  borderColor: "#2B313B",
-                  borderWidth: 3,
-                  // slice: 90,
-                  valueBox: {
-                    placement: 'out',
-                    text: '%t\n%npv%'
-                  },
-                  tooltip:{
-                    fontSize: '18',
-                    padding: "5 10",
-                    text: "%npv%"
-                  },
-                  animation:{
-                  effect: 2, 
-                  method: 5,
-                  speed: 900,
-                  sequence: 1,
-                  delay: 3000
-                }
-                },
-                source: {
-                  text: 'gs.statcounter.com',
-                  fontColor: "#8e99a9",
-                  fontFamily: "Open Sans"
-                },
-                title: {
-                  fontColor: "#8e99a9",
-                  text: 'Global Browser Usage',
-                  align: "left",
-                  offsetX: 10,
-                  fontSize: 25
-                },
-                subtitle: {
-                  offsetX: 10,
-                  offsetY: 10,
-                  fontColor: "#8e99a9",
-                  fontSize: "16",
-                  text: 'May 2016',
-                  align: "left"
-                },
-                plotarea: {
-                  margin: "20 0 0 0"  
-                },
-                series : [
-                    {
-                        values : [11.38],
-                        text: "Internet Explorer",
-                      backgroundColor: '#50ADF5',
-                    },
-                    {
-                      values: [56.94],
-                      text: "Chrome",
-                      backgroundColor: '#FF7965',
-                      detached:true
-                    },
-                    {
-                      values: [14.52],
-                      text: 'Firefox',
-                      backgroundColor: '#FFCB45',
-                      detached:true
-                    },
-                    {
-                      text: 'Safari',
-                      values: [9.69],
-                      backgroundColor: '#6877e5'
-                    },
-                    {
-                      text: 'Other',
-                      values: [7.48],
-                      backgroundColor: '#6FB07F'
-                    }
-                ]
-            };
-             
-            zingchart.render({ 
-                id : 'pieChart', 
-                data : myPie, 
-                height: 350, 
-                width: 500 
-            });*/
         }
     }
 })();

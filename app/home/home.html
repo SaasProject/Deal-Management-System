@@ -43,9 +43,34 @@
       <span class="sr-only">Next</span>
     </a>
   </div>-->
-<select>
-  <option ng-repeat="bu in selectBU">{{bu}}</option>
-</select>
+<div class="row form-inline col-md-12">
+
+  <label>Division: </label>
+  <select class = "form-control" ng-model = "selectedDiv" ng-change = "reloadAll(); selectedBU = '--ALL--'">
+    <option value="--ALL--">--ALL--</option>
+    <option value="GD">GD</option>
+    <option value="ESD">ESD</option>
+  </select>
+
+  <label>Business Unit: </label>
+  <select class = "form-control" ng-model = "selectedBU" ng-change = "reloadAll(); selectedDiv = '--ALL--'">
+    <option value="--ALL--">--ALL--</option>
+    <option ng-repeat = "bu in optionsBU">{{bu.BU}}</option>
+  </select>
+
+  <!--<div class="pull-right">
+    <label>Options(Level): </label>
+    <select class = "form-control" ng-model = "selectedBU" ng-change = "reloadAll(); selectedDiv = 'Revenue'">
+      <option value="Revenue">Revenue</option>
+      <option value="CM">CM</option>
+      <option value="MM">MM</option>
+    </select>
+  </div>-->
+
+</div>
+
+<br>
+
 <div id="dealsChart" class="col-md-6 dashboard"></div>
 
 <!--<div id="chartDiv" class="col-md-6 dashboard"></div>-->
